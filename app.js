@@ -153,11 +153,7 @@ client.on('messageCreate', async (message) => {
       if (!targetChannel?.isTextBased()) return channel.send('❌ Channel not found or not a text channel.');
 
       await targetChannel.send(text);
-      try {
-        await message.author.send(`✅ Message sent to <#${targetChannel.id}>.`);
-      } catch {
-        await channel.send(`✅ Message sent to <#${targetChannel.id}>.`);
-      }
+      await channel.send(`✅ Message sent to <#${targetChannel.id}>.`);
       return;
     }
 

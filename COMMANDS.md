@@ -1,53 +1,14 @@
-# Discord App Commands
+> NOTE: both slash and `!` are allowed. Commands fail if users don't have the required permissions to use the command.
 
-## `/test`
-
-A basic smoke-test command. Replies with "hello world" and a random emoji.
-
-| Property | Value |
-|---|---|
-| Type | Slash command |
-| Options | None |
-| Works in | Guild channels, DMs, Group DMs |
-
----
-
-## `/challenge`
-
-Challenge another user to a game of rock-paper-scissors (with a twist — there are 7 objects, not 3).
-
-| Property | Value |
-|---|---|
-| Type | Slash command |
-| Options | `object` (required) |
-| Works in | Guild channels, Group DMs |
-
-### Options
-
-| Name | Type | Required | Description |
-|---|---|---|---|
-| `object` | String (choices) | ✅ | The object you want to play |
-
-### Available objects
-
-| Object | Description | Beats |
-|---|---|---|
-| 🪨 Rock | sedimentary, igneous, or perhaps even metamorphic | Virus, Computer, Scissors |
-| 🤠 Cowboy | yeehaw~ | Scissors, Wumpus, Rock |
-| ✂️ Scissors | careful ! sharp ! edges !! | Paper, Computer, Virus |
-| 🦠 Virus | genetic mutation, malware, or something inbetween | Cowboy, Computer, Wumpus |
-| 💻 Computer | beep boop beep bzzrrhggggg | Cowboy, Paper, Wumpus |
-| 🟣 Wumpus | the purple Discord fella | Paper, Rock, Scissors |
-| 📄 Paper | versatile and iconic | Virus, Cowboy, Rock |
-
----
-
-## Registering commands
-
-Run this once to install commands globally to your Discord app:
-
-```
-npm run register
-```
-
-Commands are defined in [`commands.js`](./commands.js). After adding or changing a command, re-run `npm run register` to push the update to Discord.
+- `!say [message]` (no required permissions): Say the message, but include a user mention at the beginning so people can't impersonate the bot. Also only applies to the current channel.
+`!echo [channel] [message]` (requires `administrator`): Echo the message into the channel. Only available to people with
+`!punish [user] [reason]` (requires mute, kick, and ban): Increase the users punishment status by one. Using this new punishment status:
+- If 1,2,3: Mute for 5 minutes
+- If 4,5,6: Mute for 15 minutes
+- If 7,8,9: Mute for 60 minutes
+- If 10,11,12: Kick
+- If 13: Ban permanently
+- `!regain [user]` (requires mute, kick, and ban): Decrease punishment status by one (return an error if already 0) and don't do any action. Unban them if banned.
+- `!dm [user] [message]` (requires administrator): DM the user a message.
+- `!addrole [userid or complete username] [role]` (requires manage roles): Add the user to the role
+- `!delrole [userid or complete username] [role]` (requires manage roles): Remove the user from the role

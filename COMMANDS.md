@@ -1,5 +1,6 @@
 > NOTE: both slash and `!` are allowed. Commands fail if users don't have the required permissions to use the command.
 
+- `!help` - Print a list of commands.
 - `!say [message]` (no required permissions): Say the message, but include a user mention at the beginning so people can't impersonate the bot. Also only applies to the current channel.
 `!echo [channel] [message]` (requires `administrator`): Echo the message into the channel. Only available to people with
 `!punish [user] [reason]` (requires mute, kick, and ban): Increase the users punishment status by one. Using this new punishment status:

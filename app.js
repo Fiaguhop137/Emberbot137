@@ -107,6 +107,27 @@ client.on('messageCreate', async (message) => {
   const { guild, member, channel } = message;
 
   try {
+    // ── !help ───────────────────────────────────────────────────────────────
+    if (command === 'help') {
+      const msg = await channel.send(
+        '```\n' +
+        'Commands  [required] <optional>\n' +
+        '─────────────────────────────────────────\n' +
+        '!say       [message]\n' +
+        '!echo      [channel] [message]             (admin)\n' +
+        '!punish    [user] <reason>                 (mute/kick/ban)\n' +
+        '!regain    [user]                          (mute/kick/ban)\n' +
+        '!dm        [user] [message]                (admin)\n' +
+        '!addrole   [user] [role]                   (manage roles)\n' +
+        '!delrole   [user] [role]                   (manage roles)\n' +
+        '─────────────────────────────────────────\n' +
+        'This message deletes in 5 minutes.\n' +
+        '```'
+      );
+      setTimeout(() => msg.delete().catch(() => {}), 5 * 60 * 1000);
+      return;
+    }
+
     // ── !say [message] ──────────────────────────────────────────────────────
     if (command === 'say') {
       const text = args.join(' ');

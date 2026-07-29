@@ -24,12 +24,12 @@ const punishmentLevels = {};
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
 /**
- * Resolve a member from a guild by user ID or exact username.
+ * Resolve a member from a guild by mention, user ID, username, display name, or tag.
  * Returns a GuildMember or null.
  */
 async function resolveMember(guild, query) {
   query = query.trim();
-  // Strip <@…> mention syntax if pasted
+  // Strip <@…> mention syntax
   const mentionMatch = query.match(/^<@!?(\d+)>$/);
   if (mentionMatch) query = mentionMatch[1];
 
@@ -38,17 +38,19 @@ async function resolveMember(guild, query) {
     try {
       return await guild.members.fetch(query);
     } catch {
-      // fall through to username search
+      // fall through to name search
     }
   }
 
-  // Search by exact username (case-insensitive)
+  // Search by username, tag (user#0000), or server display name (case-insensitive)
   const members = await guild.members.fetch();
+  const q = query.toLowerCase();
   return (
     members.find(
       (m) =>
-        m.user.username.toLowerCase() === query.toLowerCase() ||
-        m.user.tag.toLowerCase() === query.toLowerCase(),
+        m.user.username.toLowerCase() === q ||
+        m.user.tag?.toLowerCase() === q ||
+        m.displayName.toLowerCase() === q,
     ) ?? null
   );
 }
@@ -130,7 +132,12 @@ client.on('messageCreate', async (message) => {
       if (!targetChannel?.isTextBased()) return channel.send('❌ Channel not found or not a text channel.');
 
       await targetChannel.send(text);
-      return message.author.send(`✅ Message sent to <#${targetChannel.id}>.`);
+      try {
+        await message.author.send(`✅ Message sent to <#${targetChannel.id}>.`);
+      } catch {
+        await channel.send(`✅ Message sent to <#${targetChannel.id}>.`);
+      }
+      return;
     }
 
     // ── !punish [user] [reason] ─────────────────────────────────────────────
@@ -161,26 +168,31 @@ client.on('messageCreate', async (message) => {
       const userArg = args.shift();
       if (!userArg) return channel.send('Usage: `!regain [user]`');
 
-      // For banned users, we may need to resolve by ID directly
-      const userIdMatch = userArg.match(/^<@!?(\d+)>$/) ?? (/^\d+$/.test(userArg) ? [null, userArg] : null);
-      const userId = userIdMatch ? userIdMatch[1] : null;
+      // Extract raw ID from mention or plain ID for banned-user lookup
+      const mentionId = userArg.match(/^<@!?(\d+)>$/)?.[1];
+      const rawId = mentionId ?? (/^\d+$/.test(userArg) ? userArg : null);
 
-      const current = punishmentLevels[userId ?? userArg] ?? 0;
+      // Try to resolve as a guild member first; fall back to raw ID for banned users
+      const target = await resolveMember(guild, userArg);
+      const resolvedId = target?.id ?? rawId;
+
+      if (!resolvedId) return channel.send('❌ User not found. Use a mention, ID, or exact username.');
+
+      const current = punishmentLevels[resolvedId] ?? 0;
       if (current === 0) return channel.send('❌ This user\'s punishment level is already 0.');
 
       const newLevel = current - 1;
 
       // Unban if they were banned (level was 13+)
       if (current >= 13) {
-        if (!userId) return channel.send('❌ Banned users must be identified by user ID or mention.');
         try {
-          await guild.members.unban(userId, 'Punishment reduced via !regain');
+          await guild.members.unban(resolvedId, 'Punishment reduced via !regain');
         } catch {
           return channel.send('❌ Could not unban user — they may not be banned.');
         }
       }
 
-      punishmentLevels[userId ?? userArg] = newLevel;
+      punishmentLevels[resolvedId] = newLevel;
       return channel.send(
         `✅ Punishment level reduced to **${newLevel}**${current >= 13 ? ' and user has been unbanned' : ''}.`,
       );

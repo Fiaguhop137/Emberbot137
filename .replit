@@ -22,14 +22,19 @@ args = "Start application"
 name = "Start application"
 author = "agent"
 
+[workflows.workflow.metadata]
+outputType = "console"
+
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "node app.js"
-waitForPort = 3000
-
-[workflows.workflow.metadata]
-outputType = "console"
 
 [[ports]]
 localPort = 3000
 externalPort = 80
+
+[userenv]
+
+[userenv.shared]
+APP_ID = "1531796145800478771"
+PUBLIC_KEY = "a7eb29e711bffd73127391ceb42cde75c4900be54b1a1751f57bff2e03c6b198"

@@ -121,9 +121,12 @@ client.on('messageCreate', async (message) => {
       const text = args.join(' ');
       if (!channelArg || !text) return channel.send('Usage: `!echo [channel] [message]`');
 
-      // Accept #channel mention or channel ID
-      const channelIdMatch = channelArg.match(/^<#(\d+)>$/) ?? [null, channelArg];
-      const targetChannel = guild.channels.cache.get(channelIdMatch[1]);
+      // Accept #channel mention, channel ID, or channel name (with or without #)
+      const mentionId = channelArg.match(/^<#(\d+)>$/)?.[1];
+      const nameQuery = channelArg.replace(/^#/, '').toLowerCase();
+      const targetChannel =
+        guild.channels.cache.get(mentionId ?? channelArg) ??
+        guild.channels.cache.find((c) => c.name.toLowerCase() === nameQuery);
       if (!targetChannel?.isTextBased()) return channel.send('❌ Channel not found or not a text channel.');
 
       await targetChannel.send(text);

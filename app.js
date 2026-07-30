@@ -117,7 +117,7 @@ client.on('messageCreate', async (message) => {
         '!echo      [channel] [message]             (admin)\n' +
         '!punish    [user] <reason>                 (mute/kick/ban)\n' +
         '!regain    [user]                          (mute/kick/ban)\n' +
-        '!dm        [user] [message]                (admin)\n' +
+        '!dm        [user] [message]\n' +
         '!addrole   [user] [role]                   (manage roles)\n' +
         '!delrole   [user] [role]                   (manage roles)\n' +
         '─────────────────────────────────────────\n' +
@@ -217,9 +217,6 @@ client.on('messageCreate', async (message) => {
 
     // ── !dm [user] [message] ────────────────────────────────────────────────
     if (command === 'dm') {
-      if (!member.permissions.has(PermissionFlagsBits.Administrator)) {
-        return channel.send('❌ You need the **Administrator** permission to use `!dm`.');
-      }
       const userArg = args.shift();
       const text = args.join(' ');
       if (!userArg || !text) return channel.send('Usage: `!dm [user] [message]`');

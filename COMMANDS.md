@@ -10,6 +10,6 @@
 - If 10,11,12: Kick
 - If 13: Ban permanently
 - `!regain [user]` (requires mute, kick, and ban): Decrease punishment status by one (return an error if already 0) and don't do any action. Unban them if banned.
-- `!dm [user] [message]` (requires administrator): DM the user a message.
+- `!dm [user] [message]`: DM the user a message.
 - `!addrole [userid or complete username] [role]` (requires manage roles): Add the user to the role
 - `!delrole [userid or complete username] [role]` (requires manage roles): Remove the user from the role

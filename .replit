@@ -38,3 +38,7 @@ externalPort = 80
 [userenv.shared]
 APP_ID = "1531796145800478771"
 PUBLIC_KEY = "a7eb29e711bffd73127391ceb42cde75c4900be54b1a1751f57bff2e03c6b198"
+
+[deployment]
+deploymentTarget = "vm"
+run = ["node", "app.js"]

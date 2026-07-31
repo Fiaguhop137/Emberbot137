@@ -18,7 +18,7 @@ from discord import app_commands
 from discord.ext import commands
 from dotenv import load_dotenv
 
-PREFIX = "?"
+PREFIX = "$"
 LOG_FILE = "bot.log"
 PUNISHMENT_LEVELS: dict[int, int] = {}
 
@@ -144,19 +144,55 @@ async def send_response(target: commands.Context | discord.Interaction, content:
             await target.response.send_message(content)
     else:
         await target.send(content)
+       
+async def do_test(target: commands.Context | discord.Interaction) -> None:
+    """Run a full diagnostic of bot status, latency, and environment."""
+    guild = target.guild
+    bot_member = guild.me if guild else None
 
+    # Check bot permissions if in a guild
+    perms_status = "N/A (DM)"
+    if bot_member and guild:
+        perms = guild.me.guild_permissions
+        missing_core = []
+        if not perms.moderate_members: missing_core.append("Timeout")
+        if not perms.kick_members: missing_core.append("Kick")
+        if not perms.ban_members: missing_core.append("Ban")
+        if not perms.manage_roles: missing_core.append("Manage Roles")
+        
+        perms_status = "🟢 All core permissions active" if not missing_core else f"⚠️ Missing: {', '.join(missing_core)}"
+
+    # Latency check
+    latency_ms = round(bot.latency * 1000, 2)
+    
+    # Environment check
+    token_loaded = "🟢 Loaded" if os.getenv("DISCORD_TOKEN") else "❌ Missing"
+
+    report = f"""```markdown
+# Meow-Bot Diagnostic Report
+-----------------------------------------
+• Status: 🟢 Online & Operational
+• Latency: {latency_ms}ms
+• Environment (.env): {token_loaded}
+• Connected Guilds: {len(bot.guilds)}
+• Core Permissions: {perms_status}
+• Punishment Trackers Active: {len(PUNISHMENT_LEVELS)} users tracked
+-----------------------------------------
+Diagnostic completed successfully.
+```"""
+    await send_response(target, report)
 
 async def do_help(target: commands.Context | discord.Interaction) -> None:
-    text = """```
+    text = f"""```
 Commands  [required] <optional>
 ─────────────────────────────────────────
-?say       [message]
-?echo      [channel] [message]             (admin)
-?punish    [user] <reason>                 (mute/kick/ban)
-?regain    [user]                          (mute/kick/ban)
-?dm        [user] [message]
-?addrole   [user] [role]                   (manage roles)
-?delrole   [user] [role]                   (manage roles)
+{PREFIX}say       [message]
+{PREFIX}echo      [channel] [message]             (admin)
+{PREFIX}punish    [user] <reason>                 (mute/kick/ban)
+{PREFIX}regain    [user]                          (mute/kick/ban)
+{PREFIX}dm        [user] [message]
+{PREFIX}addrole   [user] [role]                   (manage roles)
+{PREFIX}delrole   [user] [role]                   (manage roles)
 ─────────────────────────────────────────
 Slash commands are available with the same names.
 This message deletes in 5 minutes when possible.
@@ -347,7 +383,14 @@ async def slash_say(interaction: discord.Interaction, message: str) -> None:
 @bot.command(name="echo")
 async def prefix_echo(ctx: commands.Context, channel: discord.TextChannel, *, message: str) -> None:
     await do_echo(ctx, channel, message)
+   
+@bot.command(name="test")
+async def prefix_test(ctx: commands.Context) -> None:
+    await do_test(ctx)
 
+@bot.tree.command(name="test", description="Run a full diagnostic check of the bot.")
+async def slash_test(interaction: discord.Interaction) -> None:
+    await do_test(interaction)
 
 @bot.tree.command(name="echo", description="Echo a message into a channel.")
 @app_commands.describe(channel="Target text channel", message="Message to send")

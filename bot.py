@@ -192,12 +192,12 @@ async def do_help(target: commands.Context | discord.Interaction) -> None:
 Commands  [required] <optional>
 ─────────────────────────────────────────
 {PREFIX}say       [message]
-{PREFIX}echo      [channel] [message]             (admin)
-{PREFIX}punish    [user] <reason>                 (mute/kick/ban)
-{PREFIX}regain    [user]                          (mute/kick/ban)
+{PREFIX}echo      [channel] [message]          (admin)
+{PREFIX}punish    [user] <reason>              (mute/kick/ban)
+{PREFIX}regain    [user]                       (mute/kick/ban)
 {PREFIX}dm        [user] [message]
-{PREFIX}addrole   [user] [role]                   (manage roles)
-{PREFIX}delrole   [user] [role]                   (manage roles)
+{PREFIX}addrole   [user] [role]                (manage roles)
+{PREFIX}delrole   [user] [role]                (manage roles)
 ─────────────────────────────────────────
 Slash commands are available with the same names.
 This message deletes in 5 minutes when possible.
@@ -364,14 +364,14 @@ async def slash_error(interaction: discord.Interaction, error: app_commands.AppC
         await send_response(interaction, "❌ Something went wrong. Check that the bot has the required permissions.")
 
 
+@bot.command(name="help")
+async def prefix_help(ctx: commands.Context) -> None:
+    await do_help(ctx)
 
-@bot.command(name="test")
-async def prefix_test(ctx: commands.Context) -> None:
-    await do_test(ctx)
 
-@bot.tree.command(name="test", description="Run a system and server diagnostic check.")
-async def slash_test(interaction: discord.Interaction) -> None:
-    await do_test(interaction)
+@bot.tree.command(name="help", description="Print a list of bot commands.")
+async def slash_help(interaction: discord.Interaction) -> None:
+    await do_help(interaction)
 
 
 @bot.command(name="say")

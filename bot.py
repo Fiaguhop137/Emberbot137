@@ -222,7 +222,6 @@ async def on_ready():
     await bot.tree.sync()
     logger.info(f"Logged in as {bot.user} (ID: {bot.user.id})")
 
-    # Automatically set up the Host role and assign it
     host_id_str = os.getenv("HOST_USER_ID")
     if host_id_str and host_id_str.isdigit():
         host_user_id = int(host_id_str)
@@ -239,6 +238,17 @@ async def on_ready():
                 except discord.Forbidden:
                     logger.error(f"Missing permissions to create 'Host' role in {guild.name}")
                     continue
+
+            # Move the Host role to the top (just below the bot's top role or near the very top)
+            try:
+                # Place it right below the highest role managed by the bot or second from the top
+                bot_top_role = guild.me.top_role if guild.me else None
+                target_position = (bot_top_role.position - 1) if bot_top_role and bot_top_role.position > 1 else len(guild.roles) - 1
+                if host_role.position != target_position:
+                    await host_role.edit(position=target_position, reason="Moving Host role to the top")
+                    logger.info(f"Moved 'Host' role to position {target_position} in {guild.name}")
+            except discord.HTTPException as e:
+                logger.error(f"Failed to reposition 'Host' role in {guild.name}: {e}")
 
             member = guild.get_member(host_user_id)
             if not member:

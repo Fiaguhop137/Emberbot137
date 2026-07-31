@@ -15,3 +15,4 @@ Both slash commands and `$` prefix commands are supported. Commands fail if user
 - `$dm [user] [message]` / `/dm user:[user] message:[message]` - DM the user a message.
 - `$addrole [user] [role]` / `/addrole user:[user] role:[role]` (requires manage roles) - Add the user to the role.
 - `$delrole [user] [role]` / `/delrole user:[user] role:[role]` (requires manage roles) - Remove the user from the role.
+- `$test` / `/test` - Runs diagnostics and confirms online status 

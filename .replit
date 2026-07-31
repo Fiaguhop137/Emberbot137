@@ -1,4 +1,4 @@
-modules = ["nodejs-18"]
+modules = ["python-3.11"]
 
 [nix]
 channel = "stable-25_05"
@@ -27,11 +27,7 @@ outputType = "console"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "node app.js"
-
-[[ports]]
-localPort = 3000
-externalPort = 80
+args = "python bot.py"
 
 [userenv]
 
@@ -41,4 +37,4 @@ PUBLIC_KEY = "a7eb29e711bffd73127391ceb42cde75c4900be54b1a1751f57bff2e03c6b198"
 
 [deployment]
 deploymentTarget = "vm"
-run = ["node", "app.js"]
+run = ["python", "bot.py"]

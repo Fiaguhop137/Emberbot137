@@ -2,7 +2,7 @@
 
 ## Project overview
 - This repository contains a Python Discord moderation and utility bot.
-- Keep prefix commands (`?command`) and slash commands (`/command`) in sync: every user-facing bot command should have both forms unless a command is inherently prefix-only.
+- Keep prefix commands (`$command`) and slash commands (`/command`) in sync: every user-facing bot command should have both forms unless a command is inherently prefix-only.
 
 ## Development guidelines
 - Prefer small, dependency-light Python modules.

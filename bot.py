@@ -10,6 +10,7 @@ from __future__ import annotations
 import asyncio
 import logging
 import os
+import socket
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 
@@ -148,7 +149,8 @@ async def send_response(target: commands.Context | discord.Interaction, content:
 async def do_test(target: commands.Context | discord.Interaction) -> None:
     guild = require_guild(target)
     
-    # Gather all existing diagnostics
+    # Gather diagnostics
+    hostname = socket.gethostname()
     latency_ms = round(bot.latency * 1000)
     env_status = "Loaded" if os.getenv("DISCORD_TOKEN") else "Missing"
     guild_count = len(bot.guilds)
@@ -175,8 +177,8 @@ async def do_test(target: commands.Context | discord.Interaction) -> None:
 # Diagnostic Report
 -----------------------------------------
 • Status: Online and operational
-• Server Name: {guild.name}
-• Server ID: {guild.id}
+• Host Machine: {hostname}
+• Discord Server: {guild.name} ({guild.id})
 • Latency: {latency_ms}ms
 • Environment (.env): {env_status}
 • Connected Guilds: {guild_count}
@@ -362,14 +364,14 @@ async def slash_error(interaction: discord.Interaction, error: app_commands.AppC
         await send_response(interaction, "❌ Something went wrong. Check that the bot has the required permissions.")
 
 
-@bot.command(name="help")
-async def prefix_help(ctx: commands.Context) -> None:
-    await do_help(ctx)
 
+@bot.command(name="test")
+async def prefix_test(ctx: commands.Context) -> None:
+    await do_test(ctx)
 
-@bot.tree.command(name="help", description="Print a list of bot commands.")
-async def slash_help(interaction: discord.Interaction) -> None:
-    await do_help(interaction)
+@bot.tree.command(name="test", description="Run a system and server diagnostic check.")
+async def slash_test(interaction: discord.Interaction) -> None:
+    await do_test(interaction)
 
 
 @bot.command(name="say")

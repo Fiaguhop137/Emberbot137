@@ -195,6 +195,7 @@ Commands  [required] <optional>
 {PREFIX}dm        [user] [message]
 {PREFIX}addrole   [user] [role]               (manage roles)
 {PREFIX}delrole   [user] [role]               (manage roles)
+{PREFIX}test                                  (runs diagnostics)
 ─────────────────────────────────────────
 Slash commands are available with the same names.
 This message deletes in 5 minutes when possible.

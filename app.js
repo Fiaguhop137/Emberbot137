@@ -1,3 +1,20 @@
+import fs from 'node:fs';
+
+function logAction(message, action, success = true) {
+  const now = new Date().toISOString();
+
+  const line =
+    `[${now}] ` +
+    `${success ? "SUCCESS" : "ERROR"} | ` +
+    `Guild="${message.guild?.name ?? "DM"}" | ` +
+    `Channel="#${message.channel.name ?? "DM"}" | ` +
+    `User="${message.author.tag}" (${message.author.id}) | ` +
+    `Command="${message.content}" | ` +
+    `Action="${action}"`;
+
+  console.log(line);
+  fs.appendFileSync("bot.log", line + "\n");
+}
 import 'dotenv/config';
 import {
   Client,
@@ -173,7 +190,13 @@ client.on('messageCreate', async (message) => {
       punishmentLevels[target.id] = (punishmentLevels[target.id] ?? 0) + 1;
       const level = punishmentLevels[target.id];
       const outcome = await applyPunishment(target, level, reason);
-      return channel.send(`🔨 <@${target.id}> has been ${outcome}. Reason: *${reason}*`);
+      
+      logAction(
+          message,
+          `Punished ${target.user.tag}: ${outcome}; reason="${reason}"`
+      );
+      
+      return channel.send(...);
     }
 
     // ── !regain [user] ──────────────────────────────────────────────────────
@@ -245,8 +268,13 @@ client.on('messageCreate', async (message) => {
       if (!target) return channel.send('❌ User not found.');
       const role = resolveRole(guild, roleQuery);
       if (!role) return channel.send('❌ Role not found.');
-
       await target.roles.add(role);
+      
+      logAction(
+          message,
+          `Added role "${role.name}" to ${target.user.tag}`
+      );
+      
       return channel.send(`✅ Added **${role.name}** to <@${target.id}>.`);
     }
 
@@ -268,6 +296,7 @@ client.on('messageCreate', async (message) => {
       return channel.send(`✅ Removed **${role.name}** from <@${target.id}>.`);
     }
   } catch (err) {
+    logAction(message, err.message, false);
     console.error(`Error handling !${command}:`, err);
     channel.send('❌ Something went wrong. Check that the bot has the required permissions.').catch(() => {});
   }

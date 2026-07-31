@@ -19,7 +19,7 @@ from discord import app_commands
 from discord.ext import commands
 from dotenv import load_dotenv
 
-PREFIX = "~"
+PREFIX = "$"
 LOG_FILE = "bot.log"
 PUNISHMENT_LEVELS: dict[int, int] = {}
 

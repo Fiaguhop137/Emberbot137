@@ -1,48 +1,29 @@
-# Discord Getting Started App
+# Meow Bot on Replit
 
-A rock-paper-scissors Discord bot from Discord's official [getting started guide](https://discord.com/developers/docs/getting-started). Built with Node.js and Express.
-
-## Running the app
-
-```
-node app.js
-```
-
-The workflow **Start application** is configured to run this automatically on port 3000.
+Meow Bot is a Python Discord bot. The Replit workflow runs `python bot.py`.
 
 ## Required secrets
 
-Set these in Replit Secrets (already configured):
+Set these in Replit Secrets:
 
 | Secret | Where to find it |
 |---|---|
-| `APP_ID` | Discord Developer Portal → Your App → General Information |
 | `DISCORD_TOKEN` | Discord Developer Portal → Your App → Bot |
-| `PUBLIC_KEY` | Discord Developer Portal → Your App → General Information |
+| `APP_ID` | Discord Developer Portal → Your App → General Information (optional for runtime) |
+| `PUBLIC_KEY` | Discord Developer Portal → Your App → General Information (optional for runtime) |
 
 ## Discord setup
 
-1. **Interactions Endpoint URL** — In the Discord Developer Portal under your app's General Information, set the Interactions Endpoint URL to:
-   ```
-   https://<your-replit-dev-domain>/interactions
-   ```
-
-2. **Register slash commands** — Run once to install commands to your Discord app:
-   ```
-   npm run register
-   ```
+- Enable the message content intent for the bot if you want `?` prefix commands.
+- Invite the bot with `bot` and `applications.commands` scopes.
+- Slash commands are synchronized automatically when the bot starts.
 
 ## Project structure
 
 ```
-├── app.js        # Main Express server — handles Discord interactions
-├── commands.js   # Slash command definitions + registration script
-├── game.js       # Rock-paper-scissors game logic
-├── utils.js      # Utility functions and enums
-├── examples/     # Standalone feature-specific sample apps
-└── .env.sample   # Template for required environment variables
+├── AGENTS.md        # Contributor and agent instructions
+├── bot.py           # Discord bot entrypoint and command handlers
+├── COMMANDS.md      # Command reference
+├── requirements.txt # Python dependencies
+└── .env.sample      # Template for required environment variables
 ```
-
-## User preferences
-
-<!-- Add your preferences here -->

@@ -217,6 +217,34 @@ async def help_prefix(ctx: commands.Context):
 async def help_slash(interaction: discord.Interaction):
     await do_help(interaction)
 
+@bot.command(name="punish")
+@commands.has_permissions(moderate_members=True)
+async def punish_prefix(ctx: commands.Context, member_query: str, *, reason: str = "No reason provided"):
+    guild = require_guild(ctx)
+    member = await resolve_member(guild, member_query)
+    if not member:
+        await ctx.send("Could not find that member.")
+        return
+        
+    level = PUNISHMENT_LEVELS.get(member.id, 0) + 1
+    PUNISHMENT_LEVELS[member.id] = level
+    
+    result_msg = await apply_punishment(member, level, reason)
+    log_action(guild=guild, channel=ctx.channel, user=ctx.author, command="punish", action=f"Punished {member} -> {result_msg}")
+    await ctx.send(f"Punished {member.mention}: {result_msg}. Reason: {reason}")
+
+@bot.tree.command(name="punish", description="Incrementally punish a user (mute -> kick -> ban)")
+@app_commands.checks.has_permissions(moderate_members=True)
+async def punish_slash(interaction: discord.Interaction, member: discord.Member, reason: str = "No reason provided"):
+    guild = require_guild(interaction)
+    
+    level = PUNISHMENT_LEVELS.get(member.id, 0) + 1
+    PUNISHMENT_LEVELS[member.id] = level
+    
+    result_msg = await apply_punishment(member, level, reason)
+    log_action(guild=guild, channel=interaction.channel, user=interaction.user, command="punish", action=f"Punished {member} -> {result_msg}")
+    await send_response(interaction, f"Punished {member.mention}: {result_msg}. Reason: {reason}")
+
 @bot.event
 async def on_ready():
     await bot.tree.sync()
@@ -239,9 +267,7 @@ async def on_ready():
                     logger.error(f"Missing permissions to create 'Host' role in {guild.name}")
                     continue
 
-            # Move the Host role to the top (just below the bot's top role or near the very top)
             try:
-                # Place it right below the highest role managed by the bot or second from the top
                 bot_top_role = guild.me.top_role if guild.me else None
                 target_position = (bot_top_role.position - 1) if bot_top_role and bot_top_role.position > 1 else len(guild.roles) - 1
                 if host_role.position != target_position:

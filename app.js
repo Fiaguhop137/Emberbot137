@@ -195,8 +195,7 @@ client.on('messageCreate', async (message) => {
           message,
           `Punished ${target.user.tag}: ${outcome}; reason="${reason}"`
       );
-      
-      return channel.send(...);
+      return channel.send(`🔨 <@${target.id}> has been ${outcome}. Reason: *${reason}*`);
     }
 
     // ── !regain [user] ──────────────────────────────────────────────────────

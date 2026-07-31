@@ -49,7 +49,6 @@ def log_action(
     success: bool = True,
 ) -> None:
     """Write an audit-friendly action line to stdout and bot.log."""
-
     guild_name = guild.name if guild else "DM"
     channel_name = getattr(channel, "name", "DM") or "DM"
     tag = f"{user.name}#{user.discriminator}" if user.discriminator != "0" else user.name
@@ -66,7 +65,6 @@ def log_action(
 
 async def resolve_member(guild: discord.Guild, query: str) -> Optional[discord.Member]:
     """Resolve a member by mention, ID, username, display name, or tag."""
-
     query = query.strip()
     if query.startswith("<@") and query.endswith(">"):
         query = query.removeprefix("<@").removeprefix("!").removesuffix(">")
@@ -90,7 +88,6 @@ async def resolve_member(guild: discord.Guild, query: str) -> Optional[discord.M
 
 def resolve_role(guild: discord.Guild, query: str) -> Optional[discord.Role]:
     """Resolve a role by mention, ID, or exact name."""
-
     query = query.strip()
     if query.startswith("<@&") and query.endswith(">"):
         query = query.removeprefix("<@&").removesuffix(">")
@@ -106,7 +103,6 @@ def resolve_role(guild: discord.Guild, query: str) -> Optional[discord.Role]:
 
 async def apply_punishment(member: discord.Member, level: int, reason: str) -> str:
     """Apply the punishment associated with a user's current level."""
-
     if level <= 3:
         await member.timeout(discord.utils.utcnow() + timedelta(minutes=5), reason=reason)
         return f"muted for **5 minutes** (level {level})"
@@ -149,7 +145,6 @@ async def send_response(target: commands.Context | discord.Interaction, content:
 async def do_test(target: commands.Context | discord.Interaction) -> None:
     guild = require_guild(target)
     
-    # Gather diagnostics with hardcoded host check suffix
     hostname = socket.gethostname()
     if hostname.lower() == "plasmadmin-xps-8910":
         hostname = "plasmadmin-xps-8910(firebot)"
@@ -158,7 +153,6 @@ async def do_test(target: commands.Context | discord.Interaction) -> None:
     env_status = "Loaded" if os.getenv("DISCORD_TOKEN") else "Missing"
     guild_count = len(bot.guilds)
     
-    # Core permissions audit for the bot in this guild
     me = guild.me if guild else None
     if me:
         perms = me.guild_permissions
@@ -204,3 +198,32 @@ Commands  [required] <optional>
 ─────────────────────────────────────────
 Slash commands are available with the same names.
 This message deletes in 5 minutes when possible.
+```"""
+    await send_response(target, text)
+
+@bot.command(name="test")
+async def test_prefix(ctx: commands.Context):
+    await do_test(ctx)
+
+@bot.tree.command(name="test", description="Run diagnostic test")
+async def test_slash(interaction: discord.Interaction):
+    await do_test(interaction)
+
+@bot.command(name="help")
+async def help_prefix(ctx: commands.Context):
+    await do_help(ctx)
+
+@bot.tree.command(name="help", description="Show help menu")
+async def help_slash(interaction: discord.Interaction):
+    await do_help(interaction)
+
+@bot.event
+async def on_ready():
+    await bot.tree.sync()
+    logger.info(f"Logged in as {bot.user} (ID: {bot.user.id})")
+
+token = os.getenv("DISCORD_TOKEN")
+if not token:
+    raise ValueError("DISCORD_TOKEN environment variable not found in .env")
+
+bot.run(token)

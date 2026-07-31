@@ -146,41 +146,44 @@ async def send_response(target: commands.Context | discord.Interaction, content:
         await target.send(content)
        
 async def do_test(target: commands.Context | discord.Interaction) -> None:
-    """Run a full diagnostic of bot status, latency, and environment."""
-    guild = target.guild
-    bot_member = guild.me if guild else None
-
-    # Check bot permissions if in a guild
-    perms_status = "N/A (DM)"
-    if bot_member and guild:
-        perms = guild.me.guild_permissions
-        missing_core = []
-        if not perms.moderate_members: missing_core.append("Timeout")
-        if not perms.kick_members: missing_core.append("Kick")
-        if not perms.ban_members: missing_core.append("Ban")
-        if not perms.manage_roles: missing_core.append("Manage Roles")
-        
-        perms_status = "🟢 All core permissions active" if not missing_core else f"⚠️ Missing: {', '.join(missing_core)}"
-
-    # Latency check
-    latency_ms = round(bot.latency * 1000, 2)
+    guild = require_guild(target)
     
-    # Environment check
-    token_loaded = "🟢 Loaded" if os.getenv("DISCORD_TOKEN") else "❌ Missing"
+    # Gather all existing diagnostics
+    latency_ms = round(bot.latency * 1000)
+    env_status = "Loaded" if os.getenv("DISCORD_TOKEN") else "Missing"
+    guild_count = len(bot.guilds)
+    
+    # Core permissions audit for the bot in this guild
+    me = guild.me if guild else None
+    if me:
+        perms = me.guild_permissions
+        audit_perms = []
+        if perms.administrator:
+            audit_perms.append("Administrator")
+        else:
+            if perms.manage_guild: audit_perms.append("Manage Server")
+            if perms.manage_roles: audit_perms.append("Manage Roles")
+            if perms.manage_channels: audit_perms.append("Manage Channels")
+            if perms.kick_members: audit_perms.append("Kick")
+            if perms.ban_members: audit_perms.append("Ban")
+            if perms.manage_messages: audit_perms.append("Manage Messages")
+        perms_str = ", ".join(audit_perms) if audit_perms else "Standard User"
+    else:
+        perms_str = "Unknown"
 
-    report = f"""```markdown
-# Meow-Bot Diagnostic Report
+    response_text = f"""```markdown
+# Diagnostic Report
 -----------------------------------------
-• Status: 🟢 Online & Operational
+• Status: Online and operational
+• Server Name: {guild.name}
+• Server ID: {guild.id}
 • Latency: {latency_ms}ms
-• Environment (.env): {token_loaded}
-• Connected Guilds: {len(bot.guilds)}
-• Core Permissions: {perms_status}
-• Punishment Trackers Active: {len(PUNISHMENT_LEVELS)} users tracked
+• Environment (.env): {env_status}
+• Connected Guilds: {guild_count}
+• Core Permissions: {perms_str}
 -----------------------------------------
-Diagnostic completed successfully.
 ```"""
-    await send_response(target, report)
+    await send_response(target, response_text)
 
 async def do_help(target: commands.Context | discord.Interaction) -> None:
     text = f"""```
@@ -388,7 +391,7 @@ async def prefix_echo(ctx: commands.Context, channel: discord.TextChannel, *, me
 async def prefix_test(ctx: commands.Context) -> None:
     await do_test(ctx)
 
-@bot.tree.command(name="test", description="Run a full diagnostic check of the bot.")
+@bot.tree.command(name="test", description="Run a system and server diagnostic check.")
 async def slash_test(interaction: discord.Interaction) -> None:
     await do_test(interaction)
 

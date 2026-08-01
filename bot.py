@@ -15,7 +15,6 @@ from datetime import datetime, timezone
 from typing import Optional
 
 import discord
-from discord import app_commands
 from discord.ext import commands
 from dotenv import load_dotenv
 
@@ -33,7 +32,6 @@ intents.guild_messages = True
 intents.message_content = True
 intents.members = True
 
-# Prefix is set to a dummy value since prefix commands are no longer used
 bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
 
 
@@ -59,29 +57,6 @@ def log_action(
     logger.info(line)
     with open(LOG_FILE, "a", encoding="utf-8") as file:
         file.write(line + "\n")
-
-
-async def resolve_member(guild: discord.Guild, query: str) -> Optional[discord.Member]:
-    """Resolve a member by mention, ID, username, display name, or tag."""
-    query = query.strip()
-    if query.startswith("<@") and query.endswith(">"):
-        query = query.removeprefix("<@").removeprefix("!").removesuffix(">")
-
-    if query.isdigit():
-        member = guild.get_member(int(query))
-        if member:
-            return member
-        try:
-            return await guild.fetch_member(int(query))
-        except discord.NotFound:
-            pass
-
-    q = query.lower()
-    async for member in guild.fetch_members(limit=None):
-        user_tag = f"{member.name}#{member.discriminator}".lower()
-        if q in {member.name.lower(), user_tag, member.display_name.lower()}:
-            return member
-    return None
 
 
 async def send_response(target: discord.abc.Messageable, content: str) -> None:
@@ -140,7 +115,8 @@ async def do_echo(target: discord.abc.Messageable, message: str) -> None:
 async def console_controller():
     """Reads terminal input asynchronously and executes bot actions locally."""
     await bot.wait_until_ready()
-    print("\n[Console Controller Active] Enter commands like 'test', 'echo [message]', or 'exit' to quit.\n")
+    print(f"\n[Console Controller Active] Connected to {len(bot.guilds)} guild(s).")
+    print("Type commands like 'test', 'echo [message]', or 'exit' to quit.\n")
     
     loop = asyncio.get_running_loop()
     while not bot.is_closed():
@@ -152,42 +128,54 @@ async def console_controller():
             if not content:
                 continue
             
+            print(f"[Console Input Received] -> {content}")
+
             parts = content.split(" ", 1)
             cmd = parts[0].lower()
             args = parts[1] if len(parts) > 1 else ""
 
             if cmd == "exit":
+                print("[Console] Shutting down bot...")
                 await bot.close()
                 break
 
-            # Target the first available text channel across connected guilds for terminal commands
+            if not bot.guilds:
+                print("[Console Error] Bot is not currently in any Discord servers (guilds).")
+                continue
+
+            # Target the first available text channel across connected guilds
             target_channel = None
+            target_guild = None
             for guild in bot.guilds:
                 channel = guild.system_channel or next(
                     (c for c in guild.text_channels if c.permissions_for(guild.me).send_messages), None
                 )
                 if channel:
                     target_channel = channel
+                    target_guild = guild
                     break
 
             if not target_channel:
-                print("[Console] Error: No available text channel found in connected guilds.")
+                print("[Console Error] No available text channel with send permissions found in connected guilds.")
                 continue
+
+            print(f"[Console Target] Selected Guild: {target_guild.name} | Channel: #{target_channel.name}")
 
             if cmd == "test":
                 await do_test(target_channel)
-                print("[Console] Executed test diagnostics.")
+                print("[Console Success] Executed and sent test diagnostics to Discord.")
             elif cmd == "echo":
                 if not args:
-                    print("[Console] Usage: echo [message]")
+                    print("[Console Usage Error] Missing message. Format: echo [message]")
                     continue
                 await do_echo(target_channel, args)
-                print(f"[Console] Echoed: {args}")
+                print(f"[Console Success] Echoed message to Discord: {args}")
             else:
-                print(f"[Console] Unknown command: {cmd}")
+                print(f"[Console Warning] Unknown local command: '{cmd}'. Available: test, echo, exit")
 
         except Exception as e:
             logger.error(f"Console controller error: {e}")
+            print(f"[Console Exception] {e}")
 
 
 @bot.event

@@ -32,8 +32,6 @@ intents.guilds = True
 intents.guild_messages = True
 intents.message_content = True
 intents.members = True
-intents.bans = True
-intents.dm_messages = True
 
 bot = commands.Bot(command_prefix=PREFIX, intents=intents, help_command=None)
 
@@ -169,7 +167,6 @@ Commands  [required] <optional>
 ─────────────────────────────────────────
 {PREFIX}say       [message]
 {PREFIX}echo      [channel] [message]         (admin)
-{PREFIX}dm        [user] [message]
 {PREFIX}addrole   [user] [role]               (manage roles)
 {PREFIX}delrole   [user] [role]               (manage roles)
 {PREFIX}test                                  (runs diagnostics)

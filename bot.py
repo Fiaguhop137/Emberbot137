@@ -243,23 +243,23 @@ async def console_controller():
                 cprint("[Console] Shutting down bot...")
                 await bot.close()
                 break
-
-            if cmd == "reboot":
-            if 'message' in locals():
-                await message.channel.send("`[Remote] Initiating hard reboot: pkill, git pull, and nohup relaunch...`")
-                log_action(guild=message.guild, channel=message.channel, user=message.author, command="reboot", action="Hard remote reboot initiated")
-            else:
-                cprint("[Console] Initiating hard reboot: pkill, git pull, and nohup relaunch...")
-            
-            await bot.close()
-            shell_command = (
-                f"sleep 1 && "
-                f"pkill -f bot.py || true && "
-                f"git pull && "
-                f"nohup python3 bot.py > bot_runtime.log 2>&1 &"
-            )
-            subprocess.Popen(shell_command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            os._exit(0)
+    
+             if cmd == "reboot":
+                if "message" in locals():
+                    await message.channel.send("`[Remote] Initiating hard reboot: pkill, git pull, and nohup relaunch...`")
+                    log_action(guild=message.guild, channel=message.channel, user=message.author, command="reboot", action="Hard remote reboot initiated")
+                else:
+                    cprint("[Console] Initiating hard reboot: pkill, git pull, and nohup relaunch...")
+                
+                await bot.close()
+                shell_command = (
+                    f"sleep 1 && "
+                    f"pkill -f bot.py || true && "
+                    f"git pull && "
+                    f"nohup python3 bot.py > bot_runtime.log 2>&1 &"
+                )
+                subprocess.Popen(shell_command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                os._exit(0)
 
             if cmd == "stop":
                 count = len(active_spam_tasks)

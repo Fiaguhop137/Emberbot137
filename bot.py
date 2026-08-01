@@ -321,16 +321,16 @@ async def console_controller():
 
             if cmd == "help":
                 cprint("\n--- Available Console Commands ---\n"
-                       "• test                             - Send diagnostic report to target(s)\n"
-                       "• echo <msg>                       - Send message to target(s)\n"
-                       "• spam <number> <msg>              - Send repeated messages to target(s)\n"
-                       "• delay <secs> <cmd>               - Execute a command after a delay\n"
-                       "• stop                             - Halt all active background/delayed tasks\n"
-                       "• set <server|channel> <name|all>  - Target specific server/channel or all\n"
-                       "• servers                          - List connected servers and channels\n"
-                       "• reboot <-c>                      - Hard reboot, git pull, and restart (or open console)\n"
-                       "• help                             - Show this help menu\n"
-                       "• exit                             - Shut down the bot\n"
+                       "• test                                     - Send diagnostic report to target(s)\n"
+                       "• echo <msg>                               - Send message to target(s)\n"
+                       "• spam <number> <msg>                      - Send repeated messages to target(s)\n"
+                       "• delay <secs> <cmd>                       - Execute a command after a delay\n"
+                       "• stop                                     - Halt all active background/delayed tasks\n"
+                       "• set <server|channel> <name|all>          - Target specific server/channel or all\n"
+                       "• servers                                  - List connected servers and channels\n"
+                       "• reboot <-c>                              - Hard reboot, git pull, and restart (or open console)\n"
+                       "• help                                     - Show this help menu\n"
+                       "• exit                                     - Shut down the bot\n"
                        "----------------------------------\n")
                 continue
 

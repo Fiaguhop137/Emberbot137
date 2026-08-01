@@ -246,19 +246,31 @@ async def console_controller():
     
             if cmd == "reboot":
                 if "message" in locals():
-                    await message.channel.send("`[Remote] Initiating hard reboot: pkill, git pull, and nohup relaunch...`")
+                    await message.channel.send("`[Remote] Initiating hard reboot: pkill, git pull, and detached relaunch...`")
                     log_action(guild=message.guild, channel=message.channel, user=message.author, command="reboot", action="Hard remote reboot initiated")
                 else:
-                    cprint("[Console] Initiating hard reboot: pkill, git pull, and nohup relaunch...")
+                    cprint("[Console] Initiating hard reboot: pkill, git pull, and detached relaunch...")
                 
                 await bot.close()
-                shell_command = (
-                    f"sleep 1 && "
-                    f"pkill -f bot.py || true && "
-                    f"git pull && "
-                    f"nohup python3 bot.py > bot_runtime.log 2>&1 &"
+                
+                # Use preexec_fn=os.setsid to create a completely new session/process group 
+                # so it doesn't get taken down when this script exits.
+                log_file = open("bot_runtime.log", "a")
+                subprocess.Popen(
+                    ["nohup", "python3", "bot.py"],
+                    stdout=log_file,
+                    stderr=log_file,
+                    stdin=subprocess.DEVNULL,
+                    preexec_fn=os.setsid
                 )
-                subprocess.Popen(shell_command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                
+                # Cleanly execute the update sequence via a separate one-shot background shell, then die
+                subprocess.Popen(
+                    "sleep 1 && git pull",
+                    shell=True,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL
+                )
                 os._exit(0)
 
             if cmd == "stop":

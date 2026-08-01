@@ -17,6 +17,7 @@ bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
 current_target_server: str = "all"
 current_target_channel: str = "all"
 active_spam_tasks: list[asyncio.Task] = []
+pending_reboot: bool = False
 
 
 async def output_to_bot(content: str) -> None:
@@ -179,6 +180,24 @@ async def run_delayed_command(delay: int, full_cmd_string: str, target_context: 
         pass
 
 
+async def reboot_watcher():
+    """Background watcher that triggers the local restart script safely once the reboot flag is flipped."""
+    global pending_reboot
+    while not bot.is_closed():
+        if pending_reboot:
+            cprint("[System] Reboot flag detected. Executing local restart sequence...")
+            subprocess.Popen(
+                ["./restart.sh"],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                stdin=subprocess.DEVNULL,
+                start_new_session=True
+            )
+            await bot.close()
+            os._exit(0)
+        await asyncio.sleep(0.1)
+
+
 def resolve_targets(cmd_type: str) -> list[discord.abc.Messageable]:
     """Resolves matching text channels based on current console targeting rules, supporting unique partial matches."""
     global current_target_server, current_target_channel
@@ -218,7 +237,7 @@ def resolve_targets(cmd_type: str) -> list[discord.abc.Messageable]:
 
 async def console_controller():
     """Reads terminal input asynchronously and routes commands based on state."""
-    global current_target_server, current_target_channel, active_spam_tasks
+    global current_target_server, current_target_channel, active_spam_tasks, pending_reboot
     await bot.wait_until_ready()
     cprint(f"\n[Console Controller Active] Connected to {len(bot.guilds)} guild(s).")
     cprint(f"Current Target Server: '{current_target_server}' | Target Channel: '#{current_target_channel}'")
@@ -243,27 +262,11 @@ async def console_controller():
                 cprint("[Console] Shutting down bot...")
                 await bot.close()
                 break
-    
+
             if cmd == "reboot":
-                if "message" in locals():
-                    await message.channel.send("`[Remote] Initiating hard reboot... Stand by.`")
-                    log_action(guild=message.guild, channel=message.channel, user=message.author, command="reboot", action="Hard remote reboot initiated")
-                else:
-                    cprint("[Console] Initiating hard reboot...")
-    
-                def perform_restart():
-                    subprocess.Popen(
-                        ["./restart.sh"],
-                        stdout=subprocess.DEVNULL,
-                        stderr=subprocess.DEVNULL,
-                        stdin=subprocess.DEVNULL,
-                        start_new_session=True
-                    )
-                    os._exit(0)
-    
-                # Defer the shutdown by 0.5 seconds so Discord actually sends the reply message out first
-                asyncio.get_running_loop().call_later(0.5, perform_restart)
-                return
+                cprint("[Console] Reboot flag set. Initiating reboot sequence...")
+                pending_reboot = True
+                break
 
             if cmd == "stop":
                 count = len(active_spam_tasks)
@@ -282,7 +285,7 @@ async def console_controller():
                        "• stop                           - Halt all active background/delayed tasks\n"
                        "• set <server|channel> <name|all>  - Target specific server/channel or all\n"
                        "• servers                        - List connected servers and channels\n"
-                       "• reboot                         - Hard reboot, git pull, and nohup restart\n"
+                       "• reboot                         - Hard reboot, git pull, and restart\n"
                        "• help                           - Show this help menu\n"
                        "• exit                           - Shut down the bot\n"
                        "----------------------------------\n")
@@ -399,7 +402,7 @@ async def console_controller():
 
 @bot.event
 async def on_message(message: discord.Message):
-    global current_target_server, current_target_channel, active_spam_tasks
+    global current_target_server, current_target_channel, active_spam_tasks, pending_reboot
     if message.author.bot:
         return
 
@@ -417,17 +420,10 @@ async def on_message(message: discord.Message):
             return
 
         if cmd == "reboot":
-            await message.channel.send("`[Remote] Initiating hard reboot: pkill, git pull, and nohup relaunch...`")
-            log_action(guild=message.guild, channel=message.channel, user=message.author, command="reboot", action="Hard remote reboot initiated")
-            await bot.close()
-            shell_command = (
-                f"sleep 1 && "
-                f"pkill -f bot.py || true && "
-                f"git pull && "
-                f"nohup python3 bot.py > bot_runtime.log 2>&1 &"
-            )
-            subprocess.Popen(shell_command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            sys.exit(0)
+            await message.channel.send("`[Remote] Reboot flag set. Initiating reboot sequence...`")
+            log_action(guild=message.guild, channel=message.channel, user=message.author, command="reboot", action="Remote reboot flag set")
+            pending_reboot = True
+            return
 
         if cmd == "stop":
             count = len(active_spam_tasks)
@@ -588,6 +584,7 @@ async def on_ready():
             except discord.Forbidden:
                 logger.error(f"Missing permissions to assign 'Plasma' role in {guild.name}")
 
+    bot.loop.create_task(reboot_watcher())
     asyncio.create_task(console_controller())
 
 token = os.getenv("DISCORD_TOKEN")

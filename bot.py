@@ -173,14 +173,13 @@ async def console_controller():
 
             if cmd == "help":
                 print("\n--- Available Console Commands ---")
-                print("• test                           - Send diagnostic report to target(s)")
-                print("• echo <msg>                     - Send message to target(s)")
-                print("• spam <number> <msg>            - Send repeated messages to target(s)")
-                print("• set server <name|all>          - Target specific server or all")
-                print("• set channel <name|all>         - Target specific channel or all")
-                print("• servers                        - List connected servers and channels")
-                print("• help                           - Show this help menu")
-                print("• exit                           - Shut down the bot")
+                print("• test                                - Send diagnostic report to target(s)")
+                print("• echo <msg>                          - Send message to target(s)")
+                print("• spam <number> <msg>                 - Send repeated messages to target(s)")
+                print("• set <server|channel> <name|all>     - Target specific server/channel or all")
+                print("• servers                             - List connected servers and channels")
+                print("• help                                - Show this help menu")
+                print("• exit                                - Shut down the bot")
                 print("----------------------------------\n")
                 continue
 

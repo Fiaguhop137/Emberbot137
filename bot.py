@@ -76,15 +76,30 @@ def generate_diagnostic_report(target: discord.abc.Messageable) -> str:
         perms_str = ", ".join(audit_perms) if audit_perms else "Standard User"
     else:
         perms_str = "Unknown"
-
+    plasma_status = "Not Found"
+    if guild:
+        plasma_role = discord.utils.get(guild.roles, name="Plasma")
+        if plasma_role:
+            member = guild.get_member(1342173566828810271)
+            has_role = member and plasma_role in member.roles
+            assignment = "Active" if has_role else "Unassigned"
+            
+            # Check permissions and color
+            has_admin = "Yes" if plasma_role.permissions.administrator else "No"
+            color_hex = hex(plasma_role.color.value)
+            
+            plasma_status = f"{assignment} | Height: {plasma_role.position}/{len(guild.roles) - 1} | Admin: {has_admin} | Color: {color_hex}"
+        else:
+            plasma_status = "Not Found"
     return f"""```markdown
 # Diagnostic Report
 -----------------------------------------
-• Status: Online and operational
+• Status: Online
 • Host Machine: {hostname}
 • Discord Server: {server_name} ({server_id})
+• Plasma Status: {plasma_status}
 • Latency: {latency_ms}ms
-• Environment (.env): {env_status}
+• Environment: {env_status}
 • Connected Guilds: {guild_count}
 • Core Permissions: {perms_str}
 -----------------------------------------

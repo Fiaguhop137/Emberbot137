@@ -1,6 +1,6 @@
 """Discord bot entrypoint implemented with discord.py.
 
-The bot exposes the same command set through both `?` prefix commands and
+The bot exposes the same command set through both `$` prefix commands and
 Discord slash commands. Command behavior is implemented in shared helper
 functions so the two command surfaces stay synchronized.
 """
@@ -38,16 +38,16 @@ bot = commands.Bot(command_prefix=PREFIX, intents=intents, help_command=None)
 
 def log_action(
     *,
-    guild: Optional[discord.Guild],
-    channel: Optional[discord.abc.GuildChannel | discord.abc.PrivateChannel],
+    guild: discord.Guild,
+    channel: discord.abc.GuildChannel,
     user: discord.abc.User,
     command: str,
     action: str,
     success: bool = True,
 ) -> None:
     """Write an audit-friendly action line to stdout and bot.log."""
-    guild_name = guild.name if guild else "DM"
-    channel_name = getattr(channel, "name", "DM") or "DM"
+    guild_name = guild.name
+    channel_name = getattr(channel, "name", "unknown")
     tag = f"{user.name}#{user.discriminator}" if user.discriminator != "0" else user.name
     now = datetime.now(timezone.utc).isoformat()
     line = (
@@ -97,6 +97,7 @@ def resolve_role(guild: discord.Guild, query: str) -> Optional[discord.Role]:
     q = query.lower()
     return discord.utils.find(lambda role: role.name.lower() == q, guild.roles)
 
+
 def require_guild(ctx: commands.Context | discord.Interaction) -> discord.Guild:
     guild = ctx.guild
     if guild is None:
@@ -118,10 +119,11 @@ async def send_response(target: commands.Context | discord.Interaction, content:
             await target.response.send_message(content)
     else:
         await target.send(content)
-       
+
+
 async def do_test(target: commands.Context | discord.Interaction) -> None:
     guild = require_guild(target)
-    
+     
     hostname = socket.gethostname()
     if hostname.lower() == "plasmadmin-xps-8910":
         hostname = "plasmadmin-xps-8910(firebot)"
@@ -141,7 +143,6 @@ async def do_test(target: commands.Context | discord.Interaction) -> None:
             if perms.manage_roles: audit_perms.append("Manage Roles")
             if perms.manage_channels: audit_perms.append("Manage Channels")
             if perms.kick_members: audit_perms.append("Kick")
-            if perms.ban_members: audit_perms.append("Ban")
             if perms.manage_messages: audit_perms.append("Manage Messages")
         perms_str = ", ".join(audit_perms) if audit_perms else "Standard User"
     else:
@@ -161,6 +162,7 @@ async def do_test(target: commands.Context | discord.Interaction) -> None:
 ```"""
     await send_response(target, response_text)
 
+
 async def do_help(target: commands.Context | discord.Interaction) -> None:
     text = f"""```
 Commands  [required] <optional>
@@ -176,19 +178,27 @@ This message deletes in 5 minutes when possible.
 ```"""
     await send_response(target, text)
 
+
 @bot.command(name="test")
+@commands.guild_only()
 async def test_prefix(ctx: commands.Context):
     await do_test(ctx)
 
+
 @bot.tree.command(name="test", description="Run diagnostic test")
+@app_commands.guild_only()
 async def test_slash(interaction: discord.Interaction):
     await do_test(interaction)
 
+
 @bot.command(name="help")
+@commands.guild_only()
 async def help_prefix(ctx: commands.Context):
     await do_help(ctx)
 
+
 @bot.tree.command(name="help", description="Show help menu")
+@app_commands.guild_only()
 async def help_slash(interaction: discord.Interaction):
     await do_help(interaction)
 

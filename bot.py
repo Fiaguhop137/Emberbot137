@@ -593,23 +593,26 @@ async def on_message(message: discord.Message):
                 task.add_done_callback(lambda t: active_spam_tasks.remove(t) if t in active_spam_tasks else None)
                 await message.channel.send(f"`[Remote Success] Scheduled command in {delay_seconds}s.`")
                 log_action(guild=message.guild, channel=message.channel, user=message.author, command="delay", action=f"Remote delay {delay_seconds}s: {inner_cmd}")
-        elif cmd == "help":
-            help_text = (
-                "```markdown\n# Remote Terminal Commands\n"
-                "• test\n• echo <msg>\n• spam <number> <msg>\n"
-                "• delay <secs> <cmd>\n• stop\n• set <server|channel> <name|all>\n"
-                "• servers\n• reboot <-c>\n-------------------------```"
-            )
+        elif cmd=="help":
+            help_text=(
+                "```markdown\n= Remote Console Commands:\n"
+                " - test                                  runs diagnostics\n"
+                " - echo <msg>                            repeats <msg> to the selected channel\n"
+                " - spam <number> <msg>                   spams <msg> <number times>\n"
+                " - stop                                  stops spamming\n"
+                " - delay <secs> <cmd>                    delays <secs> seconds then runs <cmd>\n"
+                " - set <server|channel> <name|all>       moves server/channel selector. use all to broadcast to all servers/channels\n"
+                " - servers                               lists all detected servers\n"
+                " - reboot <-c>                           reboots bot. -c tag will open console\n"
+                "-------------------------```")
             await message.channel.send(help_text)
         elif cmd == "servers":
+            server_summary=""
             for g in bot.guilds:
-                channels = [c.name for c in g.text_channels if c.permissions_for(g.me).send_messages]
-                server_summary += f"• {g.name} (ID: {g.id})\n  Channels: {', '.join(channels)}\n"
-            await message.channel.send(f"```markdown\n# Connected Servers\n{server_summary}\n```") 
-
+                channels=[c.name for c in g.text_channels if c.permissions_for(g.me).send_messages]
+                server_summary+=f" - {g.name}({g.id})\n ↳ Channels: {', '.join(channels)}\n"
+            await message.channel.send(f"```markdown\n# Connected Servers\n{server_summary}```") 
     await bot.process_commands(message)
-
-
 @bot.event
 async def on_ready():
     logger.info(f"Logged in as {bot.user} (ID: {bot.user.id})")

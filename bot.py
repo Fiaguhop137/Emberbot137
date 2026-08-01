@@ -278,7 +278,7 @@ async def console_controller():
     await bot.wait_until_ready()
     cprint(f"\n[Console Controller Active] Connected to {len(bot.guilds)} guild(s).")
     cprint(f"Current Target Server: '{current_target_server}' | Target Channel: '#{current_target_channel}'")
-    cprint("Commands: test, echo <msg>, spam <number> <msg>, stop, delay <seconds> <cmd>, set, servers, help, reboot [-c], exit\n")
+    cprint("Commands: test, echo <msg>, spam <number> <msg>, stop, delay <seconds> <cmd>, set, servers, help, reboot <-c>, exit\n")
     
     loop = asyncio.get_running_loop()
     while not bot.is_closed():
@@ -321,16 +321,16 @@ async def console_controller():
 
             if cmd == "help":
                 cprint("\n--- Available Console Commands ---\n"
-                       "• test                           - Send diagnostic report to target(s)\n"
-                       "• echo <msg>                     - Send message to target(s)\n"
-                       "• spam <number> <msg>            - Send repeated messages to target(s)\n"
-                       "• delay <secs> <cmd>             - Execute a command after a delay\n"
-                       "• stop                           - Halt all active background/delayed tasks\n"
+                       "• test                             - Send diagnostic report to target(s)\n"
+                       "• echo <msg>                       - Send message to target(s)\n"
+                       "• spam <number> <msg>              - Send repeated messages to target(s)\n"
+                       "• delay <secs> <cmd>               - Execute a command after a delay\n"
+                       "• stop                             - Halt all active background/delayed tasks\n"
                        "• set <server|channel> <name|all>  - Target specific server/channel or all\n"
-                       "• servers                        - List connected servers and channels\n"
-                       "• reboot [-c]                    - Hard reboot, git pull, and restart (or open console)\n"
-                       "• help                           - Show this help menu\n"
-                       "• exit                           - Shut down the bot\n"
+                       "• servers                          - List connected servers and channels\n"
+                       "• reboot <-c>                      - Hard reboot, git pull, and restart (or open console)\n"
+                       "• help                             - Show this help menu\n"
+                       "• exit                             - Shut down the bot\n"
                        "----------------------------------\n")
                 continue
 

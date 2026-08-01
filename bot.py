@@ -14,6 +14,7 @@ emberbot137=commands.Bot(command_prefix="~",intents=intents,help_command=None)
 current_target_server,current_target_channel="yap","everyone"
 active_spam_tasks:list[asyncio.Task]=[]
 pending_reboot:bool=False
+reboot_mode="restart.sh"
 last_chat_data = {"guild":None,"channel":None,"author":None,"author_id":None,"content":None,"timestamp":None,"count":0}
 def flush_chat_log()->None:
     global last_chat_data
@@ -138,7 +139,7 @@ async def reboot_watcher():
         if pending_reboot:
             cprint(f"[System] Reboot command detected. Executing restart sequence...")
             flush_chat_log()
-            subprocess.Popen([f"./restart.sh"],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,stdin=subprocess.DEVNULL,start_new_session=True)
+            subprocess.Popen([f"./{reboot_mode}"],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,stdin=subprocess.DEVNULL,start_new_session=True)
             await emberbot137.close()
             os._exit(0)
         await asyncio.sleep(1)

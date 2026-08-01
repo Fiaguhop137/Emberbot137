@@ -423,7 +423,7 @@ async def console_controller():
             await asyncio.sleep(2)
 
 
-@bot.event
+@emberbot137.event
 async def on_message(message: discord.Message):
     global current_target_server,current_target_channel,active_spam_tasks,pending_reboot,reboot_mode,last_chat_data
     if message.guild:
@@ -583,7 +583,7 @@ async def on_message(message: discord.Message):
                 server_summary+=f" - {g.name}({g.id})\n ↳ Channels: {', '.join(channels)}\n"
             await message.channel.send(f"```markdown\n# Connected Servers\n{server_summary}```") 
     await bot.process_commands(message)
-@bot.event
+@emberbot137.event
 async def on_ready():
     logger.info(f"Logged in as {bot.user} (ID: {bot.user.id})")
 

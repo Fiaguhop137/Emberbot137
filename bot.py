@@ -195,7 +195,8 @@ async def console_controller():
         try:
             line = await loop.run_in_executor(None, sys.stdin.readline)
             if not line:
-                break
+                await asyncio.sleep(1)
+                continue
             content = line.strip()
             if not content:
                 continue
@@ -309,12 +310,12 @@ async def console_controller():
                 cprint(f"[Console Warning] Unknown local command: '{cmd}'. Type 'help' for options.")
 
         except Exception as e:
-            logger.error(f"Console controller error: {e}")
-            cprint(f"[Console Exception] {e}")
+            await asyncio.sleep(2)
 
 
 @bot.event
 async def on_message(message: discord.Message):
+    global current_target_server, current_target_channel
     if message.author.bot:
         return
 
@@ -329,6 +330,52 @@ async def on_message(message: discord.Message):
 
         if cmd == "exit":
             await message.channel.send("`[Remote Error] 'exit' command cannot be executed remotely.`")
+            return
+
+        if cmd == "set":
+            sub_parts = args.split(" ", 1)
+            sub_cmd = sub_parts[0].lower() if sub_parts else ""
+            sub_val = sub_parts[1] if len(sub_parts) > 1 else ""
+
+            if sub_cmd == "server":
+                if not sub_val:
+                    await message.channel.send(f"`[Remote] Current target server is: {current_target_server}`")
+                else:
+                    if sub_val.lower() == "all":
+                        current_target_server = "all"
+                        await message.channel.send("`[Remote] Target server updated to: all`")
+                    else:
+                        matched_server = sub_val
+                        for g in bot.guilds:
+                            if sub_val.lower() in g.name.lower():
+                                matched_server = g.name
+                                break
+                        current_target_server = sub_val
+                        await message.channel.send(f"`[Remote] Target server updated to: {matched_server}`")
+            elif sub_cmd == "channel":
+                if not sub_val:
+                    await message.channel.send(f"`[Remote] Current target channel is: #{current_target_channel}`")
+                else:
+                    clean_val = sub_val.removeprefix("#").lower()
+                    if clean_val == "bot" or clean_val == "all":
+                        current_target_channel = "all"
+                        await message.channel.send("`[Remote] Target channel 'bot' is restricted. Defaulted channel target to: #all`")
+                    else:
+                        matched_channel = clean_val
+                        for g in bot.guilds:
+                            if current_target_server != "all" and current_target_server.lower() not in g.name.lower():
+                                continue
+                            for c in g.text_channels:
+                                if c.name.lower() == clean_val or c.name.lower().startswith(clean_val):
+                                    matched_channel = c.name
+                                    break
+                        current_target_channel = clean_val
+                        await message.channel.send(f"`[Remote] Target channel updated to: #{matched_channel}`")
+            else:
+                await message.channel.send("`[Remote Usage] Use 'set server [name|all]' or 'set channel [name|all]'`")
+            
+            await message.channel.send(f"`[Active Targets] Server: {current_target_server} | Channel: #{current_target_channel}`")
+            log_action(guild=message.guild, channel=message.channel, user=message.author, command="set", action=f"Remote target update -> Server: {current_target_server}, Channel: #{current_target_channel}")
             return
 
         channels = resolve_targets(cmd)
@@ -359,6 +406,7 @@ async def on_message(message: discord.Message):
             help_text = (
                 "```markdown\n# Remote Terminal Commands\n"
                 "• test\n• echo <msg>\n• spam <number> <msg>\n"
+                "• set <server|channel> <name|all>\n"
                 "• servers\n-------------------------```"
             )
             await message.channel.send(help_text)

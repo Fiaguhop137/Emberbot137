@@ -35,9 +35,9 @@ async def output_to_bot(content: str) -> None:
             for channel in guild.text_channels:
                 if channel.name=="emberbot137-remote-console":
                     try:
-                        clean_content=content.strip()
-                        if clean_content:
-                            await channel.send(f"```text\n{clean_content}\n```")
+                        content=content.strip()
+                        if content:
+                            await channel.send(f"```text\n{content}\n```")
                     except Exception as e:
                         logger.error(f"Failed to output: {e}")
                     return

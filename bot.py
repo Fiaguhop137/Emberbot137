@@ -251,10 +251,7 @@ async def console_controller():
                 else:
                     cprint("[Console] Initiating hard reboot: pkill, git pull, and detached relaunch...")
                 
-                await bot.close()
-                
-                # Use preexec_fn=os.setsid to create a completely new session/process group 
-                # so it doesn't get taken down when this script exits.
+                # Spawn the detached shell script independently using standard subprocess
                 log_file = open("bot_runtime.log", "a")
                 subprocess.Popen(
                     ["nohup", "python3", "bot.py"],
@@ -263,14 +260,15 @@ async def console_controller():
                     stdin=subprocess.DEVNULL,
                     preexec_fn=os.setsid
                 )
-                
-                # Cleanly execute the update sequence via a separate one-shot background shell, then die
                 subprocess.Popen(
                     "sleep 1 && git pull",
                     shell=True,
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL
                 )
+                
+                # Close bot gracefully, then hard exit
+                await bot.close()
                 os._exit(0)
 
             if cmd == "stop":

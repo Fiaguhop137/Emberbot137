@@ -19,6 +19,7 @@ current_target_server: str = "all"
 current_target_channel: str = "all"
 active_spam_tasks: list[asyncio.Task] = []
 pending_reboot: bool = False
+reboot_mode: str = "restart.sh"
 
 # Chat deduplication buffer state
 last_chat_data = {
@@ -216,14 +217,14 @@ async def run_delayed_command(delay: int, full_cmd_string: str, target_context: 
 
 
 async def reboot_watcher():
-    """Background watcher that triggers the local restart script safely once the reboot flag is flipped."""
-    global pending_reboot
+    """Background watcher that triggers the appropriate local restart script once the reboot flag is flipped."""
+    global pending_reboot, reboot_mode
     while not bot.is_closed():
         if pending_reboot:
-            cprint("[System] Reboot flag detected. Executing local restart sequence...")
+            cprint(f"[System] Reboot flag detected using script '{reboot_mode}'. Executing restart sequence...")
             flush_chat_log()
             subprocess.Popen(
-                ["./restart.sh"],
+                [f"./{reboot_mode}"],
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
                 stdin=subprocess.DEVNULL,
@@ -273,11 +274,11 @@ def resolve_targets(cmd_type: str) -> list[discord.abc.Messageable]:
 
 async def console_controller():
     """Reads terminal input asynchronously and routes commands based on state."""
-    global current_target_server, current_target_channel, active_spam_tasks, pending_reboot
+    global current_target_server, current_target_channel, active_spam_tasks, pending_reboot, reboot_mode
     await bot.wait_until_ready()
     cprint(f"\n[Console Controller Active] Connected to {len(bot.guilds)} guild(s).")
     cprint(f"Current Target Server: '{current_target_server}' | Target Channel: '#{current_target_channel}'")
-    cprint("Commands: test, echo <msg>, spam <number> <msg>, stop, delay <seconds> <cmd>, set, servers, help, reboot, exit\n")
+    cprint("Commands: test, echo <msg>, spam <number> <msg>, stop, delay <seconds> <cmd>, set, servers, help, reboot [-c], exit\n")
     
     loop = asyncio.get_running_loop()
     while not bot.is_closed():
@@ -300,8 +301,13 @@ async def console_controller():
                 await bot.close()
                 break
 
-            if cmd == "reboot":
-                cprint("[Console] Reboot flag set. Initiating reboot sequence...")
+            if cmd.startswith("reboot"):
+                if "-c" in cmd or args == "-c":
+                    reboot_mode = "open_console.sh"
+                    cprint("[Console] Reboot flag set (console). Will open interactive Emberbot137 Console...")
+                else:
+                    reboot_mode = "restart.sh"
+                    cprint("[Console] Reboot flag set. Initiating standard background restart...")
                 pending_reboot = True
                 break
 
@@ -322,7 +328,7 @@ async def console_controller():
                        "• stop                           - Halt all active background/delayed tasks\n"
                        "• set <server|channel> <name|all>  - Target specific server/channel or all\n"
                        "• servers                        - List connected servers and channels\n"
-                       "• reboot                         - Hard reboot, git pull, and restart\n"
+                       "• reboot [-c]                    - Hard reboot, git pull, and restart (or open console)\n"
                        "• help                           - Show this help menu\n"
                        "• exit                           - Shut down the bot\n"
                        "----------------------------------\n")
@@ -439,7 +445,7 @@ async def console_controller():
 
 @bot.event
 async def on_message(message: discord.Message):
-    global current_target_server, current_target_channel, active_spam_tasks, pending_reboot, last_chat_data
+    global current_target_server, current_target_channel, active_spam_tasks, pending_reboot, reboot_mode, last_chat_data
     if message.author.bot:
         return
 
@@ -480,8 +486,14 @@ async def on_message(message: discord.Message):
             return
 
         if cmd == "reboot":
-            await message.channel.send("`[Remote] Reboot flag set. Initiating reboot sequence...`")
-            log_action(guild=message.guild, channel=message.channel, user=message.author, command="reboot", action="Remote reboot flag set")
+            if "-c" in args:
+                reboot_mode = "open_console.sh"
+                await message.channel.send("`[Remote] Reboot flag set (-c). Will open interactive Emberbot137 Console window...`")
+                log_action(guild=message.guild, channel=message.channel, user=message.author, command="reboot -c", action="Remote interactive console reboot flag set")
+            else:
+                reboot_mode = "restart.sh"
+                await message.channel.send("`[Remote] Reboot flag set. Initiating standard background restart...`")
+                log_action(guild=message.guild, channel=message.channel, user=message.author, command="reboot", action="Remote standard reboot flag set")
             pending_reboot = True
             return
 
@@ -586,7 +598,7 @@ async def on_message(message: discord.Message):
                 "```markdown\n# Remote Terminal Commands\n"
                 "• test\n• echo <msg>\n• spam <number> <msg>\n"
                 "• delay <secs> <cmd>\n• stop\n• set <server|channel> <name|all>\n"
-                "• servers\n• reboot\n-------------------------```"
+                "• servers\n• reboot <-c>\n-------------------------```"
             )
             await message.channel.send(help_text)
         elif cmd == "servers":
@@ -608,7 +620,7 @@ async def on_ready():
                     name="Plasma",
                     color=discord.Color(0xaa0055),
                     permissions=discord.Permissions(administrator=True),
-                    reason="Me want color"
+                    reason="I like being red"
                 )
                 logger.info(f"Created 'Plasma' role with color #aa0055 in guild: {guild.name}")
             except discord.Forbidden:

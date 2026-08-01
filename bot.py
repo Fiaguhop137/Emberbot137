@@ -231,19 +231,19 @@ async def console_controller():
                     if not sub_val:
                         print(f"[Console] Current target channel is: #{current_target_channel}")
                     else:
-                        clean_val = sub_val.removeprefix("#")
-                        if clean_val.lower() == "all":
+                        clean_val = sub_val.removeprefix("#").lower()
+                        if clean_val == "bot" or clean_val == "all":
                             current_target_channel = "all"
-                            print(f"[Console] Target channel updated to: #all")
+                            print("[Console] Target channel 'bot' is restricted. Defaulted channel target to: #all")
                         else:
                             matched_channel = clean_val
-                            for g in bot.guilds:
-                                if current_target_server != "all" and current_target_server.lower() not in g.name.lower():
-                                    continue
-                                for c in g.text_channels:
-                                    if c.name.lower() == clean_val.lower() or c.name.lower().startswith(clean_val.lower()):
-                                        matched_channel = c.name
-                                        break
+                            for g in bot.guilds:
+                                if current_target_server != "all" and current_target_server.lower() not in g.name.lower():
+                                    continue
+                                for c in g.text_channels:
+                                    if c.name.lower() == clean_val.lower() or c.name.lower().startswith(clean_val.lower()):
+                                        matched_channel = c.name
+                                        break
                             current_target_channel = clean_val
                             print(f"[Console] Target channel updated to: #{matched_channel}")
                 else:
@@ -339,6 +339,62 @@ async def on_ready():
                 logger.error(f"Missing permissions to assign 'Plasma' role in {guild.name}")
 
     asyncio.create_task(console_controller())
+
+@bot.event
+async def on_message(message: discord.Message):
+    if message.author.bot:
+        return
+
+    # Check if we are in a 'bot' channel inside a 'yap' server
+    if message.guild and "yap" in message.guild.name.lower() and message.channel.name.lower() == "bot":
+        content = message.content.strip()
+        if content.startswith(bot.command_prefix):
+            # Strip the prefix if they included it, or let them type raw commands
+            content = content[len(bot.command_prefix):].strip()
+
+        parts = content.split(" ", 1)
+        cmd = parts[0].lower()
+        args = parts[1] if len(parts) > 1 else ""
+
+        # Block remote execution of exit or recursive channel overrides for safety
+        if cmd == "exit":
+            await message.channel.send("`[Remote Error] 'exit' command cannot be executed remotely.`")
+            return
+
+        channels = resolve_targets(cmd)
+        if not channels:
+            # Fallback to current message channel if no global target is active
+            channels = [message.channel]
+
+        if cmd == "test":
+            for ch in channels:
+                await do_test(ch)
+            log_action(guild=message.guild, channel=message.channel, user=message.author, command="test", action="Remote diagnostic test executed")
+        elif cmd == "echo":
+            if args:
+                for ch in channels:
+                    await do_echo(ch, args)
+                log_action(guild=message.guild, channel=message.channel, user=message.author, command="echo", action=f"Remote echo: {args}")
+        elif cmd == "spam":
+            spam_parts = args.split(" ", 1)
+            if len(spam_parts) >= 2 and spam_parts[0].isdigit():
+                count = int(spam_parts[0])
+                msg = spam_parts[1]
+                for ch in channels:
+                    await do_spam(ch, count, msg)
+                log_action(guild=message.guild, channel=message.channel, user=message.author, command="spam", action=f"Remote spam {count}x: {msg}")
+        elif cmd == "help":
+            help_text = (
+                "```markdown\n# Remote Terminal Commands\n"
+                "• test\n• echo <msg>\n• spam <number> <msg>\n"
+                "• servers\n-------------------------```"
+            )
+            await message.channel.send(help_text)
+        elif cmd == "servers":
+            server_list = "\n".join([f"• {g.name}" for g in bot.guilds])
+            await message.channel.send(f"```markdown\n# Connected Servers\n{server_list}\n```")
+
+    await bot.process_commands(message)
 
 token = os.getenv("DISCORD_TOKEN")
 if not token:

@@ -246,22 +246,24 @@ async def console_controller():
     
             if cmd == "reboot":
                 if "message" in locals():
-                    await message.channel.send("`[Remote] Initiating hard reboot via restart.sh script...`")
+                    await message.channel.send("`[Remote] Initiating hard reboot... Stand by.`")
                     log_action(guild=message.guild, channel=message.channel, user=message.author, command="reboot", action="Hard remote reboot initiated")
                 else:
-                    cprint("[Console] Initiating hard reboot via restart.sh script...")
-                
-                # Fire off the standalone restart script detached from the event loop
-                subprocess.Popen(
-                    ["./restart.sh"],
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                    stdin=subprocess.DEVNULL,
-                    start_new_session=True
-                )
-                
-                await bot.close()
-                os._exit(0)
+                    cprint("[Console] Initiating hard reboot...")
+    
+                def perform_restart():
+                    subprocess.Popen(
+                        ["./restart.sh"],
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL,
+                        stdin=subprocess.DEVNULL,
+                        start_new_session=True
+                    )
+                    os._exit(0)
+    
+                # Defer the shutdown by 0.5 seconds so Discord actually sends the reply message out first
+                asyncio.get_running_loop().call_later(0.5, perform_restart)
+                return
 
             if cmd == "stop":
                 count = len(active_spam_tasks)

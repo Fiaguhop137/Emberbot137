@@ -4,23 +4,16 @@ from datetime import datetime, timezone
 from typing import Optional
 from discord.ext import commands
 from dotenv import load_dotenv
-
-LOG_FILE = "bot.log"
-CHAT_LOG_FILE = "chat.log"
+LOG_FILE,CHAT_LOG_FILE="bot.log","chat.log"
 load_dotenv()
-logging.basicConfig(level=logging.INFO, format="%(message)s")
-logger = logging.getLogger("Emberbot137")
-
-intents = discord.Intents.default()
-intents.guilds, intents.guild_messages, intents.message_content, intents.members = True, True, True, True
-
-bot = commands.Bot(command_prefix="~", intents=intents, help_command=None)
-current_target_server: str = "all"
-current_target_channel: str = "all"
-active_spam_tasks: list[asyncio.Task] = []
-pending_reboot: bool = False
-reboot_mode: str = "restart.sh"
-
+logging.basicConfig(level=logging.INFO,format="%(message)s")
+logger=logging.getLogger("Emberbot137")
+intents=discord.Intents.default()
+intents.guilds,intents.guild_messages,intents.message_content,intents.members=True,True,True,True
+emberbot137=commands.Bot(command_prefix="~",intents=intents,help_command=None)
+current_target_server,current_target_channel="yap","everyone"
+active_spam_tasks:list[asyncio.Task]=[]
+pending_reboot:bool=False
 # Chat deduplication buffer state
 last_chat_data = {
     "guild": None,
@@ -31,8 +24,6 @@ last_chat_data = {
     "timestamp": None,
     "count": 0
 }
-
-
 def flush_chat_log() -> None:
     """Flushes any buffered duplicate chat message streak into chat.log."""
     global last_chat_data
@@ -214,28 +205,17 @@ async def run_delayed_command(delay: int, full_cmd_string: str, target_context: 
                 task.add_done_callback(lambda t: active_spam_tasks.remove(t) if t in active_spam_tasks else None)
     except asyncio.CancelledError:
         pass
-
-
 async def reboot_watcher():
-    """Background watcher that triggers the appropriate local restart script once the reboot flag is flipped."""
-    global pending_reboot, reboot_mode
+    global pending_reboot
     while not bot.is_closed():
         if pending_reboot:
-            cprint(f"[System] Reboot flag detected using script '{reboot_mode}'. Executing restart sequence...")
+            cprint(f"[System] Reboot command detected. Executing restart sequence...")
             flush_chat_log()
-            subprocess.Popen(
-                [f"./{reboot_mode}"],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                stdin=subprocess.DEVNULL,
-                start_new_session=True
-            )
+            subprocess.Popen([f"./restart.sh"],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,stdin=subprocess.DEVNULL,start_new_session=True)
             await bot.close()
             os._exit(0)
-        await asyncio.sleep(0.1)
-
-
-def resolve_targets(cmd_type: str) -> list[discord.abc.Messageable]:
+        await asyncio.sleep(1)
+def resolve_targets(cmd_type:str)->list[discord.abc.Messageable]:
     """Resolves matching text channels based on current console targeting rules, supporting unique partial matches."""
     global current_target_server, current_target_channel
     targets = []

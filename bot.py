@@ -244,7 +244,7 @@ async def console_controller():
                 await bot.close()
                 break
     
-             if cmd == "reboot":
+            if cmd == "reboot":
                 if "message" in locals():
                     await message.channel.send("`[Remote] Initiating hard reboot: pkill, git pull, and nohup relaunch...`")
                     log_action(guild=message.guild, channel=message.channel, user=message.author, command="reboot", action="Hard remote reboot initiated")

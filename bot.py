@@ -5,7 +5,7 @@ from typing import Optional
 from discord.ext import commands
 from dotenv import load_dotenv
 
-LOG_FILE = "bot.log"
+LOG_FILE = "Emberbot137.log"
 CHAT_LOG_FILE = "chat.log"
 load_dotenv()
 logging.basicConfig(level=logging.INFO, format="%(message)s")
@@ -14,7 +14,7 @@ logger = logging.getLogger("Emberbot137")
 intents = discord.Intents.default()
 intents.guilds, intents.guild_messages, intents.message_content, intents.members = True, True, True, True
 
-bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
+Emberbot137 = commands.Emberbot137(command_prefix="!", intents=intents, help_command=None)
 current_target_server: str = "all"
 current_target_channel: str = "all"
 active_spam_tasks: list[asyncio.Task] = []
@@ -56,12 +56,12 @@ def flush_chat_log() -> None:
         last_chat_data["content"] = None
 
 
-async def output_to_bot(content: str) -> None:
-    """Mirrors console text output directly to the remote #bot channel in any 'yap' server."""
-    for guild in bot.guilds:
+async def output_to_Emberbot137(content: str) -> None:
+    """Mirrors console text output directly to the remote #Emberbot137 channel in any 'yap' server."""
+    for guild in Emberbot137.guilds:
         if "yap" in guild.name.lower():
             for channel in guild.text_channels:
-                if channel.name.lower() == "bot":
+                if channel.name.lower() == "Emberbot137":
                     try:
                         clean_content = content.strip()
                         if clean_content:
@@ -72,10 +72,10 @@ async def output_to_bot(content: str) -> None:
 
 
 def cprint(content: str = "") -> None:
-    """Prints locally to stdout/logs and schedules a mirror transmission to the remote Discord bot channel."""
+    """Prints locally to stdout/logs and schedules a mirror transmission to the remote Discord Emberbot137 channel."""
     print(content)
-    if bot.is_ready():
-        bot.loop.create_task(output_to_bot(content))
+    if Emberbot137.is_ready():
+        Emberbot137.loop.create_task(output_to_Emberbot137(content))
 
 
 def log_action(
@@ -87,7 +87,7 @@ def log_action(
     action: str,
     success: bool = True,
 ) -> None:
-    """Write an audit-friendly action line to stdout and bot.log."""
+    """Write an audit-friendly action line to stdout and Emberbot137.log."""
     guild_name = guild.name
     channel_name = getattr(channel, "name", "unknown")
     tag = f"{user.name}#{user.discriminator}" if user.discriminator != "0" else user.name
@@ -112,11 +112,11 @@ def generate_diagnostic_report(target: discord.abc.Messageable) -> str:
      
     hostname = socket.gethostname()
     if hostname.lower() == "plasmadmin-xps-8910":
-        hostname = "plasmadmin-xps-8910(firebot)"
+        hostname = "plasmadmin-xps-8910(fireEmberbot137)"
         
-    latency_ms = round(bot.latency * 1000)
+    latency_ms = round(Emberbot137.latency * 1000)
     env_status = "Loaded" if os.getenv("DISCORD_TOKEN") else "Missing"
-    guild_count = len(bot.guilds)
+    guild_count = len(Emberbot137.guilds)
     
     server_name = guild.name if guild else "Direct/Terminal Context"
     server_id = guild.id if guild else "N/A"
@@ -219,7 +219,7 @@ async def run_delayed_command(delay: int, full_cmd_string: str, target_context: 
 async def reboot_watcher():
     """Background watcher that triggers the appropriate local restart script once the reboot flag is flipped."""
     global pending_reboot, reboot_mode
-    while not bot.is_closed():
+    while not Emberbot137.is_closed():
         if pending_reboot:
             cprint(f"[System] Reboot flag detected using script '{reboot_mode}'. Executing restart sequence...")
             flush_chat_log()
@@ -230,7 +230,7 @@ async def reboot_watcher():
                 stdin=subprocess.DEVNULL,
                 start_new_session=True
             )
-            await bot.close()
+            await Emberbot137.close()
             os._exit(0)
         await asyncio.sleep(0.1)
 
@@ -243,7 +243,7 @@ def resolve_targets(cmd_type: str) -> list[discord.abc.Messageable]:
     resolved_channel_name = current_target_channel
     if current_target_channel != "all":
         all_channel_names = set()
-        for guild in bot.guilds:
+        for guild in Emberbot137.guilds:
             if current_target_server != "all" and current_target_server.lower() not in guild.name.lower():
                 continue
             for channel in guild.text_channels:
@@ -258,7 +258,7 @@ def resolve_targets(cmd_type: str) -> list[discord.abc.Messageable]:
             elif len(matching_names) > 1:
                 cprint(f"[Console Warning] Ambiguous channel prefix '{current_target_channel}' matches multiple channels: {matching_names}")
 
-    for guild in bot.guilds:
+    for guild in Emberbot137.guilds:
         if current_target_server != "all" and current_target_server.lower() not in guild.name.lower():
             continue
 
@@ -275,13 +275,13 @@ def resolve_targets(cmd_type: str) -> list[discord.abc.Messageable]:
 async def console_controller():
     """Reads terminal input asynchronously and routes commands based on state."""
     global current_target_server, current_target_channel, active_spam_tasks, pending_reboot, reboot_mode
-    await bot.wait_until_ready()
-    cprint(f"\n[Console Controller Active] Connected to {len(bot.guilds)} guild(s).")
+    await Emberbot137.wait_until_ready()
+    cprint(f"\n[Console Controller Active] Connected to {len(Emberbot137.guilds)} guild(s).")
     cprint(f"Current Target Server: '{current_target_server}' | Target Channel: '#{current_target_channel}'")
     cprint("Commands: test, echo <msg>, spam <number> <msg>, stop, delay <seconds> <cmd>, set, servers, help, reboot <-c>, exit\n")
     
     loop = asyncio.get_running_loop()
-    while not bot.is_closed():
+    while not Emberbot137.is_closed():
         try:
             line = await loop.run_in_executor(None, sys.stdin.readline)
             if not line:
@@ -296,9 +296,9 @@ async def console_controller():
             args = parts[1] if len(parts) > 1 else ""
 
             if cmd == "exit":
-                cprint("[Console] Shutting down bot...")
+                cprint("[Console] Shutting down Emberbot137...")
                 flush_chat_log()
-                await bot.close()
+                await Emberbot137.close()
                 break
 
             if cmd.startswith("reboot"):
@@ -330,13 +330,13 @@ async def console_controller():
                        "• servers                          - List connected servers and channels\n"
                        "• reboot <-c>                      - Hard reboot, git pull, and restart (or open console)\n"
                        "• help                             - Show this help menu\n"
-                       "• exit                             - Shut down the bot\n"
+                       "• exit                             - Shut down the Emberbot137\n"
                        "----------------------------------\n")
                 continue
 
             if cmd == "servers":
                 server_summary = "\n--- Connected Servers & Channels ---\n"
-                for g in bot.guilds:
+                for g in Emberbot137.guilds:
                     channels = [c.name for c in g.text_channels if c.permissions_for(g.me).send_messages]
                     server_summary += f"• {g.name} (ID: {g.id})\n  Channels: {', '.join(channels)}\n"
                 server_summary += "------------------------------------\n"
@@ -357,7 +357,7 @@ async def console_controller():
                             cprint("[Console] Target server updated to: all")
                         else:
                             matched_server = current_target_server
-                            for g in bot.guilds:
+                            for g in Emberbot137.guilds:
                                 if sub_val.lower() in g.name.lower():
                                     matched_server = g.name
                                     break
@@ -368,12 +368,12 @@ async def console_controller():
                         cprint(f"[Console] Current target channel is: #{current_target_channel}")
                     else:
                         clean_val = sub_val.removeprefix("#").lower()
-                        if clean_val == "bot" or clean_val == "all":
+                        if clean_val == "Emberbot137" or clean_val == "all":
                             current_target_channel = "all"
-                            cprint("[Console] Target channel 'bot' is restricted. Defaulted channel target to: #all")
+                            cprint("[Console] Target channel 'Emberbot137' is restricted. Defaulted channel target to: #all")
                         else:
                             matched_channel = clean_val
-                            for g in bot.guilds:
+                            for g in Emberbot137.guilds:
                                 if current_target_server != "all" and current_target_server.lower() not in g.name.lower():
                                     continue
                                 for c in g.text_channels:
@@ -388,8 +388,8 @@ async def console_controller():
                 cprint(f"[Active Targets] Server: {current_target_server} | Channel: #{current_target_channel}")
                 continue
 
-            if not bot.guilds:
-                cprint("[Console Error] Bot is not currently in any Discord servers.")
+            if not Emberbot137.guilds:
+                cprint("[Console Error] Emberbot137 is not currently in any Discord servers.")
                 continue
 
             channels = resolve_targets(cmd)
@@ -443,10 +443,10 @@ async def console_controller():
             await asyncio.sleep(2)
 
 
-@bot.event
+@Emberbot137.event
 async def on_message(message: discord.Message):
     global current_target_server, current_target_channel, active_spam_tasks, pending_reboot, reboot_mode, last_chat_data
-    if message.author.bot:
+    if message.author.Emberbot137:
         return
 
     # --- Deduplicated Chat Logger ---
@@ -472,10 +472,10 @@ async def on_message(message: discord.Message):
             last_chat_data["count"] = 1
     # --------------------------------
 
-    if message.guild and "yap" in message.guild.name.lower() and message.channel.name.lower() == "bot":
+    if message.guild and "yap" in message.guild.name.lower() and message.channel.name.lower() == "Emberbot137":
         content = message.content.strip()
-        if content.startswith(bot.command_prefix):
-            content = content[len(bot.command_prefix):].strip()
+        if content.startswith(Emberbot137.command_prefix):
+            content = content[len(Emberbot137.command_prefix):].strip()
 
         parts = content.split(" ", 1)
         cmd = parts[0].lower()
@@ -520,7 +520,7 @@ async def on_message(message: discord.Message):
                         await message.channel.send("`[Remote] Target server updated to: all`")
                     else:
                         matched_server = current_target_server
-                        for g in bot.guilds:
+                        for g in Emberbot137.guilds:
                             if sub_val.lower() in g.name.lower():
                                 matched_server = g.name
                                 break
@@ -531,12 +531,12 @@ async def on_message(message: discord.Message):
                     await message.channel.send(f"`[Remote] Current target channel is: #{current_target_channel}`")
                 else:
                     clean_val = sub_val.removeprefix("#").lower()
-                    if clean_val == "bot" or clean_val == "all":
+                    if clean_val == "Emberbot137" or clean_val == "all":
                         current_target_channel = "all"
-                        await message.channel.send("`[Remote] Target channel 'bot' is restricted. Defaulted channel target to: #all`")
+                        await message.channel.send("`[Remote] Target channel 'Emberbot137' is restricted. Defaulted channel target to: #all`")
                     else:
                         matched_channel = clean_val
-                        for g in bot.guilds:
+                        for g in Emberbot137.guilds:
                             if current_target_server != "all" and current_target_server.lower() not in g.name.lower():
                                 continue
                             for c in g.text_channels:
@@ -602,17 +602,17 @@ async def on_message(message: discord.Message):
             )
             await message.channel.send(help_text)
         elif cmd == "servers":
-            server_list = "\n".join([f"• {g.name}" for g in bot.guilds])
+            server_list = "\n".join([f"• {g.name}" for g in Emberbot137.guilds])
             await message.channel.send(f"```markdown\n# Connected Servers\n{server_list}\n```")
 
-    await bot.process_commands(message)
+    await Emberbot137.process_commands(message)
 
 
-@bot.event
+@Emberbot137.event
 async def on_ready():
-    logger.info(f"Logged in as {bot.user} (ID: {bot.user.id})")
+    logger.info(f"Logged in as {Emberbot137.user} (ID: {Emberbot137.user.id})")
 
-    for guild in bot.guilds:
+    for guild in Emberbot137.guilds:
         plasma_role = discord.utils.get(guild.roles, name="Plasma")
         if not plasma_role:
             try: 
@@ -634,8 +634,8 @@ async def on_ready():
                 pass
 
         try:
-            bot_top_role = guild.me.top_role if guild.me else None
-            target_position = (bot_top_role.position - 1) if bot_top_role and bot_top_role.position > 1 else len(guild.roles) - 1
+            Emberbot137_top_role = guild.me.top_role if guild.me else None
+            target_position = (Emberbot137_top_role.position - 1) if Emberbot137_top_role and Emberbot137_top_role.position > 1 else len(guild.roles) - 1
             if plasma_role.position != target_position:
                 await plasma_role.edit(position=target_position, reason="Plasma has very low density so it floats to the top")
                 logger.info(f"Moved 'Plasma' role to position {target_position} in {guild.name}")
@@ -656,11 +656,11 @@ async def on_ready():
             except discord.Forbidden:
                 logger.error(f"Missing permissions to assign 'Plasma' role in {guild.name}")
 
-    bot.loop.create_task(reboot_watcher())
+    Emberbot137.loop.create_task(reboot_watcher())
     asyncio.create_task(console_controller())
 
 token = os.getenv("DISCORD_TOKEN")
 if not token:
     raise ValueError("DISCORD_TOKEN environment variable not found in .env")
 
-bot.run(token)
+Emberbot137.run(token)

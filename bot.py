@@ -46,7 +46,8 @@ async def send_response(target: discord.abc.Messageable, content: str) -> None:
     await target.send(content)
 
 
-async def do_test(target: discord.abc.Messageable) -> None:
+def generate_diagnostic_report(target: discord.abc.Messageable) -> str:
+    """Generates the text body of the diagnostic report."""
     guild = getattr(target, "guild", None)
      
     hostname = socket.gethostname()
@@ -76,7 +77,7 @@ async def do_test(target: discord.abc.Messageable) -> None:
     else:
         perms_str = "Unknown"
 
-    response_text = f"""```markdown
+    return f"""```markdown
 # Diagnostic Report
 -----------------------------------------
 • Status: Online and operational

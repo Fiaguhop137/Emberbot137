@@ -86,22 +86,15 @@ def generate_diagnostic_report(target:discord.abc.Messageable)->str:
  - Connected Servers: {server_count} servers connected. Run ~servers to see more
  - Permissions: {perms_str}
 ```"""
-async def do_test(target: discord.abc.Messageable) -> None:
-    report_text = generate_diagnostic_report(target)
-    await send_response(target, report_text)
-    cprint(f"\n[Test Output for {getattr(target, 'guild', 'Terminal').name if hasattr(getattr(target, 'guild', None), 'name') else 'Target'} -> #{getattr(target, 'name', 'unknown')}]\n{report_text}")
-
-
-async def do_echo(target: discord.abc.Messageable, message: str) -> None:
-    await send_response(target, message)
-
-
-async def do_spam(target: discord.abc.Messageable, count: int, message: str) -> None:
+async def do_test(target:discord.abc.Messageable)->None:
+    report_text=generate_diagnostic_report(target)
+    await send_response(target,report_text)
+    cprint(f"\n{report_text}")
+async def do_echo(target:discord.abc.Messageable,message:str)->None:
+    await send_response(target,message)
+async def do_spam(target:discord.abc.Messageable,count:int,message:str)->None:
     for _ in range(count):
-        await send_response(target, message)
-        await asyncio.sleep(0.5)
-
-
+        await send_response(target,message)
 async def run_delayed_command(delay: int, full_cmd_string: str, target_context: Optional[discord.abc.Messageable] = None):
     try:
         await asyncio.sleep(delay)

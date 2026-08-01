@@ -602,8 +602,12 @@ async def on_message(message: discord.Message):
             )
             await message.channel.send(help_text)
         elif cmd == "servers":
-            server_list = "\n".join([f"• {g.name}" for g in bot.guilds])
-            await message.channel.send(f"```markdown\n# Connected Servers\n{server_list}\n```")
+            server_summary = "\n--- Connected Servers & Channels ---\n"
+            for g in bot.guilds:
+                channels = [c.name for c in g.text_channels if c.permissions_for(g.me).send_messages]
+                server_summary += f"• {g.name} (ID: {g.id})\n  Channels: {', '.join(channels)}\n"
+            server_summary += "------------------------------------\n"
+            await message.channel.send(server_summary)
 
     await bot.process_commands(message)
 

@@ -1,7 +1,7 @@
 """Discord bot entrypoint implemented with discord.py.
 
-Controlled entirely via the local terminal standard input, executing commands
-locally without prefixes or Discord command invocation.
+Controlled entirely via the local terminal standard input, featuring dynamic
+server/channel targeting and local command routing.
 """
 
 from __future__ import annotations
@@ -33,6 +33,10 @@ intents.message_content = True
 intents.members = True
 
 bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
+
+# Active console targeting state
+current_target_server: str = "all"  # "all" or specific server name
+current_target_channel: str = "general"  # channel name filter
 
 
 def log_action(
@@ -112,11 +116,42 @@ async def do_echo(target: discord.abc.Messageable, message: str) -> None:
     await send_response(target, message)
 
 
+def resolve_targets(cmd_type: str) -> list[discord.abc.Messageable]:
+    """Resolves matching text channels based on current console targeting rules."""
+    global current_target_server, current_target_channel
+    targets = []
+
+    for guild in bot.guilds:
+        # Filter by server name if not set to 'all'
+        if current_target_server != "all" and current_target_server.lower() not in guild.name.lower():
+            continue
+
+        matched_channel = None
+        for channel in guild.text_channels:
+            if channel.permissions_for(guild.me).send_messages:
+                if channel.name.lower() == current_target_channel.lower():
+                    matched_channel = channel
+                    break
+
+        # Fallback if specific channel name isn't found in this guild
+        if not matched_channel:
+            matched_channel = guild.system_channel or next(
+                (c for c in guild.text_channels if c.permissions_for(guild.me).send_messages), None
+            )
+
+        if matched_channel:
+            targets.append(matched_channel)
+
+    return targets
+
+
 async def console_controller():
-    """Reads terminal input asynchronously and executes bot actions locally."""
+    """Reads terminal input asynchronously and routes commands based on state."""
+    global current_target_server, current_target_channel
     await bot.wait_until_ready()
     print(f"\n[Console Controller Active] Connected to {len(bot.guilds)} guild(s).")
-    print("Type commands like 'test', 'echo [message]', or 'exit' to quit.\n")
+    print(f"Current Target Server: '{current_target_server}' | Target Channel: '#{current_target_channel}'")
+    print("Commands: test, echo [msg], set server [name|all], set channel [name], servers, exit\n")
     
     loop = asyncio.get_running_loop()
     while not bot.is_closed():
@@ -128,8 +163,6 @@ async def console_controller():
             if not content:
                 continue
             
-            print(f"[Console Input Received] -> {content}")
-
             parts = content.split(" ", 1)
             cmd = parts[0].lower()
             args = parts[1] if len(parts) > 1 else ""
@@ -139,39 +172,59 @@ async def console_controller():
                 await bot.close()
                 break
 
+            if cmd == "servers":
+                print("\n--- Connected Servers & Channels ---")
+                for g in bot.guilds:
+                    channels = [c.name for c in g.text_channels if c.permissions_for(g.me).send_messages]
+                    print(f"• {g.name} (ID: {g.id})")
+                    print(f"  Channels: {', '.join(channels)}")
+                print("------------------------------------\n")
+                continue
+
+            if cmd == "set":
+                sub_parts = args.split(" ", 1)
+                sub_cmd = sub_parts[0].lower() if sub_parts else ""
+                sub_val = sub_parts[1] if len(sub_parts) > 1 else ""
+
+                if sub_cmd == "server":
+                    if not sub_val:
+                        print(f"[Console] Current target server is: {current_target_server}")
+                    else:
+                        current_target_server = sub_val
+                        print(f"[Console] Target server updated to: {current_target_server}")
+                elif sub_cmd == "channel":
+                    if not sub_val:
+                        print(f"[Console] Current target channel is: #{current_target_channel}")
+                    else:
+                        current_target_channel = sub_val.removeprefix("#")
+                        print(f"[Console] Target channel updated to: #{current_target_channel}")
+                else:
+                    print("[Console Usage] Use 'set server [name|all]' or 'set channel [name]'")
+                continue
+
             if not bot.guilds:
-                print("[Console Error] Bot is not currently in any Discord servers (guilds).")
+                print("[Console Error] Bot is not currently in any Discord servers.")
                 continue
 
-            # Target the first available text channel across connected guilds
-            target_channel = None
-            target_guild = None
-            for guild in bot.guilds:
-                channel = guild.system_channel or next(
-                    (c for c in guild.text_channels if c.permissions_for(guild.me).send_messages), None
-                )
-                if channel:
-                    target_channel = channel
-                    target_guild = guild
-                    break
-
-            if not target_channel:
-                print("[Console Error] No available text channel with send permissions found in connected guilds.")
+            # Resolve target channels based on current settings
+            channels = resolve_targets(cmd)
+            if not channels:
+                print(f"[Console Error] No matching channels found for Server: '{current_target_server}', Channel: '#{current_target_channel}'. Type 'servers' to check names.")
                 continue
-
-            print(f"[Console Target] Selected Guild: {target_guild.name} | Channel: #{target_channel.name}")
 
             if cmd == "test":
-                await do_test(target_channel)
-                print("[Console Success] Executed and sent test diagnostics to Discord.")
+                for ch in channels:
+                    await do_test(ch)
+                print(f"[Console Success] Executed test diagnostics across {len(channels)} target(s).")
             elif cmd == "echo":
                 if not args:
                     print("[Console Usage Error] Missing message. Format: echo [message]")
                     continue
-                await do_echo(target_channel, args)
-                print(f"[Console Success] Echoed message to Discord: {args}")
+                for ch in channels:
+                    await do_echo(ch, args)
+                print(f"[Console Success] Echoed message to {len(channels)} target(s): {args}")
             else:
-                print(f"[Console Warning] Unknown local command: '{cmd}'. Available: test, echo, exit")
+                print(f"[Console Warning] Unknown local command: '{cmd}'. Available: test, echo, set, servers, exit")
 
         except Exception as e:
             logger.error(f"Console controller error: {e}")

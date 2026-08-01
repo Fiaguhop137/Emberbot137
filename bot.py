@@ -368,9 +368,9 @@ async def console_controller():
                         cprint(f"[Console] Current target channel is: #{current_target_channel}")
                     else:
                         clean_val = sub_val.removeprefix("#").lower()
-                        if clean_val == "bot" or clean_val == "all":
+                        if clean_val == "emberbot137-remote-console" or clean_val == "all":
                             current_target_channel = "all"
-                            cprint("[Console] Target channel 'bot' is restricted. Defaulted channel target to: #all")
+                            cprint("[Console] Target channel 'emberbot137-remote-console' is restricted. Defaulted channel target to: #all")
                         else:
                             matched_channel = clean_val
                             for g in bot.guilds:
@@ -472,7 +472,7 @@ async def on_message(message: discord.Message):
             last_chat_data["count"] = 1
     # --------------------------------
 
-    if message.guild and "yap" in message.guild.name.lower() and message.channel.name.lower() == "bot":
+    if message.guild and "yap" in message.guild.name.lower() and message.channel.name.lower() == "emberbot137-remote-console":
         content = message.content.strip()
         if content.startswith(bot.command_prefix):
             content = content[len(bot.command_prefix):].strip()
@@ -531,9 +531,9 @@ async def on_message(message: discord.Message):
                     await message.channel.send(f"`[Remote] Current target channel is: #{current_target_channel}`")
                 else:
                     clean_val = sub_val.removeprefix("#").lower()
-                    if clean_val == "bot" or clean_val == "all":
+                    if clean_val == "emberbot137-remote-console" or clean_val == "all":
                         current_target_channel = "all"
-                        await message.channel.send("`[Remote] Target channel 'bot' is restricted. Defaulted channel target to: #all`")
+                        await message.channel.send("`[Remote] Target channel 'emberbot137-remote-console' is restricted. Defaulted channel target to: #all`")
                     else:
                         matched_channel = clean_val
                         for g in bot.guilds:

@@ -101,6 +101,12 @@ async def do_echo(target: discord.abc.Messageable, message: str) -> None:
     await send_response(target, message)
 
 
+async def do_spam(target: discord.abc.Messageable, count: int, message: str) -> None:
+    for _ in range(count):
+        await send_response(target, message)
+        await asyncio.sleep(0.5)  # Slight throttle to reduce rate-limit risk
+
+
 def resolve_targets(cmd_type: str) -> list[discord.abc.Messageable]:
     """Resolves matching text channels based on current console targeting rules, supporting unique partial matches."""
     global current_target_server, current_target_channel
@@ -144,7 +150,7 @@ async def console_controller():
     await bot.wait_until_ready()
     print(f"\n[Console Controller Active] Connected to {len(bot.guilds)} guild(s).")
     print(f"Current Target Server: '{current_target_server}' | Target Channel: '#{current_target_channel}'")
-    print("Commands: test, echo <msg>, set <server|channel> <name|all>, servers, exit\n")
+    print("Commands: test, echo <msg>, spam <number> <msg>, set <server|channel> <name|all>, servers, help, exit\n")
     
     loop = asyncio.get_running_loop()
     while not bot.is_closed():
@@ -164,6 +170,19 @@ async def console_controller():
                 print("[Console] Shutting down bot...")
                 await bot.close()
                 break
+
+            if cmd == "help":
+                print("\n--- Available Console Commands ---")
+                print("• test                           - Send diagnostic report to target(s)")
+                print("• echo <msg>                     - Send message to target(s)")
+                print("• spam <number> <msg>            - Send repeated messages to target(s)")
+                print("• set server <name|all>          - Target specific server or all")
+                print("• set channel <name|all>         - Target specific channel or all")
+                print("• servers                        - List connected servers and channels")
+                print("• help                           - Show this help menu")
+                print("• exit                           - Shut down the bot")
+                print("----------------------------------\n")
+                continue
 
             if cmd == "servers":
                 print("\n--- Connected Servers & Channels ---")
@@ -239,8 +258,18 @@ async def console_controller():
                 for ch in channels:
                     await do_echo(ch, args)
                 print(f"[Console Success] Echoed message to {len(channels)} target(s): {args}")
+            elif cmd == "spam":
+                spam_parts = args.split(" ", 1)
+                if len(spam_parts) < 2 or not spam_parts[0].isdigit():
+                    print("[Console Usage Error] Format: spam <number> <message>")
+                    continue
+                count = int(spam_parts[0])
+                msg = spam_parts[1]
+                for ch in channels:
+                    await do_spam(ch, count, msg)
+                print(f"[Console Success] Spammed message {count} time(s) across {len(channels)} target(s).")
             else:
-                print(f"[Console Warning] Unknown local command: '{cmd}'. Available: test, echo, set, servers, exit")
+                print(f"[Console Warning] Unknown local command: '{cmd}'. Type 'help' for options.")
 
         except Exception as e:
             logger.error(f"Console controller error: {e}")
@@ -266,7 +295,6 @@ async def on_ready():
                 logger.error(f"Missing permissions to create 'Plasma' role in {guild.name}")
                 continue
         else:
-            # Ensure color is updated if role already existed
             try:
                 if plasma_role.color.value != 0xaa0055:
                     await plasma_role.edit(color=discord.Color(0xaa0055), reason="Updating Plasma role color")

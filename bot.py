@@ -57,11 +57,11 @@ def flush_chat_log() -> None:
 
 
 async def output_to_bot(content: str) -> None:
-    """Mirrors console text output directly to the remote #Emberbot137-remote-console channel in any 'yap' server."""
+    """Mirrors console text output directly to the remote #emberbot137-remote-console channel in any 'yap' server."""
     for guild in bot.guilds:
         if "yap" in guild.name.lower():
             for channel in guild.text_channels:
-                if channel.name == "Emberbot137-remote-console":
+                if channel.name == "emberbot137-remote-console":
                     try:
                         clean_content = content.strip()
                         if clean_content:

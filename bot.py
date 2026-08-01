@@ -76,7 +76,7 @@ def generate_diagnostic_report(target:discord.abc.Messageable)->str:
         perms_str=", ".join(audit_perms) if audit_perms else "Standard User"
     else:perms_str="Unknown"
     return f"""```
- = Diagnostic Report
+ # Diagnostic Report
  - Status: {status}
  - Host Machine: {hostname}
  - Discord Server: {server_name}({server_id})

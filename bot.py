@@ -47,7 +47,8 @@ def cprint(content:str="")->None:
         emberbot137.loop.create_task(output_to_bot(content))
 def log_action(*,guild:discord.Guild,channel:discord.abc.GuildChannel,user:discord.abc.User,command:str,action:str,success:bool=True)->None:
     guild_name,channel_name,tag,current_time=guild.name,getattr(channel,"name","unknown"),f"{user.name}#{user.discriminator}" if user.discriminator!="0" else user.name,datetime.now(timezone.utc).isoformat()
-    logger.info(f"[{'SUCCESS' if success else 'ERROR'} at {current_time} in Channel={guild_name}/#{channel_name}]: User={tag}({user.id}) ran {command} resulting in {action}")
+    line=f"[{'SUCCESS' if success else 'ERROR'} at {current_time} in Channel={guild_name}/#{channel_name}]: User={tag}({user.id}) ran {command} resulting in {action}"
+    logger.info(line)
     with open(LOG_FILE,"a",encoding="utf-8") as file:
         file.write(line+"\n")
 async def send_response(target:discord.abc.Messageable,content:str)->None:

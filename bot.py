@@ -77,7 +77,7 @@ def generate_diagnostic_report(target:discord.abc.Messageable)->str:
             if perms.manage_messages:audit_perms.append("Manage Messages")
         perms_str=", ".join(audit_perms) if audit_perms else "Standard User"
     else:perms_str="Unknown"
-    return f" = Diagnostic Report\n\n - Status: {status}\n - Host Machine: {hostname}\n - Discord Server: {server_name}({server_id})\n - Latency: {latency_ms}ms\n - Token status: {env_status}\n - Connected Servers: {server_count} servers connected. Run ~servers to see more\n - Permissions: {perms_str}"
+    return f"```markdown = Diagnostic Report\n - Status: {status}\n - Host Machine: {hostname}\n - Discord Server: {server_name}({server_id})\n - Latency: {latency_ms}ms\n - Token status: {env_status}\n - Connected Servers: {server_count} servers connected. Run ~servers to see more\n - Permissions: {perms_str}```"
 async def do_test(target:discord.abc.Messageable)->None:
     report_text=generate_diagnostic_report(target)
     await send_response(target,report_text)
@@ -493,8 +493,8 @@ async def on_message(message: discord.Message):
             server_summary=""
             for g in emberbot137.guilds:
                 channels=[c.name for c in g.text_channels if c.permissions_for(g.me).send_messages]
-                server_summary+=f" - {g.name}({g.id})\n ↳ Channels: {', '.join(channels)}\n"
-            await message.channel.send(f"```markdown\n# Connected Servers\n{server_summary}```") 
+                server_summary+=f" - {g.name}({g.id})\n  ↳ Channels: {', '.join(channels)}\n"
+            await message.channel.send(f"```markdown\n= Connected Servers\n{server_summary}```") 
     await emberbot137.process_commands(message)
 @emberbot137.event
 async def on_ready():

@@ -1,0 +1,9 @@
+davey is not installed, voice will NOT be supported
+[2026-08-01 17:46:59] [INFO    ] discord.client: logging in using static token
+logging in using static token
+[2026-08-01 17:47:00] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: ece0244810f5fd7ae305ff0250837b3b).
+Shard ID None has connected to Gateway (Session ID: ece0244810f5fd7ae305ff0250837b3b).
+Logged in as Emberbot137#6769 (ID: 1532899245005475860)
+Failed to reposition 'Plasma' role in Yap: 400 Bad Request (error code: 50013): Missing Permissions
+Failed to reposition 'Plasma' role in Gay Programmers: 400 Bad Request (error code: 50013): Missing Permissions
+[SUCCESS at 2026-08-01T21:47:04.900347+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran test resulting in Remote diagnostic test executed

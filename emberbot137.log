@@ -1,0 +1,16 @@
+[2026-08-01T19:42:46.153553+00:00] SUCCESS | Guild="Yap" | Channel="#emberbot137-remote-console" | User="fiaguhop137" (1342173566828810271) | Command="reboot" | Action="Remote standard reboot flag set"
+[2026-08-01T19:43:06.048781+00:00] SUCCESS | Guild="Yap" | Channel="#emberbot137-remote-console" | User="fiaguhop137" (1342173566828810271) | Command="echo" | Action="Remote echo: test"
+[2026-08-01T20:40:30.587371+00:00] SUCCESS | Guild="Yap" | Channel="#emberbot137-remote-console" | User="fiaguhop137" (1342173566828810271) | Command="set" | Action="Remote target update -> Server: Gay Programmers, Channel: #everyone"
+[2026-08-01T20:40:38.241341+00:00] SUCCESS | Guild="Yap" | Channel="#emberbot137-remote-console" | User="fiaguhop137" (1342173566828810271) | Command="set" | Action="Remote target update -> Server: Gay Programmers, Channel: #general"
+[2026-08-01T20:40:44.101536+00:00] SUCCESS | Guild="Yap" | Channel="#emberbot137-remote-console" | User="fiaguhop137" (1342173566828810271) | Command="echo" | Action="Remote echo: hello"
+[2026-08-01T21:07:27.961452+00:00] SUCCESS | Guild="Yap" | Channel="#emberbot137-remote-console" | User="fiaguhop137" (1342173566828810271) | Command="reboot" | Action="Remote standard reboot flag set"
+[SUCCESS at 2026-08-01T21:28:11.773024+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran test resulting in Remote diagnostic test executed
+[SUCCESS at 2026-08-01T21:30:01.393041+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran test resulting in Remote diagnostic test executed
+[SUCCESS at 2026-08-01T21:34:02.136599+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran reboot -c resulting in Remote interactive console reboot flag set
+[SUCCESS at 2026-08-01T21:36:12.199140+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran test resulting in Remote diagnostic test executed
+[SUCCESS at 2026-08-01T21:38:48.979419+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran reboot resulting in Remote standard reboot flag set
+[SUCCESS at 2026-08-01T21:39:13.733845+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran test resulting in Remote diagnostic test executed
+[SUCCESS at 2026-08-01T21:40:44.743518+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran reboot resulting in Remote standard reboot flag set
+[SUCCESS at 2026-08-01T21:41:01.713248+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran test resulting in Remote diagnostic test executed
+[SUCCESS at 2026-08-01T21:44:47.548915+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran reboot resulting in Remote standard reboot flag set
+[SUCCESS at 2026-08-01T21:47:04.900347+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran test resulting in Remote diagnostic test executed

@@ -3,4 +3,4 @@ cd "$(dirname "$0")"
 sleep 1
 pkill -f "python3 bot.py"
 git pull
-nohup python3 bot.py > bot_runtime.log 2>&1 &
+gnome-terminal --title="Emberbot137 Console" -- python3 bot.py &

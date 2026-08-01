@@ -89,7 +89,7 @@ def generate_diagnostic_report(target:discord.abc.Messageable)->str:
 ```"""
 async def do_test(target:discord.abc.Messageable)->None:
     report_text=generate_diagnostic_report(target)
-    await send_response(report_text)
+    await send_response(target,report_text)
     cprint(report_text)
 async def do_echo(target:discord.abc.Messageable,message:str)->None:
     await send_response(target,message)

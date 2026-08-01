@@ -246,28 +246,20 @@ async def console_controller():
     
             if cmd == "reboot":
                 if "message" in locals():
-                    await message.channel.send("`[Remote] Initiating hard reboot: pkill, git pull, and detached relaunch...`")
+                    await message.channel.send("`[Remote] Initiating hard reboot via restart.sh script...`")
                     log_action(guild=message.guild, channel=message.channel, user=message.author, command="reboot", action="Hard remote reboot initiated")
                 else:
-                    cprint("[Console] Initiating hard reboot: pkill, git pull, and detached relaunch...")
+                    cprint("[Console] Initiating hard reboot via restart.sh script...")
                 
-                # Spawn the detached shell script independently using standard subprocess
-                log_file = open("bot_runtime.log", "a")
+                # Fire off the standalone restart script detached from the event loop
                 subprocess.Popen(
-                    ["nohup", "python3", "bot.py"],
-                    stdout=log_file,
-                    stderr=log_file,
-                    stdin=subprocess.DEVNULL,
-                    preexec_fn=os.setsid
-                )
-                subprocess.Popen(
-                    "sleep 1 && git pull",
-                    shell=True,
+                    ["./restart.sh"],
                     stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL
+                    stderr=subprocess.DEVNULL,
+                    stdin=subprocess.DEVNULL,
+                    start_new_session=True
                 )
                 
-                # Close bot gracefully, then hard exit
                 await bot.close()
                 os._exit(0)
 

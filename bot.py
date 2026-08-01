@@ -144,7 +144,7 @@ async def console_controller():
     await bot.wait_until_ready()
     print(f"\n[Console Controller Active] Connected to {len(bot.guilds)} guild(s).")
     print(f"Current Target Server: '{current_target_server}' | Target Channel: '#{current_target_channel}'")
-    print("Commands: test, echo [msg], set server [name|all], set channel [name|all], servers, exit\n")
+    print("Commands: test, echo <msg>, set <server|channel> <name|all>, servers, exit\n")
     
     loop = asyncio.get_running_loop()
     while not bot.is_closed():

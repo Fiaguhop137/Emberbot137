@@ -1,17 +1,14 @@
-# Meow Bot
+# Emberbot137
 
-Meow Bot is a Python Discord moderation and utility bot powered by `discord.py`.
-The bot supports both `?` prefix commands and synchronized Discord slash commands.
+Emberbot137 is a Python bot powered by `discord.py`.
+The bot supports both `~` prefix commands and synchronized Discord slash commands.
 
 ## Features
 
-- `$help` and `/help` display the command list.
-- `$say` and `/say` send a message with the caller mentioned.
-- `$echo` and `/echo` let administrators post to a selected channel.
-- `$punish` and `/punish` escalate punishments from timeouts to kicks and bans.
-- `$regain` and `/regain` reduce a user's punishment level and unban when applicable.
-- `$dm` and `/dm` send direct messages to server members.
-- `$addrole`, `/addrole`, `$delrole`, and `/delrole` manage member roles.
+- `~help` and `/help` display the command list.
+- `~say` and `/say` send a message with the caller mentioned.
+- `~echo` and `/echo` let administrators post to a selected channel.
+- `~addrole`, `/addrole`, `~delrole`, and `/delrole` manage member roles.
 
 ## Project structure
 

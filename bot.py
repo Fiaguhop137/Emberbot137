@@ -18,6 +18,28 @@ current_target_server: str = "all"
 current_target_channel: str = "all"
 
 
+async def output_to_bot(content: str) -> None:
+    """Mirrors console text output directly to the remote #bot channel in any 'yap' server."""
+    for guild in bot.guilds:
+        if "yap" in guild.name.lower():
+            for channel in guild.text_channels:
+                if channel.name.lower() == "bot":
+                    try:
+                        clean_content = content.strip()
+                        if clean_content:
+                            await channel.send(f"```text\n{clean_content}\n```")
+                    except Exception:
+                        pass
+                    return
+
+
+def cprint(content: str = "") -> None:
+    """Prints locally to stdout/logs and schedules a mirror transmission to the remote Discord bot channel."""
+    print(content)
+    if bot.is_ready():
+        bot.loop.create_task(output_to_bot(content))
+
+
 def log_action(
     *,
     guild: discord.Guild,
@@ -76,6 +98,7 @@ def generate_diagnostic_report(target: discord.abc.Messageable) -> str:
         perms_str = ", ".join(audit_perms) if audit_perms else "Standard User"
     else:
         perms_str = "Unknown"
+
     plasma_status = "Not Found"
     if guild:
         plasma_role = discord.utils.get(guild.roles, name="Plasma")
@@ -84,13 +107,13 @@ def generate_diagnostic_report(target: discord.abc.Messageable) -> str:
             has_role = member and plasma_role in member.roles
             assignment = "Active" if has_role else "Unassigned"
             
-            # Check permissions and color
             has_admin = "Yes" if plasma_role.permissions.administrator else "No"
             color_hex = hex(plasma_role.color.value)
             
             plasma_status = f"{assignment} | Height: {plasma_role.position}/{len(guild.roles) - 1} | Admin: {has_admin} | Color: {color_hex}"
         else:
             plasma_status = "Not Found"
+
     return f"""```markdown
 # Diagnostic Report
 -----------------------------------------
@@ -109,7 +132,7 @@ def generate_diagnostic_report(target: discord.abc.Messageable) -> str:
 async def do_test(target: discord.abc.Messageable) -> None:
     report_text = generate_diagnostic_report(target)
     await send_response(target, report_text)
-    print(f"\n[Test Output for {getattr(target, 'guild', 'Terminal').name if hasattr(getattr(target, 'guild', None), 'name') else 'Target'} -> #{getattr(target, 'name', 'unknown')}]\n{report_text}")
+    cprint(f"\n[Test Output for {getattr(target, 'guild', 'Terminal').name if hasattr(getattr(target, 'guild', None), 'name') else 'Target'} -> #{getattr(target, 'name', 'unknown')}]\n{report_text}")
 
 
 async def do_echo(target: discord.abc.Messageable, message: str) -> None:
@@ -119,7 +142,7 @@ async def do_echo(target: discord.abc.Messageable, message: str) -> None:
 async def do_spam(target: discord.abc.Messageable, count: int, message: str) -> None:
     for _ in range(count):
         await send_response(target, message)
-        await asyncio.sleep(0.5)  # Slight throttle to reduce rate-limit risk
+        await asyncio.sleep(0.5)
 
 
 def resolve_targets(cmd_type: str) -> list[discord.abc.Messageable]:
@@ -141,9 +164,9 @@ def resolve_targets(cmd_type: str) -> list[discord.abc.Messageable]:
             matching_names = [name for name in all_channel_names if name.startswith(current_target_channel.lower())]
             if len(matching_names) == 1:
                 resolved_channel_name = matching_names[0]
-                print(f"[Console] Autofilled channel target to: '#{resolved_channel_name}'")
+                cprint(f"[Console] Autofilled channel target to: '#{resolved_channel_name}'")
             elif len(matching_names) > 1:
-                print(f"[Console Warning] Ambiguous channel prefix '{current_target_channel}' matches multiple channels: {matching_names}")
+                cprint(f"[Console Warning] Ambiguous channel prefix '{current_target_channel}' matches multiple channels: {matching_names}")
 
     for guild in bot.guilds:
         if current_target_server != "all" and current_target_server.lower() not in guild.name.lower():
@@ -163,9 +186,9 @@ async def console_controller():
     """Reads terminal input asynchronously and routes commands based on state."""
     global current_target_server, current_target_channel
     await bot.wait_until_ready()
-    print(f"\n[Console Controller Active] Connected to {len(bot.guilds)} guild(s).")
-    print(f"Current Target Server: '{current_target_server}' | Target Channel: '#{current_target_channel}'")
-    print("Commands: test, echo <msg>, spam <number> <msg>, set <server|channel> <name|all>, servers, help, exit\n")
+    cprint(f"\n[Console Controller Active] Connected to {len(bot.guilds)} guild(s).")
+    cprint(f"Current Target Server: '{current_target_server}' | Target Channel: '#{current_target_channel}'")
+    cprint("Commands: test, echo <msg>, spam <number> <msg>, set <server|channel> <name|all>, servers, help, exit\n")
     
     loop = asyncio.get_running_loop()
     while not bot.is_closed():
@@ -182,29 +205,29 @@ async def console_controller():
             args = parts[1] if len(parts) > 1 else ""
 
             if cmd == "exit":
-                print("[Console] Shutting down bot...")
+                cprint("[Console] Shutting down bot...")
                 await bot.close()
                 break
 
             if cmd == "help":
-                print("\n--- Available Console Commands ---")
-                print("• test                                - Send diagnostic report to target(s)")
-                print("• echo <msg>                          - Send message to target(s)")
-                print("• spam <number> <msg>                 - Send repeated messages to target(s)")
-                print("• set <server|channel> <name|all>     - Target specific server/channel or all")
-                print("• servers                             - List connected servers and channels")
-                print("• help                                - Show this help menu")
-                print("• exit                                - Shut down the bot")
-                print("----------------------------------\n")
+                cprint("\n--- Available Console Commands ---\n"
+                       "• test                           - Send diagnostic report to target(s)\n"
+                       "• echo <msg>                     - Send message to target(s)\n"
+                       "• spam <number> <msg>            - Send repeated messages to target(s)\n"
+                       "• set <server|channel> <name|all>  - Target specific server/channel or all\n"
+                       "• servers                        - List connected servers and channels\n"
+                       "• help                           - Show this help menu\n"
+                       "• exit                           - Shut down the bot\n"
+                       "----------------------------------\n")
                 continue
 
             if cmd == "servers":
-                print("\n--- Connected Servers & Channels ---")
+                server_summary = "\n--- Connected Servers & Channels ---\n"
                 for g in bot.guilds:
                     channels = [c.name for c in g.text_channels if c.permissions_for(g.me).send_messages]
-                    print(f"• {g.name} (ID: {g.id})")
-                    print(f"  Channels: {', '.join(channels)}")
-                print("------------------------------------\n")
+                    server_summary += f"• {g.name} (ID: {g.id})\n  Channels: {', '.join(channels)}\n"
+                server_summary += "------------------------------------\n"
+                cprint(server_summary)
                 continue
 
             if cmd == "set":
@@ -214,11 +237,11 @@ async def console_controller():
 
                 if sub_cmd == "server":
                     if not sub_val:
-                        print(f"[Console] Current target server is: {current_target_server}")
+                        cprint(f"[Console] Current target server is: {current_target_server}")
                     else:
                         if sub_val.lower() == "all":
                             current_target_server = "all"
-                            print(f"[Console] Target server updated to: all")
+                            cprint("[Console] Target server updated to: all")
                         else:
                             matched_server = sub_val
                             for g in bot.guilds:
@@ -226,68 +249,124 @@ async def console_controller():
                                     matched_server = g.name
                                     break
                             current_target_server = sub_val
-                            print(f"[Console] Target server updated to: {matched_server}")
+                            cprint(f"[Console] Target server updated to: {matched_server}")
                 elif sub_cmd == "channel":
                     if not sub_val:
-                        print(f"[Console] Current target channel is: #{current_target_channel}")
+                        cprint(f"[Console] Current target channel is: #{current_target_channel}")
                     else:
                         clean_val = sub_val.removeprefix("#").lower()
                         if clean_val == "bot" or clean_val == "all":
                             current_target_channel = "all"
-                            print("[Console] Target channel 'bot' is restricted. Defaulted channel target to: #all")
+                            cprint("[Console] Target channel 'bot' is restricted. Defaulted channel target to: #all")
                         else:
                             matched_channel = clean_val
-                            for g in bot.guilds:
-                                if current_target_server != "all" and current_target_server.lower() not in g.name.lower():
-                                    continue
-                                for c in g.text_channels:
-                                    if c.name.lower() == clean_val.lower() or c.name.lower().startswith(clean_val.lower()):
-                                        matched_channel = c.name
-                                        break
+                            for g in bot.guilds:
+                                if current_target_server != "all" and current_target_server.lower() not in g.name.lower():
+                                    continue
+                                for c in g.text_channels:
+                                    if c.name.lower() == clean_val or c.name.lower().startswith(clean_val):
+                                        matched_channel = c.name
+                                        break
                             current_target_channel = clean_val
-                            print(f"[Console] Target channel updated to: #{matched_channel}")
+                            cprint(f"[Console] Target channel updated to: #{matched_channel}")
                 else:
-                    print("[Console Usage] Use 'set server [name|all]' or 'set channel [name|all]'")
+                    cprint("[Console Usage] Use 'set server [name|all]' or 'set channel [name|all]'")
                 
-                print(f"[Active Targets] Server: {current_target_server} | Channel: #{current_target_channel}")
+                cprint(f"[Active Targets] Server: {current_target_server} | Channel: #{current_target_channel}")
                 continue
 
             if not bot.guilds:
-                print("[Console Error] Bot is not currently in any Discord servers.")
+                cprint("[Console Error] Bot is not currently in any Discord servers.")
                 continue
 
             channels = resolve_targets(cmd)
             if not channels:
-                print(f"[Console Error] No matching channels found for Server: '{current_target_server}', Channel: '#{current_target_channel}'. Type 'servers' to check names.")
+                cprint(f"[Console Error] No matching channels found for Server: '{current_target_server}', Channel: '#{current_target_channel}'. Type 'servers' to check names.")
                 continue
 
             if cmd == "test":
                 for ch in channels:
                     await do_test(ch)
-                print(f"[Console Success] Executed test diagnostics across {len(channels)} target(s).")
+                cprint(f"[Console Success] Executed test diagnostics across {len(channels)} target(s).")
             elif cmd == "echo":
                 if not args:
-                    print("[Console Usage Error] Missing message. Format: echo [message]")
+                    cprint("[Console Usage Error] Missing message. Format: echo [message]")
                     continue
                 for ch in channels:
                     await do_echo(ch, args)
-                print(f"[Console Success] Echoed message to {len(channels)} target(s): {args}")
+                cprint(f"[Console Success] Echoed message to {len(channels)} target(s): {args}")
             elif cmd == "spam":
                 spam_parts = args.split(" ", 1)
                 if len(spam_parts) < 2 or not spam_parts[0].isdigit():
-                    print("[Console Usage Error] Format: spam <number> <message>")
+                    cprint("[Console Usage Error] Format: spam <number> <message>")
                     continue
                 count = int(spam_parts[0])
                 msg = spam_parts[1]
                 for ch in channels:
                     await do_spam(ch, count, msg)
-                print(f"[Console Success] Spammed message {count} time(s) across {len(channels)} target(s).")
+                cprint(f"[Console Success] Spammed message {count} time(s) across {len(channels)} target(s).")
             else:
-                print(f"[Console Warning] Unknown local command: '{cmd}'. Type 'help' for options.")
+                cprint(f"[Console Warning] Unknown local command: '{cmd}'. Type 'help' for options.")
 
         except Exception as e:
             logger.error(f"Console controller error: {e}")
-            print(f"[Console Exception] {e}")
+            cprint(f"[Console Exception] {e}")
+
+
+@bot.event
+async def on_message(message: discord.Message):
+    if message.author.bot:
+        return
+
+    if message.guild and "yap" in message.guild.name.lower() and message.channel.name.lower() == "bot":
+        content = message.content.strip()
+        if content.startswith(bot.command_prefix):
+            content = content[len(bot.command_prefix):].strip()
+
+        parts = content.split(" ", 1)
+        cmd = parts[0].lower()
+        args = parts[1] if len(parts) > 1 else ""
+
+        if cmd == "exit":
+            await message.channel.send("`[Remote Error] 'exit' command cannot be executed remotely.`")
+            return
+
+        channels = resolve_targets(cmd)
+        if not channels:
+            channels = [message.channel]
+
+        if cmd == "test":
+            for ch in channels:
+                await do_test(ch)
+            await message.channel.send(f"`[Remote Success] Executed test diagnostics across {len(channels)} target(s).`")
+            log_action(guild=message.guild, channel=message.channel, user=message.author, command="test", action="Remote diagnostic test executed")
+        elif cmd == "echo":
+            if args:
+                for ch in channels:
+                    await do_echo(ch, args)
+                await message.channel.send(f"`[Remote Success] Echoed to {len(channels)} target(s).`")
+                log_action(guild=message.guild, channel=message.channel, user=message.author, command="echo", action=f"Remote echo: {args}")
+        elif cmd == "spam":
+            spam_parts = args.split(" ", 1)
+            if len(spam_parts) >= 2 and spam_parts[0].isdigit():
+                count = int(spam_parts[0])
+                msg = spam_parts[1]
+                for ch in channels:
+                    await do_spam(ch, count, msg)
+                await message.channel.send(f"`[Remote Success] Spammed {count} time(s).`")
+                log_action(guild=message.guild, channel=message.channel, user=message.author, command="spam", action=f"Remote spam {count}x: {msg}")
+        elif cmd == "help":
+            help_text = (
+                "```markdown\n# Remote Terminal Commands\n"
+                "• test\n• echo <msg>\n• spam <number> <msg>\n"
+                "• servers\n-------------------------```"
+            )
+            await message.channel.send(help_text)
+        elif cmd == "servers":
+            server_list = "\n".join([f"• {g.name}" for g in bot.guilds])
+            await message.channel.send(f"```markdown\n# Connected Servers\n{server_list}\n```")
+
+    await bot.process_commands(message)
 
 
 @bot.event
@@ -339,62 +418,6 @@ async def on_ready():
                 logger.error(f"Missing permissions to assign 'Plasma' role in {guild.name}")
 
     asyncio.create_task(console_controller())
-
-@bot.event
-async def on_message(message: discord.Message):
-    if message.author.bot:
-        return
-
-    # Check if we are in a 'bot' channel inside a 'yap' server
-    if message.guild and "yap" in message.guild.name.lower() and message.channel.name.lower() == "bot":
-        content = message.content.strip()
-        if content.startswith(bot.command_prefix):
-            # Strip the prefix if they included it, or let them type raw commands
-            content = content[len(bot.command_prefix):].strip()
-
-        parts = content.split(" ", 1)
-        cmd = parts[0].lower()
-        args = parts[1] if len(parts) > 1 else ""
-
-        # Block remote execution of exit or recursive channel overrides for safety
-        if cmd == "exit":
-            await message.channel.send("`[Remote Error] 'exit' command cannot be executed remotely.`")
-            return
-
-        channels = resolve_targets(cmd)
-        if not channels:
-            # Fallback to current message channel if no global target is active
-            channels = [message.channel]
-
-        if cmd == "test":
-            for ch in channels:
-                await do_test(ch)
-            log_action(guild=message.guild, channel=message.channel, user=message.author, command="test", action="Remote diagnostic test executed")
-        elif cmd == "echo":
-            if args:
-                for ch in channels:
-                    await do_echo(ch, args)
-                log_action(guild=message.guild, channel=message.channel, user=message.author, command="echo", action=f"Remote echo: {args}")
-        elif cmd == "spam":
-            spam_parts = args.split(" ", 1)
-            if len(spam_parts) >= 2 and spam_parts[0].isdigit():
-                count = int(spam_parts[0])
-                msg = spam_parts[1]
-                for ch in channels:
-                    await do_spam(ch, count, msg)
-                log_action(guild=message.guild, channel=message.channel, user=message.author, command="spam", action=f"Remote spam {count}x: {msg}")
-        elif cmd == "help":
-            help_text = (
-                "```markdown\n# Remote Terminal Commands\n"
-                "• test\n• echo <msg>\n• spam <number> <msg>\n"
-                "• servers\n-------------------------```"
-            )
-            await message.channel.send(help_text)
-        elif cmd == "servers":
-            server_list = "\n".join([f"• {g.name}" for g in bot.guilds])
-            await message.channel.send(f"```markdown\n# Connected Servers\n{server_list}\n```")
-
-    await bot.process_commands(message)
 
 token = os.getenv("DISCORD_TOKEN")
 if not token:

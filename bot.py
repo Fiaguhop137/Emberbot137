@@ -14,7 +14,7 @@ logger = logging.getLogger("Emberbot137")
 intents = discord.Intents.default()
 intents.guilds, intents.guild_messages, intents.message_content, intents.members = True, True, True, True
 
-bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
+bot = commands.Bot(command_prefix="~", intents=intents, help_command=None)
 current_target_server: str = "all"
 current_target_channel: str = "all"
 active_spam_tasks: list[asyncio.Task] = []
@@ -445,37 +445,27 @@ async def console_controller():
 
 @bot.event
 async def on_message(message: discord.Message):
-    global current_target_server, current_target_channel, active_spam_tasks, pending_reboot, reboot_mode, last_chat_data
-    if message.author.bot:
-        return
-
-    # --- Deduplicated Chat Logger ---
+    global current_target_server,current_target_channel,active_spam_tasks,pending_reboot,reboot_mode,last_chat_data
     if message.guild:
-        guild_name = message.guild.name
-        channel_name = message.channel.name
-        author_tag = f"{message.author.name}#{message.author.discriminator}" if message.author.discriminator != "0" else message.author.name
-        now = datetime.now(timezone.utc).isoformat()
-
-        if (last_chat_data["guild"] == guild_name and
-            last_chat_data["channel"] == channel_name and
-            last_chat_data["author_id"] == message.author.id and
-            last_chat_data["content"] == message.content):
-            last_chat_data["count"] += 1
+        guild_name,channel_name,author_tag,now=message.guild.name,message.channel.name,f"{message.author.name}#{message.author.discriminator}" if message.author.discriminator!="0" else message.author.name,datetime.now(timezone.utc).isoformat()
+        if (last_chat_data["guild"]==guild_name and
+            last_chat_data["channel"]==channel_name and
+            last_chat_data["author_id"]==message.author.id and
+            last_chat_data["content"]==message.content):
+            last_chat_data["count"]+=1
         else:
             flush_chat_log()
-            last_chat_data["guild"] = guild_name
-            last_chat_data["channel"] = channel_name
-            last_chat_data["author"] = author_tag
-            last_chat_data["author_id"] = message.author.id
-            last_chat_data["content"] = message.content
-            last_chat_data["timestamp"] = now
-            last_chat_data["count"] = 1
-    # --------------------------------
-
-    if message.guild and "yap" in message.guild.name.lower() and message.channel.name.lower() == "emberbot137-remote-console":
-        content = message.content.strip()
+            last_chat_data["guild"]=guild_name
+            last_chat_data["channel"]=channel_name
+            last_chat_data["author"]=author_tag
+            last_chat_data["author_id"]=message.author.id
+            last_chat_data["content"]=message.content
+            last_chat_data["timestamp"]=now
+            last_chat_data["count"]=1
+    if message.guild and "yap" in message.guild.name.lower() and message.channel.name.lower()=="emberbot137-remote-console":
+        content=message.content.strip()
         if content.startswith(bot.command_prefix):
-            content = content[len(bot.command_prefix):].strip()
+            content=content[len(bot.command_prefix):].strip()
 
         parts = content.split(" ", 1)
         cmd = parts[0].lower()

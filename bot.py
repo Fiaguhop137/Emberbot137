@@ -286,7 +286,7 @@ async def console_controller():
                 active_spam_tasks.append(task)
                 task.add_done_callback(lambda t: active_spam_tasks.remove(t) if t in active_spam_tasks else None)
                 cprint(f"[Success] Initiated background spam task across {len(channels)} target{'' if len(channels)==1 else 's'}.")
-            elif cmd ="delay":
+            elif cmd=="delay":
                 delay_parts = args.split(" ",1)
                 if len(delay_parts)<2 or not delay_parts[0].isdigit():
                     cprint("[Error] Format: delay <seconds> <command>")

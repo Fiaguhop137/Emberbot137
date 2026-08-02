@@ -14,3 +14,38 @@
 [SUCCESS at 2026-08-01T21:41:01.713248+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran test resulting in Remote diagnostic test executed
 [SUCCESS at 2026-08-01T21:44:47.548915+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran reboot resulting in Remote standard reboot flag set
 [SUCCESS at 2026-08-01T21:47:04.900347+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran test resulting in Remote diagnostic test executed
+[SUCCESS at 2026-08-01T22:15:54.783753+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: Rainbows and Clouds, Channel: #everyone
+[SUCCESS at 2026-08-01T22:15:58.566211+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: Rainbows and Clouds, Channel: #info
+[SUCCESS at 2026-08-01T22:16:08.098827+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran echo resulting in Remote echo: are you misnaming me
+[SUCCESS at 2026-08-01T22:16:27.794779+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran echo resulting in Remote echo: damn
+[SUCCESS at 2026-08-01T22:23:29.238959+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran reboot -c resulting in Remote interactive console reboot flag set
+[SUCCESS at 2026-08-01T22:58:46.611026+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: Yap, Channel: #everyone
+[SUCCESS at 2026-08-01T22:58:52.977125+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: Yap, Channel: #plasma-dragon
+[SUCCESS at 2026-08-01T22:59:00.443906+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran spam resulting in Remote background spam task 10x: get linux
+[SUCCESS at 2026-08-01T22:59:31.377887+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran spam resulting in Remote background spam task 100x: get linux
+[SUCCESS at 2026-08-01T23:33:44.325015+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: Rainbows and Clouds, Channel: #plasma-dragon
+[SUCCESS at 2026-08-01T23:33:47.424219+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: Rainbows and Clouds, Channel: #rainbows
+[SUCCESS at 2026-08-01T23:33:59.171324+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran echo resulting in Remote echo: imma leave my computer so im on the bot now
+[SUCCESS at 2026-08-01T23:35:22.972806+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran echo resulting in Remote echo: dyno doesn't listen to me for some reason
+[SUCCESS at 2026-08-01T23:35:26.258912+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran echo resulting in Remote echo: it's so sad
+[SUCCESS at 2026-08-02T01:49:06.029200+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: Gay Programmers, Channel: #everyone
+[SUCCESS at 2026-08-02T01:49:18.986243+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran spam resulting in Remote background spam task 100x: fuck you
+[SUCCESS at 2026-08-02T01:49:33.621883+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran stop resulting in Halted 1 tasks
+[SUCCESS at 2026-08-02T01:49:39.574365+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: Gay Programmers, Channel: #everyone
+[SUCCESS at 2026-08-02T01:49:51.313966+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran spam resulting in Remote background spam task 100x: flare you
+[SUCCESS at 2026-08-02T01:50:00.854231+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran stop resulting in Halted 1 tasks
+[SUCCESS at 2026-08-02T01:50:34.999238+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: Gay Programmers, Channel: #everyone
+[SUCCESS at 2026-08-02T01:50:45.177476+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: Gay Programmers, Channel: #general
+[SUCCESS at 2026-08-02T01:50:49.549966+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran echo resulting in Remote echo: flare you
+[SUCCESS at 2026-08-02T01:51:06.303954+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran spam resulting in Remote background spam task 2147483647x: flare you
+[SUCCESS at 2026-08-02T01:51:40.370059+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran spam resulting in Remote background spam task 2147483647x: flare you
+[SUCCESS at 2026-08-02T01:51:42.042182+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran spam resulting in Remote background spam task 2147483647x: flare you
+[SUCCESS at 2026-08-02T01:51:43.643566+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran spam resulting in Remote background spam task 2147483647x: flare you
+[SUCCESS at 2026-08-02T01:52:37.637130+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran spam resulting in Remote background spam task 2147483647x: shut up
+[SUCCESS at 2026-08-02T01:53:34.505067+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran spam resulting in Remote background spam task 2147483647x: <@1512533966001930254>
+[SUCCESS at 2026-08-02T01:53:42.085817+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran spam resulting in Remote background spam task 2147483647x: <@1512533966001930254>
+[SUCCESS at 2026-08-02T01:55:28.991133+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran stop resulting in Halted 7 tasks
+[SUCCESS at 2026-08-02T01:57:39.135359+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran echo resulting in Remote echo: meow
+[SUCCESS at 2026-08-02T02:30:10.720294+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: Rainbows and Clouds, Channel: #general
+[SUCCESS at 2026-08-02T02:30:15.245787+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: Rainbows and Clouds, Channel: #rainbows
+[SUCCESS at 2026-08-02T02:30:21.745378+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran echo resulting in Remote echo: look at my banner

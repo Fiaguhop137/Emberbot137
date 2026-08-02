@@ -140,11 +140,11 @@ def resolve_targets(cmd_type:str)->list[discord.abc.Messageable]:
                     all_channel_names.add(channel.name.lower())
         if current_target_channel.lower() not in all_channel_names:
             matching_names=[name for name in all_channel_names if name.startswith(current_target_channel.lower())]
-            resolved_channel_name=matching_names[0]
             if len(matching_names)==1:
+                resolved_channel_name=matching_names[0]
                 cprint(f"[Success] Autofilled channel target to: '#{resolved_channel_name}'")
-            elif len(matching_names) > 1:
-                cprint(f"[Warning] Ambiguous channel prefix '{current_target_channel}' matches multiple channels: {matching_names}. #{resolved_channel_name} chosen.")
+            elif len(matching_names)>1:
+                cprint(f"[Warning] Ambiguous channel prefix '{current_target_channel}' matches multiple channels: {matching_names}. ")
     for guild in emberbot137.guilds:
         if current_target_server!="all" and current_target_server.lower() not in guild.name.lower():
             continue

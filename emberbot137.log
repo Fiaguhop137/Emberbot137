@@ -94,3 +94,8 @@
 [SUCCESS at 2026-08-02T15:14:01.071742+00:00 in Channel=Yap/#emberbot137-remote-console]: User=bobbot9000#8975(1533157532510584894) ran echo resulting in Remote echo: echo echo echo echo echo meow
 [SUCCESS at 2026-08-02T15:14:01.374496+00:00 in Channel=Yap/#emberbot137-remote-console]: User=bobbot9000#8975(1533157532510584894) ran echo resulting in Remote echo: echo echo echo meow
 [SUCCESS at 2026-08-02T15:14:01.604452+00:00 in Channel=Yap/#emberbot137-remote-console]: User=bobbot9000#8975(1533157532510584894) ran echo resulting in Remote echo: echo meow
+[SUCCESS at 2026-08-02T18:09:04.140854+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran reboot resulting in Remote standard reboot flag set
+[SUCCESS at 2026-08-02T18:10:13.470255+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran reboot resulting in Remote standard reboot flag set
+[SUCCESS at 2026-08-02T19:20:47.662907+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran reboot -c resulting in Remote interactive console reboot flag set
+[SUCCESS at 2026-08-02T19:22:12.551799+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran reboot -c resulting in Remote interactive console reboot flag set
+[SUCCESS at 2026-08-02T19:29:21.551924+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran reboot -c resulting in Remote interactive console reboot flag set

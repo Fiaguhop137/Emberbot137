@@ -747,3 +747,299 @@ Help for PluBot:
 [2026-08-02T16:34:48.119208+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="oh"
 [2026-08-02T16:34:48.582293+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="bye"
 [2026-08-02T16:50:37.963191+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=fiaguhop137(1342173566828810271) | Content="?purge bots 100 (3)"
+[2026-08-02T17:04:56.325427+00:00] | Channel=Yap/#remote-controlled-bob | User=fiaguhop137(1342173566828810271) | Content="lol"
+[2026-08-02T17:47:46.291020+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="https://discord.gg/tQwFGtm3p"
+[2026-08-02T17:49:18.305968+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="@everyone"
+[2026-08-02T17:53:41.351531+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&ping fiaguhop137 100"
+[2026-08-02T17:53:41.669473+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (67)"
+[2026-08-02T17:55:08.226802+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=fiaguhop137(1342173566828810271) | Content="https://klipy.com/gifs/hazbin-hazbin-hotel-416"
+[2026-08-02T17:55:50.423812+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="https://giphy.com/gifs/trish-walker-6oHZyzBD7wVEs"
+[2026-08-02T18:09:03.912552+00:00] | Channel=Yap/#emberbot137-remote-console | User=fiaguhop137(1342173566828810271) | Content="reboot"
+[2026-08-02T18:09:04.140001+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote] Reboot flag set. Initiating standard background restart...`"
+[2026-08-02T18:09:10.655423+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Controller Active] Connected to 4 guild(s).
+```"
+[2026-08-02T18:09:10.811210+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+Commands: test, echo <msg>, spam <number> <msg>, stop, delay <seconds> <cmd>, set, servers, help, reboot <-c>, exit
+```"
+[2026-08-02T18:09:10.840249+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+Current Target Server: 'yap' | Target Channel: '#everyone'
+```"
+[2026-08-02T18:10:13.042574+00:00] | Channel=Yap/#emberbot137-remote-console | User=fiaguhop137(1342173566828810271) | Content="reboot"
+[2026-08-02T18:10:13.469731+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote] Reboot flag set. Initiating standard background restart...`"
+[2026-08-02T18:10:19.646298+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Controller Active] Connected to 4 guild(s).
+```"
+[2026-08-02T18:10:19.858268+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+Current Target Server: 'yap' | Target Channel: '#everyone'
+```"
+[2026-08-02T18:10:19.948446+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+Commands: test, echo <msg>, spam <number> <msg>, stop, delay <seconds> <cmd>, set, servers, help, reboot <-c>, exit
+```"
+[2026-08-02T18:28:29.337873+00:00] | Channel=Queer City/#safety | User=floofykitty_58560(1189748813200638027) | Content=""
+[2026-08-02T19:07:32.619553+00:00] | Channel=Yap/#emberbot137-remote-console | User=fiaguhop137(1342173566828810271) | Content="servers"
+[2026-08-02T19:07:32.983116+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```markdown
+= Connected Servers
+ - Yap(1463624406470230232)
+  ↳ Channels: emberbot137-remote-console, plasma, plasma-dragon, plasma-frog, plasma-twi, plasma-dragon-twi, plasma-dragon-frog, everyone, remote-controlled-bob
+ - Rainbows and Clouds(1511895185007579206)
+  ↳ Channels: rainbows, clouds, info
+ - Gay Programmers (Bot Testing)(1533293232597893130)
+  ↳ Channels: general
+ - Queer City(1533520595004821645)
+  ↳ Channels: rules, announcements, chat, debates, bot, qotd-discussion, qotd, moderator, safety
+```"
+[2026-08-02T19:20:47.298973+00:00] | Channel=Yap/#emberbot137-remote-console | User=fiaguhop137(1342173566828810271) | Content="reboot -c"
+[2026-08-02T19:20:47.663145+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote] Reboot flag set (-c). Will open interactive Emberbot137 Console window...`"
+[2026-08-02T19:21:52.181584+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active] Connected to 4 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```"
+[2026-08-02T19:21:58.727587+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Warning] Reboot initiated. 
+[Warning] Rebooting...
+```"
+[2026-08-02T19:22:09.582871+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active] Connected to 4 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```"
+[2026-08-02T19:22:12.039852+00:00] | Channel=Yap/#emberbot137-remote-console | User=fiaguhop137(1342173566828810271) | Content="reboot -c"
+[2026-08-02T19:22:12.551066+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote] Reboot flag set (-c). Will open interactive Emberbot137 Console window...`"
+[2026-08-02T19:22:19.309391+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active] Connected to 4 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```"
+[2026-08-02T19:23:46.566314+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+--- Available Console Commands ---
+ - test                                     - Send diagnostic report to target(s)
+ - echo <msg>                               - Send <msg> to target(s)
+ - spam <number> <msg>                      - Send <number> of messages <msg> to target(s)
+ - delay <secs> <cmd>                       - Execute <cmd> after <secs> seconds
+ - stop                                     - Halt all active tasks
+ - set <server|channel> <name|all>          - Target specific server/channel
+ - servers                                  - List connected servers and channels
+ - reboot <-c>                              - Initiates reboot and updates. Optional -c flag will open console
+ - help                                     - Show this help menu
+ - exit                                     - Shut down this bot
+```"
+[2026-08-02T19:25:46.568386+00:00] | Channel=Queer City/#safety | User=pludunn(1512533966001930254) | Content="…and you've already coloured yourself plasma"
+[2026-08-02T19:25:47.285910+00:00] | Channel=Queer City/#safety | User=pludunn(1512533966001930254) | Content="ok"
+[2026-08-02T19:27:53.134946+00:00] | Channel=Rainbows and Clouds/#rainbows | User=fiaguhop137(1342173566828810271) | Content="bro"
+[2026-08-02T19:27:56.418736+00:00] | Channel=Rainbows and Clouds/#rainbows | User=fiaguhop137(1342173566828810271) | Content="stop pinging everyone"
+[2026-08-02T19:28:01.743233+00:00] | Channel=Rainbows and Clouds/#rainbows | User=fiaguhop137(1342173566828810271) | Content="some people dont want to be pinged"
+[2026-08-02T19:28:16.023967+00:00] | Channel=Queer City/#safety | User=fiaguhop137(1342173566828810271) | Content="lol"
+[2026-08-02T19:28:22.035881+00:00] | Channel=Queer City/#safety | User=fiaguhop137(1342173566828810271) | Content="its my favorite color"
+[2026-08-02T19:28:49.252770+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Warning] Reboot initiated. 
+[Warning] Rebooting...
+```"
+[2026-08-02T19:28:55.906392+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active] Connected to 4 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```"
+[2026-08-02T19:29:21.096538+00:00] | Channel=Yap/#emberbot137-remote-console | User=fiaguhop137(1342173566828810271) | Content="reboot -c"
+[2026-08-02T19:29:21.464696+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote] Reboot flag set (-c). Will open interactive Emberbot137 Console window...`"
+[2026-08-02T19:29:28.573043+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active] Connected to 4 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```"
+[2026-08-02T19:29:35.128269+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+--- Available Console Commands ---
+ - test                                     - Send diagnostic report to target(s)
+ - echo <msg>                               - Send <msg> to target(s)
+ - spam <number> <msg>                      - Send <number> of messages <msg> to target(s)
+ - delay <secs> <cmd>                       - Execute <cmd> after <secs> seconds
+ - stop                                     - Halt all active tasks
+ - set <server|channel> <name|all>          - Target specific server/channel
+ - servers                                  - List connected servers and channels
+ - reboot <-c>                              - Initiates reboot and updates. Optional -c flag will open console
+ - help                                     - Show this help menu
+ - exit                                     - Shut down this bot
+```"
+[2026-08-02T19:29:52.944492+00:00] | Channel=Queer City/#safety | User=pludunn(1512533966001930254) | Content="aight"
+[2026-08-02T19:29:53.046988+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Success] Target server updated to: Queer City
+```"
+[2026-08-02T19:29:53.049289+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Succes] Retrived active channel: Queer City/#everyone
+```"
+[2026-08-02T19:33:52.043284+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active] Connected to 4 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```"
+[2026-08-02T19:33:57.259798+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console. 
+[Warning] Rebooting..
+```"
+[2026-08-02T19:34:03.388172+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active] Connected to 4 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```"
+[2026-08-02T19:34:32.262618+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+= Connected Servers & Channels
+ - Yap(ID: 1463624406470230232)
+  ↳ Channels: emberbot137-remote-console, plasma, plasma-dragon, plasma-frog, plasma-twi, plasma-dragon-twi, plasma-dragon-frog, everyone, remote-controlled-bob
+ - Rainbows and Clouds(ID: 1511895185007579206)
+  ↳ Channels: rainbows, clouds, info
+ - Gay Programmers (Bot Testing)(ID: 1533293232597893130)
+  ↳ Channels: general
+ - Queer City(ID: 1533520595004821645)
+  ↳ Channels: rules, announcements, chat, debates, bot, qotd-discussion, qotd, moderator, safety
+```"
+[2026-08-02T19:34:38.981305+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Success] Target server updated to: Queer City
+```"
+[2026-08-02T19:35:17.998611+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active] Connected to 4 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```"
+[2026-08-02T19:35:23.672659+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active] Connected to 4 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```"
+[2026-08-02T19:35:30.329416+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Succes] Retrived active channel: Queer City/#everyone
+```"
+[2026-08-02T19:35:30.330188+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Success] Target server updated to: Queer City
+```"
+[2026-08-02T19:35:34.305945+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+= Connected Servers & Channels
+ - Yap(ID: 1463624406470230232)
+  ↳ Channels: emberbot137-remote-console, plasma, plasma-dragon, plasma-frog, plasma-twi, plasma-dragon-twi, plasma-dragon-frog, everyone, remote-controlled-bob
+ - Rainbows and Clouds(ID: 1511895185007579206)
+  ↳ Channels: rainbows, clouds, info
+ - Gay Programmers (Bot Testing)(ID: 1533293232597893130)
+  ↳ Channels: general
+ - Queer City(ID: 1533520595004821645)
+  ↳ Channels: rules, announcements, chat, debates, bot, qotd-discussion, qotd, moderator, safety
+```"
+[2026-08-02T19:35:42.882277+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Success] Target channel updated to: #bot
+```"
+[2026-08-02T19:35:43.231398+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Succes] Retrived active channel: Queer City/#bot
+```"
+[2026-08-02T19:35:52.856066+00:00] | Channel=Queer City/#bot | User=Emberbot137#6769(1532899245005475860) | Content="hallo"
+[2026-08-02T19:35:52.962017+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): hall
+```"
+[2026-08-02T19:36:04.179994+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Success] Target channel updated to: #safety
+```"
+[2026-08-02T19:36:04.190657+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Succes] Retrived active channel: Queer City/#safety
+```"
+[2026-08-02T19:36:10.240604+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Success] Initiated background spam task across 1 target.
+```"
+[2026-08-02T19:36:10.515435+00:00] | Channel=Queer City/#safety | User=Emberbot137#6769(1532899245005475860) | Content="meow (7)"
+[2026-08-02T19:36:14.258918+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content=""
+[2026-08-02T19:36:18.050140+00:00] | Channel=Queer City/#safety | User=Emberbot137#6769(1532899245005475860) | Content="meow (3)"
+[2026-08-02T19:40:16.850365+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Warning] Unknown local command: 'server'. Try the help command for more options.
+```"
+[2026-08-02T19:40:21.943227+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Success] Target server updated to: Rainbows and Clouds
+```"
+[2026-08-02T19:40:21.943756+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Succes] Retrived active channel: Rainbows and Clouds/#safety
+``` (2)"
+[2026-08-02T19:40:27.118894+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Error] Invalid syntax. Format: set <server|channel> <name|all>
+```"
+[2026-08-02T19:41:35.896256+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Success] Target channel updated to: #rainbows
+```"
+[2026-08-02T19:41:35.902949+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Succes] Retrived active channel: Rainbows and Clouds/#rainbows
+```"
+[2026-08-02T19:41:39.389566+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console. 
+[Warning] Rebooting..
+```"
+[2026-08-02T19:41:45.329702+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active] Connected to 4 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```"
+[2026-08-02T19:43:43.739647+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console. 
+[Warning] Rebooting..
+```"
+[2026-08-02T19:43:50.343709+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active] Connected to 4 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```"
+[2026-08-02T19:44:37.456874+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Warning] Unknown local command: '1reboot'. Try the help command for more options.
+```"
+[2026-08-02T19:44:45.198846+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active] Connected to 4 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```"
+[2026-08-02T19:45:14.427921+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active] Connected to 4 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```"
+[2026-08-02T19:45:21.888003+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console. 
+[Warning] Rebooting..
+```"
+[2026-08-02T19:45:28.041732+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active] Connected to 4 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```"
+[2026-08-02T19:45:38.907572+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console. 
+[Warning] Rebooting..
+```"
+[2026-08-02T19:45:45.038172+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active] Connected to 4 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```"
+[2026-08-02T19:45:59.172635+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console. 
+[Warning] Rebooting..
+```"
+[2026-08-02T19:46:04.566731+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active] Connected to 4 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```"
+[2026-08-02T19:46:34.192392+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console. 
+[Warning] Rebooting..
+```"
+[2026-08-02T19:46:40.027793+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active] Connected to 4 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```"
+[2026-08-02T19:47:02.126106+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console. 
+[Warning] Rebooting..
+```"
+[2026-08-02T19:47:08.088055+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active] Connected to 4 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```"
+[2026-08-02T19:47:23.563616+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console. 
+[Warning] Rebooting..
+```"

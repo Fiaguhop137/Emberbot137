@@ -45,9 +45,9 @@ def cprint(content:str="")->None:
     print(content)
     if emberbot137.is_ready():
         emberbot137.loop.create_task(output_to_bot(content.strip("`").strip("markdown")))
-def log_action(*,guild:discord.Guild,channel:discord.abc.GuildChannel,user:discord.abc.User,command:str,action:str,success:bool=True)->None:
+def log_action(*,guild:discord.Guild,channel:discord.abc.GuildChannel,user:discord.abc.User,command:str,action:str,Success:bool=True)->None:
     guild_name,channel_name,tag,current_time=guild.name,getattr(channel,"name","unknown"),f"{user.name}#{user.discriminator}" if user.discriminator!="0" else user.name,datetime.now(timezone.utc).isoformat()
-    line=f"[{'SUCCESS' if success else 'ERROR'} at {current_time} in Channel={guild_name}/#{channel_name}]: User={tag}({user.id}) ran {command} resulting in {action}"
+    line=f"[{'Success' if Success else 'ERROR'} at {current_time} in Channel={guild_name}/#{channel_name}]: User={tag}({user.id}) ran {command} resulting in {action}"
     logger.info(line)
     with open(LOG_FILE,"a",encoding="utf-8") as file:
         file.write(line+"\n")
@@ -190,7 +190,7 @@ async def console_controller():
                 for task in active_spam_tasks:
                     task.cancel()
                 active_spam_tasks.clear()
-                cprint(f"[Success] Cancelled {count} active task{'' if count==1 else 's'}.")
+                cprint(f"[s] Cancelled {count} active task{'' if count==1 else 's'}.")
                 continue
             if cmd=="help":
                 cprint("\n--- Available Console Commands ---\n"
@@ -218,11 +218,11 @@ async def console_controller():
                 sub_val=sub_parts[1] if len(sub_parts)>1 else ""
                 if sub_cmd=="server":
                     if not sub_val:
-                        cprint(f"[Success] Retrived target server: {current_target_server}")
+                        cprint(f"[s] Retrived target server: {current_target_server}")
                     else:
                         if sub_val.lower()=="all":
                             current_target_server="all"
-                            cprint("[Success] Target server updated to: all servers")
+                            cprint("[s] Target server updated to: all servers")
                         else:
                             matched_server=current_target_server
                             for g in emberbot137.guilds:
@@ -230,7 +230,7 @@ async def console_controller():
                                     matched_server=g.name
                                     break
                             current_target_server=matched_server
-                            cprint(f"[Success] Target server updated to: {matched_server}")
+                            cprint(f"[s] Target server updated to: {matched_server}")
                 elif sub_cmd=="channel":
                     if not sub_val:
                         cprint(f"[Success] Retrived target channel: #{current_target_channel}")
@@ -252,7 +252,7 @@ async def console_controller():
                             cprint(f"[Success] Target channel updated to: #{matched_channel}")
                 else:
                     cprint("[Error] Invalid syntax. Format: set <server|channel> <name|all>")
-                cprint(f"[Succes] Retrived active channel: {current_target_server}/#{current_target_channel}")
+                cprint(f"[Success] Retrived active channel: {current_target_server}/#{current_target_channel}")
                 continue
             if not emberbot137.guilds:
                 cprint("[Error] Bot is not currently in any servers.")

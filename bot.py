@@ -44,7 +44,7 @@ async def output_to_bot(content:str):
 def cprint(content:str=""):
     print(content)
     if emberbot137.is_ready():
-        emberbot137.loop.create_task(output_to_bot(content.strip("`").strip("markdown")))
+        emberbot137.loop.create_task(output_to_bot(content))
 def log_action(*,guild:discord.Guild,channel:discord.abc.GuildChannel,user:discord.abc.User,command:str,action:str,Success:bool=True):
     guild_name,channel_name,tag,current_time=guild.name,getattr(channel,"name","unknown"),f"{user.name}#{user.discriminator}" if user.discriminator!="0" else user.name,datetime.now(timezone.utc).isoformat()
     line=f"[{'Success' if Success else 'ERROR'} at {current_time} in Channel={guild_name}/#{channel_name}]: User={tag}({user.id}) ran {command} resulting in {action}"
@@ -81,7 +81,7 @@ def generate_diagnostic_report(target:discord.abc.Messageable)->str:
 async def do_test(target:discord.abc.Messageable):
     report_text=generate_diagnostic_report(target)
     await send_response(target,report_text)
-    cprint(report_text)
+    cprint(report_text.strip("`").strip("markdown"))
 async def do_echo(target:discord.abc.Messageable,message:str):
     await send_response(target,message)
 async def do_spam(target:discord.abc.Messageable,count:int,message:str):
@@ -263,7 +263,7 @@ async def console_controller():
             if cmd=="test":
                 for channel in channels:
                     await do_test(channel)
-                cprint(f"[] Executed test diagnostics across {len(channels)} target{'' if len(channels)==1 else 's'}.")
+                cprint(f"[Success] Executed test diagnostics across {len(channels)} target{'' if len(channels)==1 else 's'}.")
             elif cmd=="echo":
                 if not args:
                     cprint("[Error] Missing message. Format: echo <msg>")

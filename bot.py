@@ -16,7 +16,7 @@ active_spam_tasks:list[asyncio.Task]=[]
 pending_reboot:bool=False
 reboot_mode="restart.sh"
 last_chat_data = {"guild":None,"channel":None,"author":None,"author_id":None,"content":None,"timestamp":None,"count":0}
-def flush_chat_log()->None:
+def flush_chat_log():
     global last_chat_data
     if last_chat_data["content"] is not None:
         content_str=last_chat_data["content"]
@@ -29,7 +29,7 @@ def flush_chat_log()->None:
         except Exception as e:
             logger.error(f"Failed to write chat log: {e}")
         last_chat_data["count"],last_chat_data["content"]=0,None
-async def output_to_bot(content: str) -> None:
+async def output_to_bot(content:str):
     for guild in emberbot137.guilds:
         if "yap" in guild.name.lower():
             for channel in guild.text_channels:
@@ -41,17 +41,17 @@ async def output_to_bot(content: str) -> None:
                     except Exception as e:
                         logger.error(f"Failed to output: {e}")
                     return
-def cprint(content:str="")->None:
+def cprint(content:str=""):
     print(content)
     if emberbot137.is_ready():
         emberbot137.loop.create_task(output_to_bot(content.strip("`").strip("markdown")))
-def log_action(*,guild:discord.Guild,channel:discord.abc.GuildChannel,user:discord.abc.User,command:str,action:str,Success:bool=True)->None:
+def log_action(*,guild:discord.Guild,channel:discord.abc.GuildChannel,user:discord.abc.User,command:str,action:str,Success:bool=True):
     guild_name,channel_name,tag,current_time=guild.name,getattr(channel,"name","unknown"),f"{user.name}#{user.discriminator}" if user.discriminator!="0" else user.name,datetime.now(timezone.utc).isoformat()
     line=f"[{'Success' if Success else 'ERROR'} at {current_time} in Channel={guild_name}/#{channel_name}]: User={tag}({user.id}) ran {command} resulting in {action}"
     logger.info(line)
     with open(LOG_FILE,"a",encoding="utf-8") as file:
         file.write(line+"\n")
-async def send_response(target:discord.abc.Messageable,content:str)->None:
+async def send_response(target:discord.abc.Messageable,content:str):
     await target.send(content)
 def generate_diagnostic_report(target:discord.abc.Messageable)->str:
     server=getattr(target,"guild",None)
@@ -78,13 +78,13 @@ def generate_diagnostic_report(target:discord.abc.Messageable)->str:
         perms_str=", ".join(audit_perms) if audit_perms else "Standard User"
     else:perms_str="Unknown"
     return f"```markdown\n = Diagnostic Report\n - Status: {status}\n - Host Machine: {hostname}\n - Discord Server: {server_name}({server_id})\n - Latency: {latency_ms}ms\n - Token status: {env_status}\n - Connected Servers: {server_count} servers connected. Run ~servers to see more\n - Permissions: {perms_str}```"
-async def do_test(target:discord.abc.Messageable)->None:
+async def do_test(target:discord.abc.Messageable):
     report_text=generate_diagnostic_report(target)
     await send_response(target,report_text)
     cprint(report_text)
-async def do_echo(target:discord.abc.Messageable,message:str)->None:
+async def do_echo(target:discord.abc.Messageable,message:str):
     await send_response(target,message)
-async def do_spam(target:discord.abc.Messageable,count:int,message:str)->None:
+async def do_spam(target:discord.abc.Messageable,count:int,message:str):
     for _ in range(count):
         await send_response(target,message)
 async def run_delayed_command(delay: int, full_cmd_string: str, target_context: Optional[discord.abc.Messageable] = None):
@@ -157,18 +157,17 @@ def resolve_targets(cmd_type:str)->list[discord.abc.Messageable]:
 async def console_controller():
     global current_target_server,current_target_channel,active_spam_tasks,pending_reboot,reboot_mode
     await emberbot137.wait_until_ready()
-    cprint(f"\n[Active] Connected to {len(emberbot137.guilds)} channel{'' if len(emberbot137.guilds)==1 else 's'} \nCurrent Target Channel: {current_target_server}/#{current_target_channel} \nType help for a list of commands\n~")
-    loop = asyncio.get_running_loop()
+    cprint(f"\n[Active] Connected to {len(emberbot137.guilds)} channel{'' if len(emberbot137.guilds)==1 else 's'} \nCurrent Target Channel: {current_target_server}/#{current_target_channel} \nType help for a list of commands")
+    loop=asyncio.get_running_loop()
     while not emberbot137.is_closed():
         try:
-            line=await loop.run_in_executor(None, sys.stdin.readline)
+            sys.stdout.write("~")
+            sys.stdout.flush()
+            line=await loop.run_in_executor(None,sys.stdin.readline)
             if not line:
                 await asyncio.sleep(1)
                 continue
-            content=line.strip()
-            if not content:
-                continue
-            parts=content.split(" ", 1)
+            parts=line.strip().split(" ",1)
             cmd=parts[0].lower()
             args=parts[1] if len(parts)>1 else ""
             if cmd=="exit":

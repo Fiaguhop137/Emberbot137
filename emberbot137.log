@@ -49,3 +49,23 @@
 [SUCCESS at 2026-08-02T02:30:10.720294+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: Rainbows and Clouds, Channel: #general
 [SUCCESS at 2026-08-02T02:30:15.245787+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: Rainbows and Clouds, Channel: #rainbows
 [SUCCESS at 2026-08-02T02:30:21.745378+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran echo resulting in Remote echo: look at my banner
+[SUCCESS at 2026-08-02T03:47:28.671227+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran reboot resulting in Remote standard reboot flag set
+[SUCCESS at 2026-08-02T03:47:37.854508+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: Gay Programmers (Bot Testing), Channel: #everyone
+[SUCCESS at 2026-08-02T03:47:50.204959+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: Gay Programmers (Bot Testing), Channel: #general
+[SUCCESS at 2026-08-02T03:47:56.912138+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran echo resulting in Remote echo: hiiiiiiiiiiiii
+[SUCCESS at 2026-08-02T14:15:55.520708+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: Gay Programmers (Bot Testing), Channel: #general
+[SUCCESS at 2026-08-02T14:16:02.596984+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: Gay Programmers (Bot Testing), Channel: #general
+[SUCCESS at 2026-08-02T14:16:24.964174+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran test resulting in Remote diagnostic test executed
+[SUCCESS at 2026-08-02T14:19:14.076375+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran echo resulting in Remote echo: ```markdown
+= Remote Console Commands:
+ - test                                  runs diagnostics
+ - echo <msg>                            repeats <msg> to the selected channel
+ - spam <number> <msg>                   spams <msg> <number times>
+ - stop                                  stops spamming
+ - delay <secs> <cmd>                    delays <secs> seconds then runs <cmd>
+ - set <server|channel> <name|all>       moves server/channel selector. use all to broadcast to all servers/channels
+ - servers                               lists all detected servers
+ - reboot <-c>                           reboots Emberbot137. -c tag will open console
+-------------------------```
+[SUCCESS at 2026-08-02T14:21:18.963490+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran spam resulting in Remote background spam task 33x: meow
+[SUCCESS at 2026-08-02T14:32:29.213926+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran delay resulting in Remote delay 100s: spam 100 spam

@@ -69,3 +69,28 @@
 -------------------------```
 [SUCCESS at 2026-08-02T14:21:18.963490+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran spam resulting in Remote background spam task 33x: meow
 [SUCCESS at 2026-08-02T14:32:29.213926+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran delay resulting in Remote delay 100s: spam 100 spam
+[SUCCESS at 2026-08-02T14:40:29.335519+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran reboot -c resulting in Remote interactive console reboot flag set
+[SUCCESS at 2026-08-02T14:45:50.678201+00:00 in Channel=Yap/#emberbot137-remote-console]: User=Emberbot137#6769(1532899245005475860) ran test resulting in Remote diagnostic test executed
+[SUCCESS at 2026-08-02T14:45:52.344489+00:00 in Channel=Yap/#emberbot137-remote-console]: User=Emberbot137#6769(1532899245005475860) ran echo resulting in Remote echo: test
+[SUCCESS at 2026-08-02T14:46:29.404258+00:00 in Channel=Yap/#emberbot137-remote-console]: User=Emberbot137#6769(1532899245005475860) ran test resulting in Remote diagnostic test executed
+[SUCCESS at 2026-08-02T14:46:32.060795+00:00 in Channel=Yap/#emberbot137-remote-console]: User=Emberbot137#6769(1532899245005475860) ran test resulting in Remote diagnostic test executed
+[SUCCESS at 2026-08-02T14:46:38.187823+00:00 in Channel=Yap/#emberbot137-remote-console]: User=Emberbot137#6769(1532899245005475860) ran test resulting in Remote diagnostic test executed
+[SUCCESS at 2026-08-02T14:46:40.036740+00:00 in Channel=Yap/#emberbot137-remote-console]: User=Emberbot137#6769(1532899245005475860) ran test resulting in Remote diagnostic test executed
+[SUCCESS at 2026-08-02T14:46:45.082362+00:00 in Channel=Yap/#emberbot137-remote-console]: User=Emberbot137#6769(1532899245005475860) ran test resulting in Remote diagnostic test executed
+[SUCCESS at 2026-08-02T14:46:49.120792+00:00 in Channel=Yap/#emberbot137-remote-console]: User=Emberbot137#6769(1532899245005475860) ran test resulting in Remote diagnostic test executed
+[SUCCESS at 2026-08-02T14:46:50.101072+00:00 in Channel=Yap/#emberbot137-remote-console]: User=Emberbot137#6769(1532899245005475860) ran test resulting in Remote diagnostic test executed
+[SUCCESS at 2026-08-02T14:47:01.996074+00:00 in Channel=Yap/#emberbot137-remote-console]: User=Emberbot137#6769(1532899245005475860) ran test resulting in Remote diagnostic test executed
+[SUCCESS at 2026-08-02T14:47:04.889307+00:00 in Channel=Yap/#emberbot137-remote-console]: User=Emberbot137#6769(1532899245005475860) ran test resulting in Remote diagnostic test executed
+[SUCCESS at 2026-08-02T15:11:14.035689+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran test resulting in Remote diagnostic test executed
+[SUCCESS at 2026-08-02T15:13:19.523741+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran set resulting in Remote target update -> Server: yap, Channel: #remote-controlled-bob
+[SUCCESS at 2026-08-02T15:13:29.171752+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran echo resulting in Remote echo: set channel em
+[SUCCESS at 2026-08-02T15:13:54.087384+00:00 in Channel=Yap/#emberbot137-remote-console]: User=fiaguhop137(1342173566828810271) ran echo resulting in Remote echo: echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo meow
+[SUCCESS at 2026-08-02T15:13:54.547166+00:00 in Channel=Yap/#emberbot137-remote-console]: User=bobbot9000#8975(1533157532510584894) ran echo resulting in Remote echo: echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo meow
+[SUCCESS at 2026-08-02T15:13:55.057678+00:00 in Channel=Yap/#emberbot137-remote-console]: User=bobbot9000#8975(1533157532510584894) ran echo resulting in Remote echo: echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo meow
+[SUCCESS at 2026-08-02T15:13:55.387062+00:00 in Channel=Yap/#emberbot137-remote-console]: User=bobbot9000#8975(1533157532510584894) ran echo resulting in Remote echo: echo echo echo echo echo echo echo echo echo echo echo echo echo meow
+[SUCCESS at 2026-08-02T15:13:55.632078+00:00 in Channel=Yap/#emberbot137-remote-console]: User=bobbot9000#8975(1533157532510584894) ran echo resulting in Remote echo: echo echo echo echo echo echo echo echo echo echo echo meow
+[SUCCESS at 2026-08-02T15:14:00.117969+00:00 in Channel=Yap/#emberbot137-remote-console]: User=bobbot9000#8975(1533157532510584894) ran echo resulting in Remote echo: echo echo echo echo echo echo echo echo echo meow
+[SUCCESS at 2026-08-02T15:14:00.961662+00:00 in Channel=Yap/#emberbot137-remote-console]: User=bobbot9000#8975(1533157532510584894) ran echo resulting in Remote echo: echo echo echo echo echo echo echo meow
+[SUCCESS at 2026-08-02T15:14:01.071742+00:00 in Channel=Yap/#emberbot137-remote-console]: User=bobbot9000#8975(1533157532510584894) ran echo resulting in Remote echo: echo echo echo echo echo meow
+[SUCCESS at 2026-08-02T15:14:01.374496+00:00 in Channel=Yap/#emberbot137-remote-console]: User=bobbot9000#8975(1533157532510584894) ran echo resulting in Remote echo: echo echo echo meow
+[SUCCESS at 2026-08-02T15:14:01.604452+00:00 in Channel=Yap/#emberbot137-remote-console]: User=bobbot9000#8975(1533157532510584894) ran echo resulting in Remote echo: echo meow

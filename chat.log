@@ -1,0 +1,749 @@
+[2026-08-02T14:34:58.720164+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=Emberbot137#6769(1532899245005475860) | Content="spam (17)"
+[2026-08-02T14:40:29.114367+00:00] | Channel=Yap/#emberbot137-remote-console | User=fiaguhop137(1342173566828810271) | Content="reboot -c"
+[2026-08-02T14:40:29.296929+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote] Reboot flag set (-c). Will open interactive Emberbot137 Console window...`"
+[2026-08-02T14:40:34.746591+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Controller Active] Connected to 2 guild(s).
+```"
+[2026-08-02T14:40:34.970710+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+Commands: test, echo <msg>, spam <number> <msg>, stop, delay <seconds> <cmd>, set, servers, help, reboot <-c>, exit
+```"
+[2026-08-02T14:40:35.066998+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+Current Target Server: 'yap' | Target Channel: '#everyone'
+```"
+[2026-08-02T14:41:01.733155+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Warning] Unknown local command: '~echo'. Type 'help' for options.
+```"
+[2026-08-02T14:41:05.644223+00:00] | Channel=Yap/#everyone | User=Emberbot137#6769(1532899245005475860) | Content="hi"
+[2026-08-02T14:41:06.280627+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): hi
+```"
+[2026-08-02T14:41:13.202422+00:00] | Channel=Yap/#everyone | User=dragondog558(789314712990384168) | Content="hi"
+[2026-08-02T14:41:21.190121+00:00] | Channel=Yap/#everyone | User=bossman_sir(727526906161004614) | Content="https://klipy.com/gifs/kagamine-len-len-kagamine-1"
+[2026-08-02T14:41:37.143911+00:00] | Channel=Yap/#everyone | User=Emberbot137#6769(1532899245005475860) | Content="so froggo did you put on the maid outfit"
+[2026-08-02T14:41:37.295595+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): so froggo did you put on the maid outfit
+```"
+[2026-08-02T14:41:50.729725+00:00] | Channel=Yap/#everyone | User=Emberbot137#6769(1532899245005475860) | Content="is that a no"
+[2026-08-02T14:41:50.906668+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): is that a
+```"
+[2026-08-02T14:41:54.417031+00:00] | Channel=Yap/#everyone | User=bossman_sir(727526906161004614) | Content="yeah"
+[2026-08-02T14:41:57.298724+00:00] | Channel=Yap/#everyone | User=Emberbot137#6769(1532899245005475860) | Content=";("
+[2026-08-02T14:41:57.413125+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): ;(
+```"
+[2026-08-02T14:42:03.361938+00:00] | Channel=Yap/#everyone | User=bossman_sir(727526906161004614) | Content="i havent played minecraft in ages"
+[2026-08-02T14:42:04.426760+00:00] | Channel=Yap/#everyone | User=Emberbot137#6769(1532899245005475860) | Content=":sob:"
+[2026-08-02T14:42:04.640216+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): :sob:
+```"
+[2026-08-02T14:42:21.893310+00:00] | Channel=Yap/#everyone | User=bossman_sir(727526906161004614) | Content="too much school"
+[2026-08-02T14:42:29.882555+00:00] | Channel=Yap/#everyone | User=Emberbot137#6769(1532899245005475860) | Content="but its summer?"
+[2026-08-02T14:42:30.035390+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): but its summer?
+```"
+[2026-08-02T14:42:40.741987+00:00] | Channel=Yap/#everyone | User=bossman_sir(727526906161004614) | Content="my mom signed me up for summer college"
+[2026-08-02T14:42:46.494333+00:00] | Channel=Yap/#everyone | User=Emberbot137#6769(1532899245005475860) | Content="owh"
+[2026-08-02T14:42:46.649595+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): owh
+```"
+[2026-08-02T14:42:52.033818+00:00] | Channel=Yap/#everyone | User=Emberbot137#6769(1532899245005475860) | Content="why"
+[2026-08-02T14:42:52.204405+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): why
+```"
+[2026-08-02T14:42:55.119756+00:00] | Channel=Yap/#everyone | User=bossman_sir(727526906161004614) | Content="idk"
+[2026-08-02T14:42:56.083140+00:00] | Channel=Yap/#everyone | User=Emberbot137#6769(1532899245005475860) | Content="arent you 16"
+[2026-08-02T14:42:56.291027+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): arent you 16
+```"
+[2026-08-02T14:43:01.084005+00:00] | Channel=Yap/#everyone | User=Emberbot137#6769(1532899245005475860) | Content="why r u in college"
+[2026-08-02T14:43:01.280516+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): why r u in college
+```"
+[2026-08-02T14:43:01.526939+00:00] | Channel=Yap/#everyone | User=dragondog558(789314712990384168) | Content="my scool starts tmrw :("
+[2026-08-02T14:43:01.724756+00:00] | Channel=Yap/#everyone | User=bossman_sir(727526906161004614) | Content="so i can be sucsesful and stuff"
+[2026-08-02T14:43:09.215957+00:00] | Channel=Yap/#everyone | User=Emberbot137#6769(1532899245005475860) | Content="l"
+[2026-08-02T14:43:09.624861+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): l
+```"
+[2026-08-02T14:43:09.817929+00:00] | Channel=Yap/#everyone | User=bossman_sir(727526906161004614) | Content="yeah"
+[2026-08-02T14:43:34.416257+00:00] | Channel=Yap/#everyone | User=bossman_sir(727526906161004614) | Content="my mom thinks this way i can get like a degree and a high paying job as soon as im 18"
+[2026-08-02T14:43:38.739224+00:00] | Channel=Yap/#everyone | User=Emberbot137#6769(1532899245005475860) | Content="when u turn 18 will you adopt me"
+[2026-08-02T14:43:38.888957+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): when u turn 18 will you adopt me
+```"
+[2026-08-02T14:44:01.579534+00:00] | Channel=Yap/#everyone | User=dragondog558(789314712990384168) | Content="throwback to that one time fia said they wanted to marry you"
+[2026-08-02T14:44:07.762374+00:00] | Channel=Yap/#everyone | User=dragondog558(789314712990384168) | Content="and also said they love twi 😭"
+[2026-08-02T14:44:12.548298+00:00] | Channel=Yap/#everyone | User=bossman_sir(727526906161004614) | Content="me?!?"
+[2026-08-02T14:44:14.781017+00:00] | Channel=Yap/#everyone | User=Emberbot137#6769(1532899245005475860) | Content="ITS A FIGURE OF SPEECH"
+[2026-08-02T14:44:14.896108+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): ITS A FIGURE OF SPEECH
+```"
+[2026-08-02T14:44:22.998714+00:00] | Channel=Yap/#everyone | User=dragondog558(789314712990384168) | Content="yes you"
+[2026-08-02T14:44:28.304286+00:00] | Channel=Yap/#everyone | User=dragondog558(789314712990384168) | Content="okay bro"
+[2026-08-02T14:44:29.048846+00:00] | Channel=Yap/#everyone | User=dragondog558(789314712990384168) | Content="okay"
+[2026-08-02T14:44:40.657820+00:00] | Channel=Yap/#everyone | User=Emberbot137#6769(1532899245005475860) | Content="and i do love twi"
+[2026-08-02T14:44:40.919562+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): and i do love twi
+```"
+[2026-08-02T14:44:50.076300+00:00] | Channel=Yap/#everyone | User=bossman_sir(727526906161004614) | Content="https://giphy.com/gifs/i-saw-that-needmyownmiku-needmyonmiku-FpR8ufNaglFU1WwzKs"
+[2026-08-02T14:44:56.312804+00:00] | Channel=Yap/#everyone | User=dragondog558(789314712990384168) | Content="https://klipy.com/gifs/birthday-birthday-wishes-12"
+[2026-08-02T14:45:03.824884+00:00] | Channel=Yap/#everyone | User=dragondog558(789314712990384168) | Content="wha-"
+[2026-08-02T14:45:05.045838+00:00] | Channel=Yap/#everyone | User=dragondog558(789314712990384168) | Content="wrong gif"
+[2026-08-02T14:45:11.115550+00:00] | Channel=Yap/#everyone | User=dragondog558(789314712990384168) | Content="https://giphy.com/gifs/i-saw-that-needmyownmiku-needmyonmiku-FpR8ufNaglFU1WwzKs"
+[2026-08-02T14:45:20.382754+00:00] | Channel=Yap/#everyone | User=dragondog558(789314712990384168) | Content="OMG THERES A SEARCH BAR FOR FAVORITE GIFS NOW"
+[2026-08-02T14:45:22.616657+00:00] | Channel=Yap/#everyone | User=dragondog558(789314712990384168) | Content="IM SAVED"
+[2026-08-02T14:45:25.509720+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Warning] Unknown local command: 'lol'. Type 'help' for options.
+```"
+[2026-08-02T14:45:28.368904+00:00] | Channel=Yap/#everyone | User=bossman_sir(727526906161004614) | Content="YES ITS SO PEAK"
+[2026-08-02T14:45:29.007450+00:00] | Channel=Yap/#everyone | User=Emberbot137#6769(1532899245005475860) | Content="lol"
+[2026-08-02T14:45:29.196234+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): lol
+```"
+[2026-08-02T14:45:31.669486+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+--- Available Console Commands ---
+• test                                     - Send diagnostic report to target(s)
+• echo <msg>                               - Send message to target(s)
+• spam <number> <msg>                      - Send repeated messages to target(s)
+• delay <secs> <cmd>                       - Execute a command after a delay
+• stop                                     - Halt all active background/delayed tasks
+• set <server|channel> <name|all>          - Target specific server/channel or all
+• servers                                  - List connected servers and channels
+• reboot <-c>                              - Hard reboot, git pull, and restart (or open console)
+• help                                     - Show this help menu
+• exit                                     - Shut down the bot
+----------------------------------
+```"
+[2026-08-02T14:45:34.493738+00:00] | Channel=Yap/#everyone | User=Emberbot137#6769(1532899245005475860) | Content="```markdown
+ = Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 35ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrator```"
+[2026-08-02T14:45:35.078492+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Executed test diagnostics across 1 target(s).
+```"
+[2026-08-02T14:45:35.082577+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+= Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 35ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrat
+```"
+[2026-08-02T14:45:44.794281+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active Targets] Server: yap | Channel: #emberbot137-remote-console
+```"
+[2026-08-02T14:45:44.896291+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console] Target channel updated to: #emberbot137-remote-console
+```"
+[2026-08-02T14:45:50.200607+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="echo test"
+[2026-08-02T14:45:50.293574+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="test"
+[2026-08-02T14:45:50.399759+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): echo test
+```"
+[2026-08-02T14:45:50.488983+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```markdown
+ = Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 35ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrator```"
+[2026-08-02T14:45:50.647184+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Executed test diagnostics across 1 target(s).`"
+[2026-08-02T14:45:52.288002+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+= Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 35ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrat
+```"
+[2026-08-02T14:45:52.297312+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T14:45:55.418387+00:00] | Channel=Yap/#everyone | User=dragondog558(789314712990384168) | Content="https://tenor.com/view/sherma-silk-song-hollow-knight-lyrics-music-gif-103910113041076620"
+[2026-08-02T14:46:10.116614+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="wait"
+[2026-08-02T14:46:10.227567+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): wait
+```"
+[2026-08-02T14:46:25.243610+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Initiated background spam task across 1 target(s).
+```"
+[2026-08-02T14:46:25.244304+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="test"
+[2026-08-02T14:46:25.529962+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```markdown
+ = Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 38ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrator```"
+[2026-08-02T14:46:25.530202+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="test"
+[2026-08-02T14:46:25.662435+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```markdown
+ = Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 38ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrator```"
+[2026-08-02T14:46:26.516013+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="test"
+[2026-08-02T14:46:29.267153+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Executed test diagnostics across 1 target(s).`"
+[2026-08-02T14:46:29.331378+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+= Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 38ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrat
+```"
+[2026-08-02T14:46:29.334268+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Executed test diagnostics across 1 target(s).`"
+[2026-08-02T14:46:30.125372+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="test"
+[2026-08-02T14:46:31.119906+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+= Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 38ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrat
+```"
+[2026-08-02T14:46:32.130109+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```markdown
+ = Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 38ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrator``` (2)"
+[2026-08-02T14:46:34.183784+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="test"
+[2026-08-02T14:46:37.206434+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Executed test diagnostics across 1 target(s).`"
+[2026-08-02T14:46:37.210274+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```markdown
+ = Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 38ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrator```"
+[2026-08-02T14:46:37.223689+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+= Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 38ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrat
+```"
+[2026-08-02T14:46:38.128112+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Executed test diagnostics across 1 target(s).`"
+[2026-08-02T14:46:39.102022+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+= Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 38ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrat
+```"
+[2026-08-02T14:46:40.125582+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Executed test diagnostics across 1 target(s).`"
+[2026-08-02T14:46:41.142374+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="test"
+[2026-08-02T14:46:42.085127+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+= Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 38ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrat
+```"
+[2026-08-02T14:46:45.258504+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```markdown
+ = Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 38ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrator```"
+[2026-08-02T14:46:45.276553+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="test"
+[2026-08-02T14:46:45.445448+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```markdown
+ = Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 31ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrator```"
+[2026-08-02T14:46:46.330462+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="test"
+[2026-08-02T14:46:48.232182+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+= Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 31ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrat
+```"
+[2026-08-02T14:46:48.232569+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="test"
+[2026-08-02T14:46:49.091505+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Executed test diagnostics across 1 target(s).` (2)"
+[2026-08-02T14:46:51.438859+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+= Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 38ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrat
+```"
+[2026-08-02T14:47:00.701306+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console] Target channel updated to: #everyone
+```"
+[2026-08-02T14:47:00.783277+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active Targets] Server: yap | Channel: #everyone
+```"
+[2026-08-02T14:47:01.392080+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```markdown
+ = Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 31ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrator``` (2)"
+[2026-08-02T14:47:01.478302+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Cancelled 1 active task(s).
+```"
+[2026-08-02T14:47:01.956772+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Executed test diagnostics across 1 target(s).`"
+[2026-08-02T14:47:03.769298+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+= Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 31ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrat
+``` (2)"
+[2026-08-02T14:47:04.853805+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Executed test diagnostics across 1 target(s).`"
+[2026-08-02T14:47:09.115318+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Active Targets] Server: yap | Channel: #remote-controlled-bob
+```"
+[2026-08-02T14:47:09.115737+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console] Target channel updated to: #remote-controlled-bob
+```"
+[2026-08-02T14:47:12.846191+00:00] | Channel=Yap/#remote-controlled-bob | User=Emberbot137#6769(1532899245005475860) | Content="echo hi"
+[2026-08-02T14:47:13.055471+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Success] Echoed message to 1 target(s): echo hi
+```"
+[2026-08-02T15:00:57.443554+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Controller Active] Connected to 2 guild(s).
+```"
+[2026-08-02T15:00:57.569083+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+Current Target Server: 'yap' | Target Channel: '#everyone'
+```"
+[2026-08-02T15:00:57.780179+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+Commands: test, echo <msg>, spam <number> <msg>, stop, delay <seconds> <cmd>, set, servers, help, reboot <-c>, exit
+```"
+[2026-08-02T15:00:58.082222+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console] Reboot flag set. Initiating standard background restart...
+```"
+[2026-08-02T15:01:03.939959+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+[Console Controller Active] Connected to 2 guild(s).
+```"
+[2026-08-02T15:01:04.476232+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+Commands: test, echo <msg>, spam <number> <msg>, stop, delay <seconds> <cmd>, set, servers, help, reboot <-c>, exit
+```"
+[2026-08-02T15:01:04.477793+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+Current Target Server: 'yap' | Target Channel: '#everyone'
+```"
+[2026-08-02T15:01:18.604902+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="```text
+[Console Controller Active] Connected to 1 guild(s).
+```"
+[2026-08-02T15:01:18.834120+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="```text
+Current Target Server: 'all' | Target Channel: '#all'
+```"
+[2026-08-02T15:01:19.171233+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="```text
+Commands: test, echo <msg>, spam <number> <msg>, stop, delay <seconds> <cmd>, set, servers, help, reboot, exit
+```"
+[2026-08-02T15:01:21.094365+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="```text
+[Console] Reboot flag set. Will reboot now.
+```"
+[2026-08-02T15:01:26.518541+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="```text
+[Console Controller Active] Connected to 1 guild(s).
+```"
+[2026-08-02T15:01:26.712875+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="```text
+Current Target Server: 'all' | Target Channel: '#all'
+```"
+[2026-08-02T15:01:26.715573+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="```text
+Commands: test, echo <msg>, spam <number> <msg>, stop, delay <seconds> <cmd>, set, servers, help, reboot, exit
+```"
+[2026-08-02T15:11:13.246065+00:00] | Channel=Yap/#emberbot137-remote-console | User=fiaguhop137(1342173566828810271) | Content="test"
+[2026-08-02T15:11:13.526278+00:00] | Channel=Yap/#everyone | User=Emberbot137#6769(1532899245005475860) | Content="```markdown
+ = Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 54ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrator```"
+[2026-08-02T15:11:13.786889+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```text
+= Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 54ms
+ - Token status: loaded
+ - Connected Servers: 2 servers connected. Run ~servers to see more
+ - Permissions: Administrat
+```"
+[2026-08-02T15:11:13.949578+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Executed test diagnostics across 1 target(s).`"
+[2026-08-02T15:11:42.277919+00:00] | Channel=Yap/#remote-controlled-bob | User=dragondog558(789314712990384168) | Content="https://klipy.com/gifs/okcat-thumbs-up"
+[2026-08-02T15:11:48.351556+00:00] | Channel=Yap/#remote-controlled-bob | User=dragondog558(789314712990384168) | Content="echo https://klipy.com/gifs/okcat-thumbs-up"
+[2026-08-02T15:11:48.591374+00:00] | Channel=Yap/#emberbot137-remote-console | User=bobbot9000#8975(1533157532510584894) | Content="https://klipy.com/gifs/okcat-thumbs-up"
+[2026-08-02T15:11:48.764321+00:00] | Channel=Yap/#everyone | User=bobbot9000#8975(1533157532510584894) | Content="https://klipy.com/gifs/okcat-thumbs-up"
+[2026-08-02T15:11:49.308018+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="https://klipy.com/gifs/okcat-thumbs-up"
+[2026-08-02T15:11:49.417337+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Remote Success] Echoed to 3 target(s).`"
+[2026-08-02T15:12:04.110243+00:00] | Channel=Yap/#remote-controlled-bob | User=fiaguhop137(1342173566828810271) | Content="lol"
+[2026-08-02T15:12:12.311741+00:00] | Channel=Yap/#remote-controlled-bob | User=fiaguhop137(1342173566828810271) | Content="set channel all"
+[2026-08-02T15:12:13.177834+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Remote] Target channel 'remote-controlled-bob' is restricted. Defaulted channel target to: #all`"
+[2026-08-02T15:12:13.314498+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Active Targets] Server: all | Channel: #all`"
+[2026-08-02T15:12:34.995917+00:00] | Channel=Yap/#remote-controlled-bob | User=fiaguhop137(1342173566828810271) | Content="echo iam bob"
+[2026-08-02T15:12:35.207308+00:00] | Channel=Yap/#emberbot137-remote-console | User=bobbot9000#8975(1533157532510584894) | Content="iam bob"
+[2026-08-02T15:12:35.350366+00:00] | Channel=Yap/#everyone | User=bobbot9000#8975(1533157532510584894) | Content="iam bob"
+[2026-08-02T15:12:35.506365+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="iam bob"
+[2026-08-02T15:12:35.698077+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Remote Success] Echoed to 3 target(s).`"
+[2026-08-02T15:12:43.726792+00:00] | Channel=Yap/#remote-controlled-bob | User=fiaguhop137(1342173566828810271) | Content="servers"
+[2026-08-02T15:12:43.836226+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="```markdown
+# Connected Servers
+• Yap
+```"
+[2026-08-02T15:12:44.858481+00:00] | Channel=Yap/#everyone | User=dragondog558(789314712990384168) | Content="fia stop screwing with my bot"
+[2026-08-02T15:12:55.763019+00:00] | Channel=Yap/#everyone | User=fiaguhop137(1342173566828810271) | Content="😭"
+[2026-08-02T15:13:18.902284+00:00] | Channel=Yap/#emberbot137-remote-console | User=fiaguhop137(1342173566828810271) | Content="set channel re"
+[2026-08-02T15:13:19.321403+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote] Target channel updated to: #remote-controlled-bob`"
+[2026-08-02T15:13:19.523938+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Active Targets] Server: yap | Channel: #remote-controlled-bob`"
+[2026-08-02T15:13:28.669779+00:00] | Channel=Yap/#emberbot137-remote-console | User=fiaguhop137(1342173566828810271) | Content="echo set channel em"
+[2026-08-02T15:13:28.882608+00:00] | Channel=Yap/#remote-controlled-bob | User=Emberbot137#6769(1532899245005475860) | Content="set channel em"
+[2026-08-02T15:13:29.079264+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Remote] Target channel updated to: #emberbot137-remote-console`"
+[2026-08-02T15:13:29.125459+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:13:29.269324+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Active Targets] Server: all | Channel: #emberbot137-remote-console`"
+[2026-08-02T15:13:53.426984+00:00] | Channel=Yap/#emberbot137-remote-console | User=fiaguhop137(1342173566828810271) | Content="echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo meow"
+[2026-08-02T15:13:53.910700+00:00] | Channel=Yap/#remote-controlled-bob | User=Emberbot137#6769(1532899245005475860) | Content="echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo meow"
+[2026-08-02T15:13:54.033274+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:13:54.081047+00:00] | Channel=Yap/#emberbot137-remote-console | User=bobbot9000#8975(1533157532510584894) | Content="echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo meow"
+[2026-08-02T15:13:54.229178+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:13:54.281884+00:00] | Channel=Yap/#remote-controlled-bob | User=Emberbot137#6769(1532899245005475860) | Content="echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo meow"
+[2026-08-02T15:13:54.547428+00:00] | Channel=Yap/#emberbot137-remote-console | User=bobbot9000#8975(1533157532510584894) | Content="echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo meow"
+[2026-08-02T15:13:54.548177+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:13:54.759101+00:00] | Channel=Yap/#remote-controlled-bob | User=Emberbot137#6769(1532899245005475860) | Content="echo echo echo echo echo echo echo echo echo echo echo echo echo echo echo meow"
+[2026-08-02T15:13:54.790333+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:13:55.018548+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:13:55.048526+00:00] | Channel=Yap/#emberbot137-remote-console | User=bobbot9000#8975(1533157532510584894) | Content="echo echo echo echo echo echo echo echo echo echo echo echo echo echo meow"
+[2026-08-02T15:13:55.191602+00:00] | Channel=Yap/#remote-controlled-bob | User=Emberbot137#6769(1532899245005475860) | Content="echo echo echo echo echo echo echo echo echo echo echo echo echo meow"
+[2026-08-02T15:13:55.276375+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:13:55.329364+00:00] | Channel=Yap/#emberbot137-remote-console | User=bobbot9000#8975(1533157532510584894) | Content="echo echo echo echo echo echo echo echo echo echo echo echo meow"
+[2026-08-02T15:13:55.388315+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:13:55.435083+00:00] | Channel=Yap/#remote-controlled-bob | User=Emberbot137#6769(1532899245005475860) | Content="echo echo echo echo echo echo echo echo echo echo echo meow"
+[2026-08-02T15:13:55.611180+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:13:55.611398+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:13:55.671894+00:00] | Channel=Yap/#emberbot137-remote-console | User=bobbot9000#8975(1533157532510584894) | Content="echo echo echo echo echo echo echo echo echo echo meow"
+[2026-08-02T15:13:55.815951+00:00] | Channel=Yap/#remote-controlled-bob | User=Emberbot137#6769(1532899245005475860) | Content="echo echo echo echo echo echo echo echo echo meow"
+[2026-08-02T15:13:55.826449+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:13:56.037957+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:13:56.048211+00:00] | Channel=Yap/#emberbot137-remote-console | User=bobbot9000#8975(1533157532510584894) | Content="echo echo echo echo echo echo echo echo meow"
+[2026-08-02T15:13:56.173197+00:00] | Channel=Yap/#remote-controlled-bob | User=Emberbot137#6769(1532899245005475860) | Content="echo echo echo echo echo echo echo meow"
+[2026-08-02T15:14:00.338632+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:14:00.346385+00:00] | Channel=Yap/#emberbot137-remote-console | User=bobbot9000#8975(1533157532510584894) | Content="echo echo echo echo echo echo meow"
+[2026-08-02T15:14:00.616890+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:14:00.937204+00:00] | Channel=Yap/#remote-controlled-bob | User=Emberbot137#6769(1532899245005475860) | Content="echo echo echo echo echo meow"
+[2026-08-02T15:14:00.937500+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Echoed to 1 target(s).` (2)"
+[2026-08-02T15:14:01.069940+00:00] | Channel=Yap/#emberbot137-remote-console | User=bobbot9000#8975(1533157532510584894) | Content="echo echo echo echo meow"
+[2026-08-02T15:14:01.196671+00:00] | Channel=Yap/#remote-controlled-bob | User=Emberbot137#6769(1532899245005475860) | Content="echo echo echo meow"
+[2026-08-02T15:14:01.196767+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:14:01.290075+00:00] | Channel=Yap/#emberbot137-remote-console | User=bobbot9000#8975(1533157532510584894) | Content="echo echo meow"
+[2026-08-02T15:14:01.360998+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:14:01.401807+00:00] | Channel=Yap/#remote-controlled-bob | User=Emberbot137#6769(1532899245005475860) | Content="echo meow"
+[2026-08-02T15:14:01.497377+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:14:01.504858+00:00] | Channel=Yap/#emberbot137-remote-console | User=bobbot9000#8975(1533157532510584894) | Content="meow"
+[2026-08-02T15:14:01.567973+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:14:01.663089+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Remote Success] Echoed to 1 target(s).`"
+[2026-08-02T15:14:21.490279+00:00] | Channel=Yap/#remote-controlled-bob | User=fiaguhop137(1342173566828810271) | Content="lol"
+[2026-08-02T15:14:51.735404+00:00] | Channel=Yap/#remote-controlled-bob | User=fiaguhop137(1342173566828810271) | Content="set channel ev"
+[2026-08-02T15:14:51.902561+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Remote] Target channel updated to: #everyone`"
+[2026-08-02T15:14:52.161544+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Active Targets] Server: all | Channel: #everyone`"
+[2026-08-02T15:14:57.171669+00:00] | Channel=Yap/#remote-controlled-bob | User=fiaguhop137(1342173566828810271) | Content="spam 400 <@789314712990384168>"
+[2026-08-02T15:14:57.380047+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Remote Success] Background spam task started across 1 target(s).`"
+[2026-08-02T15:14:57.549731+00:00] | Channel=Yap/#everyone | User=bobbot9000#8975(1533157532510584894) | Content="<@789314712990384168> (179)"
+[2026-08-02T15:18:00.067704+00:00] | Channel=Yap/#everyone | User=dragondog558(789314712990384168) | Content="f off"
+[2026-08-02T15:18:00.985234+00:00] | Channel=Yap/#everyone | User=bobbot9000#8975(1533157532510584894) | Content="<@789314712990384168> (3)"
+[2026-08-02T15:18:02.686256+00:00] | Channel=Yap/#remote-controlled-bob | User=dragondog558(789314712990384168) | Content="stop"
+[2026-08-02T15:18:03.216037+00:00] | Channel=Yap/#remote-controlled-bob | User=bobbot9000#8975(1533157532510584894) | Content="`[Remote Success] Halted 1 active task(s).`"
+[2026-08-02T15:18:32.877635+00:00] | Channel=Yap/#remote-controlled-bob | User=dragondog558(789314712990384168) | Content="?kick fiaguhop137"
+[2026-08-02T15:18:33.058115+00:00] | Channel=Yap/#remote-controlled-bob | User=Dyno#3861(155149108183695360) | Content=""
+[2026-08-02T15:18:46.985984+00:00] | Channel=Yap/#remote-controlled-bob | User=dragondog558(789314712990384168) | Content="if you keep spamming me ill kick emberbot"
+[2026-08-02T15:19:27.453925+00:00] | Channel=Yap/#remote-controlled-bob | User=fiaguhop137(1342173566828810271) | Content="noooooooooooooooo"
+[2026-08-02T15:19:45.664523+00:00] | Channel=Yap/#everyone | User=fiaguhop137(1342173566828810271) | Content="?purge bots 30"
+[2026-08-02T15:20:06.218046+00:00] | Channel=Yap/#everyone | User=dragondog558(789314712990384168) | Content="?purge bots 300"
+[2026-08-02T15:20:06.283880+00:00] | Channel=Yap/#everyone | User=bossman_sir(727526906161004614) | Content="https://tenor.com/view/captain-america-marvel-avengers-gif-14328153"
+[2026-08-02T15:20:13.900497+00:00] | Channel=Yap/#everyone | User=dragondog558(789314712990384168) | Content="?purge bots 100"
+[2026-08-02T15:22:09.541761+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="@everyone PLEASE BEWARE people with pronouns saying "DM me (insert word) for a surprise." Do not DM them the word. The "surprise" is that you've been "infected," forced to take that same pronoun and use it to infect more people, spreading the "DM me (insert word) for a surprise" infection further."
+[2026-08-02T15:22:38.934897+00:00] | Channel=Rainbows and Clouds/#rainbows | User=fiaguhop137(1342173566828810271) | Content="meow"
+[2026-08-02T15:22:42.126755+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="hi"
+[2026-08-02T15:22:45.183503+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="why did you delete that"
+[2026-08-02T15:22:50.116716+00:00] | Channel=Rainbows and Clouds/#rainbows | User=fiaguhop137(1342173566828810271) | Content="delete what?"
+[2026-08-02T15:22:59.109036+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="nvm i'll retype it"
+[2026-08-02T15:23:54.441876+00:00] | Channel=Rainbows and Clouds/#rainbows | User=fiaguhop137(1342173566828810271) | Content="dm me the word frog for a suprise"
+[2026-08-02T15:24:16.165983+00:00] | Channel=Rainbows and Clouds/#rainbows | User=floofykitty_58560(1189748813200638027) | Content="Hi"
+[2026-08-02T15:24:36.508592+00:00] | Channel=Rainbows and Clouds/#rainbows | User=fiaguhop137(1342173566828810271) | Content="hi"
+[2026-08-02T15:24:51.630532+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="@everyone LISTEN UP! DO NOT DM PEOPLE A WORD IF THEIR PRONOUNS TELL YOU TO DO SO! PLENTY OF PEOPLE HAVE PRONOUNS OR BIOS ALONG THE LINES OF "DM ME THE WORD (BLANK) FOR A SURPRISE". THEY ARE TRYING TO INFECT YOU BY MAKING YOU HAVE TO HAVE THOSE EXACT PRONOUNS AND SPREAD THEM FURTHER, OFTEN FOR AN ABSURDLY LONG TIME LIKE 2 MONTHS OR SMTH. <@1342173566828810271> AND <@1486168626821075056> ARE GUILTY OF SPREADING THIS INFECTION. I WILL NOT BE SILENCED. IF THIS MESSAGE GETS DELETED I HAVE COPIED IT SO I CAN QUICKLY REPOST IT."
+[2026-08-02T15:24:54.294230+00:00] | Channel=Yap/#emberbot137-remote-console | User=fiaguhop137(1342173566828810271) | Content="servers"
+[2026-08-02T15:24:54.733433+00:00] | Channel=Yap/#emberbot137-remote-console | User=Emberbot137#6769(1532899245005475860) | Content="```markdown
+= Connected Servers
+ - Yap(1463624406470230232)
+  ↳ Channels: emberbot137-remote-console, plasma, plasma-dragon, plasma-frog, plasma-twi, plasma-dragon-twi, plasma-dragon-frog, everyone, remote-controlled-bob
+ - Rainbows and Clouds(1511895185007579206)
+  ↳ Channels: rainbows, clouds, info
+```"
+[2026-08-02T15:26:54.313521+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="EVERYONE LISTEN UP! DO NOT DM PEOPLE A WORD IF THEIR PRONOUNS TELL YOU TO DO SO! PLENTY OF PEOPLE HAVE PRONOUNS OR BIOS ALONG THE LINES OF "DM ME THE WORD (BLANK) FOR A SURPRISE". THEY ARE TRYING TO INFECT YOU BY MAKING YOU HAVE TO HAVE THOSE EXACT PRONOUNS AND SPREAD THEM FURTHER, OFTEN FOR AN ABSURDLY LONG TIME LIKE 2 MONTHS OR SMTH. I WILL NOT BE SILENCED. IF THIS MESSAGE GETS DELETED I HAVE COPIED IT SO I CAN QUICKLY REPOST IT."
+[2026-08-02T15:27:40.431247+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="@everyone"
+[2026-08-02T15:27:43.620885+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="see"
+[2026-08-02T15:27:49.691042+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="before dea deletes it again"
+[2026-08-02T15:27:51.713838+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="@everyone"
+[2026-08-02T15:27:54.165809+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="see"
+[2026-08-02T15:27:54.811447+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="read"
+[2026-08-02T15:27:56.400102+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="and stuff"
+[2026-08-02T15:27:57.684588+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="EVERYONE LISTEN UP! DO NOT DM PEOPLE A WORD IF THEIR PRONOUNS TELL YOU TO DO SO! PLENTY OF PEOPLE HAVE PRONOUNS OR BIOS ALONG THE LINES OF "DM ME THE WORD (BLANK) FOR A SURPRISE". THEY ARE TRYING TO INFECT YOU BY MAKING YOU HAVE TO HAVE THOSE EXACT PRONOUNS AND SPREAD THEM FURTHER, OFTEN FOR AN ABSURDLY LONG TIME LIKE 2 MONTHS OR SMTH. I WILL NOT BE SILENCED. IF THIS MESSAGE GETS DELETED I HAVE COPIED IT SO I CAN QUICKLY REPOST IT."
+[2026-08-02T15:28:39.856951+00:00] | Channel=Rainbows and Clouds/#info | User=pludunn(1512533966001930254) | Content="EVERYONE LISTEN UP! DO NOT DM PEOPLE A WORD IF THEIR PRONOUNS TELL YOU TO DO SO! PLENTY OF PEOPLE HAVE PRONOUNS OR BIOS ALONG THE LINES OF "DM ME THE WORD (BLANK) FOR A SURPRISE". THEY ARE TRYING TO INFECT YOU BY MAKING YOU HAVE TO HAVE THOSE EXACT PRONOUNS AND SPREAD THEM FURTHER, OFTEN FOR AN ABSURDLY LONG TIME LIKE 2 MONTHS OR SMTH. I WILL NOT BE SILENCED. IF THIS MESSAGE GETS DELETED I HAVE COPIED IT SO I CAN QUICKLY REPOST IT."
+[2026-08-02T15:28:48.477601+00:00] | Channel=Rainbows and Clouds/#voice chat | User=pludunn(1512533966001930254) | Content="EVERYONE LISTEN UP! DO NOT DM PEOPLE A WORD IF THEIR PRONOUNS TELL YOU TO DO SO! PLENTY OF PEOPLE HAVE PRONOUNS OR BIOS ALONG THE LINES OF "DM ME THE WORD (BLANK) FOR A SURPRISE". THEY ARE TRYING TO INFECT YOU BY MAKING YOU HAVE TO HAVE THOSE EXACT PRONOUNS AND SPREAD THEM FURTHER, OFTEN FOR AN ABSURDLY LONG TIME LIKE 2 MONTHS OR SMTH. I WILL NOT BE SILENCED. IF THIS MESSAGE GETS DELETED I HAVE COPIED IT SO I CAN QUICKLY REPOST IT."
+[2026-08-02T15:30:24.643935+00:00] | Channel=Rainbows and Clouds/#rainbows | User=coolkidinawheelchair(1486168626821075056) | Content="<@1512533966001930254> relax"
+[2026-08-02T15:30:53.718436+00:00] | Channel=Rainbows and Clouds/#rainbows | User=coolkidinawheelchair(1486168626821075056) | Content="It’s just a joke"
+[2026-08-02T15:30:57.489779+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="@everyone LISTEN UP! DO NOT DM PEOPLE A WORD IF THEIR PRONOUNS TELL YOU TO DO SO! PLENTY OF PEOPLE HAVE PRONOUNS OR BIOS ALONG THE LINES OF "DM ME THE WORD (BLANK) FOR A SURPRISE". THEY ARE TRYING TO INFECT YOU BY MAKING YOU HAVE TO HAVE THOSE EXACT PRONOUNS AND SPREAD THEM FURTHER, OFTEN FOR AN ABSURDLY LONG TIME LIKE 2 MONTHS OR SMTH. <@1342173566828810271> AND <@1486168626821075056> ARE GUILTY OF SPREADING THIS INFECTION. I WILL NOT BE SILENCED. IF THIS MESSAGE GETS DELETED I HAVE COPIED IT SO I CAN QUICKLY REPOST IT. (3)"
+[2026-08-02T15:31:49.946680+00:00] | Channel=Rainbows and Clouds/#rainbows | User=fiaguhop137(1342173566828810271) | Content="i just realized i dont have a mic"
+[2026-08-02T15:31:54.427028+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="@everyone LISTEN UP! DO NOT DM PEOPLE A WORD IF THEIR PRONOUNS TELL YOU TO DO SO! PLENTY OF PEOPLE HAVE PRONOUNS OR BIOS ALONG THE LINES OF "DM ME THE WORD (BLANK) FOR A SURPRISE". THEY ARE TRYING TO INFECT YOU BY MAKING YOU HAVE TO HAVE THOSE EXACT PRONOUNS AND SPREAD THEM FURTHER, OFTEN FOR AN ABSURDLY LONG TIME LIKE 2 MONTHS OR SMTH. <@1342173566828810271> AND <@1486168626821075056> ARE GUILTY OF SPREADING THIS INFECTION. I WILL NOT BE SILENCED. IF THIS MESSAGE GETS DELETED I HAVE COPIED IT SO I CAN QUICKLY REPOST IT."
+[2026-08-02T15:32:17.891279+00:00] | Channel=Rainbows and Clouds/#rainbows | User=coolkidinawheelchair(1486168626821075056) | Content="It’s not because we’re trying to silence anyone"
+[2026-08-02T15:32:40.533654+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="@everyone"
+[2026-08-02T15:32:46.178884+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="hhm"
+[2026-08-02T15:32:48.387333+00:00] | Channel=Rainbows and Clouds/#rainbows | User=coolkidinawheelchair(1486168626821075056) | Content="You don’t have to do it"
+[2026-08-02T15:33:32.152101+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="@everyone"
+[2026-08-02T15:33:36.337931+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="there's an infection"
+[2026-08-02T15:33:42.702082+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="dm me the word whatever for a surprise"
+[2026-08-02T15:33:45.894300+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="don't dm them that word"
+[2026-08-02T15:33:51.125994+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="@everyone"
+[2026-08-02T15:33:52.530196+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="trust me"
+[2026-08-02T15:33:54.866615+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="do not do it"
+[2026-08-02T15:33:56.996602+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="it's not worth it"
+[2026-08-02T15:34:07.330482+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="they will force you to collect that same bio/pronoun"
+[2026-08-02T15:34:10.653200+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="and it will spread further"
+[2026-08-02T15:34:12.237844+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="@everyone"
+[2026-08-02T15:34:13.859333+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="understand"
+[2026-08-02T15:34:15.318830+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="?"
+[2026-08-02T15:34:17.869746+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="@everyone"
+[2026-08-02T15:34:20.106254+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="do not do it"
+[2026-08-02T15:34:30.136019+00:00] | Channel=Rainbows and Clouds/#rainbows | User=coolkidinawheelchair(1486168626821075056) | Content="?mute <@1512533966001930254> 5m spam"
+[2026-08-02T15:34:30.649916+00:00] | Channel=Rainbows and Clouds/#rainbows | User=Dyno#3861(155149108183695360) | Content=""
+[2026-08-02T15:34:46.304872+00:00] | Channel=Rainbows and Clouds/#rainbows | User=fiaguhop137(1342173566828810271) | Content="?purge user 10 <@1512533966001930254> (2)"
+[2026-08-02T15:35:07.391467+00:00] | Channel=Rainbows and Clouds/#rainbows | User=fiaguhop137(1342173566828810271) | Content="?unmute plu"
+[2026-08-02T15:35:07.816473+00:00] | Channel=Rainbows and Clouds/#rainbows | User=Dyno#3861(155149108183695360) | Content=""
+[2026-08-02T15:35:39.425305+00:00] | Channel=Rainbows and Clouds/#rainbows | User=coolkidinawheelchair(1486168626821075056) | Content="Why."
+[2026-08-02T15:36:03.426603+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="lol dea what did you do"
+[2026-08-02T15:36:04.984186+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="like"
+[2026-08-02T15:36:06.128048+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="test"
+[2026-08-02T15:36:07.773782+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="testest"
+[2026-08-02T15:36:10.941207+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="testestest (2)"
+[2026-08-02T15:36:19.391175+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="teststetsetsetsetetttttttttttttttttttttttttttttttttttttttttttttttt"
+[2026-08-02T15:36:20.554385+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="hmm"
+[2026-08-02T15:36:26.277060+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="i think you blocked long messages"
+[2026-08-02T15:37:00.863358+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+[2026-08-02T15:37:08.690527+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+[2026-08-02T15:37:16.547249+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="hmm"
+[2026-08-02T15:37:17.779036+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="yeah"
+[2026-08-02T15:37:26.831371+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="ok"
+[2026-08-02T15:44:36.940321+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=fiaguhop137(1342173566828810271) | Content="$test"
+[2026-08-02T15:44:37.321076+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=Meow Bot <UwU>#0058(1531796145800478771) | Content="```markdown
+# Diagnostic Report
+-----------------------------------------
+• Status: Online and operational
+• Host Machine: plasmadmin-xps-8910(firebot)
+• Discord Server: Gay Programmers (Bot Testing) (1533293232597893130)
+• Latency: 30ms
+• Environment (.env): Loaded
+• Connected Guilds: 1
+• Core Permissions: Administrator
+-----------------------------------------
+```"
+[2026-08-02T15:45:26.987052+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=fiaguhop137(1342173566828810271) | Content="Ojai"
+[2026-08-02T15:45:31.246905+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=fiaguhop137(1342173566828810271) | Content="i added then"
+[2026-08-02T15:45:39.233929+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=fiaguhop137(1342173566828810271) | Content="my autocorrect is high"
+[2026-08-02T15:47:25.515494+00:00] | Channel=Yap/#remote-controlled-bob | User=twillight_no(1292531498695524470) | Content="HA"
+[2026-08-02T15:52:46.391132+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&help (3)"
+[2026-08-02T15:55:46.614989+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&echo general hey"
+[2026-08-02T15:55:53.610816+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&echo general what"
+[2026-08-02T15:56:02.557823+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&say general fuck"
+[2026-08-02T15:56:02.619701+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="fuck"
+[2026-08-02T15:56:04.417833+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="alr"
+[2026-08-02T15:56:05.751261+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="it works"
+[2026-08-02T15:58:30.750208+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&help"
+[2026-08-02T16:07:34.678130+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&say general hey"
+[2026-08-02T16:07:34.740639+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="hey"
+[2026-08-02T16:07:54.851909+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&help"
+[2026-08-02T16:07:55.085011+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="```
+Help for PluBot:
+&ping <user> <times> - Pings a user a certain number of times.
+&say <channel> <message> - Says a message in a channel. Make sure the bot has access to the channel.
+&dm <user> <message> - DMs a user a message. Please make sure the user actually has their DMs open, otherwise the message will be lost.
+&chaos - Chaos mode. This message will ping everyone and then spam the channel with random characters. It's not recommended for obvious reasons.
+&help - Shows this message.
+```"
+[2026-08-02T16:08:07.856230+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&ping fiaguhop137 100"
+[2026-08-02T16:08:08.015153+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (3)"
+[2026-08-02T16:08:15.852695+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&ping fiaguhop137 100 (2)"
+[2026-08-02T16:08:35.387497+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="oh"
+[2026-08-02T16:08:38.148729+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="uh oh"
+[2026-08-02T16:08:40.171514+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="it went down"
+[2026-08-02T16:15:48.662203+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="wait"
+[2026-08-02T16:16:41.216613+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="@everyone"
+[2026-08-02T16:17:11.248625+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="i bet my right nostril this message's reactions won't spell out the word stupid"
+[2026-08-02T16:17:15.401855+00:00] | Channel=Rainbows and Clouds/#rainbows | User=pludunn(1512533966001930254) | Content="@everyone"
+[2026-08-02T16:18:06.566362+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&ping fiaguhop137 100"
+[2026-08-02T16:18:06.840793+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (7)"
+[2026-08-02T16:18:10.678620+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&ping fiaguhop137 100"
+[2026-08-02T16:18:13.959073+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (6)"
+[2026-08-02T16:18:15.891614+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&ping fiaguhop137 100"
+[2026-08-02T16:18:18.342250+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (18)"
+[2026-08-02T16:18:33.783471+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&chaos"
+[2026-08-02T16:18:35.274822+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (3)"
+[2026-08-02T16:18:37.114223+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="@everyone"
+[2026-08-02T16:18:39.537256+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (11)"
+[2026-08-02T16:18:50.209573+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="4MDj'O0%V<^id'BFC2\M]h5V^+JuWLXe;TX9O{ZU@C'QkB_Nv0TD$
+G"
+[2026-08-02T16:18:50.209845+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (6)"
+[2026-08-02T16:18:56.041055+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="Y[]/H;SH`<ek'	VMXf6rGonCs Y("
+[2026-08-02T16:18:56.988026+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (3)"
+[2026-08-02T16:18:59.983525+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="V%r\Nx{$76HAK#_nVC[A&.G7r;l+"KPEJa@2&zYX
+BaZ?@=|e9M/36]zFG.z' s^3k}n&sNMiZ[zGXN\qm-4xQ"
+[2026-08-02T16:19:01.152683+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (3)"
+[2026-08-02T16:19:03.952867+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="v93;uFElb. `>iF{A`Q|IN"
+[2026-08-02T16:19:05.007298+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (5)"
+[2026-08-02T16:19:09.934536+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="emFzi"
+[2026-08-02T16:19:12.220993+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="s"HwUk'Q;/HDM.tPQL,?;
+opbErpf>^"
+[2026-08-02T16:19:12.221256+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (4)"
+[2026-08-02T16:19:17.135571+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="eex)'JES4U<G
+I^=5WL&g%)s:8GZ:.3 T{Iv;e[6g"
+[2026-08-02T16:19:17.135876+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (4)"
+[2026-08-02T16:19:22.231315+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content=">UDr26VH...qu#
+"E(Fy%|[d^xeWDbVIB"
+[2026-08-02T16:19:22.231856+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (3)"
+[2026-08-02T16:19:26.392205+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="3B:~/i:b)oo9Ob1 @'d.M@mp%gC}'RPFR+!uG?lh7*w@[3&/||B-.Ls}I}|GAccrE`$}^p:9)`}NW^Z@6a&Vr"
+[2026-08-02T16:19:26.392379+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (6)"
+[2026-08-02T16:19:32.148725+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content=","
+[2026-08-02T16:19:34.385217+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271>"
+[2026-08-02T16:19:34.385438+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="[
+|#0YRwT<~dU#.
+EY,ae-X"W1X|+L0QD<`~+=1L1IVtfb8On.SCff)Y6IU7 LXZgI"
+[2026-08-02T16:19:35.020187+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (2)"
+[2026-08-02T16:19:38.213692+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="Yg[-cm@T&vWb`ury	~&v6mRx2f8K|8BDN~5
+!!K:s&$L2p8zd}Y@II8`"
+[2026-08-02T16:19:38.213984+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (5)"
+[2026-08-02T16:19:43.193050+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="|Y3Ye95nS	H+)e^7'%Jis?<'n)D({Iu4wa;L]u86wV_4+b	Qh}E3ZkP3!8./{l-P
+Wu3I<'apyu!"
+[2026-08-02T16:19:43.962499+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (2)"
+[2026-08-02T16:19:46.200210+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content=")lXV2)TBi`&>1*!$R{lAA"
+[2026-08-02T16:19:48.089951+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="jK@8O{'5<Q
+0x	{ep"
+[2026-08-02T16:19:48.096436+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (3)"
+[2026-08-02T16:19:52.267153+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="tg.e#irh3[V`jNQ3^9>lr	3]^AgDcaR@O)Zl?s|+tX*3U`*YO%CHXcX!C"
+[2026-08-02T16:19:52.267482+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (5)"
+[2026-08-02T16:19:57.065562+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="eiDHeMTuYm|w=b)FLZf0r"TB%2*P	?[Z 4++&o :F}Y4)t#*O<"
+[2026-08-02T16:19:58.022898+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (3)"
+[2026-08-02T16:20:01.220608+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="5+K\].dsfe j/BRtyP~rR6oIw:VPHz6OrXR^>y"0y	e!rUKI$`d7P+lP#q~A=1:-0[=yvU3Z`]"xW2'BH`m"
+[2026-08-02T16:20:02.283440+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271>"
+[2026-08-02T16:20:04.416302+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="8	0ZgfS[	R'FWl!Yn"
+[2026-08-02T16:20:04.416448+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (4)"
+[2026-08-02T16:20:09.016982+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="+zsVXa[c8N=g*Y"
+[2026-08-02T16:20:09.074764+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (6)"
+[2026-08-02T16:20:15.136501+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="@PaP"
+[2026-08-02T16:20:15.593673+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&ping fiaguhop137 100"
+[2026-08-02T16:20:17.192876+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (3)"
+[2026-08-02T16:20:18.953542+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="xe[x6+PtM!0SwpnRlR8ePA]qdXS&u]Ppt??WTKH)'$=,z"
+[2026-08-02T16:20:19.099333+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&ping fiaguhop137 100"
+[2026-08-02T16:20:20.309985+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (4)"
+[2026-08-02T16:20:23.955188+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="Lx(h1^z,v)r,pogwIB0^?r$Hk1^i}<=34o`6aOW(Q;3Y6n)']!{L-O&c0{Y\IJ"
+[2026-08-02T16:20:24.968692+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271>"
+[2026-08-02T16:20:25.207395+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&chaos"
+[2026-08-02T16:20:26.136280+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (4)"
+[2026-08-02T16:20:29.970752+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content=""ZbO^WB4+vN	T2$b~RL_:</hSaQ[NI;OV'!8X87z"
+[2026-08-02T16:20:31.241671+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="@everyone"
+[2026-08-02T16:20:32.122500+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (7)"
+[2026-08-02T16:20:38.963188+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="VDu5cL_'K(K{ZC-H|]w^mu
+8H,t2
+?.gv}1miL	`A}:V7K[VL6F"B"
+[2026-08-02T16:20:40.195768+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (3)"
+[2026-08-02T16:20:43.070310+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="Z,TZC7:n:ch;%B&Fp)WT]hHtz`[K|"
+[2026-08-02T16:20:44.136780+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (4)"
+[2026-08-02T16:20:48.181696+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="F3w>qK;.8}x%>@U8I[)D<eC8"xYm<A(BB'W/5&-z$-e(B>F:HA.u."LmWo`*Sl fwB!Pw_7I"
+[2026-08-02T16:20:48.950944+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="<@1342173566828810271> (2)"
+[2026-08-02T16:22:27.222851+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&say fiaguhop137"
+[2026-08-02T16:22:31.788259+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&say general something"
+[2026-08-02T16:22:32.124046+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="something"
+[2026-08-02T16:22:35.210358+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&say general"
+[2026-08-02T16:22:40.322847+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&say general ** **"
+[2026-08-02T16:22:40.323167+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="**"
+[2026-08-02T16:22:57.255141+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&say general ** **"
+[2026-08-02T16:22:57.255323+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="**"
+[2026-08-02T16:23:14.614951+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&say general "** **""
+[2026-08-02T16:23:14.673538+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="** **"
+[2026-08-02T16:23:25.703301+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&say"
+[2026-08-02T16:23:28.570069+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&help"
+[2026-08-02T16:23:28.885360+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="```
+Help for PluBot:
+&ping <user> <times> - Pings a user a certain number of times.
+&say <channel> <message> - Says a message in a channel. Make sure the bot has access to the channel.
+&dm <user> <message> - DMs a user a message. Please make sure the user actually has their DMs open, otherwise the message will be lost.
+&chaos - Chaos mode. This message will ping everyone and then spam the channel with random characters. It's not recommended for obvious reasons.
+&help - Shows this message.
+```"
+[2026-08-02T16:23:46.782738+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="i cloud swear i added <times> to &say"
+[2026-08-02T16:24:04.243760+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&say general "** **" 100"
+[2026-08-02T16:24:04.281213+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="** **"
+[2026-08-02T16:24:10.424830+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="nope"
+[2026-08-02T16:24:11.058116+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="huh"
+[2026-08-02T16:29:32.964488+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&ping"
+[2026-08-02T16:29:35.339967+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&help (3)"
+[2026-08-02T16:30:00.259510+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&say general hi"
+[2026-08-02T16:30:05.463061+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="```
+Help for PluBot:
+&ping <user> <times> - Pings a user a certain number of times.
+&say <channel> <message> - Says a message in a channel. Make sure the bot has access to the channel.
+&dm <user> <message> - DMs a user a message. Please make sure the user actually has their DMs open, otherwise the message will be lost.
+&chaos - Chaos mode. This message will ping everyone and then spam the channel with random characters. It's not recommended for obvious reasons.
+&help - Shows this message.
+```"
+[2026-08-02T16:30:06.335228+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="hi"
+[2026-08-02T16:30:58.406438+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="&say general hi"
+[2026-08-02T16:30:58.473735+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=✈ Plubot <UwU>#9028(1532584387659567254) | Content="hi"
+[2026-08-02T16:34:48.119208+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="oh"
+[2026-08-02T16:34:48.582293+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=pludunn(1512533966001930254) | Content="bye"
+[2026-08-02T16:50:37.963191+00:00] | Channel=Gay Programmers (Bot Testing)/#general | User=fiaguhop137(1342173566828810271) | Content="?purge bots 100 (3)"

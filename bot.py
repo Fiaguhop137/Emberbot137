@@ -157,7 +157,7 @@ def resolve_targets(cmd_type:str)->list[discord.abc.Messageable]:
 async def console_controller():
     global current_target_server,current_target_channel,active_spam_tasks,pending_reboot,reboot_mode
     await emberbot137.wait_until_ready()
-    cprint(f"\n[Active] Connected to {len(emberbot137.guilds)} channel{'' if len(emberbot137.guilds)==1 else 's'} \nCurrent Target Channel: {current_target_server}/#{current_target_channel} \nType help for a list of commands\n")
+    cprint(f"\n[Active] Connected to {len(emberbot137.guilds)} channel{'' if len(emberbot137.guilds)==1 else 's'} \nCurrent Target Channel: {current_target_server}/#{current_target_channel} \nType help for a list of commands\n~")
     loop = asyncio.get_running_loop()
     while not emberbot137.is_closed():
         try:
@@ -218,7 +218,7 @@ async def console_controller():
                 sub_val=sub_parts[1] if len(sub_parts)>1 else ""
                 if sub_cmd=="server":
                     if not sub_val:
-                        cprint(f"[Success] Retrived target server: {current_target_server}")
+                        cprint(f"[Success] Retrieved target server: {current_target_server}")
                     else:
                         if sub_val.lower()=="all":
                             current_target_server="all"
@@ -233,7 +233,7 @@ async def console_controller():
                             cprint(f"[Success] Target server updated to: {matched_server}")
                 elif sub_cmd=="channel":
                     if not sub_val:
-                        cprint(f"[Success] Retrived target channel: #{current_target_channel}")
+                        cprint(f"[Success] Retrieved target channel: #{current_target_channel}")
                     else:
                         clean_val=sub_val.removeprefix("#").lower()
                         if clean_val=="emberbot137-remote-console" or clean_val=="all":
@@ -252,7 +252,7 @@ async def console_controller():
                             cprint(f"[Success] Target channel updated to: #{matched_channel}")
                 else:
                     cprint("[Error] Invalid syntax. Format: set <server|channel> <name|all>")
-                cprint(f"[Success] Retrived active channel: {current_target_server}/#{current_target_channel}")
+                cprint(f"[Success] Retrieved active channel: {current_target_server}/#{current_target_channel}")
                 continue
             if not emberbot137.guilds:
                 cprint("[Error] Bot is not currently in any servers.")
@@ -296,7 +296,7 @@ async def console_controller():
                 task=asyncio.create_task(run_delayed_command(delay_seconds,inner_cmd))
                 active_spam_tasks.append(task)
                 task.add_done_callback(lambda t: active_spam_tasks.remove(t) if t in active_spam_tasks else None)
-                cprint(f"[Success] Scheduled command to run in {delay_second}{'' if delay_seconds==1 else 's'}.")
+                cprint(f"[Success] Scheduled command to run in {delay_seconds}{'' if delay_seconds==1 else 's'}.")
             else:
                 cprint(f"[Warning] Unknown local command: '{cmd}'. Try the help command for more options.")
         except Exception as e:
@@ -352,11 +352,11 @@ async def on_message(message: discord.Message):
             sub_val=sub_parts[1] if len(sub_parts)>1 else ""
             if sub_cmd=="server":
                 if not sub_val:
-                    await message.channel.send(f"`[Success] Retrived target server: {current_target_server}`")
+                    await message.channel.send(f"`[Success] Retrieved target server: {current_target_server}`")
                 else:
                     if sub_val.lower()=="all":
                         current_target_server="all"
-                        await message.channel.send("`[Success] Retrived target server: all servers`")
+                        await message.channel.send("`[Success] Retrieved target server: all servers`")
                     else:
                         matched_server=current_target_server
                         for g in emberbot137.guilds:
@@ -367,7 +367,7 @@ async def on_message(message: discord.Message):
                         await message.channel.send(f"`[Success] Target server updated to: {matched_server}`")
             elif sub_cmd=="channel":
                 if not sub_val:
-                    await message.channel.send(f"`[Success] Retrived target channel: #{current_target_channel}`")
+                    await message.channel.send(f"`[Success] Retrieved target channel: #{current_target_channel}`")
                 else:
                     clean_val=sub_val.removeprefix("#").lower()
                     if clean_val=="emberbot137-remote-console" or clean_val=="all":
@@ -386,7 +386,7 @@ async def on_message(message: discord.Message):
                         await message.channel.send(f"`[Success] Target channel updated to: #{matched_channel}`")
             else:
                 await message.channel.send("`[Error] Invalid syntax. Format: set <server|channel> <name|all>`")
-            await message.channel.send(f"`[Success] Retrived active channel: {current_target_server}/#{current_target_channel}`")
+            await message.channel.send(f"`[Success] Retrieved active channel: {current_target_server}/#{current_target_channel}`")
             log_action(guild=message.guild,channel=message.channel,user=message.author,command="set",action=f"Target remotely updated to {current_target_server}/#{current_target_channel}")
             return
         channels=resolve_targets(cmd)

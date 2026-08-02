@@ -179,7 +179,7 @@ async def console_controller():
             if cmd.startswith("reboot"):
                 if "-c" in cmd or args=="-c":
                     reboot_mode="open_console.sh"
-                    cprint("[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console. \n[Warning] Rebooting..")
+                    cprint("[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console. \n[Warning] Rebooting...")
                 else:
                     reboot_mode="restart.sh"
                     cprint("[Warning] Reboot initiated. \n[Warning] Rebooting...")
@@ -190,7 +190,7 @@ async def console_controller():
                 for task in active_spam_tasks:
                     task.cancel()
                 active_spam_tasks.clear()
-                cprint(f"[s] Cancelled {count} active task{'' if count==1 else 's'}.")
+                cprint(f"[Success] Cancelled {count} active task{'' if count==1 else 's'}.")
                 continue
             if cmd=="help":
                 cprint("\n--- Available Console Commands ---\n"
@@ -218,11 +218,11 @@ async def console_controller():
                 sub_val=sub_parts[1] if len(sub_parts)>1 else ""
                 if sub_cmd=="server":
                     if not sub_val:
-                        cprint(f"[s] Retrived target server: {current_target_server}")
+                        cprint(f"[Success] Retrived target server: {current_target_server}")
                     else:
                         if sub_val.lower()=="all":
                             current_target_server="all"
-                            cprint("[s] Target server updated to: all servers")
+                            cprint("[Success] Target server updated to: all servers")
                         else:
                             matched_server=current_target_server
                             for g in emberbot137.guilds:
@@ -230,7 +230,7 @@ async def console_controller():
                                     matched_server=g.name
                                     break
                             current_target_server=matched_server
-                            cprint(f"[s] Target server updated to: {matched_server}")
+                            cprint(f"[Success] Target server updated to: {matched_server}")
                 elif sub_cmd=="channel":
                     if not sub_val:
                         cprint(f"[Success] Retrived target channel: #{current_target_channel}")
@@ -238,7 +238,7 @@ async def console_controller():
                         clean_val=sub_val.removeprefix("#").lower()
                         if clean_val=="emberbot137-remote-console" or clean_val=="all":
                             current_target_channel="all"
-                            cprint("[Error] Target channel 'emberbot137-remote-console' is restricted. Defaulted channel target to: #all")
+                            cprint("[Error] Target channel 'emberbot137-remote-console' is restricted. Defaulted channel target to: all channels")
                         else:
                             matched_channel=clean_val
                             for g in emberbot137.guilds:
@@ -264,14 +264,14 @@ async def console_controller():
             if cmd=="test":
                 for channel in channels:
                     await do_test(channel)
-                cprint(f"[Success] Executed test diagnostics across {len(channels)} target{'' if len(channels)==1 else 's'}.")
+                cprint(f"[] Executed test diagnostics across {len(channels)} target{'' if len(channels)==1 else 's'}.")
             elif cmd=="echo":
                 if not args:
                     cprint("[Error] Missing message. Format: echo <msg>")
                     continue
                 for channel in channels:
                     await do_echo(channel,args)
-                cprint(f"[Console Success] Echoed message to {len(channels)} target(s): {args}")
+                cprint(f"[Success] Echoed message to {len(channels)} target{len(channels)} target{'' if len(channels)==1 else 's'}")
             elif cmd=="spam":
                 spam_parts=args.split(" ",1)
                 if len(spam_parts)<2 or not spam_parts[0].isdigit():
@@ -296,7 +296,7 @@ async def console_controller():
                 task=asyncio.create_task(run_delayed_command(delay_seconds,inner_cmd))
                 active_spam_tasks.append(task)
                 task.add_done_callback(lambda t: active_spam_tasks.remove(t) if t in active_spam_tasks else None)
-                cprint(f"[Success] Scheduled command to run in {delay_seconds}s.")
+                cprint(f"[Success] Scheduled command to run in {delay_second}{'' if delay_seconds==1 else 's'}.")
             else:
                 cprint(f"[Warning] Unknown local command: '{cmd}'. Try the help command for more options.")
         except Exception as e:
@@ -306,10 +306,7 @@ async def on_message(message: discord.Message):
     global current_target_server,current_target_channel,active_spam_tasks,pending_reboot,reboot_mode,last_chat_data
     if message.guild:
         guild_name,channel_name,author_tag,now=message.guild.name,message.channel.name,f"{message.author.name}#{message.author.discriminator}" if message.author.discriminator!="0" else message.author.name,datetime.now(timezone.utc).isoformat()
-        if (last_chat_data["guild"]==guild_name and
-            last_chat_data["channel"]==channel_name and
-            last_chat_data["author_id"]==message.author.id and
-            last_chat_data["content"]==message.content):
+        if (last_chat_data["guild"]==guild_name and last_chat_data["channel"]==channel_name and last_chat_data["author_id"]==message.author.id and last_chat_data["content"]==message.content):
             last_chat_data["count"]+=1
         else:
             flush_chat_log()
@@ -324,123 +321,112 @@ async def on_message(message: discord.Message):
         content=message.content.strip()
         if content.startswith(emberbot137.command_prefix):
             content=content[len(emberbot137.command_prefix):].strip()
-
-        parts = content.split(" ", 1)
-        cmd = parts[0].lower()
-        args = parts[1] if len(parts) > 1 else ""
-
-        if cmd == "exit":
-            await message.channel.send("`[Remote Error] 'exit' command cannot be executed remotely.`")
+        parts=content.split(" ",1)
+        cmd=parts[0].lower()
+        args=parts[1] if len(parts) > 1 else ""
+        if cmd=="exit":
+            await message.channel.send("`[Error] the exit command cannot be executed remotely. You can open console with 'reboot -c' to exit locally.`")
             return
-
-        if cmd == "reboot":
+        if cmd=="reboot":
             if "-c" in args:
-                reboot_mode = "open_console.sh"
-                await message.channel.send("`[Remote] Reboot flag set (-c). Will open interactive Emberbot137 Console window...`")
-                log_action(guild=message.guild, channel=message.channel, user=message.author, command="reboot -c", action="Remote interactive console reboot flag set")
+                reboot_mode="open_console.sh"
+                await message.channel.send("`[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console. \n[Warning] Rebooting...`")
+                log_action(guild=message.guild,channel=message.channel,user=message.author,command="reboot -c",action="Remote reboot initated. Opening Console")
             else:
-                reboot_mode = "restart.sh"
-                await message.channel.send("`[Remote] Reboot flag set. Initiating standard background restart...`")
-                log_action(guild=message.guild, channel=message.channel, user=message.author, command="reboot", action="Remote standard reboot flag set")
-            pending_reboot = True
+                reboot_mode="restart.sh"
+                await message.channel.send("`Warning] Reboot initiated. \n[Warning] Rebooting...`")
+                log_action(guild=message.guild,channel=message.channel,user=message.author,command="reboot",action="Remote reboot initated")
+            pending_reboot=True
             return
-
-        if cmd == "stop":
-            count = len(active_spam_tasks)
+        if cmd=="stop":
+            count=len(active_spam_tasks)
             for task in active_spam_tasks:
                 task.cancel()
             active_spam_tasks.clear()
-            await message.channel.send(f"`[Remote Success] Halted {count} active task(s).`")
-            log_action(guild=message.guild, channel=message.channel, user=message.author, command="stop", action=f"Halted {count} tasks")
+            await message.channel.send(f"`[Success] Cancelled {count} active task{'' if count==1 else 's'}.`")
+            log_action(guild=message.guild,channel=message.channel,user=message.author,command="stop",action=f"Cancelled {count} task{'' if count==1 else 's'}")
             return
-
-        if cmd == "set":
-            sub_parts = args.split(" ", 1)
-            sub_cmd = sub_parts[0].lower() if sub_parts else ""
-            sub_val = sub_parts[1] if len(sub_parts) > 1 else ""
-
-            if sub_cmd == "server":
+        if cmd=="set":
+            sub_parts=args.split(" ",1)
+            sub_cmd=sub_parts[0].lower() if sub_parts else ""
+            sub_val=sub_parts[1] if len(sub_parts)>1 else ""
+            if sub_cmd=="server":
                 if not sub_val:
-                    await message.channel.send(f"`[Remote] Current target server is: {current_target_server}`")
+                    await message.channel.send(f"`[Success] Retrived target server: {current_target_server}`")
                 else:
-                    if sub_val.lower() == "all":
-                        current_target_server = "all"
-                        await message.channel.send("`[Remote] Target server updated to: all`")
+                    if sub_val.lower()=="all":
+                        current_target_server="all"
+                        await message.channel.send("`[Success] Retrived target server: all servers`")
                     else:
-                        matched_server = current_target_server
+                        matched_server=current_target_server
                         for g in emberbot137.guilds:
                             if sub_val.lower() in g.name.lower():
-                                matched_server = g.name
+                                matched_server=g.name
                                 break
-                        current_target_server = matched_server
-                        await message.channel.send(f"`[Remote] Target server updated to: {matched_server}`")
-            elif sub_cmd == "channel":
+                        current_target_server=matched_server
+                        await message.channel.send(f"`[Success] Target server updated to: {matched_server}`")
+            elif sub_cmd=="channel":
                 if not sub_val:
-                    await message.channel.send(f"`[Remote] Current target channel is: #{current_target_channel}`")
+                    await message.channel.send(f"`[Success] Retrived target channel: #{current_target_channel}`")
                 else:
-                    clean_val = sub_val.removeprefix("#").lower()
-                    if clean_val == "emberbot137-remote-console" or clean_val == "all":
-                        current_target_channel = "all"
-                        await message.channel.send("`[Remote] Target channel 'emberbot137-remote-console' is restricted. Defaulted channel target to: #all`")
+                    clean_val=sub_val.removeprefix("#").lower()
+                    if clean_val=="emberbot137-remote-console" or clean_val=="all":
+                        current_target_channel="all"
+                        await message.channel.send("`[Error] Target channel 'emberbot137-remote-console' is restricted. Defaulted channel target to: all channels`")
                     else:
-                        matched_channel = clean_val
+                        matched_channel=clean_val
                         for g in emberbot137.guilds:
-                            if current_target_server != "all" and current_target_server.lower() not in g.name.lower():
+                            if current_target_server!="all" and current_target_server.lower() not in g.name.lower():
                                 continue
                             for c in g.text_channels:
-                                if c.name.lower() == clean_val or c.name.lower().startswith(clean_val):
-                                    matched_channel = c.name
+                                if c.name.lower()==clean_val or c.name.lower().startswith(clean_val):
+                                    matched_channel=c.name
                                     break
-                        current_target_channel = matched_channel
-                        await message.channel.send(f"`[Remote] Target channel updated to: #{matched_channel}`")
+                        current_target_channel=matched_channel
+                        await message.channel.send(f"`[Success] Target channel updated to: #{matched_channel}`")
             else:
-                await message.channel.send("`[Remote Usage] Use 'set server [name|all]' or 'set channel [name|all]'`")
-
-            await message.channel.send(f"`[Active Targets] Server: {current_target_server} | Channel: #{current_target_channel}`")
-            log_action(guild=message.guild, channel=message.channel, user=message.author, command="set", action=f"Remote target update -> Server: {current_target_server}, Channel: #{current_target_channel}")
+                await message.channel.send("`[Error] Invalid syntax. Format: set <server|channel> <name|all>`")
+            await message.channel.send(f"`[Success] Retrived active channel: {current_target_server}/#{current_target_channel}`")
+            log_action(guild=message.guild,channel=message.channel,user=message.author,command="set",action=f"Target remotely updated to {current_target_server}/#{current_target_channel}")
             return
-
-        channels = resolve_targets(cmd)
+        channels=resolve_targets(cmd)
         if not channels:
-            channels = [message.channel]
-
-        if cmd == "test":
-            for ch in channels:
-                await do_test(ch)
-            await message.channel.send(f"`[Remote Success] Executed test diagnostics across {len(channels)} target(s).`")
-            log_action(guild=message.guild, channel=message.channel, user=message.author, command="test", action="Remote diagnostic test executed")
-        elif cmd == "echo":
+            channels=[message.channel]
+        if cmd=="test":
+            for channel in channels:
+                await do_test(channel)
+            await message.channel.send(f"`[Success] Executed test diagnostics across {len(channels)} target{'' if len(channels)==1 else 's'}.`")
+            log_action(guild=message.guild,channel=message.channel,user=message.author,command="test",action="Diagnostic test executed")
+        elif cmd=="echo":
             if args:
-                for ch in channels:
-                    await do_echo(ch, args)
-                await message.channel.send(f"`[Remote Success] Echoed to {len(channels)} target(s).`")
-                log_action(guild=message.guild, channel=message.channel, user=message.author, command="echo", action=f"Remote echo: {args}")
-        elif cmd == "spam":
-            spam_parts = args.split(" ", 1)
-            if len(spam_parts) >= 2 and spam_parts[0].isdigit():
-                count = int(spam_parts[0])
-                msg = spam_parts[1]
-
+                for channel in channels:
+                    await do_echo(channel,args)
+                await message.channel.send(f"`[Success] Echoed message to {len(channels)} target{len(channels)} target{'' if len(channels)==1 else 's'}`")
+                log_action(guild=message.guild,channel=message.channel,user=message.author,command="echo",action=f"Echoed {args} remotely")
+        elif cmd=="spam":
+            spam_parts=args.split(" ",1)
+            if len(spam_parts)>=2 and spam_parts[0].isdigit():
+                count=int(spam_parts[0])
+                msg=spam_parts[1]
                 async def run_spam():
-                    for ch in channels:
-                        await do_spam(ch, count, msg)
-
-                task = asyncio.create_task(run_spam())
+                    for channel in channels:
+                        await do_spam(channel,count,msg)
+                task=asyncio.create_task(run_spam())
                 active_spam_tasks.append(task)
                 task.add_done_callback(lambda t: active_spam_tasks.remove(t) if t in active_spam_tasks else None)
-                await message.channel.send(f"`[Remote Success] Background spam task started across {len(channels)} target(s).`")
-                log_action(guild=message.guild, channel=message.channel, user=message.author, command="spam", action=f"Remote background spam task {count}x: {msg}")
-        elif cmd == "delay":
-            delay_parts = args.split(" ", 1)
-            if len(delay_parts) >= 2 and delay_parts[0].isdigit():
-                delay_seconds = int(delay_parts[0])
-                inner_cmd = delay_parts[1]
-
-                task = asyncio.create_task(run_delayed_command(delay_seconds, inner_cmd, message.channel))
+                await message.channel.send(f"`[Success] Initiated background spam task across {len(channels)} target{'' if len(channels)==1 else 's'}.`")
+                log_action(guild=message.guild, channel=message.channel, user=message.author, command="spam", action=f"Background spam task: {count}x: {msg} started")
+            else:cprint("[Error] Invalid syntax. Format: spam <number> <message>")
+        elif cmd=="delay":
+            delay_parts=args.split(" ",1)
+            if len(delay_parts)>=2 and delay_parts[0].isdigit():
+                delay_seconds=int(delay_parts[0])
+                inner_cmd=delay_parts[1]
+                task=asyncio.create_task(run_delayed_command(delay_seconds,inner_cmd,message.channel))
                 active_spam_tasks.append(task)
                 task.add_done_callback(lambda t: active_spam_tasks.remove(t) if t in active_spam_tasks else None)
-                await message.channel.send(f"`[Remote Success] Scheduled command in {delay_seconds}s.`")
-                log_action(guild=message.guild, channel=message.channel, user=message.author, command="delay", action=f"Remote delay {delay_seconds}s: {inner_cmd}")
+                await message.channel.send(f"`[Success] Scheduled command to run in {delay_seconds}{'' if delay_seconds==1 else 's'}.`")
+                log_action(guild=message.guild,channel=message.channel,user=message.author,command="delay",action=f"Remote delay {delay_seconds}{'' if delay_seconds==1 else 's'}: {inner_cmd}")
         elif cmd=="help":
             help_text=(
                 "```markdown\n= Remote Console Commands:\n"
@@ -449,16 +435,15 @@ async def on_message(message: discord.Message):
                 " - spam <number> <msg>                   spams <msg> <number times>\n"
                 " - stop                                  stops spamming\n"
                 " - delay <secs> <cmd>                    delays <secs> seconds then runs <cmd>\n"
-                " - set <server|channel> <name|all>       moves server/channel selector. use all to broadcast to all servers/channels\n"
+                " - set <server|channel> <name|all>       moves server/channel selector\n"
                 " - servers                               lists all detected servers\n"
-                " - reboot <-c>                           reboots Emberbot137. -c tag will open console\n"
-                "-------------------------```")
+                " - reboot <-c>                           reboots Emberbot137. -c tag will open console\n```")
             await message.channel.send(help_text)
-        elif cmd == "servers":
+        elif cmd=="servers":
             server_summary=""
             for g in emberbot137.guilds:
                 channels=[c.name for c in g.text_channels if c.permissions_for(g.me).send_messages]
-                server_summary+=f" - {g.name}({g.id})\n  ↳ Channels: {', '.join(channels)}\n"
+                server_summary+=f"-{g.name}({g.id})\n  ↳ Channels: {', '.join(channels)}\n"
             await message.channel.send(f"```markdown\n= Connected Servers\n{server_summary}```") 
     await emberbot137.process_commands(message)
 @emberbot137.event

@@ -366,6 +366,7 @@ async def console_controller():
 @emberbot137.event
 async def on_message(message: discord.Message):
     global current_target_server,current_target_channel,active_tasks,pending_reboot,reboot_mode,last_chat_data
+    await emberbot137.process_commands(message)
     if message.guild:
         guild_name,channel_name,author_tag,now=message.guild.name,message.channel.name,f"{message.author.name}#{message.author.discriminator}" if message.author.discriminator!="0" else message.author.name,datetime.now(timezone.utc).isoformat()
         if (last_chat_data["guild"]==guild_name and last_chat_data["channel"]==channel_name and last_chat_data["author_id"]==message.author.id and last_chat_data["content"]==message.content):
@@ -548,7 +549,6 @@ async def on_message(message: discord.Message):
                 await message.channel.send("[Error] Missing volume. Format: volume <number>")
                 return
             await set_system_volume(args)
-    await emberbot137.process_commands(message)
 @emberbot137.event
 async def on_ready():
     logger.info(f"Logged in as {emberbot137.user}({emberbot137.user.id})")

@@ -24,8 +24,8 @@ def flush_chat_log():
             content_str=f"{content_str} ({last_chat_data['count']})"
         line = (f"[{last_chat_data['timestamp']}] | Channel={last_chat_data['guild']}/#{last_chat_data['channel']} | User={last_chat_data['author']}({last_chat_data['author_id']}) | Content=\"{content_str}\"")
         try:
-            with open(CHAT_LOG_FILE,"a",encoding="utf-8") as f:
-                f.write(line+"\n")
+            with open(CHAT_LOG_FILE,"a",encoding="utf-8") as chat_log:
+                chat_log.write(line+"\n")
         except Exception as e:
             logger.error(f"Failed to write chat log: {e}")
         last_chat_data["count"],last_chat_data["content"]=0,None

@@ -12,7 +12,8 @@ intents=discord.Intents.default()
 intents.guilds,intents.guild_messages,intents.message_content,intents.members=True,True,True,True
 emberbot137=commands.Bot(command_prefix="~",intents=intents,help_command=None)
 current_target_server,current_target_channel="yap","everyone"
-active_spam_tasks:list[asyncio.Task]=[]
+active_tasks:dict[int,dict]={}
+task_id_counter:int=1
 pending_reboot:bool=False
 reboot_mode="restart.sh"
 last_chat_data = {"guild":None,"channel":None,"author":None,"author_id":None,"content":None,"timestamp":None,"count":0}
@@ -87,6 +88,7 @@ async def do_echo(target:discord.abc.Messageable,message:str):
 async def do_spam(target:discord.abc.Messageable,count:int,message:str):
     for _ in range(count):
         await send_response(target,message)
+        asyncio.sleep(1)
 async def run_delayed_command(delay:int,full_cmd_string:str,target_context:Optional[discord.abc.Messageable] = None):
     try:
         await asyncio.sleep(delay)
@@ -116,6 +118,16 @@ async def run_delayed_command(delay:int,full_cmd_string:str,target_context:Optio
                 task.add_done_callback(lambda t: active_spam_tasks.remove(t) if t in active_spam_tasks else None)
     except asyncio.CancelledError:
         pass
+def register_task(task:asyncio.Task,description:str)->int:
+    global task_id_counter
+    tid=task_id_counter
+    task_id_counter+=1
+    active_tasks[tid]={"task":task,"description":description,"started_at":datetime.now(timezone.utc).strftime("%H:%M:%S")}
+    def cleanup(t):
+        if tid in active_tasks:
+            del active_tasks[tid]
+    task.add_done_callback(cleanup)
+    return tid
 async def reboot_watcher():
     global pending_reboot
     while not emberbot137.is_closed():
@@ -282,9 +294,9 @@ async def console_controller():
                     for channel in channels:
                         await do_spam(channel,count,msg)
                 task=asyncio.create_task(run_spam())
+                tid=register_task(task,f"Spaming {msg[:20]} {count} times")
+                cprint(f"[Success] Initiated background spam task #{tid} across {len(channels)} target{'' if len(channels)==1 else 's'}.")
                 active_spam_tasks.append(task)
-                task.add_done_callback(lambda t: active_spam_tasks.remove(t) if t in active_spam_tasks else None)
-                cprint(f"[Success] Initiated background spam task across {len(channels)} target{'' if len(channels)==1 else 's'}.")
             elif cmd=="delay":
                 delay_parts = args.split(" ",1)
                 if len(delay_parts)<2 or not delay_parts[0].isdigit():
@@ -294,8 +306,30 @@ async def console_controller():
                 inner_cmd=delay_parts[1]
                 task=asyncio.create_task(run_delayed_command(delay_seconds,inner_cmd))
                 active_spam_tasks.append(task)
-                task.add_done_callback(lambda t: active_spam_tasks.remove(t) if t in active_spam_tasks else None)
+                task=asyncio.create_task(run_delayed_command(delay_seconds,inner_cmd,message.channel))
+                tid=register_task(task,f"Running {inner_cmd} in {delay_seconds}{'' if delay_seconds==1 else 's'}")
                 cprint(f"[Success] Scheduled command to run in {delay_seconds}{'' if delay_seconds==1 else 's'}.")
+            elif cmd=="tasks":
+                if not active_tasks:
+                    summary="[Warning] No active background tasks found"
+                else:
+                    summary="= Active Background Tasks"
+                    for tid,info in active_tasks.items():
+                        summary+=f"\n - {tid}: {info['description']}. Started at {info['started_at']}"
+                cprint(summary)
+                continue
+            elif cmd=="cancel":
+                if not args.isdigit():
+                    cprint("[Error] Format: cancel <task_id>")
+                    continue
+                target_id=int(args)
+                if target_id in active_tasks:
+                    active_tasks[target_id]["task"].cancel()
+                    del active_tasks[target_id]
+                    cprint(f"[Success] Cancelled task #{target_id}.")
+                else:
+                    cprint(f"[Error] Task ID [{target_id}] not found.")
+                continue
             else:
                 cprint(f"[Warning] Unknown local command: '{cmd}'. Try the help command for more options.")
         except Exception as e:

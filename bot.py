@@ -80,7 +80,7 @@ def generate_diagnostic_report(target:discord.abc.Messageable)->str:
     return f"```markdown= Diagnostic Report\n - Status: {status}\n - Host Machine: {hostname}\n - Discord Server: {server_name}({server_id})\n - Latency: {latency_ms}ms\n - Token status: {env_status}\n - Connected Servers: {server_count} servers connected. Run ~servers to see more\n - Permissions: {perms_str}```"
 async def do_test(target:discord.abc.Messageable):
     report_text=generate_diagnostic_report(target)
-    await send_response(target,report_text)
+    await send_response(target,report_text.strip('markdown')
     cprint(report_text.strip("`").strip("markdown"))
 async def do_echo(target:discord.abc.Messageable,message:str):
     await send_response(target,message)
@@ -192,7 +192,7 @@ async def console_controller():
                 cprint(f"[Success] Cancelled {count} active task{'' if count==1 else 's'}.")
                 continue
             if cmd=="help":
-                cprint("--- Available Console Commands ---\n"
+                cprint("= Available Console Commands\n"
                        " - test                                     - Send diagnostic report to target(s)\n"
                        " - echo <msg>                               - Send <msg> to target(s)\n"
                        " - spam <number> <msg>                      - Send <number> of messages <msg> to target(s)\n"
@@ -202,13 +202,13 @@ async def console_controller():
                        " - servers                                  - List connected servers and channels\n"
                        " - reboot <-c>                              - Initiates reboot and updates. Optional -c flag will open console\n"
                        " - help                                     - Show this help menu\n"
-                       " - exit                                     - Shut down this bot\n")
+                       " - exit                                     - Shut down this bot")
                 continue
             if cmd=="servers":
-                server_summary="= Connected Servers & Channels\n"
+                server_summary="= Connected Servers & Channels"
                 for g in emberbot137.guilds:
                     channels=[c.name for c in g.text_channels if c.permissions_for(g.me).send_messages]
-                    server_summary+=f" - {g.name}(ID: {g.id})\n  ↳ Channels: {', '.join(channels)}\n"
+                    server_summary+=f"\n - {g.name}(ID: {g.id})\n  ↳ Channels: {', '.join(channels)}"
                 cprint(server_summary)
                 continue
             if cmd=="set":

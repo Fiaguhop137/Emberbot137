@@ -215,6 +215,7 @@ async def console_controller():
                        " - tasks                                   - Lists all active tasks\n"
                        " - cancel <task_id>                        - Halt active tasks by task id\n"
                        " - set <server|channel> <name|all>         - Target specific server/channel\n"
+                       " - tail <file>                             - Outputs last 15 lines of any file\n"
                        " - servers                                 - List connected servers and channels\n"
                        " - volume <number>                         - Changes volume to <number>%\n"
                        " - reboot <-c>                             - Initiates reboot and updates. Optional -c flag will open console\n"
@@ -366,6 +367,8 @@ async def console_controller():
 @emberbot137.event
 async def on_message(message: discord.Message):
     global current_target_server,current_target_channel,active_tasks,pending_reboot,reboot_mode,last_chat_data
+    if message.author.bot:
+        return
     await emberbot137.process_commands(message)
     if message.guild:
         guild_name,channel_name,author_tag,now=message.guild.name,message.channel.name,f"{message.author.name}#{message.author.discriminator}" if message.author.discriminator!="0" else message.author.name,datetime.now(timezone.utc).isoformat()
@@ -382,7 +385,6 @@ async def on_message(message: discord.Message):
             last_chat_data["count"]=1
     if message.guild and "yap" in message.guild.name.lower() and message.channel.name.lower()=="emberbot137-remote-console":
         content=message.content.strip()
-        # There is exactly nothing here
         if content.startswith("~"):
             content=content[1:].strip()
         parts=content.split(" ",1)
@@ -519,6 +521,7 @@ async def on_message(message: discord.Message):
                 " - tasks                                   - Lists all active tasks\n"
                 " - cancel <task_id>                        - Halt active tasks by task id\n"
                 " - set <server|channel> <name|all>         - Target specific server/channel\n"
+                " - tail <file>                             - Outputs last 15 lines of any file\n"
                 " - servers                                 - List connected servers and channels\n"
                 " - volume <number>                         - Changes volume to <number>%\n"
                 " - reboot <-c>                             - Initiates reboot and updates. Optional -c flag will open console\n"

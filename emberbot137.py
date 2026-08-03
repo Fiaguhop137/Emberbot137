@@ -10,11 +10,6 @@ logging.basicConfig(level=logging.INFO,format="%(message)s")
 logger=logging.getLogger("Emberbot137")
 intents=discord.Intents.default()
 intents.guilds,intents.guild_messages,intents.message_content,intents.members=True,True,True,True
-class MyClient(discord.Client):
-    def __init__(self,*args,**kwargs):
-        super().__init__(*args,**kwargs)
-        self.command_prefix="~"
-emberbot137 = MyClient(intents=intents)
 emberbot137=discord.Client(intents=intents)
 current_target_server,current_target_channel="yap","everyone"
 active_tasks:dict[int,dict]={}
@@ -386,7 +381,6 @@ async def on_message(message: discord.Message):
             last_chat_data["count"]=1
     if message.guild and "yap" in message.guild.name.lower() and message.channel.name.lower()=="emberbot137-remote-console":
         content=message.content.strip()
-        
         if content.startswith("~"):
             content=content[1:].strip()
         parts=content.split(" ",1)

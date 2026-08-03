@@ -130,7 +130,7 @@ async def reboot_watcher():
     global pending_reboot
     while not emberbot137.is_closed():
         if pending_reboot:
-            cprint(f"[System] Reboot command detected. Executing restart sequence...")
+            cprint(f"[Warning] Reboot command detected. Executing restart sequence...")
             flush_chat_log()
             subprocess.Popen([f"./{reboot_mode}"],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,stdin=subprocess.DEVNULL,start_new_session=True)
             await emberbot137.close()
@@ -179,7 +179,7 @@ async def set_system_volume(volume_str:str):
 async def console_controller():
     global current_target_server,current_target_channel,active_tasks,pending_reboot,reboot_mode
     await emberbot137.wait_until_ready()
-    cprint(f"\n[Active] Connected to {len(emberbot137.guilds)} channel{'' if len(emberbot137.guilds)==1 else 's'} \nCurrent Target Channel: {current_target_server}/#{current_target_channel} \nType help for a list of commands")
+    cprint(f"\n[Success] Connected to {len(emberbot137.guilds)} channel{'' if len(emberbot137.guilds)==1 else 's'} \nCurrent Target Channel: {current_target_server}/#{current_target_channel} \nType help for a list of commands")
     loop=asyncio.get_running_loop()
     while not emberbot137.is_closed():
         try:
@@ -338,7 +338,7 @@ async def console_controller():
                     del active_tasks[target_id]
                     cprint(f"[Success] Cancelled task #{target_id}.")
                 else:
-                    cprint(f"[Error] Task ID [{target_id}] not found.")
+                    cprint(f"[Error] Task #{target_id} not found.")
                 continue
             elif cmd=="volume":
                 if not args:
@@ -346,7 +346,7 @@ async def console_controller():
                     continue
                 await set_system_volume(args)
             else:
-                cprint(f"[Warning] Unknown local command: '{cmd}'. Try the help command for more options.")
+                cprint(f"[Error] Unknown local command: '{cmd}'. Try the help command for more options.")
         except Exception as e:
             await asyncio.sleep(5)
 @emberbot137.event

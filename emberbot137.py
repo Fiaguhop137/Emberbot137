@@ -381,8 +381,6 @@ async def on_message(message: discord.Message):
             last_chat_data["count"]=1
     if message.guild and "yap" in message.guild.name.lower() and message.channel.name.lower()=="emberbot137-remote-console":
         content=message.content.strip()
-        if content.startswith(emberbot137.command_prefix):
-            content=content[len(emberbot137.command_prefix):].strip()
         parts=content.split(" ",1)
         cmd=parts[0].lower()
         args=parts[1] if len(parts) > 1 else ""

@@ -276,7 +276,7 @@ async def console_controller():
                     continue
                 for channel in channels:
                     await do_echo(channel,args)
-                cprint(f"[Success] Echoed message to {len(channels)} target{len(channels)} target{'' if len(channels)==1 else 's'}")
+                cprint(f"[Success] Echoed message to {len(channels)} target{'' if len(channels)==1 else 's'}")
             elif cmd=="spam":
                 spam_parts=args.split(" ",1)
                 if len(spam_parts)<2 or not spam_parts[0].isdigit():
@@ -453,7 +453,7 @@ async def on_message(message: discord.Message):
             if args:
                 for channel in channels:
                     await do_echo(channel,args)
-                await message.channel.send(f"`[Success] Echoed message to {len(channels)} target{len(channels)} target{'' if len(channels)==1 else 's'}`")
+                await message.channel.send(f"`[Success] Echoed message to {len(channels)} target{'' if len(channels)==1 else 's'}`")
                 log_action(guild=message.guild,channel=message.channel,user=message.author,command="echo",action=f"Echoed {args} remotely")
         elif cmd=="spam":
             spam_parts=args.split(" ",1)

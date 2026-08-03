@@ -1,6 +1,6 @@
 #!/bin/bash
 cd "$(dirname "$0")"
 sleep 1
-pkill -f "python3 bot.py"
+pkill -f "python3 emberbot137.py"
 git pull
-nohup python3 bot.py > bot_runtime.log 2>&1 &
+nohup python3 emberbot137.py > emberbot137.log 2>&1 &

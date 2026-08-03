@@ -52,8 +52,6 @@ def log_action(*,guild:discord.Guild,channel:discord.abc.GuildChannel,user:disco
     logger.info(line)
     with open(LOG_FILE,"a",encoding="utf-8") as file:
         file.write(line+"\n")
-async def send_response(target:discord.abc.Messageable,content:str):
-    await target.send(content)
 def generate_diagnostic_report(target:discord.abc.Messageable)->str:
     server=getattr(target,"guild",None)
     hostname=socket.gethostname()
@@ -81,13 +79,13 @@ def generate_diagnostic_report(target:discord.abc.Messageable)->str:
     return f"```= Diagnostic Report\n - Status: {status}\n - Host Machine: {hostname}\n - Discord Server: {server_name}({server_id})\n - Latency: {latency_ms}ms\n - Token status: {env_status}\n - Connected Servers: {server_count} servers connected. Run ~servers to see more\n - Permissions: {perms_str}```"
 async def do_test(target:discord.abc.Messageable):
     report_text=generate_diagnostic_report(target)
-    await send_response(target,report_text)
+    await target.send(report_text)
     cprint(report_text.strip("`"))
 async def do_echo(target:discord.abc.Messageable,message:str):
-    await send_response(target,message)
+    await target.send(message)
 async def do_spam(target:discord.abc.Messageable,count:int,message:str):
     for _ in range(count):
-        await send_response(target,message)
+        await target.send(message)
         await asyncio.sleep(1)
 async def run_delayed_command(delay:int,full_cmd_string:str,target_context:Optional[discord.abc.Messageable] = None):
     try:
@@ -166,6 +164,18 @@ def resolve_targets(cmd_type:str)->list[discord.abc.Messageable]:
             if resolved_channel_name=="all" or channel.name.lower()==resolved_channel_name.lower():
                 targets.append(channel)
     return targets
+async def set_system_volume(volume_str:str):
+    try:
+        level=int(volume_str.strip('%').strip())
+        level=max(0,min(100,level))
+        subprocess.run(["amixer","-c","0","set","Master",f"{level}%"],check=True,capture_output=True)
+        cprint(f"[Success] Volume set to {level}%")
+    except ValueError:
+        cprint("[Error] Invalid volume level. Use a number like `~volume 50`.")
+    except subprocess.CalledProcessError as e:
+        cprint(f"[Error] ALSA rejected the command: {e.stderr.decode().strip()}")
+    except Exception as e:
+        cprint(f"[Error] Failed to adjust volume: {e}")
 async def console_controller():
     global current_target_server,current_target_channel,active_tasks,pending_reboot,reboot_mode
     await emberbot137.wait_until_ready()
@@ -329,6 +339,11 @@ async def console_controller():
                 else:
                     cprint(f"[Error] Task ID [{target_id}] not found.")
                 continue
+            elif cmd=="volume":
+                if not args:
+                    cprint("[Error] Missing volume. Format: volume <number>")
+                    continue
+                await set_system_volume(args)
             else:
                 cprint(f"[Warning] Unknown local command: '{cmd}'. Try the help command for more options.")
         except Exception as e:
@@ -497,6 +512,11 @@ async def on_message(message: discord.Message):
                 channels=[c.name for c in g.text_channels if c.permissions_for(g.me).send_messages]
                 server_summary+=f"-{g.name}({g.id})\n  ↳ Channels: {', '.join(channels)}\n"
             await message.channel.send(f"```markdown\n= Connected Servers\n{server_summary}```") 
+        elif cmd=="volume":
+            if not args:
+                await message.channel.send("[Error] Missing volume. Format: volume <number>")
+                return
+            await set_system_volume(args)
     await emberbot137.process_commands(message)
 @emberbot137.event
 async def on_ready():

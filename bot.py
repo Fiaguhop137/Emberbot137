@@ -77,11 +77,11 @@ def generate_diagnostic_report(target:discord.abc.Messageable)->str:
             if perms.manage_messages:audit_perms.append("Manage Messages")
         perms_str=", ".join(audit_perms) if audit_perms else "Standard User"
     else:perms_str="Unknown"
-    return f"```markdown= Diagnostic Report\n - Status: {status}\n - Host Machine: {hostname}\n - Discord Server: {server_name}({server_id})\n - Latency: {latency_ms}ms\n - Token status: {env_status}\n - Connected Servers: {server_count} servers connected. Run ~servers to see more\n - Permissions: {perms_str}```"
+    return f"```= Diagnostic Report\n - Status: {status}\n - Host Machine: {hostname}\n - Discord Server: {server_name}({server_id})\n - Latency: {latency_ms}ms\n - Token status: {env_status}\n - Connected Servers: {server_count} servers connected. Run ~servers to see more\n - Permissions: {perms_str}```"
 async def do_test(target:discord.abc.Messageable):
     report_text=generate_diagnostic_report(target)
-    await send_response(target,report_text.strip('markdown'))
-    cprint(report_text.strip("`").strip("markdown"))
+    await send_response(target,report_text)
+    cprint(report_text.strip("`"))
 async def do_echo(target:discord.abc.Messageable,message:str):
     await send_response(target,message)
 async def do_spam(target:discord.abc.Messageable,count:int,message:str):

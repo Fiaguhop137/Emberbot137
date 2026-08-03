@@ -1017,3 +1017,601 @@ discord.errors.HTTPException: 400 Bad Request (error code: 50013): Missing Permi
 [2026-08-03T05:57:22.229660+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=Im gonna
 [2026-08-03T05:57:23.762023+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=Sleep now
 [2026-08-03T05:57:26.220412+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=Goon night
+[2026-08-03T12:21:05.302383+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Active] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T12:21:07.876204+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=reboot
+[2026-08-03T12:21:08.080736+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=`[Warning] Reboot initiated. 
+[Warning] Rebooting...`
+[2026-08-03T12:21:12.996844+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Active] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T12:52:38.183316+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=reboot -c
+[2026-08-03T12:52:38.401998+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=`[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console. 
+[Warning] Rebooting...`
+[2026-08-03T12:52:44.134196+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Active] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T12:53:23.830691+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+= Available Console Commands
+ - test                                    - Send diagnostic report to target(s)
+ - echo <msg>                              - Send <msg> to target(s)
+ - spam <number> <msg>                     - Send <number> of messages <msg> to target(s)
+ - delay <secs> <cmd>                      - Execute <cmd> after <secs> seconds
+ - tasks                                   - Lists all active tasks
+ - cancel <task_id>                        - Halt active tasks by task id
+ - set <server|channel> <name|all>         - Target specific server/channel
+ - servers                                 - List connected servers and channels
+ - reboot <-c>                             - Initiates reboot and updates. Optional -c flag will open console
+ - help                                    - Show this help menu
+ - exit                                    - Shut down this bot
+```
+[2026-08-03T12:54:03.709027+00:00 | Yap/#everyone | Emberbot137#6769(1532899245005475860] Content=```= Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 35ms
+ - Token status: loaded
+ - Connected Servers: 3 servers connected. Run ~servers to see more
+ - Permissions: Administrator```
+[2026-08-03T12:54:03.862782+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+= Diagnostic Report
+ - Status: Online
+ - Host Machine: plasmadmin-xps-8910(firebot)
+ - Discord Server: Yap(1463624406470230232)
+ - Latency: 35ms
+ - Token status: loaded
+ - Connected Servers: 3 servers connected. Run ~servers to see more
+ - Permissions: Administrator
+```
+[2026-08-03T12:54:04.011555+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Executed test diagnostics across 1 target.
+```
+[2026-08-03T12:54:20.762650+00:00 | Yap/#everyone | Emberbot137#6769(1532899245005475860] Content=hello
+[2026-08-03T12:54:21.086577+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Echoed message to 1 target
+```
+[2026-08-03T12:54:28.590981+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+= Connected Servers & Channels
+ - Yap(ID: 1463624406470230232)
+  ↳ Channels: emberbot137-remote-console, plasma, plasma-dragon, plasma-frog, plasma-twi, plasma-dragon-twi, plasma-dragon-frog, plasma-twi-frog, everyone, remote-controlled-bob
+ - Rainbows and Clouds(ID: 1511895185007579206)
+  ↳ Channels: rainbows, clouds, info
+ - Queer City(ID: 1533520595004821645)
+  ↳ Channels: rules, announcements, chat, debates, bot, qotd-discussion, qotd, moderator, safety
+```
+[2026-08-03T12:54:35.139269+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Target server updated to: Queer City
+```
+[2026-08-03T12:54:35.140033+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Retrieved active channel: Queer City/#everyone
+```
+[2026-08-03T12:54:47.356428+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Retrieved active channel: Queer City/#qotd-discussion
+```
+[2026-08-03T12:54:47.375424+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Target channel updated to: #qotd-discussion
+``` (2)
+[2026-08-03T12:55:02.515950+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Retrieved active channel: Queer City/#qotd-discussion
+```
+[2026-08-03T12:55:08.013649+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Warning] Reboot initiated. 
+[Warning] Rebooting...
+```
+[2026-08-03T12:55:12.924867+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Active] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T13:44:53.306872+00:00 | Yap/#everyone | fiaguhop137(1342173566828810271] Content=reboot
+[2026-08-03T13:45:15.727047+00:00 | Yap/#remote-controlled-bob | bobbot9000#8975(1533157532510584894] Content=```text
+[Console Controller Active] Connected to 1 guild(s).
+```
+[2026-08-03T13:45:16.041683+00:00 | Yap/#remote-controlled-bob | bobbot9000#8975(1533157532510584894] Content=```text
+Current Target Server: 'all' | Target Channel: '#all'
+```
+[2026-08-03T13:45:16.169664+00:00 | Yap/#remote-controlled-bob | bobbot9000#8975(1533157532510584894] Content=```text
+Commands: test, echo <msg>, spam <number> <msg>, stop, delay <seconds> <cmd>, set, servers, help, reboot, exit
+```
+[2026-08-03T13:45:16.415553+00:00 | Yap/#remote-controlled-bob | bobbot9000#8975(1533157532510584894] Content=```text
+[Console] Reboot flag set. Will reboot now.
+```
+[2026-08-03T13:45:20.806525+00:00 | Yap/#remote-controlled-bob | bobbot9000#8975(1533157532510584894] Content=```text
+[Console Controller Active] Connected to 1 guild(s).
+```
+[2026-08-03T13:45:21.052070+00:00 | Yap/#remote-controlled-bob | bobbot9000#8975(1533157532510584894] Content=```text
+Commands: test, echo <msg>, spam <number> <msg>, stop, delay <seconds> <cmd>, set, servers, help, reboot, exit
+```
+[2026-08-03T13:45:21.052350+00:00 | Yap/#remote-controlled-bob | bobbot9000#8975(1533157532510584894] Content=```text
+Current Target Server: 'all' | Target Channel: '#all'
+```
+[2026-08-03T13:45:26.890243+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=reboot
+[2026-08-03T13:45:27.093039+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=`[Warning] Reboot initiated. 
+[Warning] Rebooting...`
+[2026-08-03T13:45:32.420218+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Active] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T13:45:39.163688+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=volume 0%
+[2026-08-03T13:45:39.305230+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Error] ALSA rejected the command: amixer: Unable to find simple control 'Master',0
+```
+[2026-08-03T13:45:47.578870+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=volume 15
+[2026-08-03T13:45:47.724360+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Error] ALSA rejected the command: amixer: Unable to find simple control 'Master',0
+```
+[2026-08-03T13:47:05.408930+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=reboot
+[2026-08-03T13:47:05.568423+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=`[Warning] Reboot initiated. 
+[Warning] Rebooting...`
+[2026-08-03T13:47:10.907560+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Active] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T13:47:18.710445+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=volume 0
+[2026-08-03T13:47:18.915056+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Volume set to 0%
+```
+[2026-08-03T13:47:23.216279+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=volume 33
+[2026-08-03T13:47:23.373474+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Volume set to 33%
+```
+[2026-08-03T13:48:44.092300+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=reboot
+[2026-08-03T13:48:44.390320+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=`[Warning] Reboot initiated. 
+[Warning] Rebooting...`
+[2026-08-03T13:48:50.461538+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Active] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T13:48:51.413914+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=help
+[2026-08-03T13:48:51.515874+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```markdown
+= Remote Console Commands:
+ - test                                    - Send diagnostic report to target(s)
+ - echo <msg>                              - Send <msg> to target(s)
+ - spam <number> <msg>                     - Send <number> of messages <msg> to target(s)
+ - delay <secs> <cmd>                      - Execute <cmd> after <secs> seconds
+ - tasks                                   - Lists all active tasks
+ - cancel <task_id>                        - Halt active tasks by task id
+ - set <server|channel> <name|all>         - Target specific server/channel
+ - servers                                 - List connected servers and channels
+ - volume <number>                         - Changes volume to <number>%
+ - reboot <-c>                             - Initiates reboot and updates. Optional -c flag will open console
+ - help                                    - Show this help menu
+```
+[2026-08-03T13:50:19.594209+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=volume 0
+[2026-08-03T13:50:19.788822+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Volume set to 0%
+```
+[2026-08-03T13:50:26.408409+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=volume 100
+[2026-08-03T13:50:26.594001+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Volume set to 100%
+```
+[2026-08-03T13:50:30.882534+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=volume 33
+[2026-08-03T13:50:31.066960+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Volume set to 33%
+```
+[2026-08-03T14:25:07.349718+00:00 | Queer City/#moderator | fiaguhop137(1342173566828810271] Content=?github Fiaguhop137/Emberbot137
+[2026-08-03T14:25:07.668578+00:00 | Queer City/#moderator | Dyno#3861(155149108183695360] Content=
+[2026-08-03T14:25:28.993306+00:00 | Queer City/#safety | fiaguhop137(1342173566828810271] Content=?github Fiaguhop137/Emberbot137
+[2026-08-03T14:25:29.552628+00:00 | Queer City/#safety | Dyno#3861(155149108183695360] Content=
+[2026-08-03T15:10:10.846339+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=reboot
+[2026-08-03T15:10:11.152813+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=`[Warning] Reboot initiated. 
+[Warning] Rebooting...`
+[2026-08-03T15:10:16.466404+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T15:10:29.401899+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=tail emberbot137.log
+[2026-08-03T15:10:38.666214+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=servers
+[2026-08-03T15:10:52.087819+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+``` (3)
+[2026-08-03T15:13:38.395440+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T15:13:43.083969+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+= Connected Servers & Channels
+ - Yap(ID: 1463624406470230232)
+  ↳ Channels: emberbot137-remote-console, plasma, plasma-dragon, plasma-frog, plasma-twi, plasma-dragon-twi, plasma-dragon-frog, plasma-twi-frog, everyone, remote-controlled-bob
+ - Rainbows and Clouds(ID: 1511895185007579206)
+  ↳ Channels: rainbows, clouds, info
+ - Queer City(ID: 1533520595004821645)
+  ↳ Channels: rules, announcements, chat, debates, bot, qotd-discussion, qotd, moderator, safety
+```
+[2026-08-03T15:13:43.083972+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+= Connected Servers & Channels
+ - Yap(ID: 1463624406470230232)
+  ↳ Channels: emberbot137-remote-console, plasma, plasma-dragon, plasma-frog, plasma-twi, plasma-dragon-twi, plasma-dragon-frog, plasma-twi-frog, everyone, remote-controlled-bob
+ - Rainbows and Clouds(ID: 1511895185007579206)
+  ↳ Channels: rainbows, clouds, info
+ - Queer City(ID: 1533520595004821645)
+  ↳ Channels: rules, announcements, chat, debates, bot, qotd-discussion, qotd, moderator, safety
+```
+[2026-08-03T15:13:56.814615+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+File "/usr/local/lib/python3.12/dist-packages/discord/client.py", line 508, in _run_event
+    await coro(*args, **kwargs)
+  File "/home/firebot/git/Emberbot137/emberbot137.py", line 384, in on_message
+    parts=content.split(" ",1)
+                          ^^^^^
+AttributeError: 'Client' object has no attribute 'command_prefix'
+Ignoring exception in on_message
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/discord/client.py", line 508, in _run_event
+    await coro(*args, **kwargs)
+  File "/home/firebot/git/Emberbot137/emberbot137.py", line 384, in on_message
+    parts=content.split(" ",1)
+                          ^^^^^
+AttributeError: 'Client' object has no attribute 'command_prefix'
+~~~~~~~~~~~~~~
+```
+[2026-08-03T15:16:30.584956+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T15:16:30.585042+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T15:19:29.340381+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T15:19:34.024924+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+File "/usr/local/lib/python3.12/dist-packages/discord/client.py", line 508, in _run_event
+    await coro(*args, **kwargs)
+  File "/home/firebot/git/Emberbot137/emberbot137.py", line 384, in on_message
+    if content.startswith("~"):
+                          ^^^^^^
+AttributeError: 'Client' object has no attribute 'command_prefix'
+Ignoring exception in on_message
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/discord/client.py", line 508, in _run_event
+    await coro(*args, **kwargs)
+  File "/home/firebot/git/Emberbot137/emberbot137.py", line 384, in on_message
+    if content.startswith("~"):
+                          ^^^^^^
+AttributeError: 'Client' object has no attribute 'command_prefix'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+[2026-08-03T15:20:27.959224+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T15:21:20.840309+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T15:23:16.391143+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T15:24:39.669567+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T15:26:01.779803+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T15:45:09.272996+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T15:45:13.320310+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Error] File 'test' not found.
+```
+[2026-08-03T15:46:23.757854+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T15:46:37.985970+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Error] File 'emberbot137.lo' not found.
+```
+[2026-08-03T15:46:45.296919+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+File "/usr/local/lib/python3.12/dist-packages/discord/client.py", line 508, in _run_event
+    await coro(*args, **kwargs)
+  File "/home/firebot/git/Emberbot137/emberbot137.py", line 384, in on_message
+    if content.startswith("~"):
+                          ^^^^^^
+AttributeError: 'Client' object has no attribute 'command_prefix'
+Ignoring exception in on_message
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/discord/client.py", line 508, in _run_event
+    await coro(*args, **kwargs)
+  File "/home/firebot/git/Emberbot137/emberbot137.py", line 384, in on_message
+    if content.startswith("~"):
+                          ^^^^^^
+AttributeError: 'Client' object has no attribute 'command_prefix'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+[2026-08-03T15:47:26.440388+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=https://youtube.com/shorts/xOfX7G55JBY?si=cvvonKxA3Hfb1xf5
+[2026-08-03T15:47:34.825957+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=SHADOWVANILAAAA
+[2026-08-03T15:47:35.495930+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=A
+[2026-08-03T15:47:37.749900+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=Æ
+[2026-08-03T15:47:40.163737+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=AAAAAAA
+[2026-08-03T15:49:09.849147+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T15:51:58.866598+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T15:54:14.215544+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T15:54:19.115809+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Error] File 'emberbot.log' not found.
+```
+[2026-08-03T15:54:26.249918+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+File "/usr/local/lib/python3.12/dist-packages/discord/client.py", line 508, in _run_event
+    await coro(*args, **kwargs)
+  File "/home/firebot/git/Emberbot137/emberbot137.py", line 384, in on_message
+    if content.startswith("~"):
+                          ^^^^^^
+AttributeError: 'Client' object has no attribute 'command_prefix'
+Ignoring exception in on_message
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/discord/client.py", line 508, in _run_event
+    await coro(*args, **kwargs)
+  File "/home/firebot/git/Emberbot137/emberbot137.py", line 384, in on_message
+    if content.startswith("~"):
+                          ^^^^^^
+AttributeError: 'Client' object has no attribute 'command_prefix'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+[2026-08-03T15:54:32.531788+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+= Connected Servers & Channels
+ - Yap(ID: 1463624406470230232)
+  ↳ Channels: emberbot137-remote-console, plasma, plasma-dragon, plasma-frog, plasma-twi, plasma-dragon-twi, plasma-dragon-frog, plasma-twi-frog, everyone, remote-controlled-bob
+ - Rainbows and Clouds(ID: 1511895185007579206)
+  ↳ Channels: rainbows, clouds, info
+ - Queer City(ID: 1533520595004821645)
+  ↳ Channels: rules, announcements, chat, debates, bot, qotd-discussion, qotd, moderator, safety
+```
+[2026-08-03T16:38:42.906311+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=volume 0
+[2026-08-03T16:38:43.225422+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Volume set to 0%
+```
+[2026-08-03T16:38:56.963004+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=volume 17
+[2026-08-03T16:38:57.176612+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Volume set to 17%
+```
+[2026-08-03T17:12:03.552582+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Warning] Reboot initiated. 
+[Warning] Rebooting...
+```
+[2026-08-03T17:12:08.984055+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T17:12:16.969447+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=tail emberbot137.log
+[2026-08-03T17:12:17.183134+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=davey is not installed, voice will NOT be supported
+[2026-08-03 13:12:05] [INFO    ] discord.client: logging in using static token
+logging in using static token
+[2026-08-03 13:12:06] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 25edf9635cdf87b0f175a27a8e793dd1).
+Shard ID None has connected to Gateway (Session ID: 25edf9635cdf87b0f175a27a8e793dd1).
+Logged in as Emberbot137#6769(1532899245005475860)
+
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+~~~~~~~~~
+[2026-08-03T17:12:27.723791+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=tail emberbot137.log
+[2026-08-03T17:12:28.150331+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=davey is not installed, voice will NOT be supported
+[2026-08-03 13:12:05] [INFO    ] discord.client: logging in using static token
+logging in using static token
+[2026-08-03 13:12:06] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 25edf9635cdf87b0f175a27a8e793dd1).
+Shard ID None has connected to Gateway (Session ID: 25edf9635cdf87b0f175a27a8e793dd1).
+Logged in as Emberbot137#6769(1532899245005475860)
+
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+~~~~~~~~~~~~~~~~~~~~
+[2026-08-03T17:12:33.580896+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=tail chat.log
+[2026-08-03T17:12:33.796854+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=Current Target Channel: yap/#everyone 
+Type help for a list of commands
+~~~~~~~~~
+[2026-08-03T17:12:27.723791+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=tail emberbot137.log
+[2026-08-03T17:12:28.150331+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=davey is not installed, voice will NOT be supported
+[2026-08-03 13:12:05] [INFO    ] discord.client: logging in using static token
+logging in using static token
+[2026-08-03 13:12:06] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 25edf9635cdf87b0f175a27a8e793dd1).
+Shard ID None has connected to Gateway (Session ID: 25edf9635cdf87b0f175a27a8e793dd1).
+Logged in as Emberbot137#6769(1532899245005475860)
+
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+~~~~~~~~~~~~~~~~~~~~
+[2026-08-03T17:12:46.040603+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=tail chat.log
+[2026-08-03T17:12:46.256765+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=[2026-08-03T17:12:33.796854+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=Current Target Channel: yap/#everyone 
+Type help for a list of commands
+~~~~~~~~~
+[2026-08-03T17:12:27.723791+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=tail emberbot137.log
+[2026-08-03T17:12:28.150331+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=davey is not installed, voice will NOT be supported
+[2026-08-03 13:12:05] [INFO    ] discord.client: logging in using static token
+logging in using static token
+[2026-08-03 13:12:06] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 25edf9635cdf87b0f175a27a8e793dd1).
+Shard ID None has connected to Gateway (Session ID: 25edf9635cdf87b0f175a27a8e793dd1).
+Logged in as Emberbot137#6769(1532899245005475860)
+
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+~~~~~~~~~~~~~~~~~~~~
+[2026-08-03T17:12:47.851763+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=tail chat.log
+[2026-08-03T17:12:48.067806+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=[2026-08-03T17:12:46.256765+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=[2026-08-03T17:12:33.796854+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=Current Target Channel: yap/#everyone 
+Type help for a list of commands
+~~~~~~~~~
+[2026-08-03T17:12:27.723791+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=tail emberbot137.log
+[2026-08-03T17:12:28.150331+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=davey is not installed, voice will NOT be supported
+[2026-08-03 13:12:05] [INFO    ] discord.client: logging in using static token
+logging in using static token
+[2026-08-03 13:12:06] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 25edf9635cdf87b0f175a27a8e793dd1).
+Shard ID None has connected to Gateway (Session ID: 25edf9635cdf87b0f175a27a8e793dd1).
+Logged in as Emberbot137#6769(1532899245005475860)
+
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+~~~~~~~~~~~~~~~~~~~~
+[2026-08-03T17:12:50.005369+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=reboot
+[2026-08-03T17:12:50.194813+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=`[Warning] Reboot initiated. 
+[Warning] Rebooting...`
+[2026-08-03T17:12:55.824850+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T17:12:56.904962+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=tail chat.log
+[2026-08-03T17:12:57.029950+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=Shard ID None has connected to Gateway (Session ID: 25edf9635cdf87b0f175a27a8e793dd1).
+Logged in as Emberbot137#6769(1532899245005475860)
+
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+~~~~~~~~~~~~~~~~~~~~
+[2026-08-03T17:12:50.005369+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=reboot
+[2026-08-03T17:12:50.194813+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=`[Warning] Reboot initiated. 
+[Warning] Rebooting...`
+[2026-08-03T17:12:55.824850+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T17:13:10.855551+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=tail chat
+[2026-08-03T17:13:10.977586+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=[Error] File 'chat' not found.
+[2026-08-03T17:13:13.108111+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=tail chat.log
+[2026-08-03T17:13:13.528128+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+~~~~~~~~~~~~~~~~~~~~
+[2026-08-03T17:12:50.005369+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=reboot
+[2026-08-03T17:12:50.194813+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=`[Warning] Reboot initiated. 
+[Warning] Rebooting...`
+[2026-08-03T17:12:55.824850+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=```text
+[Success] Connected to 3 channels 
+Current Target Channel: yap/#everyone 
+Type help for a list of commands
+```
+[2026-08-03T17:13:10.855551+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=tail chat
+[2026-08-03T17:13:10.977586+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=[Error] File 'chat' not found.
+[2026-08-03T17:13:42.275233+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=tail open_console.sh
+[2026-08-03T17:13:42.484991+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=#!/bin/bash
+cd "$(dirname "$0")"
+sleep 1
+pkill -f "python3 emberbot137.py"
+git pull
+gnome-terminal --geometry=120x30 --title="Emberbot137 Console" -- python3 emberbot137.py &
+[2026-08-03T17:13:56.244735+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=tail restart.sh
+[2026-08-03T17:13:56.395282+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=#!/bin/bash
+cd "$(dirname "$0")"
+sleep 1
+pkill -f "python3 emberbot137.py"
+git pull
+nohup python3 emberbot137.py > emberbot137.log 2>&1 &
+[2026-08-03T17:15:43.358061+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=reboot
+[2026-08-03T17:15:43.572849+00:00 | Yap/#emberbot137-remote-console | Emberbot137#6769(1532899245005475860] Content=`[Warning] Reboot initiated. 
+[Warning] Rebooting...`
+[2026-08-03T17:15:51.558192+00:00 | Yap/#emberbot137-remote-console | fiaguhop137(1342173566828810271] Content=help
+[2026-08-03T17:20:49.962799+00:00 | Yap/#everyone | fiaguhop137(1342173566828810271] Content=SOMEONE
+[2026-08-03T17:20:59.546145+00:00 | Yap/#everyone | fiaguhop137(1342173566828810271] Content=IF YOU HAVE 1.21.11
+[2026-08-03T17:21:29.258723+00:00 | Yap/#everyone | fiaguhop137(1342173566828810271] Content=go to 20000,20000 on seed -3627854015528897530
+[2026-08-03T17:24:10.393415+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=Why
+[2026-08-03T17:24:12.305946+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=What is it
+[2026-08-03T17:24:20.931145+00:00 | Yap/#everyone | fiaguhop137(1342173566828810271] Content=idk
+[2026-08-03T17:24:28.280126+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=Then
+[2026-08-03T17:24:29.877189+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=Why
+[2026-08-03T17:24:30.835096+00:00 | Yap/#everyone | fiaguhop137(1342173566828810271] Content=i saw it in a wifies video
+[2026-08-03T17:24:33.710400+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=Ok
+[2026-08-03T17:24:35.947118+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=Fine
+[2026-08-03T17:24:44.892327+00:00 | Yap/#everyone | fiaguhop137(1342173566828810271] Content=take screenie too
+[2026-08-03T17:24:46.491445+00:00 | Yap/#everyone | bossman_sir(727526906161004614] Content=im gonna go eat a banana for lunch
+[2026-08-03T17:24:50.643021+00:00 | Yap/#everyone | bossman_sir(727526906161004614] Content=https://klipy.com/gifs/banana-len-1
+[2026-08-03T17:24:52.561257+00:00 | Yap/#everyone | fiaguhop137(1342173566828810271] Content=good for you
+[2026-08-03T17:25:28.663758+00:00 | Yap/#everyone | bossman_sir(727526906161004614] Content=(i am always looking for a reason to post this gif)
+[2026-08-03T17:26:31.177204+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=Fia wa
+[2026-08-03T17:26:34.371985+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=*wait
+[2026-08-03T17:26:35.180178+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=R u
+[2026-08-03T17:26:42.091879+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=Going to public school
+[2026-08-03T17:26:43.317553+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=Or
+[2026-08-03T17:26:44.595985+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=Not
+[2026-08-03T17:26:46.513314+00:00 | Yap/#everyone | fiaguhop137(1342173566828810271] Content=lhs
+[2026-08-03T17:28:07.893396+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=https://youtube.com/shorts/jForTWu5bq4?si=waiDz7zcZRXjDhyw
+[2026-08-03T17:28:26.304162+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=rOoT bEeR iN a CoWbOy MuG
+[2026-08-03T17:45:37.716607+00:00 | Yap/#everyone | fiaguhop137(1342173566828810271] Content=you find anything?
+[2026-08-03T19:10:50.715426+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=GUYS
+[2026-08-03T19:10:51.992872+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=GUUYSSSSSS
+[2026-08-03T19:10:53.911055+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=I DDI ITTT
+[2026-08-03T19:10:55.512335+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=I
+[2026-08-03T19:10:56.152012+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=DID
+[2026-08-03T19:10:56.787025+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=ITT
+[2026-08-03T19:11:01.144217+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=SCREECHES
+[2026-08-03T19:11:01.791128+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=I (3)
+[2026-08-03T19:11:04.494949+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=I GOT
+[2026-08-03T19:11:05.730903+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=THE
+[2026-08-03T19:11:06.690453+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=THING
+[2026-08-03T19:11:11.801251+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=HEHHEHEHEHEHEEHEHEHEHE
+[2026-08-03T19:11:20.427869+00:00 | Yap/#everyone | bossman_sir(727526906161004614] Content=what
+[2026-08-03T19:11:23.622745+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=TIME TO vIOLENTLY BANG MY SHIT TO PURE TWINK AND SHADOW MILK
+[2026-08-03T19:11:30.013457+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=ITS MADE BY A HUMAN TOO
+[2026-08-03T19:11:30.224991+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=HEH
+[2026-08-03T19:11:31.291096+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=HEHHHH
+[2026-08-03T19:11:32.249092+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=HEHHHHHH
+[2026-08-03T19:11:39.278649+00:00 | Yap/#everyone | bossman_sir(727526906161004614] Content=what
+[2026-08-03T19:11:45.667235+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=wait
+[2026-08-03T19:11:49.187031+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=ITS IN SPANISH-
+[2026-08-03T19:13:56.445892+00:00 | Yap/#everyone | fiaguhop137(1342173566828810271] Content=???????????????
+[2026-08-03T19:14:05.253847+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=A (2)
+[2026-08-03T19:14:07.309007+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=A
+A
+[2026-08-03T19:14:08.267201+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=JUST
+[2026-08-03T19:14:08.906366+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=LET
+[2026-08-03T19:14:09.413732+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=ME
+[2026-08-03T19:14:10.140397+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=GOON
+[2026-08-03T19:14:10.705649+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=GAME
+[2026-08-03T19:14:11.780348+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=STUPID
+[2026-08-03T19:14:12.100148+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=A
+[2026-08-03T19:15:01.302879+00:00 | Yap/#everyone | fiaguhop137(1342173566828810271] Content=stop gooning
+[2026-08-03T19:15:23.868569+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=NOUUUUUHHHH I HAVE TO REDOWNLOAD IT
+[2026-08-03T19:15:28.466669+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=sCREECHES
+[2026-08-03T19:15:31.938512+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=why
+[2026-08-03T19:15:32.934764+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=no-
+[2026-08-03T19:15:52.422908+00:00 | Yap/#everyone | fiaguhop137(1342173566828810271] Content=okay, stop telling us about your gooning
+[2026-08-03T19:17:08.854832+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=why
+[2026-08-03T19:17:45.521884+00:00 | Yap/#everyone | bossman_sir(727526906161004614] Content=tbh it makes me concerned and uncomfortable
+[2026-08-03T19:19:09.229563+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=ok fine
+[2026-08-03T19:19:10.183503+00:00 | Yap/#everyone | twillight_no(1292531498695524470] Content=:1
+[2026-08-03T19:26:01.905566+00:00 | Yap/#everyone | bossman_sir(727526906161004614] Content=
+[2026-08-03T19:26:06.051290+00:00 | Yap/#everyone | bossman_sir(727526906161004614] Content=sky

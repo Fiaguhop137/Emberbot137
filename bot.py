@@ -198,16 +198,17 @@ async def console_controller():
                 break
             if cmd=="help":
                 cprint("= Available Console Commands\n"
-                       " - test                                     - Send diagnostic report to target(s)\n"
-                       " - echo <msg>                               - Send <msg> to target(s)\n"
-                       " - spam <number> <msg>                      - Send <number> of messages <msg> to target(s)\n"
-                       " - delay <secs> <cmd>                       - Execute <cmd> after <secs> seconds\n"
-                       " - stop                                     - Halt all active tasks\n"
-                       " - set <server|channel> <name|all>          - Target specific server/channel\n"
-                       " - servers                                  - List connected servers and channels\n"
-                       " - reboot <-c>                              - Initiates reboot and updates. Optional -c flag will open console\n"
-                       " - help                                     - Show this help menu\n"
-                       " - exit                                     - Shut down this bot")
+                       " - test                                    - Send diagnostic report to target(s)\n"
+                       " - echo <msg>                              - Send <msg> to target(s)\n"
+                       " - spam <number> <msg>                     - Send <number> of messages <msg> to target(s)\n"
+                       " - delay <secs> <cmd>                      - Execute <cmd> after <secs> seconds\n"
+                       " - tasks                                   - Lists all active tasks\n"
+                       " - cancel <task_id>                        - Halt active tasks by task id\n"
+                       " - set <server|channel> <name|all>         - Target specific server/channel\n"
+                       " - servers                                 - List connected servers and channels\n"
+                       " - reboot <-c>                             - Initiates reboot and updates. Optional -c flag will open console\n"
+                       " - help                                    - Show this help menu\n"
+                       " - exit                                    - Shut down this bot")
                 continue
             if cmd=="servers":
                 server_summary="= Connected Servers & Channels"
@@ -479,14 +480,16 @@ async def on_message(message: discord.Message):
         elif cmd=="help":
             help_text=(
                 "```markdown\n= Remote Console Commands:\n"
-                " - test                                  runs diagnostics\n"
-                " - echo <msg>                            repeats <msg> to the selected channel\n"
-                " - spam <number> <msg>                   spams <msg> <number times>\n"
-                " - stop                                  stops spamming\n"
-                " - delay <secs> <cmd>                    delays <secs> seconds then runs <cmd>\n"
-                " - set <server|channel> <name|all>       moves server/channel selector\n"
-                " - servers                               lists all detected servers\n"
-                " - reboot <-c>                           reboots Emberbot137. -c tag will open console\n```")
+                " - test                                    - Send diagnostic report to target(s)\n"
+                " - echo <msg>                              - Send <msg> to target(s)\n"
+                " - spam <number> <msg>                     - Send <number> of messages <msg> to target(s)\n"
+                " - delay <secs> <cmd>                      - Execute <cmd> after <secs> seconds\n"
+                " - tasks                                   - Lists all active tasks\n"
+                " - cancel <task_id>                        - Halt active tasks by task id\n"
+                " - set <server|channel> <name|all>         - Target specific server/channel\n"
+                " - servers                                 - List connected servers and channels\n"
+                " - reboot <-c>                             - Initiates reboot and updates. Optional -c flag will open console\n"
+                " - help                                    - Show this help menu\n```")
             await message.channel.send(help_text)
         elif cmd=="servers":
             server_summary=""

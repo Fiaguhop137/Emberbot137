@@ -88,7 +88,7 @@ async def do_echo(target:discord.abc.Messageable,message:str):
 async def do_spam(target:discord.abc.Messageable,count:int,message:str):
     for _ in range(count):
         await send_response(target,message)
-        asyncio.sleep(1)
+        await asyncio.sleep(1)
 async def run_delayed_command(delay:int,full_cmd_string:str,target_context:Optional[discord.abc.Messageable] = None):
     try:
         await asyncio.sleep(delay)
@@ -114,8 +114,8 @@ async def run_delayed_command(delay:int,full_cmd_string:str,target_context:Optio
                     for channel in channels:
                         await do_spam(channel,count,msg)
                 task=asyncio.create_task(run_spam())
-                active_spam_tasks.append(task)
-                task.add_done_callback(lambda t: active_spam_tasks.remove(t) if t in active_spam_tasks else None)
+                active_tasks.append(task)
+                task.add_done_callback(lambda t:active_tasks.remove(t) if t in active_tasks else None)
     except asyncio.CancelledError:
         pass
 def register_task(task:asyncio.Task,description:str)->int:
@@ -167,7 +167,7 @@ def resolve_targets(cmd_type:str)->list[discord.abc.Messageable]:
                 targets.append(channel)
     return targets
 async def console_controller():
-    global current_target_server,current_target_channel,active_spam_tasks,pending_reboot,reboot_mode
+    global current_target_server,current_target_channel,active_tasks,pending_reboot,reboot_mode
     await emberbot137.wait_until_ready()
     cprint(f"\n[Active] Connected to {len(emberbot137.guilds)} channel{'' if len(emberbot137.guilds)==1 else 's'} \nCurrent Target Channel: {current_target_server}/#{current_target_channel} \nType help for a list of commands")
     loop=asyncio.get_running_loop()
@@ -196,13 +196,6 @@ async def console_controller():
                     cprint("[Warning] Reboot initiated. \n[Warning] Rebooting...")
                 pending_reboot=True
                 break
-            if cmd=="stop":
-                count=len(active_spam_tasks)
-                for task in active_spam_tasks:
-                    task.cancel()
-                active_spam_tasks.clear()
-                cprint(f"[Success] Cancelled {count} active task{'' if count==1 else 's'}.")
-                continue
             if cmd=="help":
                 cprint("= Available Console Commands\n"
                        " - test                                     - Send diagnostic report to target(s)\n"
@@ -296,7 +289,7 @@ async def console_controller():
                 task=asyncio.create_task(run_spam())
                 tid=register_task(task,f"Spaming {msg[:20]} {count} times")
                 cprint(f"[Success] Initiated background spam task #{tid} across {len(channels)} target{'' if len(channels)==1 else 's'}.")
-                active_spam_tasks.append(task)
+                active_tasks.append(task)
             elif cmd=="delay":
                 delay_parts = args.split(" ",1)
                 if len(delay_parts)<2 or not delay_parts[0].isdigit():
@@ -305,9 +298,7 @@ async def console_controller():
                 delay_seconds=int(delay_parts[0])
                 inner_cmd=delay_parts[1]
                 task=asyncio.create_task(run_delayed_command(delay_seconds,inner_cmd))
-                active_spam_tasks.append(task)
-                task=asyncio.create_task(run_delayed_command(delay_seconds,inner_cmd,message.channel))
-                tid=register_task(task,f"Running {inner_cmd} in {delay_seconds}{'' if delay_seconds==1 else 's'}")
+                tid=register_task(task, f"Running {inner_cmd} in {delay_seconds}s")
                 cprint(f"[Success] Scheduled command to run in {delay_seconds}{'' if delay_seconds==1 else 's'}.")
             elif cmd=="tasks":
                 if not active_tasks:
@@ -319,6 +310,13 @@ async def console_controller():
                 cprint(summary)
                 continue
             elif cmd=="cancel":
+                if not args:
+                    count=len(active_tasks)
+                    for info in active_tasks.values():
+                        info["task"].cancel()
+                    active_tasks.clear()
+                    cprint(f"[Success] Cancelled {count} active task{'' if count==1 else 's'}.")
+                    continue
                 if not args.isdigit():
                     cprint("[Error] Format: cancel <task_id>")
                     continue
@@ -336,7 +334,7 @@ async def console_controller():
             await asyncio.sleep(5)
 @emberbot137.event
 async def on_message(message: discord.Message):
-    global current_target_server,current_target_channel,active_spam_tasks,pending_reboot,reboot_mode,last_chat_data
+    global current_target_server,current_target_channel,active_tasks,pending_reboot,reboot_mode,last_chat_data
     if message.guild:
         guild_name,channel_name,author_tag,now=message.guild.name,message.channel.name,f"{message.author.name}#{message.author.discriminator}" if message.author.discriminator!="0" else message.author.name,datetime.now(timezone.utc).isoformat()
         if (last_chat_data["guild"]==guild_name and last_chat_data["channel"]==channel_name and last_chat_data["author_id"]==message.author.id and last_chat_data["content"]==message.content):
@@ -367,17 +365,37 @@ async def on_message(message: discord.Message):
                 log_action(guild=message.guild,channel=message.channel,user=message.author,command="reboot -c",action="Remote reboot initated. Opening Console")
             else:
                 reboot_mode="restart.sh"
-                await message.channel.send("`Warning] Reboot initiated. \n[Warning] Rebooting...`")
+                await message.channel.send("`[Warning] Reboot initiated. \n[Warning] Rebooting...`")
                 log_action(guild=message.guild,channel=message.channel,user=message.author,command="reboot",action="Remote reboot initated")
             pending_reboot=True
             return
-        if cmd=="stop":
-            count=len(active_spam_tasks)
-            for task in active_spam_tasks:
-                task.cancel()
-            active_spam_tasks.clear()
-            await message.channel.send(f"`[Success] Cancelled {count} active task{'' if count==1 else 's'}.`")
-            log_action(guild=message.guild,channel=message.channel,user=message.author,command="stop",action=f"Cancelled {count} task{'' if count==1 else 's'}")
+        elif cmd=="tasks":
+            if not active_tasks:
+                summary="[Warning] No active background tasks found"
+            else:
+                summary="= Active Background Tasks"
+                for tid,info in active_tasks.items():
+                    summary+=f"\n - {tid}: {info['description']}. Started at {info['started_at']}"
+            cprint(summary)
+            return
+        if cmd=="cancel":
+            if not args:
+                count=len(active_tasks)
+                for info in active_tasks.values():
+                    info["task"].cancel()
+                active_tasks.clear()
+                await message.channel.send(f"`[Success] Cancelled {count} active task{'' if count==1 else 's'}.`")
+                return
+            if not args.isdigit():
+                cprint("[Error] Format: cancel <task_id>")
+                return
+            target_id=int(args)
+            if target_id in active_tasks:
+                active_tasks[target_id]["task"].cancel()
+                del active_tasks[target_id]
+                cprint(f"[Success] Cancelled task #{target_id}.")
+            else:
+                cprint(f"[Error] Task ID [{target_id}] not found.")
             return
         if cmd=="set":
             sub_parts=args.split(" ",1)
@@ -443,11 +461,10 @@ async def on_message(message: discord.Message):
                 msg=spam_parts[1]
                 async def run_spam():
                     for channel in channels:
-                        await do_spam(channel,count,msg)
-                task=asyncio.create_task(run_spam())
-                active_spam_tasks.append(task)
-                task.add_done_callback(lambda t: active_spam_tasks.remove(t) if t in active_spam_tasks else None)
-                await message.channel.send(f"`[Success] Initiated background spam task across {len(channels)} target{'' if len(channels)==1 else 's'}.`")
+                        await do_spam(channel, count, msg)
+                task = asyncio.create_task(run_spam())
+                tid = register_task(task, f"Spaming {msg[:20]} {count} time{'' if count==1 else 's'}")
+                await message.channel.send(f"`[Success] Initiated background spam task #{tid} across {len(channels)} target{'' if len(channels)==1 else 's'}.`")
                 log_action(guild=message.guild, channel=message.channel, user=message.author, command="spam", action=f"Background spam task: {count}x: {msg} started")
             else:cprint("[Error] Invalid syntax. Format: spam <number> <message>")
         elif cmd=="delay":
@@ -455,9 +472,8 @@ async def on_message(message: discord.Message):
             if len(delay_parts)>=2 and delay_parts[0].isdigit():
                 delay_seconds=int(delay_parts[0])
                 inner_cmd=delay_parts[1]
-                task=asyncio.create_task(run_delayed_command(delay_seconds,inner_cmd,message.channel))
-                active_spam_tasks.append(task)
-                task.add_done_callback(lambda t: active_spam_tasks.remove(t) if t in active_spam_tasks else None)
+                task=asyncio.create_task(run_delayed_command(delay_seconds,inner_cmd))
+                tid=register_task(task, f"Running {inner_cmd} in {delay_seconds}{'' if delay_seconds==1 else 's'}")
                 await message.channel.send(f"`[Success] Scheduled command to run in {delay_seconds}{'' if delay_seconds==1 else 's'}.`")
                 log_action(guild=message.guild,channel=message.channel,user=message.author,command="delay",action=f"Remote delay {delay_seconds}{'' if delay_seconds==1 else 's'}: {inner_cmd}")
         elif cmd=="help":

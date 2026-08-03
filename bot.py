@@ -80,7 +80,7 @@ def generate_diagnostic_report(target:discord.abc.Messageable)->str:
     return f"```markdown= Diagnostic Report\n - Status: {status}\n - Host Machine: {hostname}\n - Discord Server: {server_name}({server_id})\n - Latency: {latency_ms}ms\n - Token status: {env_status}\n - Connected Servers: {server_count} servers connected. Run ~servers to see more\n - Permissions: {perms_str}```"
 async def do_test(target:discord.abc.Messageable):
     report_text=generate_diagnostic_report(target)
-    await send_response(target,report_text.strip('markdown')
+    await send_response(target,report_text.strip('markdown'))
     cprint(report_text.strip("`").strip("markdown"))
 async def do_echo(target:discord.abc.Messageable,message:str):
     await send_response(target,message)

@@ -381,6 +381,7 @@ async def on_message(message: discord.Message):
             last_chat_data["count"]=1
     if message.guild and "yap" in message.guild.name.lower() and message.channel.name.lower()=="emberbot137-remote-console":
         content=message.content.strip()
+        # There is exactly nothing here
         if content.startswith("~"):
             content=content[1:].strip()
         parts=content.split(" ",1)

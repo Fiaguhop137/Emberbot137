@@ -216,6 +216,7 @@ async def console_controller():
                        " - cancel <task_id>                        - Halt active tasks by task id\n"
                        " - set <server|channel> <name|all>         - Target specific server/channel\n"
                        " - servers                                 - List connected servers and channels\n"
+                       " - volume <number>                         - Changes volume to <number>%\n"
                        " - reboot <-c>                             - Initiates reboot and updates. Optional -c flag will open console\n"
                        " - help                                    - Show this help menu\n"
                        " - exit                                    - Shut down this bot")
@@ -503,6 +504,7 @@ async def on_message(message: discord.Message):
                 " - cancel <task_id>                        - Halt active tasks by task id\n"
                 " - set <server|channel> <name|all>         - Target specific server/channel\n"
                 " - servers                                 - List connected servers and channels\n"
+                " - volume <number>                         - Changes volume to <number>%\n"
                 " - reboot <-c>                             - Initiates reboot and updates. Optional -c flag will open console\n"
                 " - help                                    - Show this help menu\n```")
             await message.channel.send(help_text)

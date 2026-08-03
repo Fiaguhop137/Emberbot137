@@ -59,7 +59,7 @@ def generate_diagnostic_report(target:discord.abc.Messageable)->str:
     status="Offline" if emberbot137.is_closed() else "Online"
     if hostname.lower()=="plasmadmin-xps-8910":
         hostname="plasmadmin-xps-8910(firebot)"
-    latency_ms=round(emberbot137.latency * 1000)
+    latency_ms=round(emberbot137.latency*1000)
     env_status="loaded" if os.getenv("DISCORD_TOKEN") else "missing"
     server_count=len(emberbot137.guilds)
     server_name=server.name if server else "Console"
@@ -77,7 +77,7 @@ def generate_diagnostic_report(target:discord.abc.Messageable)->str:
             if perms.manage_messages:audit_perms.append("Manage Messages")
         perms_str=", ".join(audit_perms) if audit_perms else "Standard User"
     else:perms_str="Unknown"
-    return f"```markdown\n = Diagnostic Report\n - Status: {status}\n - Host Machine: {hostname}\n - Discord Server: {server_name}({server_id})\n - Latency: {latency_ms}ms\n - Token status: {env_status}\n - Connected Servers: {server_count} servers connected. Run ~servers to see more\n - Permissions: {perms_str}```"
+    return f"```markdown\= Diagnostic Report\n - Status: {status}\n - Host Machine: {hostname}\n - Discord Server: {server_name}({server_id})\n - Latency: {latency_ms}ms\n - Token status: {env_status}\n - Connected Servers: {server_count} servers connected. Run ~servers to see more\n - Permissions: {perms_str}```"
 async def do_test(target:discord.abc.Messageable):
     report_text=generate_diagnostic_report(target)
     await send_response(target,report_text)
@@ -87,7 +87,7 @@ async def do_echo(target:discord.abc.Messageable,message:str):
 async def do_spam(target:discord.abc.Messageable,count:int,message:str):
     for _ in range(count):
         await send_response(target,message)
-async def run_delayed_command(delay: int, full_cmd_string: str, target_context: Optional[discord.abc.Messageable] = None):
+async def run_delayed_command(delay:int,full_cmd_string:str,target_context:Optional[discord.abc.Messageable] = None):
     try:
         await asyncio.sleep(delay)
         parts=full_cmd_string.split(" ",1)
@@ -192,7 +192,7 @@ async def console_controller():
                 cprint(f"[Success] Cancelled {count} active task{'' if count==1 else 's'}.")
                 continue
             if cmd=="help":
-                cprint("\n--- Available Console Commands ---\n"
+                cprint("--- Available Console Commands ---\n"
                        " - test                                     - Send diagnostic report to target(s)\n"
                        " - echo <msg>                               - Send <msg> to target(s)\n"
                        " - spam <number> <msg>                      - Send <number> of messages <msg> to target(s)\n"
@@ -205,7 +205,7 @@ async def console_controller():
                        " - exit                                     - Shut down this bot\n")
                 continue
             if cmd=="servers":
-                server_summary="\n = Connected Servers & Channels\n"
+                server_summary="= Connected Servers & Channels\n"
                 for g in emberbot137.guilds:
                     channels=[c.name for c in g.text_channels if c.permissions_for(g.me).send_messages]
                     server_summary+=f" - {g.name}(ID: {g.id})\n  ↳ Channels: {', '.join(channels)}\n"

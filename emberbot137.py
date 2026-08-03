@@ -11,6 +11,7 @@ logger=logging.getLogger("Emberbot137")
 intents=discord.Intents.default()
 intents.guilds,intents.guild_messages,intents.message_content,intents.members=True,True,True,True
 emberbot137=discord.Client(intents=intents)
+emberbot137.command_prefix="~"
 current_target_server,current_target_channel="yap","everyone"
 active_tasks:dict[int,dict]={}
 task_id_counter:int=1

@@ -548,6 +548,7 @@ async def on_message(message: discord.Message):
                 await message.channel.send("[Error] Missing volume. Format: volume <number>")
                 return
             await set_system_volume(args)
+    await emberbot137.process_commands(message)
 @emberbot137.event
 async def on_ready():
     logger.info(f"Logged in as {emberbot137.user}({emberbot137.user.id})")

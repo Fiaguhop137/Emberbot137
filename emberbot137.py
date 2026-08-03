@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO,format="%(message)s")
 logger=logging.getLogger("Emberbot137")
 intents=discord.Intents.default()
 intents.guilds,intents.guild_messages,intents.message_content,intents.members=True,True,True,True
-emberbot137=commands.Bot(command_prefix="~",intents=intents,help_command=None)
+emberbot137=discord.Client(intents=intents)
 current_target_server,current_target_channel="yap","everyone"
 active_tasks:dict[int,dict]={}
 task_id_counter:int=1
@@ -197,7 +197,7 @@ async def console_controller():
                 flush_chat_log()
                 await emberbot137.close()
                 break
-            if cmd.startswith("reboot"):
+            elif cmd.startswith("reboot"):
                 if "-c" in cmd or args=="-c":
                     reboot_mode="open_console.sh"
                     cprint("[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console. \n[Warning] Rebooting...")
@@ -206,7 +206,7 @@ async def console_controller():
                     cprint("[Warning] Reboot initiated. \n[Warning] Rebooting...")
                 pending_reboot=True
                 break
-            if cmd=="help":
+            elif cmd=="help":
                 cprint("= Available Console Commands\n"
                        " - test                                    - Send diagnostic report to target(s)\n"
                        " - echo <msg>                              - Send <msg> to target(s)\n"
@@ -221,14 +221,28 @@ async def console_controller():
                        " - help                                    - Show this help menu\n"
                        " - exit                                    - Shut down this bot")
                 continue
-            if cmd=="servers":
+            elif cmd=="servers":
                 server_summary="= Connected Servers & Channels"
                 for g in emberbot137.guilds:
                     channels=[c.name for c in g.text_channels if c.permissions_for(g.me).send_messages]
                     server_summary+=f"\n - {g.name}(ID: {g.id})\n  ↳ Channels: {', '.join(channels)}"
                 cprint(server_summary)
                 continue
-            if cmd=="set":
+            elif cmd=="tail":
+                if not args:
+                    cprint("[Error] Invalid syntax. Try ~tail <filename>")
+                    continue
+                try:
+                    with open(args,"r",encoding="utf-8") as f:
+                        lines=f.readlines()
+                        output="".join(lines[-15:])
+                        if not output:
+                            output="[Warning] Log file is empty."
+                    cprint(output)
+                except FileNotFoundError:
+                    cprint(f"[Error] File '{args}' not found.")
+                continue
+            elif cmd=="set":
                 sub_parts=args.split(" ",1)
                 sub_cmd=sub_parts[0].lower() if sub_parts else ""
                 sub_val=sub_parts[1] if len(sub_parts)>1 else ""
@@ -275,7 +289,7 @@ async def console_controller():
                 continue
             channels=resolve_targets(cmd)
             if not channels:
-                cprint(f"[Error] {current_target_server}/#{current_target_channel} not found. Use the 'servers' command to check names.")
+                cprint(f"[Error] {current_target_server}/#{current_target_channel} not found. Try ~servers to check names.")
                 continue
             if cmd=="test":
                 for channel in channels:
@@ -346,7 +360,7 @@ async def console_controller():
                     continue
                 await set_system_volume(args)
             else:
-                cprint(f"[Error] Unknown local command: '{cmd}'. Try the help command for more options.")
+                cprint(f"[Error] Unknown local command: '{cmd}'. Try ~help for more options.")
         except Exception as e:
             await asyncio.sleep(5)
 @emberbot137.event
@@ -513,7 +527,21 @@ async def on_message(message: discord.Message):
             for g in emberbot137.guilds:
                 channels=[c.name for c in g.text_channels if c.permissions_for(g.me).send_messages]
                 server_summary+=f"-{g.name}({g.id})\n  ↳ Channels: {', '.join(channels)}\n"
-            await message.channel.send(f"```markdown\n= Connected Servers\n{server_summary}```") 
+            await message.channel.send(f"```markdown\n= Connected Servers\n{server_summary}```")
+        elif cmd=="tail":
+            if not args:
+                await message.channel.send("[Error] Invalid syntax. Try ~tail <filename>")
+                return
+            try:
+                with open(args,"r",encoding="utf-8") as f:
+                    lines=f.readlines()
+                    output="".join(lines[-15:])
+                    if not output:
+                        output="[Warning] Log file is empty."
+                await message.channel.send(output)
+            except FileNotFoundError:
+                await message.channel.send(f"[Error] File '{args}' not found.")
+            return
         elif cmd=="volume":
             if not args:
                 await message.channel.send("[Error] Missing volume. Format: volume <number>")

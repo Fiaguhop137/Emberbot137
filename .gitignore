@@ -4,3 +4,4 @@ __pycache__/
 *.py[cod]
 venv/
 emberbot137.log
+chat.log

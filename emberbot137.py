@@ -381,9 +381,11 @@ async def on_message(message: discord.Message):
             last_chat_data["count"]=1
     if message.guild and "yap" in message.guild.name.lower() and message.channel.name.lower()=="emberbot137-remote-console":
         content=message.content.strip()
+        if content.startswith("~"):
+            content=content[1:].strip()
         parts=content.split(" ",1)
         cmd=parts[0].lower()
-        args=parts[1] if len(parts) > 1 else ""
+        args=parts[1] if len(parts)>1 else ""
         if cmd=="exit":
             await message.channel.send("`[Error] the exit command cannot be executed remotely. You can open console with 'reboot -c' to exit locally.`")
             return

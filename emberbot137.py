@@ -168,7 +168,7 @@ async def set_system_volume(volume_str:str):
     try:
         level=int(volume_str.strip('%').strip())
         level=max(0,min(100,level))
-        subprocess.run(["amixer","-c","0","set","Master",f"{level}%"],check=True,capture_output=True)
+        subprocess.run(["amixer","set","Master",f"{level}%"],check=True,capture_output=True)
         cprint(f"[Success] Volume set to {level}%")
     except ValueError:
         cprint("[Error] Invalid volume level. Use a number like `~volume 50`.")

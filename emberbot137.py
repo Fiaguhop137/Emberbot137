@@ -166,7 +166,10 @@ async def run_cmd(cmd,args,lore,message=None):
     if not channels:
         if message and hasattr(message, "channel"):
             channels=[message.channel]
+            return
         cprint(f"[Error] {current_target_server}/#{current_target_channel} not found. Try ~servers to check names.")
+    if not message and lore=="remote":
+        cprint("[Error] Remote command execution requires a message context.")
         return
     if cmd=="exit":
         if lore=="local":
@@ -320,7 +323,6 @@ async def run_cmd(cmd,args,lore,message=None):
                 log_action(guild=message.guild,channel=message.channel,user=message.author,command="spam",action=f"Spam task #{tid} initiated: {count}x {msg[:20]}")
             except Exception as e:
                 cprint(f"[Error] Failed to log remote spam action: {e}")
-        active_tasks.append(task)
     elif cmd=="delay":
         delay_parts = args.split(" ",1)
         if len(delay_parts)<2 or not delay_parts[0].isdigit():

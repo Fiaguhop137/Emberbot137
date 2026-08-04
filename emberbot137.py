@@ -96,24 +96,7 @@ async def run_delayed_command(delay:int,full_cmd_string:str,target_context:Optio
         channels=resolve_targets(cmd)
         if not channels and target_context:
             channels=[target_context]
-        if cmd=="test":
-            for channel in channels:
-                await do_test(channel)
-        elif cmd=="echo":
-            if args:
-                for channel in channels:
-                    await do_echo(channel,args)
-        elif cmd=="spam":
-            spam_parts=args.split(" ", 1)
-            if len(spam_parts)>=2 and spam_parts[0].isdigit():
-                count=int(spam_parts[0])
-                msg=spam_parts[1]
-                async def run_spam():
-                    for channel in channels:
-                        await do_spam(channel,count,msg)
-                task=asyncio.create_task(run_spam())
-                active_tasks.append(task)
-                task.add_done_callback(lambda t:active_tasks.remove(t) if t in active_tasks else None)
+        run_cmd(cmd,args)
     except asyncio.CancelledError:
         pass
 def register_task(task:asyncio.Task,description:str)->int:
@@ -130,7 +113,7 @@ async def reboot_watcher():
     global pending_reboot
     while not emberbot137.is_closed():
         if pending_reboot:
-            cprint(f"[Warning] Reboot command detected. Executing restart sequence...")
+            cprint(f"[Warning] Reboot command detected. \n[Warning] Rebooting...")
             flush_chat_log()
             subprocess.Popen([f"./{reboot_mode}"],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,stdin=subprocess.DEVNULL,start_new_session=True)
             await emberbot137.close()
@@ -176,6 +159,177 @@ async def set_system_volume(volume_str:str):
         cprint(f"[Error] ALSA rejected the command: {e.stderr.decode().strip()}")
     except Exception as e:
         cprint(f"[Error] Failed to adjust volume: {e}")
+async def run_cmd(cmd,args):
+    if cmd=="exit":
+        cprint("[Warning] Shutting down Emberbot137...")
+        flush_chat_log()
+        await emberbot137.close()
+        break
+    elif cmd=="reboot":
+        if args=="-c":
+            reboot_mode="open_console.sh"
+            cprint("[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console.")
+        else:
+            reboot_mode="restart.sh"
+            cprint("[Warning] Reboot initiated.")
+        pending_reboot=True
+        break
+    elif cmd=="help":
+        cprint("= Available Console Commands\n"
+               " - test                                    - Send diagnostic report to target(s)\n"
+               " - echo <msg>                              - Send <msg> to target(s)\n"
+               " - spam <number> <msg>                     - Send <number> of messages <msg> to target(s)\n"
+               " - delay <secs> <cmd>                      - Execute <cmd> after <secs> seconds\n"
+               " - tasks                                   - Lists all active tasks\n"
+               " - cancel <task_id>                        - Halt active tasks by task id\n"
+               " - set <server|channel> <name|all>         - Target specific server/channel\n"
+               " - tail <file>                             - Outputs last 15 lines of any file\n"
+               " - servers                                 - List connected servers and channels\n"
+               " - volume <number>                         - Changes volume to <number>%\n"
+               " - reboot <-c>                             - Initiates reboot and updates. Optional -c flag will open console\n"
+               " - help                                    - Show this help menu\n"
+               " - exit                                    - Shut down this bot")
+        continue
+    elif cmd=="servers":
+        server_summary="= Connected Servers & Channels"
+        for g in emberbot137.guilds:
+            channels=[c.name for c in g.text_channels if c.permissions_for(g.me).send_messages]
+            server_summary+=f"\n - {g.name}(ID: {g.id})\n  ↳ Channels: {', '.join(channels)}"
+        cprint(server_summary)
+        continue
+    elif cmd=="tail":
+        if not args:
+            cprint("[Error] Invalid syntax. Try ~tail <filename>")
+            continue
+        try:
+            with open(args,"r",encoding="utf-8") as f:
+                lines=f.readlines()
+                output="".join(lines[-15:])
+                if not output:
+                    output="[Warning] Log file is empty."
+            cprint(output)
+        except FileNotFoundError:
+            cprint(f"[Error] File '{args}' not found.")
+        continue
+    elif cmd=="set":
+        sub_parts=args.split(" ",1)
+        sub_cmd=sub_parts[0].lower() if sub_parts else ""
+        sub_val=sub_parts[1] if len(sub_parts)>1 else ""
+        if sub_cmd=="server":
+            if not sub_val:
+                cprint(f"[Success] Retrieved target server: {current_target_server}")
+            else:
+                if sub_val.lower()=="all":
+                    current_target_server="all"
+                    cprint("[Success] Target server updated to: all servers")
+                else:
+                    matched_server=current_target_server
+                    for g in emberbot137.guilds:
+                        if sub_val.lower() in g.name.lower():
+                            matched_server=g.name
+                            break
+                    current_target_server=matched_server
+                    cprint(f"[Success] Target server updated to: {matched_server}")
+        elif sub_cmd=="channel":
+            if not sub_val:
+                cprint(f"[Success] Retrieved target channel: #{current_target_channel}")
+            else:
+                clean_val=sub_val.removeprefix("#").lower()
+                if clean_val=="emberbot137-remote-console" or clean_val=="all":
+                    current_target_channel="all"
+                    cprint("[Error] Target channel 'emberbot137-remote-console' is restricted. Defaulted channel target to: all channels")
+                else:
+                    matched_channel=clean_val
+                    for g in emberbot137.guilds:
+                        if current_target_server!="all" and current_target_server.lower() not in g.name.lower():
+                            continue
+                        for c in g.text_channels:
+                            if c.name.lower()==clean_val or c.name.lower().startswith(clean_val):
+                                matched_channel=c.name
+                                break
+                    current_target_channel=matched_channel
+                    cprint(f"[Success] Target channel updated to: #{matched_channel}")
+        else:
+            cprint("[Error] Invalid syntax. Format: set <server|channel> <name|all>")
+        cprint(f"[Success] Retrieved active channel: {current_target_server}/#{current_target_channel}")
+        continue
+    if not emberbot137.guilds:
+        cprint("[Error] Bot is not currently in any servers.")
+        continue
+    channels=resolve_targets(cmd)
+    if not channels:
+        cprint(f"[Error] {current_target_server}/#{current_target_channel} not found. Try ~servers to check names.")
+        continue
+    if cmd=="test":
+        for channel in channels:
+            await do_test(channel)
+        cprint(f"[Success] Executed test diagnostics across {len(channels)} target{'' if len(channels)==1 else 's'}.")
+    elif cmd=="echo":
+        if not args:
+            cprint("[Error] Missing message. Format: echo <msg>")
+            continue
+        for channel in channels:
+            await do_echo(channel,args)
+        cprint(f"[Success] Echoed message to {len(channels)} target{'' if len(channels)==1 else 's'}")
+    elif cmd=="spam":
+        spam_parts=args.split(" ",1)
+        if len(spam_parts)<2 or not spam_parts[0].isdigit():
+            cprint("[Error] Invalid syntax. Format: spam <number> <message>")
+            continue
+        count=int(spam_parts[0])
+        msg=spam_parts[1]
+        async def run_spam():
+            for channel in channels:
+                await do_spam(channel,count,msg)
+        task=asyncio.create_task(run_spam())
+        tid=register_task(task,f"Spaming {msg[:20]} {count} times")
+        cprint(f"[Success] Initiated background spam task #{tid} across {len(channels)} target{'' if len(channels)==1 else 's'}.")
+        active_tasks.append(task)
+    elif cmd=="delay":
+        delay_parts = args.split(" ",1)
+        if len(delay_parts)<2 or not delay_parts[0].isdigit():
+            cprint("[Error] Format: delay <seconds> <command>")
+            continue
+        delay_seconds=int(delay_parts[0])
+        inner_cmd=delay_parts[1]
+        task=asyncio.create_task(run_delayed_command(delay_seconds,inner_cmd))
+        tid=register_task(task, f"Running {inner_cmd} in {delay_seconds}s")
+        cprint(f"[Success] Scheduled command to run in {delay_seconds}{'' if delay_seconds==1 else 's'}.")
+    elif cmd=="tasks":
+        if not active_tasks:
+            summary="[Warning] No active background tasks found"
+        else:
+            summary="= Active Background Tasks"
+            for tid,info in active_tasks.items():
+                summary+=f"\n - {tid}: {info['description']}. Started at {info['started_at']}"
+        cprint(summary)
+        continue
+    elif cmd=="cancel":
+        if not args:
+            count=len(active_tasks)
+            for info in active_tasks.values():
+                info["task"].cancel()
+            active_tasks.clear()
+            cprint(f"[Success] Cancelled {count} active task{'' if count==1 else 's'}.")
+            continue
+        if not args.isdigit():
+            cprint("[Error] Format: cancel <task_id>")
+            continue
+        target_id=int(args)
+        if target_id in active_tasks:
+            active_tasks[target_id]["task"].cancel()
+            del active_tasks[target_id]
+            cprint(f"[Success] Cancelled task #{target_id}.")
+        else:
+            cprint(f"[Error] Task #{target_id} not found.")
+        continue
+    elif cmd=="volume":
+        if not args:
+            cprint("[Error] Missing volume. Format: volume <number>")
+            continue
+        await set_system_volume(args)
+    else:
+        cprint(f"[Error] Unknown local command: '{cmd}'. Try ~help for more options.")
 async def console_controller():
     global current_target_server,current_target_channel,active_tasks,pending_reboot,reboot_mode
     await emberbot137.wait_until_ready()
@@ -192,176 +346,7 @@ async def console_controller():
             parts=line.strip().split(" ",1)
             cmd=parts[0].lower()
             args=parts[1] if len(parts)>1 else ""
-            if cmd=="exit":
-                cprint("[Warning] Shutting down Emberbot137...")
-                flush_chat_log()
-                await emberbot137.close()
-                break
-            elif cmd.startswith("reboot"):
-                if "-c" in cmd or args=="-c":
-                    reboot_mode="open_console.sh"
-                    cprint("[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console. \n[Warning] Rebooting...")
-                else:
-                    reboot_mode="restart.sh"
-                    cprint("[Warning] Reboot initiated. \n[Warning] Rebooting...")
-                pending_reboot=True
-                break
-            elif cmd=="help":
-                cprint("= Available Console Commands\n"
-                       " - test                                    - Send diagnostic report to target(s)\n"
-                       " - echo <msg>                              - Send <msg> to target(s)\n"
-                       " - spam <number> <msg>                     - Send <number> of messages <msg> to target(s)\n"
-                       " - delay <secs> <cmd>                      - Execute <cmd> after <secs> seconds\n"
-                       " - tasks                                   - Lists all active tasks\n"
-                       " - cancel <task_id>                        - Halt active tasks by task id\n"
-                       " - set <server|channel> <name|all>         - Target specific server/channel\n"
-                       " - tail <file>                             - Outputs last 15 lines of any file\n"
-                       " - servers                                 - List connected servers and channels\n"
-                       " - volume <number>                         - Changes volume to <number>%\n"
-                       " - reboot <-c>                             - Initiates reboot and updates. Optional -c flag will open console\n"
-                       " - help                                    - Show this help menu\n"
-                       " - exit                                    - Shut down this bot")
-                continue
-            elif cmd=="servers":
-                server_summary="= Connected Servers & Channels"
-                for g in emberbot137.guilds:
-                    channels=[c.name for c in g.text_channels if c.permissions_for(g.me).send_messages]
-                    server_summary+=f"\n - {g.name}(ID: {g.id})\n  ↳ Channels: {', '.join(channels)}"
-                cprint(server_summary)
-                continue
-            elif cmd=="tail":
-                if not args:
-                    cprint("[Error] Invalid syntax. Try ~tail <filename>")
-                    continue
-                try:
-                    with open(args,"r",encoding="utf-8") as f:
-                        lines=f.readlines()
-                        output="".join(lines[-15:])
-                        if not output:
-                            output="[Warning] Log file is empty."
-                    cprint(output)
-                except FileNotFoundError:
-                    cprint(f"[Error] File '{args}' not found.")
-                continue
-            elif cmd=="set":
-                sub_parts=args.split(" ",1)
-                sub_cmd=sub_parts[0].lower() if sub_parts else ""
-                sub_val=sub_parts[1] if len(sub_parts)>1 else ""
-                if sub_cmd=="server":
-                    if not sub_val:
-                        cprint(f"[Success] Retrieved target server: {current_target_server}")
-                    else:
-                        if sub_val.lower()=="all":
-                            current_target_server="all"
-                            cprint("[Success] Target server updated to: all servers")
-                        else:
-                            matched_server=current_target_server
-                            for g in emberbot137.guilds:
-                                if sub_val.lower() in g.name.lower():
-                                    matched_server=g.name
-                                    break
-                            current_target_server=matched_server
-                            cprint(f"[Success] Target server updated to: {matched_server}")
-                elif sub_cmd=="channel":
-                    if not sub_val:
-                        cprint(f"[Success] Retrieved target channel: #{current_target_channel}")
-                    else:
-                        clean_val=sub_val.removeprefix("#").lower()
-                        if clean_val=="emberbot137-remote-console" or clean_val=="all":
-                            current_target_channel="all"
-                            cprint("[Error] Target channel 'emberbot137-remote-console' is restricted. Defaulted channel target to: all channels")
-                        else:
-                            matched_channel=clean_val
-                            for g in emberbot137.guilds:
-                                if current_target_server!="all" and current_target_server.lower() not in g.name.lower():
-                                    continue
-                                for c in g.text_channels:
-                                    if c.name.lower()==clean_val or c.name.lower().startswith(clean_val):
-                                        matched_channel=c.name
-                                        break
-                            current_target_channel=matched_channel
-                            cprint(f"[Success] Target channel updated to: #{matched_channel}")
-                else:
-                    cprint("[Error] Invalid syntax. Format: set <server|channel> <name|all>")
-                cprint(f"[Success] Retrieved active channel: {current_target_server}/#{current_target_channel}")
-                continue
-            if not emberbot137.guilds:
-                cprint("[Error] Bot is not currently in any servers.")
-                continue
-            channels=resolve_targets(cmd)
-            if not channels:
-                cprint(f"[Error] {current_target_server}/#{current_target_channel} not found. Try ~servers to check names.")
-                continue
-            if cmd=="test":
-                for channel in channels:
-                    await do_test(channel)
-                cprint(f"[Success] Executed test diagnostics across {len(channels)} target{'' if len(channels)==1 else 's'}.")
-            elif cmd=="echo":
-                if not args:
-                    cprint("[Error] Missing message. Format: echo <msg>")
-                    continue
-                for channel in channels:
-                    await do_echo(channel,args)
-                cprint(f"[Success] Echoed message to {len(channels)} target{'' if len(channels)==1 else 's'}")
-            elif cmd=="spam":
-                spam_parts=args.split(" ",1)
-                if len(spam_parts)<2 or not spam_parts[0].isdigit():
-                    cprint("[Error] Invalid syntax. Format: spam <number> <message>")
-                    continue
-                count=int(spam_parts[0])
-                msg=spam_parts[1]
-                async def run_spam():
-                    for channel in channels:
-                        await do_spam(channel,count,msg)
-                task=asyncio.create_task(run_spam())
-                tid=register_task(task,f"Spaming {msg[:20]} {count} times")
-                cprint(f"[Success] Initiated background spam task #{tid} across {len(channels)} target{'' if len(channels)==1 else 's'}.")
-                active_tasks.append(task)
-            elif cmd=="delay":
-                delay_parts = args.split(" ",1)
-                if len(delay_parts)<2 or not delay_parts[0].isdigit():
-                    cprint("[Error] Format: delay <seconds> <command>")
-                    continue
-                delay_seconds=int(delay_parts[0])
-                inner_cmd=delay_parts[1]
-                task=asyncio.create_task(run_delayed_command(delay_seconds,inner_cmd))
-                tid=register_task(task, f"Running {inner_cmd} in {delay_seconds}s")
-                cprint(f"[Success] Scheduled command to run in {delay_seconds}{'' if delay_seconds==1 else 's'}.")
-            elif cmd=="tasks":
-                if not active_tasks:
-                    summary="[Warning] No active background tasks found"
-                else:
-                    summary="= Active Background Tasks"
-                    for tid,info in active_tasks.items():
-                        summary+=f"\n - {tid}: {info['description']}. Started at {info['started_at']}"
-                cprint(summary)
-                continue
-            elif cmd=="cancel":
-                if not args:
-                    count=len(active_tasks)
-                    for info in active_tasks.values():
-                        info["task"].cancel()
-                    active_tasks.clear()
-                    cprint(f"[Success] Cancelled {count} active task{'' if count==1 else 's'}.")
-                    continue
-                if not args.isdigit():
-                    cprint("[Error] Format: cancel <task_id>")
-                    continue
-                target_id=int(args)
-                if target_id in active_tasks:
-                    active_tasks[target_id]["task"].cancel()
-                    del active_tasks[target_id]
-                    cprint(f"[Success] Cancelled task #{target_id}.")
-                else:
-                    cprint(f"[Error] Task #{target_id} not found.")
-                continue
-            elif cmd=="volume":
-                if not args:
-                    cprint("[Error] Missing volume. Format: volume <number>")
-                    continue
-                await set_system_volume(args)
-            else:
-                cprint(f"[Error] Unknown local command: '{cmd}'. Try ~help for more options.")
+            run_cmd(cmd,args)
         except Exception as e:
             await asyncio.sleep(5)
 @emberbot137.event

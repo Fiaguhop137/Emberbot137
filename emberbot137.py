@@ -45,7 +45,7 @@ async def output_to_bot(content:str):
                         logger.error(f"Failed to output: {e}")
                     return
 def cprint(content:str=""):
-    print(content)
+    print(content.strip('`').strip('markdown').strip())
     if emberbot137.is_ready():
         emberbot137.loop.create_task(output_to_bot(content))
 def log_action(*,guild:discord.Guild,channel:discord.abc.GuildChannel,user:discord.abc.User,command:str,action:str,Success:bool=True):
@@ -178,7 +178,7 @@ async def run_cmd(cmd,args,lore,message=None):
             flush_chat_log()
             await emberbot137.close()
         elif lore=="remote":
-            cprint("`.markdown\n[Error] the exit command cannot be executed remotely. You can open console with 'reboot -c' to try locally.`")
+            cprint("[Error] The exit command cannot be executed remotely. You can open console with 'reboot -c' to try locally.")
     elif cmd=="reboot":
         if args=="-c":
             reboot_mode="open_console.sh"
@@ -215,7 +215,7 @@ async def run_cmd(cmd,args,lore,message=None):
         if lore=="local":
             cprint(available_commands)
         elif lore=="remote":
-            cprint("".join(["```markdown\n",available_commands,"\n```"]))
+            cprint(available_commands)
     elif cmd=="servers":
         server_summary="= Connected Servers & Channels"
         for server in emberbot137.guilds:
@@ -224,7 +224,7 @@ async def run_cmd(cmd,args,lore,message=None):
         if lore=="local":
             cprint(server_summary)
         elif lore=="remote":
-            cprint("".join(["```markdown\n",server_summary,"\n```"]))
+            cprint(server_summary)
     elif cmd=="tail":
         if not args:
             cprint("[Error] Invalid syntax. Try ~tail <filename>")

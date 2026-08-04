@@ -9,7 +9,7 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO,format="%(message)s")
 logger=logging.getLogger("Emberbot137")
 intents=discord.Intents.default()
-intents.guilds,intents.guild_messages,intents.message_content,intents.members=True,True,True,True
+intents.guilds,intents.guild_messages,intents.messages,intents.members=True,True,True,True
 emberbot137=commands.Bot(command_prefix="~", intents=intents)
 current_target_server,current_target_channel="yap","everyone"
 active_tasks:dict[int,dict]={}
@@ -38,7 +38,7 @@ async def output_to_bot(content:str):
                     try:
                         content=content.strip()
                         if content:
-                            await channel.send(f"```text\n{content}\n```")
+                            await channel.send(f"```markdown\n{content}\n```")
                     except Exception as e:
                         logger.error(f"Failed to output: {e}")
                     return
@@ -344,7 +344,10 @@ async def run_cmd(cmd,args,lore,message=None):
             return
         await set_system_volume(args)
     else:
-        cprint(f"[Error] Unknown local command: '{cmd}'. Try ~help for more options.")
+        if lore=="remote":
+            log_action(guild=message.guild,channel=message.channel,user=message.author,command=cmd,action="Unknown remote command",Success=False)
+        elif lore=="local":
+            cprint(f"[Error] Unknown local command: '{cmd}'. Try ~help for more options.")
 async def console_controller():
     global current_target_server,current_target_channel
     await emberbot137.wait_until_ready()
@@ -361,7 +364,7 @@ async def console_controller():
             parts=line.strip().split(" ",1)
             cmd=parts[0].lower()
             args=parts[1] if len(parts)>1 else ""
-            run_cmd(cmd,args,"local")
+            await run_cmd(cmd,args,"local")
         except Exception as e:
             await asyncio.sleep(5)
 @emberbot137.event
@@ -372,11 +375,11 @@ async def on_message(message:discord.Message):
     await emberbot137.process_commands(message)
     if message.guild:
         server_name,channel_name,author_tag,now=message.guild.name,message.channel.name,f"{message.author.name}#{message.author.discriminator}" if message.author.discriminator!="0" else message.author.name,datetime.now(timezone.utc).isoformat()
-        if (last_chat_data["server"]==server_name and last_chat_data["channel"]==channel_name and last_chat_data["author_id"]==message.author.id and last_chat_data["content"]==message.content):
+        if (last_chat_data["guild"]==server_name and last_chat_data["channel"]==channel_name and last_chat_data["author_id"]==message.author.id and last_chat_data["content"]==message.content):
             last_chat_data["count"]+=1
         else:
             flush_chat_log()
-            last_chat_data["server"]=server_name
+            last_chat_data["guild"]=server_name
             last_chat_data["channel"]=channel_name
             last_chat_data["author"]=author_tag
             last_chat_data["author_id"]=message.author.id
@@ -388,7 +391,7 @@ async def on_message(message:discord.Message):
         parts=content.split(" ",1)
         cmd=parts[0].lower()
         args=parts[1] if len(parts)>1 else ""
-        run_cmd(cmd,args,"remote",message)
+        await run_cmd(cmd,args,"remote",message)
 @emberbot137.event
 async def on_ready():
     logger.info(f"Logged in as {emberbot137.user}({emberbot137.user.id})")

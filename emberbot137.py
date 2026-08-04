@@ -85,16 +85,16 @@ async def do_spam(target:discord.abc.Messageable,count:int,message:str):
     for _ in range(count):
         await target.send(message) 
         await asyncio.sleep(1)
-async def run_delayed_command(delay:int,full_cmd_string:str,lore:str="local",target_context:Optional[discord.abc.Messageable]=None):
+async def run_delayed_command(delay:int,full_cmd_string:str,lore:str="local",message:Optional[discord.abc.Messageable]=None):
     try:
         await asyncio.sleep(delay)
         parts=full_cmd_string.split(" ",1)
         cmd=parts[0].lower()
         args=parts[1] if len(parts)>1 else ""
         channels=resolve_targets(cmd)
-        if not channels and target_context:
-            channels=[target_context]
-        await run_cmd(cmd,args,lore)
+        if not channels and message:
+            channels=[message]
+        await run_cmd(cmd,args,lore,message=message)
     except asyncio.CancelledError:
         pass
 def register_task(task:asyncio.Task,description:str)->int:

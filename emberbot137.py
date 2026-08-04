@@ -330,7 +330,7 @@ async def run_cmd(cmd,args,lore,message=None):
             return
         delay_seconds=int(delay_parts[0])
         inner_cmd=delay_parts[1]
-        task=asyncio.create_task(run_delayed_command(delay_seconds,inner_cmd,lore))
+        task=asyncio.create_task(run_delayed_command(delay_seconds,inner_cmd,lore,message))
         tid=register_task(task, f"Running {inner_cmd} in {delay_seconds}s")
         cprint(f"[Success] Scheduled command to run in {delay_seconds}{'' if delay_seconds==1 else 's'}.")
         if lore=="remote":
@@ -401,7 +401,7 @@ async def console_controller():
 async def on_message(message:discord.Message):
     global current_target_server,current_target_channel,active_tasks,pending_reboot,reboot_mode,last_chat_data
     if message.author.bot:
-        await asyncio.sleep(0.1)
+        await asyncio.sleep(1)
         if message.author==emberbot137.user:
             return
     await emberbot137.process_commands(message)

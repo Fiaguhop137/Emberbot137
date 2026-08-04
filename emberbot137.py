@@ -167,7 +167,9 @@ async def run_cmd(cmd,args,lore,message=None):
         if message and hasattr(message, "channel"):
             channels=[message.channel]
             return
-        cprint(f"[Error] {current_target_server}/#{current_target_channel} not found. Try ~servers to check names.")
+        if cmd not in ["set","servers"]:
+            cprint(f"[Error] {current_target_server}/#{current_target_channel} not found. Try ~servers to check names.")
+            return
     if not message and lore=="remote":
         cprint("[Error] Remote command execution requires a message context.")
         return

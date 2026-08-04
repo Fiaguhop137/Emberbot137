@@ -178,12 +178,18 @@ async def run_cmd(cmd,args,lore,message=None):
         if args=="-c":
             reboot_mode="open_console.sh"
             if lore=="remote":
-                log_action(guild=message.guild,channel=message.channel,user=message.author,command="reboot -c",action="Remote reboot initated. Opening Console")
+                try:
+                    log_action(guild=message.guild,channel=message.channel,user=message.author,command="reboot -c",action="Remote reboot initated. Opening Console")
+                except Exception as e:
+                    cprint(f"[Error] Failed to log remote reboot action: {e}")
             cprint("[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console.")
         else:
             reboot_mode="restart.sh"
             if lore=="remote":
-                log_action(guild=message.guild,channel=message.channel,user=message.author,command="reboot",action="Remote reboot initated")
+                try:
+                    log_action(guild=message.guild,channel=message.channel,user=message.author,command="reboot",action="Remote reboot initated")
+                except Exception as e:
+                    cprint(f"[Error] Failed to log remote reboot action: {e}")
             cprint("[Warning] Reboot initiated.")
         pending_reboot=True
     elif cmd=="help":
@@ -270,13 +276,19 @@ async def run_cmd(cmd,args,lore,message=None):
             cprint("[Error] Invalid syntax. Format: set <server|channel> <name|all>")
         cprint(f"[Success] Retrieved active channel: {current_target_server}/#{current_target_channel}")
         if lore=="remote":
-                    log_action(guild=message.guild,channel=message.channel,user=message.author,command="set",action=f"Target remotely updated to {current_target_server}/#{current_target_channel}")
+            try:
+                log_action(guild=message.guild,channel=message.channel,user=message.author,command="set",action=f"Target remotely updated to {current_target_server}/#{current_target_channel}")
+            except Exception as e:
+                cprint(f"[Error] Failed to log remote set action: {e}")
     elif cmd=="test":
         for channel in channels:
             await do_test(channel)
         cprint(f"[Success] Executed test diagnostics across {len(channels)} target{'' if len(channels)==1 else 's'}.")
         if lore=="remote":
-            log_action(guild=message.guild,channel=message.channel,user=message.author,command="test",action="Diagnostic test executed")
+            try:
+                log_action(guild=message.guild,channel=message.channel,user=message.author,command="test",action="Diagnostic test executed")
+            except Exception as e:
+                cprint(f"[Error] Failed to log remote test action: {e}")
     elif cmd=="echo":
         if not args:
             cprint("[Error] Missing message. Format: echo <msg>")
@@ -285,7 +297,10 @@ async def run_cmd(cmd,args,lore,message=None):
             await channel.send(args) 
         cprint(f"[Success] Echoed message to {len(channels)} target{'' if len(channels)==1 else 's'}")
         if lore=="remote":
-            log_action(guild=message.guild,channel=message.channel,user=message.author,command="echo",action=f"Echoed {args}")
+            try:
+                log_action(guild=message.guild,channel=message.channel,user=message.author,command="echo",action=f"Echoed {args}")
+            except Exception as e:
+                cprint(f"[Error] Failed to log remote echo action: {e}")
     elif cmd=="spam":
         spam_parts=args.split(" ",1)
         if len(spam_parts)<2 or not spam_parts[0].isdigit():
@@ -300,7 +315,10 @@ async def run_cmd(cmd,args,lore,message=None):
         tid=register_task(task,f"Spaming {msg[:20]} {count} times")
         cprint(f"[Success] Initiated background spam task #{tid} across {len(channels)} target{'' if len(channels)==1 else 's'}.")
         if lore=="remote":
-            log_action(guild=message.guild,channel=message.channel,user=message.author,command="spam",action=f"Spam task #{tid} initiated: {count}x {msg[:20]}")
+            try:
+                log_action(guild=message.guild,channel=message.channel,user=message.author,command="spam",action=f"Spam task #{tid} initiated: {count}x {msg[:20]}")
+            except Exception as e:
+                cprint(f"[Error] Failed to log remote spam action: {e}")
         active_tasks.append(task)
     elif cmd=="delay":
         delay_parts = args.split(" ",1)
@@ -313,7 +331,10 @@ async def run_cmd(cmd,args,lore,message=None):
         tid=register_task(task, f"Running {inner_cmd} in {delay_seconds}s")
         cprint(f"[Success] Scheduled command to run in {delay_seconds}{'' if delay_seconds==1 else 's'}.")
         if lore=="remote":
-            log_action(guild=message.guild,channel=message.channel,user=message.author,command="delay",action=f"Remote delay {delay_seconds}{'' if delay_seconds==1 else 's'}: {inner_cmd}")
+            try:
+                log_action(guild=message.guild,channel=message.channel,user=message.author,command="delay",action=f"Remote delay {delay_seconds}{'' if delay_seconds==1 else 's'}: {inner_cmd}")
+            except Exception as e:
+                cprint(f"[Error] Failed to log remote delay action: {e}")
     elif cmd=="tasks":
         if not active_tasks:
             summary="[Warning] No active background tasks found"
@@ -347,7 +368,10 @@ async def run_cmd(cmd,args,lore,message=None):
         await set_system_volume(args)
     else:
         if lore=="remote":
-            log_action(guild=message.guild,channel=message.channel,user=message.author,command=cmd,action="Unknown remote command",Success=False)
+            try:
+                log_action(guild=message.guild,channel=message.channel,user=message.author,command=cmd,action="Unknown remote command",Success=False)
+            except Exception as e:
+                cprint(f"[Error] Failed to log remote unknown command: {e}")
         elif lore=="local":
             cprint(f"[Error] Unknown local command: '{cmd}'. Try ~help for more options.")
 async def console_controller():
@@ -368,8 +392,8 @@ async def console_controller():
             args=parts[1] if len(parts)>1 else ""
             await run_cmd(cmd,args,"local")
         except Exception as e:
-            await asyncio.sleep(1)
             cprint(f"[Error] Exception in console_controller: {e}")
+            await asyncio.sleep(1)
 @emberbot137.event
 async def on_message(message:discord.Message):
     global current_target_server,current_target_channel,active_tasks,pending_reboot,reboot_mode,last_chat_data

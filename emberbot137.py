@@ -164,12 +164,11 @@ async def run_cmd(cmd,args,lore,message=None):
         return
     channels=resolve_targets(cmd)
     if not channels:
-        if message and hasattr(message, "channel"):
-            channels=[message.channel]
-            return
         if cmd not in ["set","servers"]:
             cprint(f"[Error] {current_target_server}/#{current_target_channel} not found. Try ~servers to check names.")
             return
+        if message and hasattr(message, "channel"):
+            channels=[message.channel]
     if not message and lore=="remote":
         cprint("[Error] Remote command execution requires a message context.")
         return
@@ -179,7 +178,7 @@ async def run_cmd(cmd,args,lore,message=None):
             flush_chat_log()
             await emberbot137.close()
         elif lore=="remote":
-            cprint("`[Error] the exit command cannot be executed remotely. You can open console with 'reboot -c' to try locally.`")
+            cprint("`.markdown\n[Error] the exit command cannot be executed remotely. You can open console with 'reboot -c' to try locally.`")
     elif cmd=="reboot":
         if args=="-c":
             reboot_mode="open_console.sh"
@@ -216,7 +215,7 @@ async def run_cmd(cmd,args,lore,message=None):
         if lore=="local":
             cprint(available_commands)
         elif lore=="remote":
-            cprint("".join(["```markdown",available_commands,"```"]))
+            cprint("".join(["```markdown\n",available_commands,"\n```"]))
     elif cmd=="servers":
         server_summary="= Connected Servers & Channels"
         for server in emberbot137.guilds:
@@ -225,7 +224,7 @@ async def run_cmd(cmd,args,lore,message=None):
         if lore=="local":
             cprint(server_summary)
         elif lore=="remote":
-            cprint("".join(["```markdown",server_summary,"```"]))
+            cprint("".join(["```markdown\n",server_summary,"\n```"]))
     elif cmd=="tail":
         if not args:
             cprint("[Error] Invalid syntax. Try ~tail <filename>")
@@ -404,7 +403,7 @@ async def on_message(message:discord.Message):
     global current_target_server,current_target_channel,active_tasks,pending_reboot,reboot_mode,last_chat_data
     if message.author.bot:
         await asyncio.sleep(0.1)
-        if message.author == emberbot137.user:
+        if message.author==emberbot137.user:
             return
     await emberbot137.process_commands(message)
     if message.guild:

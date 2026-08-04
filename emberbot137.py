@@ -77,13 +77,13 @@ async def do_test(target:discord.abc.Messageable):
         perms_str=", ".join(audit_perms) if audit_perms else "Standard User"
     else:perms_str="Unknown"
     report_text=f"= Diagnostic Report\n - Status: {status}\n - Host Machine: {hostname}\n - Discord Server: {server_name}({server_id})\n - Latency: {latency_ms}ms\n - Token status: {env_status}\n - Connected Servers: {server_count} servers connected. Run ~servers to see more\n - Permissions: {perms_str}"
-    await target.send("".join(["```markdown",report_text,"```"]))
+    await target.send("".join(["```markdown\n",report_text,"\n```"]))
     cprint(report_text)
 async def do_spam(target:discord.abc.Messageable,count:int,message:str):
     for _ in range(count):
         await target.send(message) 
         await asyncio.sleep(1)
-async def run_delayed_command(delay:int,full_cmd_string:str,target_context:Optional[discord.abc.Messageable]=None):
+async def run_delayed_command(delay:int,full_cmd_string:str,target_context:Optional[discord.abc.Messageable]=None,lore:str="local"):
     try:
         await asyncio.sleep(delay)
         parts=full_cmd_string.split(" ",1)
@@ -92,7 +92,7 @@ async def run_delayed_command(delay:int,full_cmd_string:str,target_context:Optio
         channels=resolve_targets(cmd)
         if not channels and target_context:
             channels=[target_context]
-        run_cmd(cmd,args)
+        await run_cmd(cmd,args,lore)
     except asyncio.CancelledError:
         pass
 def register_task(task:asyncio.Task,description:str)->int:
@@ -307,7 +307,7 @@ async def run_cmd(cmd,args,lore,message=None):
             return
         delay_seconds=int(delay_parts[0])
         inner_cmd=delay_parts[1]
-        task=asyncio.create_task(run_delayed_command(delay_seconds,inner_cmd))
+        task=asyncio.create_task(run_delayed_command(delay_seconds,inner_cmd,lore))
         tid=register_task(task, f"Running {inner_cmd} in {delay_seconds}s")
         cprint(f"[Success] Scheduled command to run in {delay_seconds}{'' if delay_seconds==1 else 's'}.")
         if lore=="remote":
@@ -372,6 +372,8 @@ async def on_message(message:discord.Message):
     global current_target_server,current_target_channel,active_tasks,pending_reboot,reboot_mode,last_chat_data
     if message.author.bot:
         await asyncio.sleep(0.1)
+        if message.author == emberbot137.user:
+            return
     await emberbot137.process_commands(message)
     if message.guild:
         server_name,channel_name,author_tag,now=message.guild.name,message.channel.name,f"{message.author.name}#{message.author.discriminator}" if message.author.discriminator!="0" else message.author.name,datetime.now(timezone.utc).isoformat()

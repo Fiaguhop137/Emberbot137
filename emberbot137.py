@@ -6,6 +6,8 @@ from discord.ext import commands
 from dotenv import load_dotenv
 LOG_FILE,CHAT_LOG_FILE="emberbot137.log","chat.log"
 load_dotenv()
+logging.getLogger("discord").setLevel(logging.WARNING)
+logging.getLogger("discord.gateway").setLevel(logging.WARNING)
 logging.basicConfig(level=logging.INFO,format="%(message)s")
 logger=logging.getLogger("Emberbot137")
 intents=discord.Intents.default()
@@ -83,7 +85,7 @@ async def do_spam(target:discord.abc.Messageable,count:int,message:str):
     for _ in range(count):
         await target.send(message) 
         await asyncio.sleep(1)
-async def run_delayed_command(delay:int,full_cmd_string:str,target_context:Optional[discord.abc.Messageable]=None,lore:str="local"):
+async def run_delayed_command(delay:int,full_cmd_string:str,lore:str="local",target_context:Optional[discord.abc.Messageable]=None):
     try:
         await asyncio.sleep(delay)
         parts=full_cmd_string.split(" ",1)
@@ -366,7 +368,8 @@ async def console_controller():
             args=parts[1] if len(parts)>1 else ""
             await run_cmd(cmd,args,"local")
         except Exception as e:
-            await asyncio.sleep(5)
+            await asyncio.sleep(1)
+            cprint(f"[Error] Exception in console_controller: {e}")
 @emberbot137.event
 async def on_message(message:discord.Message):
     global current_target_server,current_target_channel,active_tasks,pending_reboot,reboot_mode,last_chat_data

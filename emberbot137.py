@@ -164,7 +164,8 @@ async def run_cmd(cmd,args,lore,message=None):
         return
     channels=resolve_targets(cmd)
     if not channels:
-        channels=[message.channel]
+        if message and hasattr(message, "channel"):
+            channels=[message.channel]
         cprint(f"[Error] {current_target_server}/#{current_target_channel} not found. Try ~servers to check names.")
         return
     if cmd=="exit":

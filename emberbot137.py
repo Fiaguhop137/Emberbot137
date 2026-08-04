@@ -210,10 +210,9 @@ async def run_cmd(cmd,args,lore,message=None):
                             " - servers                                 - List connected servers and channels\n"
                             " - volume <number>                         - Changes volume to <number>%\n"
                             " - reboot <-c>                             - Initiates reboot and updates. Optional -c flag will open console\n"
-                            " - help                                    - Show this help menu\n"
-                            " - exit                                    - Shut down this bot")
+                            " - help                                    - Show this help menu")
         if lore=="local":
-            cprint(available_commands)
+            cprint("".join([available_commands,"\n - exit                                    - Shut down this bot"]))
         elif lore=="remote":
             cprint(available_commands)
     elif cmd=="servers":

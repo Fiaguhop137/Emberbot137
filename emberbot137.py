@@ -25,7 +25,7 @@ def flush_chat_log():
         content_str=last_chat_data["content"]
         if last_chat_data["count"] > 1:
             content_str=f"{content_str} ({last_chat_data['count']})"
-        line = (f"[{last_chat_data['timestamp']}, {last_chat_data['guild']}/#{last_chat_data['channel']}] {last_chat_data['author']}({last_chat_data['author_id']}: Content={content_str}")
+        line=(f"[{last_chat_data['timestamp']}, {last_chat_data['guild']}/#{last_chat_data['channel']}] {last_chat_data['author']}({last_chat_data['author_id']}: {content_str}")
         try:
             with open(CHAT_LOG_FILE,"a",encoding="utf-8") as chat_log:
                 chat_log.write(line+"\n")

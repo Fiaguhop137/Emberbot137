@@ -229,7 +229,7 @@ async def run_cmd(cmd,args,lore,message=None):
             cprint("[Error] Invalid syntax. Try ~tail <filename>")
         try:
             with open(args,"r",encoding="utf-8") as f:
-                lines=f.read()
+                lines=f.readlines()
                 output="".join(lines[-15:])
                 if not output:
                     output="[Warning] Log file is empty."

@@ -206,7 +206,7 @@ async def run_cmd(cmd,args,lore,message=None):
                             " - tasks                                   - Lists all active tasks\n"
                             " - cancel <task_id>                        - Halt active tasks by task id\n"
                             " - set <server|channel> <name|all>         - Target specific server/channel\n"
-                            " - tail <file>                             - Outputs last 15 lines of any file\n"
+                            " - tail <lines> <file>                     - Outputs last <lines> lines of any file\n"
                             " - servers                                 - List connected servers and channels\n"
                             " - volume <number>                         - Changes volume to <number>%\n"
                             " - reboot <-c>                             - Initiates reboot and updates. Optional -c flag will open console\n"
@@ -227,10 +227,15 @@ async def run_cmd(cmd,args,lore,message=None):
     elif cmd=="tail":
         if not args:
             cprint("[Error] Invalid syntax. Try ~tail <filename>")
+        else:
+            tail_parts=args.split(" ",1)
+            if len(tail_parts)==2 and tail_parts[0].isdigit():
+                num_lines=int(tail_parts[0])
+                filename=tail_parts[1]
         try:
-            with open(args,"r",encoding="utf-8") as f:
+            with open(filename,"r",encoding="utf-8") as f:
                 lines=f.readlines()
-                output="".join(lines[-15:])
+                output="".join(lines[-num_lines:])
                 if not output:
                     output="[Warning] Log file is empty."
             cprint(output[-2000:])

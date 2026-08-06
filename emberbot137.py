@@ -115,10 +115,6 @@ async def reboot_watcher():
             subprocess.Popen([f"./{reboot_mode}"],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,stdin=subprocess.DEVNULL,start_new_session=True)
             await emberbot137.close()
             os._exit(0)
-            if not reboot_mode=="lock.sh":
-                cprint("[Warning] Rebooting...")
-            else:
-                cprint("[Warning] Locking...")
         await asyncio.sleep(1)
 def resolve_targets(cmd_type:str)->list[discord.abc.Messageable]:
     global current_target_server,current_target_channel
@@ -185,13 +181,14 @@ async def run_cmd(cmd,args,lore,message=None):
                     cprint(f"[Error] Failed to log remote reboot action: {e}")
             cprint("[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console.")
         elif args=="-l":
-            reboot_mode="lock.sh"
             if lore=="remote":
                 try:
                     log_action(guild=message.guild,channel=message.channel,user=message.author,command="reboot -l",action="Locking PC remotely")
                 except Exception as e:
                     cprint(f"[Error] Failed to log remote reboot action: {e}")
             cprint("[Warning] Lock initiated. Locking PC remotely.")
+            subprocess.Popen(["xdg-screensaver","lock"],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,stdin=subprocess.DEVNULL,start_new_session=True) 
+            cprint("[Warning] Locking...")
         elif args=="-s":
             if lore=="local":
                 cprint("[Warning] Shutting down Emberbot137...")

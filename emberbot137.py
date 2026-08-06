@@ -165,21 +165,14 @@ async def run_cmd(cmd,args,lore,message=None):
     channels=resolve_targets(cmd)
     if not channels:
         if cmd not in ["set","servers"]:
-            cprint(f"[Error] {current_target_server}/#{current_target_channel} not found. Try ~servers to check names.")
+            cprint(f"[Error] {current_target_server}/#{current_target_channel} not found. Try ~servers to check names or ~set to change servers.")
             return
         if message and hasattr(message, "channel"):
             channels=[message.channel]
     if not message and lore=="remote":
         cprint("[Error] Remote command execution requires a message context.")
         return
-    if cmd=="exit":
-        if lore=="local":
-            cprint("[Warning] Shutting down Emberbot137...")
-            flush_chat_log()
-            await emberbot137.close()
-        elif lore=="remote":
-            cprint("[Error] The exit command cannot be executed remotely. You can open console with 'reboot -c' to try locally.")
-    elif cmd=="reboot":
+    if cmd=="reboot":
         if args=="-c":
             reboot_mode="open_console.sh"
             if lore=="remote":
@@ -188,6 +181,21 @@ async def run_cmd(cmd,args,lore,message=None):
                 except Exception as e:
                     cprint(f"[Error] Failed to log remote reboot action: {e}")
             cprint("[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console.")
+        elif args=="-l":
+            reboot_mode="lock.sh"
+            if lore=="remote":
+                try:
+                    log_action(guild=message.guild,channel=message.channel,user=message.author,command="reboot -l",action="Locking PC remotely")
+                except Exception as e:
+                    cprint(f"[Error] Failed to log remote reboot action: {e}")
+            cprint("[Warning] Lock initiated. Locking PC remotely.")
+        elif args=="-s":
+            if lore=="local":
+                cprint("[Warning] Shutting down Emberbot137...")
+                flush_chat_log()
+                await emberbot137.close()
+            elif lore=="remote":
+                cprint("[Error] The exit command cannot be executed remotely. You can open console with 'reboot -c' to try locally.")
         else:
             reboot_mode="restart.sh"
             if lore=="remote":
@@ -209,12 +217,12 @@ async def run_cmd(cmd,args,lore,message=None):
                             " - tail <lines> <file>                     - Outputs last <lines> lines of any file\n"
                             " - servers                                 - List connected servers and channels\n"
                             " - volume <number>                         - Changes volume to <number>%\n"
-                            " - reboot <-c>                             - Initiates reboot and updates. Optional -c flag will open console\n"
+                            " - reboot <flag>                           - Initiates reboot and updates. Optional flags listed below\n"
+                            "  ↳ -c                                     - Opens console after reboot\n"
+                            "  ↳ -l                                     - Locks PC remotely\n"
+                         f"{'  ↳ -s                                     - Shuts down Emberbot137\n' if lore != 'remote' else ''}"
                             " - help                                    - Show this help menu")
-        if lore=="local":
-            cprint("".join([available_commands,"\n - exit                                    - Shut down this bot"]))
-        elif lore=="remote":
-            cprint(available_commands)
+        cprint(available_commands)
     elif cmd=="servers":
         server_summary="= Connected Servers & Channels"
         for server in emberbot137.guilds:

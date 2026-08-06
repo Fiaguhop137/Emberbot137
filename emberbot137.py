@@ -237,9 +237,12 @@ async def run_cmd(cmd,args,lore,message=None):
             cprint("[Error] Invalid syntax. Try ~tail <filename>")
         else:
             tail_parts=args.split(" ",1)
-            if len(tail_parts)==2 and tail_parts[0].isdigit():
+            try:
                 num_lines=int(tail_parts[0])
                 filename=tail_parts[1]
+            except (ValueError, IndexError):
+                cprint("[Error] Invalid syntax. Try ~tail <lines> <filename>")
+                return
         try:
             with open(filename,"r",encoding="utf-8") as f:
                 lines=f.readlines()

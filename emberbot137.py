@@ -117,6 +117,9 @@ async def reboot_watcher():
             if not reboot_mode=="lock.sh":
                 await emberbot137.close()
                 os._exit(0)
+            else:
+                pending_reboot=False
+                reboot_mode="restart.sh"
         await asyncio.sleep(1)
 def resolve_targets(cmd_type:str)->list[discord.abc.Messageable]:
     global current_target_server,current_target_channel

@@ -48,9 +48,9 @@ def cprint(content:str=""):
     print(content.strip('`').strip('markdown').strip())
     if emberbot137.is_ready():
         emberbot137.loop.create_task(output_to_bot(content))
-def log_action(*,guild:discord.Guild,channel:discord.abc.GuildChannel,user:discord.abc.User,command:str,action:str,Success:bool=True):
+def log_action(*,guild:discord.Guild,channel:discord.abc.GuildChannel,user:discord.abc.User,command:str,action:str,success:bool=True):
     guild_name,channel_name,tag,current_time=guild.name,getattr(channel,"name","unknown"),f"{user.name}#{user.discriminator}" if user.discriminator!="0" else user.name,datetime.now(timezone.utc).isoformat()
-    line=f"[{'Success' if Success else 'ERROR'} at {current_time} in Channel={guild_name}/#{channel_name}]: User={tag}({user.id}) ran {command} resulting in {action}"
+    line=f"[{'Success' if success else 'ERROR'} at {current_time} in Channel={guild_name}/#{channel_name}]: User={tag}({user.id}) ran {command} resulting in {action}"
     logger.info(line)
     with open(LOG_FILE,"a",encoding="utf-8") as file:
         file.write(line+"\n")
@@ -176,7 +176,7 @@ async def run_cmd(cmd,args,lore,message=None):
             reboot_mode="open_console.sh"
             if lore=="remote":
                 try:
-                    log_action(guild=message.guild,channel=message.channel,user=message.author,command="reboot -c",action="Remote reboot initated. Opening Console")
+                    log_action(guild=message.guild,channel=message.channel,user=message.author,command="reboot -c",action="Remote reboot initiated. Opening Console")
                 except Exception as e:
                     cprint(f"[Error] Failed to log remote reboot action: {e}")
             cprint("[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console.")
@@ -200,7 +200,7 @@ async def run_cmd(cmd,args,lore,message=None):
             reboot_mode="restart.sh"
             if lore=="remote":
                 try:
-                    log_action(guild=message.guild,channel=message.channel,user=message.author,command="reboot",action="Remote reboot initated")
+                    log_action(guild=message.guild,channel=message.channel,user=message.author,command="reboot",action="Remote reboot initiated")
                 except Exception as e:
                     cprint(f"[Error] Failed to log remote reboot action: {e}")
             cprint("[Warning] Reboot initiated.")
@@ -332,7 +332,7 @@ async def run_cmd(cmd,args,lore,message=None):
             for channel in channels:
                 await do_spam(channel,count,msg)
         task=asyncio.create_task(run_spam())
-        tid=register_task(task,f"Spaming {msg[:20]} {count} times")
+        tid=register_task(task,f"Spamming {msg[:20]} {count} times")
         cprint(f"[Success] Initiated background spam task #{tid} across {len(channels)} target{'' if len(channels)==1 else 's'}.")
         if lore=="remote":
             try:
@@ -388,7 +388,7 @@ async def run_cmd(cmd,args,lore,message=None):
     else:
         if lore=="remote":
             try:
-                log_action(guild=message.guild,channel=message.channel,user=message.author,command=cmd,action="Unknown remote command",Success=False)
+                log_action(guild=message.guild,channel=message.channel,user=message.author,command=cmd,action="Unknown remote command",success=False)
             except Exception as e:
                 cprint(f"[Error] Failed to log remote unknown command: {e}")
         elif lore=="local":

@@ -187,7 +187,7 @@ async def run_cmd(cmd,args,lore,message=None):
                 except Exception as e:
                     cprint(f"[Error] Failed to log remote reboot action: {e}")
             cprint("[Warning] Lock initiated. Locking PC remotely.")
-            subprocess.Popen(["xdg-screensaver","lock"],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,stdin=subprocess.DEVNULL,start_new_session=True) 
+            subprocess.Popen(["loginctl","lock-session"],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,stdin=subprocess.DEVNULL,start_new_session=True) 
             cprint("[Warning] Locking...")
         elif args=="-s":
             if lore=="local":

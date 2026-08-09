@@ -172,6 +172,7 @@ async def run_cmd(cmd,args,lore,message=None):
         cprint("[Error] Remote command execution requires a message context.")
         return
     if cmd=="reboot":
+        pending_reboot=False
         if args=="-c":
             reboot_mode="open_console.sh"
             if lore=="remote":
@@ -188,7 +189,7 @@ async def run_cmd(cmd,args,lore,message=None):
                 except Exception as e:
                     cprint(f"[Error] Failed to log remote reboot action: {e}")
             cprint(f"[Warning] Lock initiated. Locking PC{'' if lore=='local' else ' remotely'}.")
-            await subprocess.run(["loginctl","lock-session"]) 
+            subprocess.run(["loginctl","lock-session"],env=os.environ)
             cprint("[Warning] Locking...")
         elif args=="-s":
             if lore=="local":

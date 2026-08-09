@@ -47,7 +47,7 @@ async def output_to_bot(content:str):
 def cprint(content:str=""):
     print(content.strip('`').strip('markdown').strip())
     if emberbot137.is_ready():
-        emberbot137.loop.create_task(output_to_bot(content))
+        emberbot137.loop.create_task(output_to_bot(content[-2000:]))
 def log_action(*,guild:discord.Guild,channel:discord.abc.GuildChannel,user:discord.abc.User,command:str,action:str,success:bool=True):
     guild_name,channel_name,tag,current_time=guild.name,getattr(channel,"name","unknown"),f"{user.name}#{user.discriminator}" if user.discriminator!="0" else user.name,datetime.now(timezone.utc).isoformat()
     line=f"[{'Success' if success else 'ERROR'} at {current_time} in Channel={guild_name}/#{channel_name}]: User={tag}({user.id}) ran {command} resulting in {action}"
@@ -251,7 +251,7 @@ async def run_cmd(cmd,args,lore,message=None):
                 output="".join(lines[-num_lines:])
                 if not output:
                     output="[Warning] Log file is empty."
-            cprint(output[-2000:])
+            cprint(output)
         except FileNotFoundError:
             cprint(f"[Error] File '{args}' not found.")
         except Exception as e:

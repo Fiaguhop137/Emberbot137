@@ -180,14 +180,15 @@ async def run_cmd(cmd,args,lore,message=None):
                 except Exception as e:
                     cprint(f"[Error] Failed to log remote reboot action: {e}")
             cprint("[Warning] Reboot initiated. Console flag found, opening Emberbot137 Console.")
+            pending_reboot=True
         elif args=="-l":
             if lore=="remote":
                 try:
                     log_action(guild=message.guild,channel=message.channel,user=message.author,command="reboot -l",action="Locking PC remotely")
                 except Exception as e:
                     cprint(f"[Error] Failed to log remote reboot action: {e}")
-            cprint("[Warning] Lock initiated. Locking PC remotely.")
-            subprocess.Popen(["loginctl","lock-session"],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,stdin=subprocess.DEVNULL,start_new_session=True) 
+            cprint(f"[Warning] Lock initiated. Locking PC{'' if lore=='local' else ' remotely'}.")
+            await subprocess.run(["loginctl","lock-session"]) 
             cprint("[Warning] Locking...")
         elif args=="-s":
             if lore=="local":
@@ -204,7 +205,7 @@ async def run_cmd(cmd,args,lore,message=None):
                 except Exception as e:
                     cprint(f"[Error] Failed to log remote reboot action: {e}")
             cprint("[Warning] Reboot initiated.")
-        pending_reboot=True
+            pending_reboot=True
     elif cmd=="help":
         available_commands=("= Available Console Commands\n"
                             " - test                                    - Send diagnostic report to target(s)\n"

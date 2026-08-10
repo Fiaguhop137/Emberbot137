@@ -40,7 +40,7 @@ async def output_to_bot(content:str):
                     try:
                         content=content.strip()
                         if content:
-                            await channel.send(f"```markdown\n{content}\n```")
+                            await channel.send(f"```markdown\n{content[-1970:]}\n```")
                     except Exception as e:
                         logger.error(f"Failed to output: {e}")
                     return
@@ -245,17 +245,17 @@ async def run_cmd(cmd,args,lore,message=None):
             except (ValueError, IndexError):
                 cprint("[Error] Invalid syntax. Try ~tail <lines> <filename>")
                 return
-        try:
-            with open(filename,"r",encoding="utf-8") as f:
-                lines=f.readlines()
-                output="".join(lines[-num_lines:])
-                if not output:
-                    output="[Warning] Log file is empty."
-            cprint(output)
-        except FileNotFoundError:
-            cprint(f"[Error] File '{args}' not found.")
-        except Exception as e:
-            cprint(f"[Error] Failed to read file '{args}': {e}")
+            try:
+                with open(filename,"r",encoding="utf-8") as f:
+                    lines=f.readlines()
+                    output="".join(lines[-num_lines:])
+                    if not output:
+                        output="[Warning] Log file is empty."
+                cprint(output)
+            except FileNotFoundError:
+                cprint(f"[Error] File '{args}' not found.")
+            except Exception as e:
+                cprint(f"[Error] Failed to read file '{args}': {e}")
     elif cmd=="set":
         sub_parts=args.split(" ",1)
         sub_cmd=sub_parts[0].lower() if sub_parts else ""

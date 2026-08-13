@@ -23,15 +23,13 @@ def flush_chat_log():
     global last_chat_data
     if last_chat_data["content"] is not None:
         content_str=last_chat_data["content"]
-        if last_chat_data["count"] > 1:
-            content_str=f"{content_str} ({last_chat_data['count']})"
         line=(f"[{last_chat_data['timestamp']}, {last_chat_data['guild']}/#{last_chat_data['channel']}] {last_chat_data['author']}({last_chat_data['author_id']}): {content_str}")
         try:
             with open(CHAT_LOG_FILE,"a",encoding="utf-8") as chat_log:
                 chat_log.write(line+"\n")
         except Exception as e:
             logger.error(f"Failed to write chat log: {e}")
-        last_chat_data["count"],last_chat_data["content"]=0,None
+        last_chat_data["content"]=None
 async def output_to_bot(content:str):
     for guild in emberbot137.guilds:
         if "yap" in guild.name.lower():
@@ -251,7 +249,9 @@ async def run_cmd(cmd,args,lore,message=None):
                     output="".join(lines[-num_lines:])
                     if not output:
                         output="[Warning] Log file is empty."
-                cprint(output)
+                output=output.splitlines()
+                for line in output:
+                    cprint(line)
             except FileNotFoundError:
                 cprint(f"[Error] File '{args}' not found.")
             except Exception as e:
@@ -425,17 +425,13 @@ async def on_message(message:discord.Message):
     await emberbot137.process_commands(message)
     if message.guild:
         server_name,channel_name,author_tag,now=message.guild.name,message.channel.name,f"{message.author.name}#{message.author.discriminator}" if message.author.discriminator!="0" else message.author.name,datetime.now(timezone.utc).isoformat()
-        if (last_chat_data["guild"]==server_name and last_chat_data["channel"]==channel_name and last_chat_data["author_id"]==message.author.id and last_chat_data["content"]==message.content):
-            last_chat_data["count"]+=1
-        else:
-            flush_chat_log()
-            last_chat_data["guild"]=server_name
-            last_chat_data["channel"]=channel_name
-            last_chat_data["author"]=author_tag
-            last_chat_data["author_id"]=message.author.id
-            last_chat_data["content"]=message.content
-            last_chat_data["timestamp"]=now
-            last_chat_data["count"]=1
+        last_chat_data["guild"]=server_name
+        last_chat_data["channel"]=channel_name
+        last_chat_data["author"]=author_tag
+        last_chat_data["author_id"]=message.author.id
+        last_chat_data["content"]=message.content
+        last_chat_data["timestamp"]=now
+        flush_chat_log()
     if message.guild and "yap" in message.guild.name.lower() and message.channel.name.lower()=="emberbot137-remote-console":
         content=message.content.strip().strip('~')
         parts=content.split(" ",1)

@@ -154,12 +154,14 @@ async def plasma():
                 continue
         else:
             try:
+                logger.info(f"DEBUG: plasma_role after creation/lookup = {plasma_role!r}")
                 if plasma_role.color.value!=0xaa0055:
                     await plasma_role.edit(color=discord.Color(0xaa0055),reason="Plasma is this very nice red color, get it right")
                     logger.info(f"Recolored Plasma in {guild.name}")
+                logger.info(f"DEBUG: plasma_role before permissions = {plasma_role!r}")
                 if not plasma_role.permissions.administrator:
                     plasma_role.permissions.update(administrator=True)
-                    plasma_role=await plasma_role.edit(permissions=plasma_role.permissions,reason="Plasma is the administrator because it ionizes the rules")
+                    await plasma_role.edit(permissions=plasma_role.permissions,reason="Plasma is the administrator because it ionizes the rules")
                     if plasma_role.permissions.administrator:
                         logger.info(f"Made Plasma admin in {guild.name}")
                     else:
@@ -170,7 +172,7 @@ async def plasma():
             bot_top_role=guild.me.top_role if guild.me else None
             target_position=(bot_top_role.position - 1) if bot_top_role and bot_top_role.position>1 else len(guild.roles)-1
             if plasma_role.position!=target_position:
-                plasma_role=await plasma_role.edit(position=target_position,reason="Plasma has very low density so it floats to the top")
+                await plasma_role.edit(position=target_position,reason="Plasma has very low density so it floats to the top")
                 logger.info(f"Moved Plasma role to position {target_position} in {guild.name}")
         except discord.HTTPException as e:
             logger.error(f"Failed to reposition Plasma in {guild.name}: {e}")

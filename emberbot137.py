@@ -160,14 +160,12 @@ async def plasma():
                     logger.info(f"Recolored Plasma in {guild.name}")
                 logger.info(f"DEBUG: plasma_role before permissions = {plasma_role!r}")
                 if not plasma_role.permissions.administrator:
-                    plasma_role.permissions.update(administrator=True)
-                    await plasma_role.edit(permissions=plasma_role.permissions,reason="Plasma is the administrator because it ionizes the rules")
-                    if plasma_role.permissions.administrator:
-                        logger.info(f"Made Plasma admin in {guild.name}")
-                    else:
-                        logger.error(f"Missing permissions to upgrade Plasma role in {guild.name}")
-            except Exception as e:
-                logger.info(f"[Error] {e}")
+                    new_permissions=discord.Permissions(plasma_role.permissions.value)
+                    new_permissions.administrator=True
+                    await plasma_role.edit(permissions=new_permissions,reason="Plasma is the administrator because it ionizes the rules")
+                    logger.info(f"Made Plasma admin in {guild.name}")
+            except Exception:
+                logger.exception(f"Plasma processing failed in {guild.name}")
         try:
             bot_top_role=guild.me.top_role if guild.me else None
             target_position=(bot_top_role.position - 1) if bot_top_role and bot_top_role.position>1 else len(guild.roles)-1

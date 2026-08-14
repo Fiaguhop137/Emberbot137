@@ -160,7 +160,10 @@ async def plasma():
                 if not plasma_role.permissions.administrator:
                     plasma_role.permissions.update(administrator=True)
                     await plasma_role.edit(permissions=plasma_role.permissions,reason="Plasma is the administrator because it ionizes the rules")
-                    logger.info(f"Made Plasma admin in {guild.name}")
+                    if plasma_role.permissions.administrator:
+                        logger.info(f"Made Plasma admin in {guild.name}")
+                    else:
+                        logger.error(f"Missing permissions to upgrade Plasma role in {guild.name}")
             except discord.HTTPException:
                 pass
         try:

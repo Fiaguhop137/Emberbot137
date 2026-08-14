@@ -167,7 +167,7 @@ async def plasma():
                     else:
                         logger.error(f"Missing permissions to upgrade Plasma role in {guild.name}")
             except Exception as e:
-                logger.info("[Error] {e}")
+                logger.info(f"[Error] {e}")
         try:
             bot_top_role=guild.me.top_role if guild.me else None
             target_position=(bot_top_role.position - 1) if bot_top_role and bot_top_role.position>1 else len(guild.roles)-1

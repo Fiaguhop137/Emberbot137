@@ -467,7 +467,6 @@ async def on_message(message:discord.Message):
         await asyncio.sleep(1)
         if message.author==emberbot137.user:
             return
-    await emberbot137.process_commands(message)
     if message.guild:
         server_name,channel_name,author_tag,now=message.guild.name,message.channel.name,f"{message.author.name}#{message.author.discriminator}" if message.author.discriminator!="0" else message.author.name,datetime.now(timezone.utc).isoformat()
         last_chat_data["guild"]=server_name

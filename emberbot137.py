@@ -443,7 +443,7 @@ async def run_cmd(cmd,args,lore,message=None):
 async def console_controller():
     global current_target_server,current_target_channel
     await emberbot137.wait_until_ready()
-    cprint(f"\n[Success] Connected to {len(emberbot137.guilds)} servers{'' if len(emberbot137.guilds)==1 else 's'} \nCurrent Target Channel: {current_target_server}/#{current_target_channel} \nType help for a list of commands")
+    cprint(f"\n[Success] Connected to {len(emberbot137.guilds)} server{'' if len(emberbot137.guilds)==1 else 's'} \nCurrent Target Channel: {current_target_server}/#{current_target_channel} \nType help for a list of commands")
     loop=asyncio.get_running_loop()
     while not emberbot137.is_closed():
         try:

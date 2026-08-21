@@ -11,7 +11,7 @@ logging.getLogger("discord.gateway").setLevel(logging.WARNING)
 logging.basicConfig(level=logging.INFO,format="%(message)s")
 logger=logging.getLogger("Emberbot137")
 intents=discord.Intents.default()
-intents.guilds,intents.guild_messages,intents.messages,intents.members=True,True,True,True
+intents.guilds,intents.guild_messages,intents.message_content,intents.members=True,True,True,True
 emberbot137=commands.Bot(command_prefix="~", intents=intents)
 current_target_server,current_target_channel="yap","everyone"
 active_tasks:dict[int,dict]={}

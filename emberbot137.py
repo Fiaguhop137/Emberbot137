@@ -353,9 +353,10 @@ async def run_cmd(cmd,args,loredo,message=None):
                             " - delay <secs> <cmd>                            - Execute <cmd> after <secs> seconds\n"
                             " - tasks                                         - Lists all active tasks\n"
                             " - cancel <task_id>                              - Halt active tasks by task id\n"
-                            " - set <variable> <name|all>                     - Changes a variable's value\n"
-                            " - cat <head|tail|paws> <lines|pattern> <file>   - Outputs a file\n"
                             " - servers                                       - List connected servers and channels\n"
+                            " - set <variable> <name|all>                     - Changes a variable's value\n"
+                            " - get <variable>                                - Retrieves a variable's value\n"
+                            " - cat <head|tail|paws> <lines|pattern> <file>   - Outputs a file\n"
                             " - volume <number>                               - Changes volume to <number>%\n"
                             " - say <msg>                                     - Vocalizes <msg> through the system speaker\n"
                             " - plasma                                        - Creates plasma role in all servers\n"
@@ -375,6 +376,7 @@ async def run_cmd(cmd,args,loredo,message=None):
             "set server":"Sets the target server for commands. Format: ~set server <name|all>",
             "set channel":"Sets the target channel for commands. Format: ~set channel <name|all>",
             "set trim_num":"Sets the maximum number of lines to keep in the Google Doc. Format: ~set trim_num <number>",
+            "get":"Retrieves the value of a variable. Format: ~get <server|channel|doc_link|trim_num|invite>",
             "cat":"Outputs the contents of a file. Format: ~cat <head|tail|paws> <lines|pattern> <filename>",
             "cat head":"Outputs the first <lines> of a file. Format: ~cat head <lines> <filename>",
             "cat tail":"Outputs the last <lines> of a file. Format: ~cat tail <lines> <filename>",
@@ -400,6 +402,58 @@ async def run_cmd(cmd,args,loredo,message=None):
             printf(server_summary)
         elif loredo=="remote":
             printf(server_summary)
+    elif cmd=="set":
+        sub_parts=args.split(" ",1)
+        sub_cmd=sub_parts[0].lower() if sub_parts else ""
+        sub_val=sub_parts[1] if len(sub_parts)>1 else ""
+        if sub_cmd=="server":
+            if not sub_val:
+                printf(f"[Success] Retrieved target server: {current_target_server}")
+            else:
+                if sub_val.lower()=="all":
+                    current_target_server="all"
+                    printf("[Success] Target server updated to: all servers")
+                else:
+                    matched_server=current_target_server
+                    for server in emberbot137.guilds:
+                        if sub_val.lower() in server.name.lower():
+                            matched_server=server.name
+                            break
+                    current_target_server=matched_server
+                    printf(f"[Success] Target server updated to: {matched_server}")
+        elif sub_cmd=="channel":
+            if not sub_val:
+                printf(f"[Success] Retrieved target channel: #{current_target_channel}")
+            else:
+                clean_val=sub_val.removeprefix("#").lower()
+                if clean_val=="emberbot137-remote-console":
+                    current_target_channel="everyone"
+                    printf("[Error] Target channel 'emberbot137-remote-console' is restricted. Defaulted channel target to: all channels")
+                else:
+                    matched_channel=clean_val
+                    for server in emberbot137.guilds:
+                        if current_target_server!="all" and current_target_server.lower() not in server.name.lower():
+                            continue
+                        for channel in server.text_channels:
+                            if channel.name.lower()==clean_val or channel.name.lower().startswith(clean_val):
+                                matched_channel=channel.name
+                                break
+                    current_target_channel=matched_channel
+                    printf(f"[Success] Target channel updated to: #{matched_channel}")
+        else:
+            if sub_cmd!="trim_num":
+                printf("[Error] Invalid syntax. Format: ~set <server|channel|trim_num> <name|all|number> or try ~help for more information")
+    elif cmd=="get":
+        if sub_cmd=="server" or sub_cmd=="channel":
+            printf(f"[Success] Retrieved target channel: {current_target_server}/{current_target_channel}")
+        elif sub_cmd=="doc_link":
+            printf(f"[Success] Retrieved Google Doc link: https://docs.google.com/document/d/{DOCUMENT_ID}/edit")
+        elif sub_cmd=="trim_num":
+            printf(f"[Success] Retrieved trim_num: {trim_num}")
+        elif sub_cmd=="invite":
+            printf("[Success] Retrieved invite link: https://discord.com/oauth2/authorize?client_id=1532899245005475860&permissions=2056&integration_type=0&scope=bot")
+        else:
+            printf("[Error] Invalid syntax. Format: ~get <server|channel|doc_link|trim_num|invite> or try ~help for more information")
     elif cmd=="cat":
         if not args:
             printf("[Error] Invalid syntax. Try ~cat <head|tail|paws> <lines|pattern> <filename>")
@@ -456,47 +510,6 @@ async def run_cmd(cmd,args,loredo,message=None):
             printf(f"[Error] Missing message. Format: ~say <msg> or try ~help for more information")
         except Exception as e:
             printf(f"[Error] Unexpected error while vocalizing message: {e}")
-    elif cmd=="set":
-        sub_parts=args.split(" ",1)
-        sub_cmd=sub_parts[0].lower() if sub_parts else ""
-        sub_val=sub_parts[1] if len(sub_parts)>1 else ""
-        if sub_cmd=="server":
-            if not sub_val:
-                printf(f"[Success] Retrieved target server: {current_target_server}")
-            else:
-                if sub_val.lower()=="all":
-                    current_target_server="all"
-                    printf("[Success] Target server updated to: all servers")
-                else:
-                    matched_server=current_target_server
-                    for server in emberbot137.guilds:
-                        if sub_val.lower() in server.name.lower():
-                            matched_server=server.name
-                            break
-                    current_target_server=matched_server
-                    printf(f"[Success] Target server updated to: {matched_server}")
-        elif sub_cmd=="channel":
-            if not sub_val:
-                printf(f"[Success] Retrieved target channel: #{current_target_channel}")
-            else:
-                clean_val=sub_val.removeprefix("#").lower()
-                if clean_val=="emberbot137-remote-console" or clean_val=="all":
-                    current_target_channel="all"
-                    printf("[Error] Target channel 'emberbot137-remote-console' is restricted. Defaulted channel target to: all channels")
-                else:
-                    matched_channel=clean_val
-                    for server in emberbot137.guilds:
-                        if current_target_server!="all" and current_target_server.lower() not in server.name.lower():
-                            continue
-                        for channel in server.text_channels:
-                            if channel.name.lower()==clean_val or channel.name.lower().startswith(clean_val):
-                                matched_channel=channel.name
-                                break
-                    current_target_channel=matched_channel
-                    printf(f"[Success] Target channel updated to: #{matched_channel}")
-        else:
-            if sub_cmd!="trim_num":
-                printf("[Error] Invalid syntax. Format: ~set <server|channel|trim_num> <name|all|number> or try ~help for more information")
         if sub_cmd=="trim_num":
             try:
                 new_trim_num=int(sub_val)

@@ -26,7 +26,7 @@ intents.guilds,intents.guild_messages,intents.message_content,intents.members=Tr
 emberbot137=commands.Bot(command_prefix="~", intents=intents)
 current_target_server,current_target_channel="yap","everyone"
 active_tasks:dict[int,dict]={}
-task_id_counter,documenting=1,True
+task_id_counter=1
 pending_reboot,reboot_mode=False,"restart.sh"
 chat_data={"guild":None,"channel":None,"author":None,"author_id":None,"content":None,"timestamp":None,"count":0}
 subprocess.run(["g++","-O3","speak.cpp","-o","speak"])
@@ -653,53 +653,46 @@ async def console_controller():
             printf(f"[Error] Exception in console_controller: {e}")
             await asyncio.sleep(1)
 async def doc_controller():
-    global documenting
     await emberbot137.wait_until_ready()
     while not emberbot137.is_closed():
-        if documenting:
-            documenting=False
-            async def pause():
-                global documenting
-                await asyncio.sleep(1)
-                documenting=True
-            try:
-                document=get_document("t.362u6mhuxab6")
-                commands=[]
-                cmd=""
-                start=None
-                for element in document["body"]["content"]:
-                    if "paragraph" not in element:
+        try:
+            document=get_document("t.362u6mhuxab6")
+            commands=[]
+            cmd=""
+            start=None
+            for element in document["body"]["content"]:
+                if "paragraph" not in element:
+                    continue
+                for item in element["paragraph"]["elements"]:
+                    if "textRun" not in item:
                         continue
-                    for item in element["paragraph"]["elements"]:
-                        if "textRun" not in item:
-                            continue
-                        content=item["textRun"]["content"]
-                        index=item["startIndex"]
-                        for offset,char in enumerate(content):
-                            current_index=index+offset
-                            if char=="~":
-                                cmd="~"
-                                start=current_index
-                            elif cmd:
-                                cmd+=char
-                                if char==";":
-                                    end=current_index+1
-                                    commands.append({"command": cmd[1:-1],"start": start,"end": end})
-                                    cmd=""
-                                    start=None
-                for command in commands:
-                    parts=command["command"].split(" ",1)
-                    cmd=parts[0].lower()
-                    args=parts[1] if len(parts)>1 else""
-                    await run_cmd(cmd,args,"doc")
-                if commands:
-                    requests=[]
-                    for command in reversed(commands):
-                        requests.append({"deleteContentRange":{"range":{"startIndex":command["start"],"endIndex":command["end"],"tabId":"t.362u6mhuxab6"}}})
-                    docs.documents().batchUpdate(documentId=DOCUMENT_ID,body={"requests":requests}).execute()
-            except Exception as e:
-                printf(f"[Error] Exception in doc_controller: {e}")
-            await asyncio.to_thread(pause)
+                    content=item["textRun"]["content"]
+                    index=item["startIndex"]
+                    for offset,char in enumerate(content):
+                        current_index=index+offset
+                        if char=="~":
+                            cmd="~"
+                            start=current_index
+                        elif cmd:
+                            cmd+=char
+                            if char==";":
+                                end=current_index+1
+                                commands.append({"command": cmd[1:-1],"start": start,"end": end})
+                                cmd=""
+                                start=None
+            for command in commands:
+                parts=command["command"].split(" ",1)
+                cmd=parts[0].lower()
+                args=parts[1] if len(parts)>1 else""
+                await run_cmd(cmd,args,"doc")
+            if commands:
+                requests=[]
+                for command in reversed(commands):
+                    requests.append({"deleteContentRange":{"range":{"startIndex":command["start"],"endIndex":command["end"],"tabId":"t.362u6mhuxab6"}}})
+                docs.documents().batchUpdate(documentId=DOCUMENT_ID,body={"requests":requests}).execute()
+        except Exception as e:
+            printf(f"[Error] Exception in doc_controller: {e}")
+        await asyncio.sleep(1)
 @emberbot137.event
 async def on_message(message:discord.Message):
     global current_target_server,current_target_channel,active_tasks,pending_reboot,reboot_mode,chat_data

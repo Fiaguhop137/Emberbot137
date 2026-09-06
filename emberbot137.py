@@ -443,6 +443,24 @@ async def run_cmd(cmd,args,loredo,message=None):
         else:
             if sub_cmd!="trim_num":
                 printf("[Error] Invalid syntax. Format: ~set <server|channel|trim_num> <name|all|number> or try ~help for more information")
+        if sub_cmd=="trim_num":
+            try:
+                new_trim_num=int(sub_val)
+                if new_trim_num<1:
+                    printf("[Error] trim_num must be a positive integer.")
+                else:
+                    trim_num=new_trim_num
+                    printf(f"[Success] trim_num updated to: {trim_num}")
+            except ValueError:
+                printf("[Error] trim_num must be a positive integer.")
+            printf(f"[Success] Retrieved trim_num: {trim_num}")
+        else:
+            printf(f"[Success] Retrieved active channel: {current_target_server}/#{current_target_channel}")
+        if loredo=="remote":
+            try:
+                log_action(guild=message.guild,channel=message.channel,user=message.author,command="set",action=f"Target remotely updated to {current_target_server}/#{current_target_channel}")
+            except Exception as e:
+                printf(f"[Error] Failed to log remote set action: {e}")
     elif cmd=="get":
         if sub_cmd=="server" or sub_cmd=="channel":
             printf(f"[Success] Retrieved target channel: {current_target_server}/{current_target_channel}")
@@ -510,24 +528,6 @@ async def run_cmd(cmd,args,loredo,message=None):
             printf(f"[Error] Missing message. Format: ~say <msg> or try ~help for more information")
         except Exception as e:
             printf(f"[Error] Unexpected error while vocalizing message: {e}")
-        if sub_cmd=="trim_num":
-            try:
-                new_trim_num=int(sub_val)
-                if new_trim_num<1:
-                    printf("[Error] trim_num must be a positive integer.")
-                else:
-                    trim_num=new_trim_num
-                    printf(f"[Success] trim_num updated to: {trim_num}")
-            except ValueError:
-                printf("[Error] trim_num must be a positive integer.")
-            printf(f"[Success] Retrieved trim_num: {trim_num}")
-        else:
-            printf(f"[Success] Retrieved active channel: {current_target_server}/#{current_target_channel}")
-        if loredo=="remote":
-            try:
-                log_action(guild=message.guild,channel=message.channel,user=message.author,command="set",action=f"Target remotely updated to {current_target_server}/#{current_target_channel}")
-            except Exception as e:
-                printf(f"[Error] Failed to log remote set action: {e}")
     elif cmd=="test":
         for channel in channels:
             await do_test(channel)

@@ -715,7 +715,7 @@ async def on_message(message:discord.Message):
         chat_data["timestamp"]=now
         flush_chat_log()
     for i in banned_words:
-        if i in message.content:
+        if i in message.content and message.author.id!=emberbot137.user.id:
             try:
                 await message.delete()
                 printf(f"[Warning] Deleted message from {message.author} containing banned word '{i}' in {message.guild}/{message.channel}")

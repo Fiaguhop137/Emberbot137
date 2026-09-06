@@ -462,6 +462,8 @@ async def run_cmd(cmd,args,loredo,message=None):
             except Exception as e:
                 printf(f"[Error] Failed to log remote set action: {e}")
     elif cmd=="get":
+        sub_parts=args.split(" ",1)
+        sub_cmd=sub_parts[0].lower()
         if sub_cmd=="server" or sub_cmd=="channel":
             printf(f"[Success] Retrieved target channel: {current_target_server}/{current_target_channel}")
         elif sub_cmd=="doc_link":
@@ -496,7 +498,11 @@ async def run_cmd(cmd,args,loredo,message=None):
                 except Exception as e:
                     printf(f"[Error] Failed to read file '{filename}': {e}")
             else:
-                num_lines=int(cat_parts[1])
+                try:
+                    num_lines=int(cat_parts[1])
+                except ValueError:
+                    printf("[Error] Invalid number of lines. Try ~cat <head|tail|paws> <lines|pattern> <filename>")
+                    return
                 try:
                     with open(filename,"r",encoding="utf-8") as f:
                         lines=f.readlines()
@@ -645,6 +651,7 @@ async def console_controller():
             printf(f"[Error] Exception in console_controller: {e}")
             await asyncio.sleep(1)
 async def doc_controller():
+    global documenting
     await emberbot137.wait_until_ready()
     while not emberbot137.is_closed():
         if documenting:
@@ -686,10 +693,6 @@ async def doc_controller():
                     docs.documents().batchUpdate(documentId=DOCUMENT_ID,body={"requests":requests}).execute()
             except Exception as e:
                 printf(f"[Error] Exception in doc_controller: {e}")
-            async def pause():
-                global documenting
-                await asyncio.sleep(1)
-                documenting=True
             asyncio.run(pause())
 @emberbot137.event
 async def on_message(message:discord.Message):

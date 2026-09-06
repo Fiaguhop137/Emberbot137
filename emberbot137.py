@@ -1,5 +1,7 @@
 from __future__ import annotations
 import asyncio,logging,os,socket,sys,subprocess,discord,os.path
+
+from click import pause
 from contextlib import suppress
 from datetime import datetime
 from zoneinfo import ZoneInfo
@@ -656,6 +658,10 @@ async def doc_controller():
     while not emberbot137.is_closed():
         if documenting:
             documenting=False
+            async def pause():
+                global documenting
+                await asyncio.sleep(1)
+                documenting=True
             try:
                 document=get_document("t.362u6mhuxab6")
                 commands=[]
@@ -693,8 +699,7 @@ async def doc_controller():
                     docs.documents().batchUpdate(documentId=DOCUMENT_ID,body={"requests":requests}).execute()
             except Exception as e:
                 printf(f"[Error] Exception in doc_controller: {e}")
-            asyncio.run(pause())
-@emberbot137.event
+            await asyncio.to_thread(pause)@emberbot137.event
 async def on_message(message:discord.Message):
     global current_target_server,current_target_channel,active_tasks,pending_reboot,reboot_mode,chat_data
     if message.author.bot:

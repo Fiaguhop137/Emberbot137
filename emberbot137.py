@@ -1,7 +1,5 @@
 from __future__ import annotations
 import asyncio,logging,os,socket,sys,subprocess,discord,os.path
-
-from click import pause
 from contextlib import suppress
 from datetime import datetime
 from zoneinfo import ZoneInfo

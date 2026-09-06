@@ -647,44 +647,50 @@ async def console_controller():
 async def doc_controller():
     await emberbot137.wait_until_ready()
     while not emberbot137.is_closed():
-        try:
-            document=get_document("t.362u6mhuxab6")
-            commands=[]
-            cmd=""
-            start=None
-            for element in document["body"]["content"]:
-                if "paragraph" not in element:
-                    continue
-                for item in element["paragraph"]["elements"]:
-                    if "textRun" not in item:
+        if documenting:
+            documenting=False
+            try:
+                document=get_document("t.362u6mhuxab6")
+                commands=[]
+                cmd=""
+                start=None
+                for element in document["body"]["content"]:
+                    if "paragraph" not in element:
                         continue
-                    content=item["textRun"]["content"]
-                    index=item["startIndex"]
-                    for offset,char in enumerate(content):
-                        current_index=index+offset
-                        if char=="~":
-                            cmd="~"
-                            start=current_index
-                        elif cmd:
-                            cmd+=char
-                            if char==";":
-                                end=current_index+1
-                                commands.append({"command": cmd[1:-1],"start": start,"end": end})
-                                cmd=""
-                                start=None
-            for command in commands:
-                parts=command["command"].split(" ",1)
-                cmd=parts[0].lower()
-                args=parts[1] if len(parts)>1 else""
-                await run_cmd(cmd,args,"doc")
-            if commands:
-                requests=[]
-                for command in reversed(commands):
-                    requests.append({"deleteContentRange":{"range":{"startIndex":command["start"],"endIndex":command["end"],"tabId":"t.362u6mhuxab6"}}})
-                docs.documents().batchUpdate(documentId=DOCUMENT_ID,body={"requests":requests}).execute()
-        except Exception as e:
-            printf(f"[Error] Exception in doc_controller: {e}")
-        await asyncio.sleep(1)
+                    for item in element["paragraph"]["elements"]:
+                        if "textRun" not in item:
+                            continue
+                        content=item["textRun"]["content"]
+                        index=item["startIndex"]
+                        for offset,char in enumerate(content):
+                            current_index=index+offset
+                            if char=="~":
+                                cmd="~"
+                                start=current_index
+                            elif cmd:
+                                cmd+=char
+                                if char==";":
+                                    end=current_index+1
+                                    commands.append({"command": cmd[1:-1],"start": start,"end": end})
+                                    cmd=""
+                                    start=None
+                for command in commands:
+                    parts=command["command"].split(" ",1)
+                    cmd=parts[0].lower()
+                    args=parts[1] if len(parts)>1 else""
+                    await run_cmd(cmd,args,"doc")
+                if commands:
+                    requests=[]
+                    for command in reversed(commands):
+                        requests.append({"deleteContentRange":{"range":{"startIndex":command["start"],"endIndex":command["end"],"tabId":"t.362u6mhuxab6"}}})
+                    docs.documents().batchUpdate(documentId=DOCUMENT_ID,body={"requests":requests}).execute()
+            except Exception as e:
+                printf(f"[Error] Exception in doc_controller: {e}")
+        async def pause():
+            global documenting
+            await asyncio.sleep(1)
+            documenting=True
+        asyncio.run(pause())
 @emberbot137.event
 async def on_message(message:discord.Message):
     global current_target_server,current_target_channel,active_tasks,pending_reboot,reboot_mode,chat_data

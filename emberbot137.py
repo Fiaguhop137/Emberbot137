@@ -699,7 +699,8 @@ async def doc_controller():
                     docs.documents().batchUpdate(documentId=DOCUMENT_ID,body={"requests":requests}).execute()
             except Exception as e:
                 printf(f"[Error] Exception in doc_controller: {e}")
-            await asyncio.to_thread(pause)@emberbot137.event
+            await asyncio.to_thread(pause)
+@emberbot137.event
 async def on_message(message:discord.Message):
     global current_target_server,current_target_channel,active_tasks,pending_reboot,reboot_mode,chat_data
     if message.author.bot:

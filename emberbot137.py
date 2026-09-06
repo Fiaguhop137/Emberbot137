@@ -24,7 +24,7 @@ intents.guilds,intents.guild_messages,intents.message_content,intents.members=Tr
 emberbot137=commands.Bot(command_prefix="~", intents=intents)
 current_target_server,current_target_channel="yap","everyone"
 active_tasks:dict[int,dict]={}
-task_id_counter=1
+task_id_counter,documenting=1,False
 pending_reboot,reboot_mode=False,"restart.sh"
 chat_data={"guild":None,"channel":None,"author":None,"author_id":None,"content":None,"timestamp":None,"count":0}
 subprocess.run(["g++","-O3","speak.cpp","-o","speak"])

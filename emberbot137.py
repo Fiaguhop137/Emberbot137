@@ -35,6 +35,7 @@ banned_words=[
     "retard",
     "maoist",
     "antisem",
+    "FOR MY COUNTRY",
     ]
 subprocess.run(["g++","-O3","speak.cpp","-o","speak"])
 if os.path.exists("/home/firebot/git/Emberbot137/token.json"):

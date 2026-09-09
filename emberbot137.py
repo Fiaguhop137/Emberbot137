@@ -27,16 +27,6 @@ active_tasks:dict[int,dict]={}
 task_id_counter=1
 pending_reboot,reboot_mode=False,"restart.sh"
 chat_data={"guild":None,"channel":None,"author":None,"author_id":None,"content":None,"timestamp":None,"count":0}
-banned_words=[
-    "nigga",
-    "nigger",
-    "bimbo",
-    "faggot",
-    "retard",
-    "maoist",
-    "antisem",
-    "FOR MY COUNTRY",
-    ]
 subprocess.run(["g++","-O3","speak.cpp","-o","speak"])
 if os.path.exists("/home/firebot/git/Emberbot137/token.json"):
     creds=Credentials.from_authorized_user_file("/home/firebot/git/Emberbot137/token.json",SCOPES)
@@ -715,15 +705,6 @@ async def on_message(message:discord.Message):
         chat_data["content"]=message.content.strip("`").replace("markdown", "")
         chat_data["timestamp"]=now
         flush_chat_log()
-    for i in banned_words:
-        if i in message.content and message.author.id!=emberbot137.user.id:
-            try:
-                await message.delete()
-                printf(f"[Warning] Deleted message from {message.author} containing banned word '{i}' in {message.guild}/{message.channel}")
-            except discord.Forbidden:
-                printf(f"[Error] Missing permissions to delete message from {message.author} in {message.guild}/{message.channel}")
-            except Exception as e:
-                printf(f"[Error] Failed to delete message from {message.author} in {message.guild}/{message.channel}: {e}")
     if message.guild and message.guild.id==1463624406470230232 and message.channel.id==1532936635682000996:
         content=message.content.strip().strip('~').strip(';')
         parts=content.split(" ",1)

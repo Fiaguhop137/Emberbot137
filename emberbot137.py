@@ -6,6 +6,7 @@ from zoneinfo import ZoneInfo
 from typing import Optional
 from discord.ext import commands
 from dotenv import load_dotenv
+from pathlib import Path
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -522,6 +523,24 @@ async def run_cmd(cmd,args,loredo,message=None):
                 for channel in channels:
                     await do_echo(channel,"".join(["```\n",line,"\n```"])[:2000])
                     await asyncio.sleep(1)
+    elif cmd=="remove":
+        if not args:
+            printf("[Error] Invalid syntax. Format: ~remove <filename> or try ~help for more information")
+            return
+        filename=args.strip()
+        if filename in [CHAT_LOG_FILE,LOG_FILE]:
+            os.remove(filename)
+            printf(f"[Success] Removed file: {filename}")
+        elif filename=="logs":
+            for file in Path("/home/firebot/git/Emberbot137").glob("*.log"):
+                if file.exists():
+                    file.unlink()
+                    printf(f"[Success] Removed file: {file}")
+                else:
+                    printf(f"[Warning] File '{file}' does not exist.")
+        else:
+            printf(f"[Error] Invalid filename '{filename}'. Only log files can be removed. Use ~remove logs to remove all log files.")
+            return
     elif cmd=="say":
         if not args:
             printf("[Error] Missing message. Format: ~say <msg> or try ~help for more information")
@@ -718,7 +737,4 @@ async def on_ready():
     emberbot137.loop.create_task(reboot_watcher())
     asyncio.create_task(console_controller())
     asyncio.create_task(doc_controller())
-token=os.getenv("DISCORD_TOKEN")
-if not token:
-    raise ValueError("DISCORD_TOKEN environment variable not found in .env")
-emberbot137.run(token)
+emberbot137.run(os.getenv("DISCORD_TOKEN"))

@@ -11,6 +11,7 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
+from google.auth.exceptions import RefreshError
 LOG_FILE,CHAT_LOG_FILE="/home/firebot/git/Emberbot137/emberbot137.log","/home/firebot/git/Emberbot137/chat.log"
 FIA_USER_IDS,FIA_NAMES=[1342173566828810271,1492932060782919760,1532899245005475860],{1342173566828810271:"Fiaguhop137",1492932060782919760:"Redstone137",1532899245005475860:"Emberbot137"}
 SCOPES,DOCUMENT_ID=["https://www.googleapis.com/auth/documents"],"1WHjzHm3_poLQ51OLn5nvGkzArWMzogc2tEgYgcXRc_g"
@@ -30,10 +31,18 @@ pending_reboot,reboot_mode=False,"restart.sh"
 chat_data={"guild":None,"channel":None,"author":None,"author_id":None,"content":None,"timestamp":None,"count":0}
 subprocess.run(["g++","-O3","speak.cpp","-o","speak"])
 if os.path.exists("/home/firebot/git/Emberbot137/token.json"):
-    creds=Credentials.from_authorized_user_file("/home/firebot/git/Emberbot137/token.json",SCOPES)
+    try:
+        creds=Credentials.from_authorized_user_file("/home/firebot/git/Emberbot137/token.json",SCOPES)
+    except RefreshError:
+        os.remove("/home/firebot/git/Emberbot137/token.json")
+        creds=None
 else:
     creds=None
 if not creds or not creds.valid:
+    try:
+        os.remove("/home/firebot/git/Emberbot137/token.json")
+    except OSError:
+        pass
     if creds and creds.expired and creds.refresh_token:
         creds.refresh(Request())
     else:

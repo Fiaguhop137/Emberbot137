@@ -481,7 +481,8 @@ async def run_cmd(cmd,args,loredo,message=None):
         elif sub_cmd=="trim_num":
             printf(f"[Success] Retrieved trim_num: {trim_num}")
         elif sub_cmd=="invite":
-            printf("[Success] Retrieved invite link: https://discord.com/oauth2/authorize?client_id=1532899245005475860&permissions=2056&integration_type=0&scope=bot")
+            printf("[Success] Retrieved invite link: ")
+            printf("https://discord.com/oauth2/authorize?client_id=1532899245005475860&permissions=2056&integration_type=0&scope=bot")
         else:
             printf("[Error] Invalid syntax. Format: ~get <server|channel|doc_link|trim_num|invite> or try ~help for more information")
     elif cmd=="cat":

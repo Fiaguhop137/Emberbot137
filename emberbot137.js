@@ -1,7 +1,7 @@
 const chatbox=document.getElementById("chatbox");
 const input=document.getElementById("input");
-const ENCRYPTED_BOT_TOKEN=`{"salt": "c/0Ft8We/4e9LSkaT20bpw==", "iv": "tWHDmaBVHG64/s7r", "ciphertext": "K6sWtLfdHwzuxubnEhxtGZdGO999zqAUKazX5vS3LaGw5Tgt9xTGILFV4G8pYfUQIInEO1i1cBvYIdcWYD07//yDNzb0t80rcpEOD4ULmroEFsrtkSoeRQ=="}`;
-const ENCRYPTED_WEBHOOK=`{"salt": "zsartwS/30EC/WgFbQOxwg==", "iv": "4Xhm9CbBvlcuA/wJ", "ciphertext": "a4HU2aoEOcIcFuhu5WcJPEpPQkKAEWxxNJbNOW+6Y/wzSxr88Ml4D+w6abr6XbrqS/EyD+Eba/eDu1sYVrBSuzh8xZw5IJp3TN/eoo9x9fIuhkZIhpUMG99w+VuAQjtfQCWQkBK/riG+g5TIb5jNgj5w9fMGAxIsfjf3yk2259J41naJzaPvG3Q="}`;
+const ENCRYPTED_BOT_TOKEN=`{"salt": "i+raneNzeolfFRuNe9AL4Q==", "iv": "yPebghkwUd+MWhk9", "ciphertext": "C0sYZ76sI4mPzmhpNJKSLb7/GfC9vOsF01da6tPNugcSs/pKjk6awrASFhnu6Lfom/AO1CyJYGzIKfP+l82Dda8xN3ggBEfIWzKN2AAFQIv9JgSL7IaXwA=="}`;
+const ENCRYPTED_WEBHOOK=`{"salt": "fHrbUECc1gBlT+gL7qx4vw==", "iv": "G33rsV7jSBT/RKwx", "ciphertext": "AfH/dOKCyhgw3cAScI/3znShVfTDJbQexwYyjTFcwfGzINEfwPDz4b9tqDHyHD7jMyRVTXZobhzV6HA5yfZMbKXkZbfp1KPXNs6iqGrteLd1CverJ6Kn81OIYxRPTEBmx/tbj+16QTP4HLQni4H0OcUmG2G1oXsttlyo/DrJXXhazbPbiXXEPIQ="}`;
 let WEBHOOK_URL="";
 let BOT_TOKEN="";
 let socket=null;
@@ -90,8 +90,12 @@ function connect(){
                     log(`Logged in as ${packet.d.user.username}.`);
                     log("Gateway connection ready.");
                 }
-                if (packet.t==="MESSAGE_CREATE"){log(`${packet.d.author.username}: `+`${packet.d.content}`);}
-                if (packet.t==="INTERACTION_CREATE") {
+                if(packet.t==="MESSAGE_CREATE"){
+                    if(packet.d.guild_id!=="1530032067084292097"){
+                        log(`${packet.d.author.username}: `+`${packet.d.content}`);
+                    }
+                }
+                if(packet.t==="INTERACTION_CREATE"){
                     const interaction=packet.d;
                     log("INTERACTION_CREATE received.");
                     if (interaction.data?.name){log(`Command: /${interaction.data.name}`);}

@@ -1,7 +1,7 @@
 const chatbox=document.getElementById("chatbox");
 const input=document.getElementById("input");
-const ENCRYPTED_BOT_TOKEN=`{"salt": "i+raneNzeolfFRuNe9AL4Q==", "iv": "yPebghkwUd+MWhk9", "ciphertext": "C0sYZ76sI4mPzmhpNJKSLb7/GfC9vOsF01da6tPNugcSs/pKjk6awrASFhnu6Lfom/AO1CyJYGzIKfP+l82Dda8xN3ggBEfIWzKN2AAFQIv9JgSL7IaXwA=="}`;
-const ENCRYPTED_WEBHOOK=`{"salt": "fHrbUECc1gBlT+gL7qx4vw==", "iv": "G33rsV7jSBT/RKwx", "ciphertext": "AfH/dOKCyhgw3cAScI/3znShVfTDJbQexwYyjTFcwfGzINEfwPDz4b9tqDHyHD7jMyRVTXZobhzV6HA5yfZMbKXkZbfp1KPXNs6iqGrteLd1CverJ6Kn81OIYxRPTEBmx/tbj+16QTP4HLQni4H0OcUmG2G1oXsttlyo/DrJXXhazbPbiXXEPIQ="}`;
+const ENCRYPTED_BOT_TOKEN=`{"salt": "KjE/W37byfLQvSQkDED8DQ==", "iv": "RcLoPhHJlpS8Rk5Y", "ciphertext": "rD3BvxHBJxyLQykXiL5iGPvO1Dmfq0nJmPaoONXjF5QJskZJb6t+Xfg0v75LkD2QW0XJrSDdQ0aj23ehbLVn7m8MAcemochnsNkKA1oFLVwtLJoLzS/Www=="}`;
+const ENCRYPTED_WEBHOOK=`{"salt": "BLxZVrU2k52nLVDFK96S/w==", "iv": "Pgj7iyCOMMfMDOH6", "ciphertext": "EaddIjfWtPwORteAPzBxvnxquU1la23P/w/QqQkcKqwQVRjbLuTfcLJaf96u8SRE8TfnaA/Ez5GpZI3RhfIxnxFn5BIPy7bqo9YlrJ2m/2yxqTFuXbGbiH0qm43dAYd2UFALehiUptLso7w3cKLEbP1SL5DKgx/0lTFQpZF9lIsIC1mDPaE7lMI="}`;
 let WEBHOOK_URL="";
 let BOT_TOKEN="";
 let socket=null;
@@ -91,7 +91,7 @@ function connect(){
                     log("Gateway connection ready.");
                 }
                 if(packet.t==="MESSAGE_CREATE"){
-                    if(packet.d.guild_id!=="1530032067084292097"){
+                    if(packet.d.channel_id!=="1532936635682000996"){
                         log(`${packet.d.author.username}: `+`${packet.d.content}`);
                     }
                 }

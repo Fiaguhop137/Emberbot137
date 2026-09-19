@@ -1,7 +1,7 @@
 const chatbox=document.getElementById("chatbox");
 const input=document.getElementById("input");
-const ENCRYPTED_BOT_TOKEN=`{"salt": "KjE/W37byfLQvSQkDED8DQ==", "iv": "RcLoPhHJlpS8Rk5Y", "ciphertext": "rD3BvxHBJxyLQykXiL5iGPvO1Dmfq0nJmPaoONXjF5QJskZJb6t+Xfg0v75LkD2QW0XJrSDdQ0aj23ehbLVn7m8MAcemochnsNkKA1oFLVwtLJoLzS/Www=="}`;
-const ENCRYPTED_WEBHOOK=`{"salt": "BLxZVrU2k52nLVDFK96S/w==", "iv": "Pgj7iyCOMMfMDOH6", "ciphertext": "EaddIjfWtPwORteAPzBxvnxquU1la23P/w/QqQkcKqwQVRjbLuTfcLJaf96u8SRE8TfnaA/Ez5GpZI3RhfIxnxFn5BIPy7bqo9YlrJ2m/2yxqTFuXbGbiH0qm43dAYd2UFALehiUptLso7w3cKLEbP1SL5DKgx/0lTFQpZF9lIsIC1mDPaE7lMI="}`;
+const ENCRYPTED_BOT_TOKEN=`{"salt": "PWgZHJ51oLx2nYYLOzEDng==", "iv": "Ge/OoP2uC0TDhXp4", "ciphertext": "EPvm3ihdI7GehknAU+JbN3A4O3XH/691WMcaxCVDjz+ZihO3aid0hafS+5Pf7QU90l9yRgLpLCP9iSeaMrJ/euMTjMgYo2fUVohiDLdYF7z15nAaWEv8DQ=="}`;
+const ENCRYPTED_WEBHOOK=`{"salt": "aXj9f3BPts1XDoTv27JYnQ==", "iv": "/LJ2tZoxwTwl+KVK", "ciphertext": "fNomx526vBoG/xv3GMuxyytmu5/T5+CUJyJwdOm9YkSLBQAl4hT9PCQJM4Pz5IpmZH9PfGVY+66IupUM30d30nTNgmKSmwluD+r4Uj/U9xyqk7jIYjvOBruPQC+kJ3Nt4I3l/dFzs2ZZW5Mgp6z4A+adU0CRqRJeuoYf2na61bMajMvBOmfW7Mk="}`;
 let WEBHOOK_URL="";
 let BOT_TOKEN="";
 let socket=null;
@@ -163,7 +163,7 @@ async function main(){
         BOT_TOKEN=await decrypt(ENCRYPTED_BOT_TOKEN,password);
     }catch(error){
         console.error("Decryption failed:",error);
-        log("Invalid password or corrupted encrypted data.");
+        log("Invalid password or corrupted encrypted data. Reload the page and try again.");
         return;
     }
     log("Credentials decrypted.");

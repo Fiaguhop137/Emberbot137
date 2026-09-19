@@ -1,0 +1,25 @@
+#chatbox {
+    width: 100%;
+    height: calc(100vh - 65px); 
+    border: 3px solid #663300;
+    border-radius: 9px;
+    background-color: #fedcba;
+    padding: 15px;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    color: #663300;
+    box-sizing: border-box;
+    overflow-y: auto; 
+    overflow-wrap: break-word;
+}
+#input {
+    width: 100%;
+    margin-top: 10px;
+    border: 3px solid #663300;
+    border-radius: 9px;
+    background-color: #fedcba;
+    padding: 9px;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    color: #663300;
+    box-sizing: border-box;
+    overflow-y: auto; 
+}

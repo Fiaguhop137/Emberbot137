@@ -1,0 +1,3 @@
+discord.html
+emberbot.js
+style.css

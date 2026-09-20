@@ -1,5 +1,4 @@
 .env
 emberbot137.log
 chat.log
-token.json
-credentials.json
+firebase-service-account.json

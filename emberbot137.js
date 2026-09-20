@@ -1,7 +1,7 @@
 const chatbox=document.getElementById("chatbox");
 const input=document.getElementById("input");
-const ENCRYPTED_BOT_TOKEN=`{"salt": "PWgZHJ51oLx2nYYLOzEDng==", "iv": "Ge/OoP2uC0TDhXp4", "ciphertext": "EPvm3ihdI7GehknAU+JbN3A4O3XH/691WMcaxCVDjz+ZihO3aid0hafS+5Pf7QU90l9yRgLpLCP9iSeaMrJ/euMTjMgYo2fUVohiDLdYF7z15nAaWEv8DQ=="}`;
-const ENCRYPTED_WEBHOOK=`{"salt": "aXj9f3BPts1XDoTv27JYnQ==", "iv": "/LJ2tZoxwTwl+KVK", "ciphertext": "fNomx526vBoG/xv3GMuxyytmu5/T5+CUJyJwdOm9YkSLBQAl4hT9PCQJM4Pz5IpmZH9PfGVY+66IupUM30d30nTNgmKSmwluD+r4Uj/U9xyqk7jIYjvOBruPQC+kJ3Nt4I3l/dFzs2ZZW5Mgp6z4A+adU0CRqRJeuoYf2na61bMajMvBOmfW7Mk="}`;
+const ENCRYPTED_BOT_TOKEN=`{"salt": "djrf8nJ4YegFBvpBh2MA4A==", "iv": "VsHCIS1os2XN1dgj", "ciphertext": "uQ2h4h72Y+f0dzqDGOZXhKwXGA/N6ws9M7gdK+J4CRcoDCPBrN9301nOCb1M8YuBoWH5D36K5QEpWeOBzkOLKdH+cFiEAaY6lYm17UACTFKX64x16uHQ3Q=="}`;
+const ENCRYPTED_WEBHOOK=`{"salt": "z0ysrdBYrDPQSPUc7JPGvw==", "iv": "Vnuh1suCFRm5cvpv", "ciphertext": "f24wPPjj72oL29mVmVStFRWHFkm1VpH0cjpOMhhar48XxaESL4dxxURSY3rYbLQ8VltvGHTRBMCI9YtfS/kLH0+y28EabI57/UWzmZa3LFXh9/w84D5Hm0M6EeDZPdmfimoN9AvgSrrDbQnRD6UF6AYFHOtNUpj1tFD//fd79LieRog3r6+DJIM="}`;
 let WEBHOOK_URL="";
 let BOT_TOKEN="";
 let socket=null;

@@ -1,5 +1,4 @@
-body{
-    background-color:#ffffff;
+*{
     font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
 }
 #chatbox{

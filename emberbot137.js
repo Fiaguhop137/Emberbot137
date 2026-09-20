@@ -12,7 +12,7 @@ const chatbox=document.getElementById("chatbox");
 const input=document.getElementById("input");
 const channelSelect=document.getElementById("channel-select");
 const channelIdInput=document.getElementById("channel-id");
-const ENCRYPTED_BOT_TOKEN=`{"salt": "y3YHd9xTAdupTegMOqrnDQ==", "iv": "zBByANoepyWthnQJ", "ciphertext": "vkPe2ziFwswAG5N3WIE38s1X0FNQFaWf8VXuAJBZ0p61o6hCuZ5dvFay0B/bgnSEsAvCQmLOk1Ryl50TyQLLATwKcfRncqvZEdJTGQ7WFQxLCklc30p+PA=="}`;
+const ENCRYPTED_BOT_TOKEN=`{"salt": "ZLYdfvAbutsjczSSjuzmag==", "iv": "s0KVOPvYcoUjGBGf", "ciphertext": "xCREpu4V7Zmy6d2DZXHZrA19vVWkQ2p9vfvz0kzikWHKsm/m43oCE0kg1XLW/wQw5WRib0BgMCa4UkwwJb2lZmYWU6W6jQplSfYlRro9zTvY11a4h8v91g=="}`;
 let BOT_TOKEN="";
 let socket=null;
 let heartbeatTimer=null;

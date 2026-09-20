@@ -10,7 +10,7 @@ const firebaseConfig={
 };
 const chatbox=document.getElementById("chatbox");
 const input=document.getElementById("input");
-const ENCRYPTED_BOT_TOKEN=`{"salt": "WOO4ldwQsrhx5vhdkzgjHw==", "iv": "L6Brq5bDsZ6FWMSg", "ciphertext": "vu5XXRwBg+gxT1T/SMm6rb6IOaMWdcKR1jIvAA96BJb13GFTnUh3q0ET60kISuRjhmLVbj1bTVosyYsf5+IyxJnUy2ddYWWMsYUN2lnUfrigyFn/jAh/RQ=="}`;
+const ENCRYPTED_BOT_TOKEN=`{"salt": "/qqXi+zog8FYiJTLDtfmMA==", "iv": "wsZKwoA51HmVHkhU", "ciphertext": "yde4CzgY1Ljs8BepBOQD2qjz95zk9kxF/fmvfnzEGazyYRHCIRzJnDLZGOIoAB13MQZqvG1SYMm9D7jWU0SorsEtI+Yi95n+l00d55Xh9TmZ7kRqIGra4A=="}`;
 let BOT_TOKEN="";
 let socket=null;
 let heartbeatTimer=null;

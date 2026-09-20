@@ -10,7 +10,9 @@ const firebaseConfig={
 };
 const chatbox=document.getElementById("chatbox");
 const input=document.getElementById("input");
-const ENCRYPTED_BOT_TOKEN=`{"salt": "577iC4iZyDGZ5l9lP3DwYw==", "iv": "a2k7iOrQWSR7U7ZO", "ciphertext": "Oux5cHvTTMwjdGcUNJpKdCODpqAJI9b7QfFP8FTjqMLzy+28hp+KM3WQd5AyeUfDt+A2J02FklmsMth31MFK4n70PRLlwhOffLVor3V6bMZHjGSjXj+Ohw=="}`;
+const channelSelect=document.getElementById("channel-select");
+const channelIdInput=document.getElementById("channel-id");
+const ENCRYPTED_BOT_TOKEN=`{"salt": "y3YHd9xTAdupTegMOqrnDQ==", "iv": "zBByANoepyWthnQJ", "ciphertext": "vkPe2ziFwswAG5N3WIE38s1X0FNQFaWf8VXuAJBZ0p61o6hCuZ5dvFay0B/bgnSEsAvCQmLOk1Ryl50TyQLLATwKcfRncqvZEdJTGQ7WFQxLCklc30p+PA=="}`;
 let BOT_TOKEN="";
 let socket=null;
 let heartbeatTimer=null;
@@ -83,8 +85,10 @@ function connect(){
                 break;
             }
             case 0:{
-                if(packet.t==="READY"){log(`Logged in as ${packet.d.user.username}`);}
-                if(packet.t==="MESSAGE_CREATE"){if(packet.d.channel_id!=="1532936635682000996"){log(`${packet.d.author.username}: `+`${packet.d.content}`);}}
+                if(packet.t==="READY"){
+                    log(`Logged in as ${packet.d.user.username}`);
+                }
+                if(packet.t==="MESSAGE_CREATE"){log(`${packet.d.author.username}: `+`${packet.d.content}`);}
                 if(packet.t==="INTERACTION_CREATE"){
                     const interaction=packet.d;
                     log("INTERACTION_CREATE received.");
@@ -107,7 +111,7 @@ function connect(){
                 heartbeatTimer=null;
                 break;
             }
-            case 11:{log("Heartbeat ACK.");break;}
+            case 11:{break;}
             default:{log("Unhandled Gateway opcode:",packet.op,packet);break;}
         }
     });
@@ -116,17 +120,20 @@ function connect(){
         heartbeatTimer=null;
         log(`Disconnected. Code: ${event.code}`);
     });
-    socket.addEventListener("error",error=>{
-        log("WebSocket error:",error);
-    });
+    socket.addEventListener("error",error=>{log("WebSocket error:"+error);});
 }
 input.addEventListener("keydown",async event=>{
     if(event.key!=="Enter"){return;}
     const message=input.value.trim();
     if(!message){return;}
     input.value="";
-    const channelId="1530032067084292097";
+    const channelId=channelIdInput.value.trim();
     await sendFirebase(channelId,message);
+});
+channelSelect.addEventListener("change",()=>{
+    if(channelSelect.value){
+        channelIdInput.value=channelSelect.value;
+    }
 });
 async function main(){
     const password=prompt("Password:");
@@ -136,7 +143,7 @@ async function main(){
         credential_status.textContent="Credentials decrypted.";
         await initializeFirebase();
     }catch(error){
-        log("Invalid password, Firebase initialization failed, or corrupted encrypted data. ",error,". Reload the page and try again.");
+        log("Invalid password, Firebase initialization failed, or corrupted encrypted data. "+error+". Reload the page and try again.");
         return;
     }
     connect();

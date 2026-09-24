@@ -6,7 +6,7 @@ export USER=firebot
 export LOGNAME=firebot
 export XDG_RUNTIME_DIR=/run/user/1000
 cd /home/firebot/git/Emberbot137
-/usr/bin/pkill -f "discord.py" || :
+/usr/bin/pkill -f "discord_tunnel.py" || :
 /usr/bin/sleep 1
 /usr/bin/nohup /usr/bin/python3 /home/firebot/git/Emberbot137/encrypt.py > /dev/null 2>&1 &
 /usr/bin/nohup /usr/bin/python3 /home/firebot/git/Emberbot137/discord_tunnel.py > /home/firebot/git/Emberbot137/discord.log 2>&1 &

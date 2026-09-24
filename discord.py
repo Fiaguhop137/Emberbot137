@@ -32,7 +32,7 @@ def send_firebase_message(event:db.Event):
         return
     key=event.path.strip("/")
     print(f"Firebase message {key}: channel={channel_id} content={content!r}")
-    future=asyncio.run_coroutine_threadsafe(send_to_discord(key,int(channel_id),content),bots.loop)
+    future=asyncio.run_coroutine_threadsafe(send_to_discord(key,int(channel_id),content),bots[uid].loop,uid)
     try:
         future.result()
     except Exception as error:
@@ -52,5 +52,6 @@ async def send_to_discord(key,channel_id,content,uid):
     except Exception as error:
         print(f"Failed to send Firebase message {key}: {error}")
 messages.listen(send_firebase_message)
-for bot in bots:
-    bot.run(TOKENS[bots.index(bot)])
+async def start_bots():
+    await asyncio.gather(*(bot.start(TOKENS[i]) for i,bot in enumerate(bots)))
+asyncio.run(start_bots())

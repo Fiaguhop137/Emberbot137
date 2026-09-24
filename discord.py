@@ -7,6 +7,7 @@ TOKENS=[os.environ[f"DISCORD_TOKEN_{i}"] for i in range(2)]
 FIREBASE_CREDENTIALS="/home/firebot/git/Emberbot137/firebase-service-account.json"
 DATABASE_URL="https://discord-fia-default-rtdb.firebaseio.com"
 USERS=[os.environ[f"USERNAME_{i}"] for i in range(2)]
+bot_loop=None
 cred=credentials.Certificate(FIREBASE_CREDENTIALS)
 firebase_admin.initialize_app(cred,{"databaseURL":DATABASE_URL})
 messages=db.reference("messages")
@@ -25,7 +26,7 @@ def send_firebase_message(event:db.Event):
     channel_id=data.get("channel_id")
     sender=data.get("sender")
     uid=USERS.index(sender) if sender in USERS else None
-    if uid is None or uid<0 or uid>=len(bots):
+    if uid is None:
         return
     if not content or not channel_id:
         print("Invalid Firebase message:", data)
@@ -51,10 +52,9 @@ async def send_to_discord(key,channel_id,content,uid):
         print(f"Sent and deleted Firebase message: {key}")
     except Exception as error:
         print(f"Failed to send Firebase message {key}: {error}")
-messages.listen(send_firebase_message)
-bot_loop=None
 async def start_bots():
     global bot_loop
     bot_loop=asyncio.get_running_loop()
     await asyncio.gather(*(bot.start(TOKENS[i]) for i,bot in enumerate(bots)))
 asyncio.run(start_bots())
+messages.listen(send_firebase_message)

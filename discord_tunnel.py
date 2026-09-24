@@ -25,7 +25,14 @@ def send_firebase_message(event:db.Event):
     content=data.get("data")
     channel_id=data.get("channel_id")
     sender=data.get("sender")
-    uid=USERS.index(sender) if sender in USERS else None
+    print(f"Firebase sender={sender!r}")
+    print(f"USERS={USERS!r}")
+    if sender not in USERS:
+        print(f"Unknown sender: {sender!r}")
+        print(f"Known users: {USERS!r}")
+        return
+    uid=USERS.index(sender)
+    print(f"Routing to bot {uid}: {bots[uid].user}")
     if uid is None:
         return
     if not content or not channel_id:
@@ -57,4 +64,8 @@ async def start_bots():
     bot_loop=asyncio.get_running_loop()
     messages.listen(send_firebase_message)
     await asyncio.gather(*(bot.start(TOKENS[i]) for i,bot in enumerate(bots)))
+for i,bot in enumerate(bots):
+    @bot.event
+    async def on_ready(bot=bot, i=i):
+        print(f"Bot {i} ready: {bot.user} ({bot.user.id})")
 asyncio.run(start_bots())

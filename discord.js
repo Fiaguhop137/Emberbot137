@@ -12,7 +12,7 @@ const chatbox=document.getElementById("chatbox");
 const input=document.getElementById("input");
 const channelSelect=document.getElementById("channel-select");
 const channelIdInput=document.getElementById("channel-id");
-const ENCRYPTED_BOT_TOKENS={0:`{"salt": "Ui0j6aOhDhvZih1ixxN5Iw==", "iv": "wVe5IUOgPeNvNfSL", "ciphertext": "QJI3ZcBnWB6xhA/xMET83pyMi8uKBmCWJzJkhWpyPJvWhvMommm6EFqovbRnXY0A/w6coNQr15sHy7PflhDBQ4/w08ffkmT9FCc2iCb4hpZESSOdGU4FEw=="}`,1:`{"salt": "LDJF0Cay1FnjY/jlqjaNOg==", "iv": "v9Sf7jx1eFomEWQE", "ciphertext": "OcI0aakf/Wci0O3e71GEL1ndkyfoZzxJ5psB7ucnqnMjrDf06qd0jbJ8g3+MMo7dfRDfRV7Gixwq2MrhBIdestA7WUBAYIxZIU99ZxKxnMpf/oBL+SPS3A=="}`};
+const ENCRYPTED_BOT_TOKENS={0:`{"salt": "IYfX9SYQ+KWuyPYlZ2m2cQ==", "iv": "fOvGjssg1qXno1nU", "ciphertext": "1IhdjjZSAPgvVVYcY7rhbyrwC1URyFKcMnyp9OMeX2JLys2q0BmLthGGWpvIBSFcoxYZXl9dV0G4d9r57ZPKRSfHPmL4lfxV7Fu/gWidLsRavzrhWWOIfQ=="}`,1:`{"salt": "e/VgbPd2JzEreUABMfi59Q==", "iv": "v7KT43lHwXiRkwOS", "ciphertext": "UgTYMQib6hBuE6BQEjZquWpBiNOq0WQDxEyq7ioEcRbfdxIqTkVik0ZIWMhYR7Pide5t4qXn971Ic7WSiBJ+WxkAJF42EVgpLBw5crRiq3lyvCIJSmlW9Q=="}`};
 const USERNAMES=["Emberbot137","Melina"];
 let BOT_TOKEN="";
 let uid=0

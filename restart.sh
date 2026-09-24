@@ -11,4 +11,5 @@ cd /home/firebot/git/Emberbot137
 /usr/bin/nohup /usr/bin/python3 /home/firebot/git/Emberbot137/encrypt.py > /dev/null 2>&1 &
 /usr/bin/nohup /usr/bin/python3 /home/firebot/git/Emberbot137/discord_tunnel.py > /home/firebot/git/Emberbot137/discord.log 2>&1 &
 /usr/bin/sleep 1
+zip discord.zip discord.js style.css discord.html Emberbot137.css Melina.css
 /home/firebot/Downloads/shell/git-sync.sh || :

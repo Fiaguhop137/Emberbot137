@@ -12,8 +12,10 @@ const chatbox=document.getElementById("chatbox");
 const input=document.getElementById("input");
 const channelSelect=document.getElementById("channel-select");
 const channelIdInput=document.getElementById("channel-id");
-const ENCRYPTED_BOT_TOKEN=`{"salt": "EjfBkdSWvNuBE0UWEwgPvg==", "iv": "seG64G3eiBSiC+v/", "ciphertext": "hoHJyycNx2URf/J5vmS0fYRBFXnLwup/7ouQWwT4EjWLKjhhVjH/4HsF+UR2JEfr8jtTHvwxgpFuCpH3oA+SjlD94ZAyZRb3KsBVl29BhEfK6ckFvpJGlw=="}`;
+const ENCRYPTED_BOT_TOKENS={0:`{"salt": "QiGKQKfnoNo+X+xauiqwXQ==", "iv": "7r+2Mmv1uSTsBTXf", "ciphertext": "e/K9di6mjmxGwyOVynVKxi04iMXsByZE9S6nelYOThA2EgKYJHE61WU70W36R+u80xXz0klwSxc8yA/QdY//ySlUQqU9YQ59k+2lRXOEheo6mGQuvZiiIw=="}`,1:`{"salt": "2SrRuOfCZ5Np0n4jkfy7WQ==", "iv": "93XIYBCFLoF9QVDC", "ciphertext": "w19ojO2jkfPp5GrhZgurlpMbyBqsd7XoXPD94hC9eiqpe8JeaWQT8PRrPMWJcS/QbHlzS72RGrc9z0ND3JsbTWPqcIqsCPihDknvb8xpuIVit9DH9P6INQ=="}`};
+const USERNAMES=["Emberbot137","Melina"];
 let BOT_TOKEN="";
+let uid=0
 let socket=null;
 let heartbeatTimer=null;
 let sequence=null;
@@ -42,7 +44,7 @@ async function sendFirebase(channelId,content){
             log("Firebase is not initialized.");
             return false;
         }
-        await firebasePush(firebaseMessages,{type:"message",sender:"emberbot137",channel_id:channelId,data:content,timestamp:Date.now()});
+        await firebasePush(firebaseMessages,{type:"message",sender:USERNAMES[uid],channel_id:channelId,data:content,timestamp:Date.now()});
         return true;
     }catch(error){
         log(`Firebase failed: ${error.message}`);
@@ -74,7 +76,7 @@ function connect(){
     socket.addEventListener("message",event=>{
         let packet;
         try{packet=JSON.parse(event.data);}
-        catch{log("Received invalid Gateway JSON.");return;}
+        catch(error){log("Received invalid Gateway JSON.");return;}
         if(packet.s!==null){sequence=packet.s;}
         switch(packet.op){
             case 10:{
@@ -89,12 +91,6 @@ function connect(){
                     log(`Logged in as ${packet.d.user.username}`);
                 }
                 if(packet.t==="MESSAGE_CREATE"){log(`${packet.d.author.username}: `+`${packet.d.content}`);}
-                if(packet.t==="INTERACTION_CREATE"){
-                    const interaction=packet.d;
-                    log("INTERACTION_CREATE received.");
-                    if(interaction.data?.name){log(`Command: /${interaction.data.name}`);}
-                    respondToInteraction(interaction);
-                }
                 break;
             }
             case 1:{sendGateway(1,sequence);break;}
@@ -138,13 +134,20 @@ channelSelect.addEventListener("change",()=>{
 async function main(){
     const password=prompt("Password:");
     const credential_status=log("Decrypting credentials...");
-    try{
-        BOT_TOKEN=await decrypt(ENCRYPTED_BOT_TOKEN,password);
-        credential_status.textContent="Credentials decrypted.";
-        await initializeFirebase();
-    }catch(error){
-        log("Invalid password, Firebase initialization failed, or corrupted encrypted data. "+error+". Reload the page and try again.");
+    for(const [index,encrypted_token] of Object.entries(ENCRYPTED_BOT_TOKENS)){
+        try{
+            const decrypted_token=await decrypt(encrypted_token,password);
+            BOT_TOKEN=decrypted_token;
+            uid=Number(index);
+            await initializeFirebase();
+            break;
+        }catch(error){continue;}
+    }
+    if(!BOT_TOKEN){
+        log("Invalid password, Firebase initialization failed, or corrupted encrypted data. Reload the page and try again.");
         return;
+    }else{
+        credential_status.textContent="Credentials decrypted.";
     }
     connect();
 }

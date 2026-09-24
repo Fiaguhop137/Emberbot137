@@ -55,6 +55,6 @@ async def send_to_discord(key,channel_id,content,uid):
 async def start_bots():
     global bot_loop
     bot_loop=asyncio.get_running_loop()
+    messages.listen(send_firebase_message)
     await asyncio.gather(*(bot.start(TOKENS[i]) for i,bot in enumerate(bots)))
 asyncio.run(start_bots())
-messages.listen(send_firebase_message)

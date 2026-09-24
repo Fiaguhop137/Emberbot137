@@ -9,6 +9,6 @@ cd /home/firebot/git/Emberbot137
 /usr/bin/pkill -f "discord.py" || :
 /usr/bin/sleep 1
 /usr/bin/nohup /usr/bin/python3 /home/firebot/git/Emberbot137/encrypt.py > /dev/null 2>&1 &
-/usr/bin/nohup /usr/bin/python3 /home/firebot/git/Emberbot137/discord.py > /home/firebot/git/Emberbot137/emberbot137.log 2>&1 &
+/usr/bin/nohup /usr/bin/python3 /home/firebot/git/Emberbot137/discord.py > /home/firebot/git/Emberbot137/discord.log 2>&1 &
 /usr/bin/sleep 1
 /home/firebot/Downloads/shell/git-sync.sh || :

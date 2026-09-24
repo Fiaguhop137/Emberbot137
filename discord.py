@@ -6,6 +6,7 @@ load_dotenv()
 TOKENS=[os.environ[f"DISCORD_TOKEN_{i}"] for i in range(2)]
 FIREBASE_CREDENTIALS="/home/firebot/git/Emberbot137/firebase-service-account.json"
 DATABASE_URL="https://discord-fia-default-rtdb.firebaseio.com"
+USERS=[os.environ[f"USERNAME_{i}"] for i in range(2)]
 cred=credentials.Certificate(FIREBASE_CREDENTIALS)
 firebase_admin.initialize_app(cred,{"databaseURL":DATABASE_URL})
 messages=db.reference("messages")
@@ -23,6 +24,9 @@ def send_firebase_message(event:db.Event):
     content=data.get("data")
     channel_id=data.get("channel_id")
     sender=data.get("sender")
+    uid=USERS.index(sender) if sender in USERS else None
+    if uid is None or uid<0 or uid>=len(bots):
+        return
     if not content or not channel_id:
         print("Invalid Firebase message:", data)
         return

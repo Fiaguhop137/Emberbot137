@@ -4,11 +4,11 @@
 #chatbox{
     width:100%;
     height:calc(100vh - 66px);
-    border:3px solid#000000;
+    border:3px solid#663300;
     border-radius:9px;
-    background-color:#ffffff;
+    background-color:#fedcba;
     padding:15px;
-    color:#000000;
+    color:#663300;
     box-sizing:border-box;
     overflow-y:auto;
     overflow-wrap:break-word;
@@ -16,33 +16,33 @@
 #input{
     width:calc(100vw - 396px);
     margin-top:10px;
-    border:3px solid#000000;
+    border:3px solid#663300;
     border-radius:9px;
-    background-color:#ffffff;
+    background-color:#fedcba;
     padding:9px;
-    color:#000000;
+    color:#663300;
     box-sizing:border-box;
     overflow-y:auto;
 }
 #channel-id{
     width:180px;
     margin-top:10px;
-    border:3px solid#000000;
+    border:3px solid#663300;
     border-radius:9px;
-    background-color:#ffffff;
+    background-color:#fedcba;
     padding:9px;
-    color:#000000;
+    color:#663300;
     box-sizing:border-box;
     overflow-y:auto;
 }
 #channel-select{
     width:180px;
     margin-top:10px;
-    border:3px solid#000000;
+    border:3px solid#663300;
     border-radius:9px;
-    background-color:#ffffff;
+    background-color:#fedcba;
     padding:9px;
-    color:#000000;
+    color:#663300;
     box-sizing:border-box;
     overflow-y:auto;
 }
@@ -51,23 +51,23 @@
         background-color:#000000;
     }
     #chatbox{
-        border:3px solid#000000;
-        background-color:#000000;
-        color:#ffffff;
+        border:3px solid#663300;
+        background-color:#332211;
+        color:#fedcba;
     }
     #input{
-        border:3px solid#000000;
-        background-color:#000000;
-        color:#ffffff;
+        border:3px solid#663300;
+        background-color:#332211;
+        color:#fedcba;
     }
     #channel-id{
-        border:3px solid#000000;
-        background-color:#000000;
-        color:#ffffff;
+        border:3px solid#663300;
+        background-color:#332211;
+        color:#fedcba;
     }
     #channel-select{
-        border:3px solid#000000;
-        background-color:#000000;
-        color:#ffffff;
+        border:3px solid#663300;
+        background-color:#332211;
+        color:#fedcba;
     }
 }

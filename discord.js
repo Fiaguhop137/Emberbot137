@@ -90,7 +90,7 @@ function connect(){
                 if(packet.t==="READY"){
                     log(`Logged in as ${packet.d.user.username}`);
                 }
-                if(packet.t==="MESSAGE_CREATE"){log(`${packet.d.author.username}: `+`${packet.d.content}`);}
+                if(packet.t==="MESSAGE_CREATE"){log(`${packet.d.author.global_name}(${packet.d.author.username}) in ${packet.d.channel_id}: `+`${packet.d.content}`);}
                 break;
             }
             case 1:{sendGateway(1,sequence);break;}

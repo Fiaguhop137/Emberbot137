@@ -1,4 +1,4 @@
-import os,requests,discord,subprocess
+import os,requests,discord,subprocess,asyncio
 from dotenv import load_dotenv
 intents=discord.Intents.default()
 intents.message_content=True
@@ -8,34 +8,75 @@ load_dotenv()
 WEBHOOK=os.environ["WEBHOOK"]
 TOKEN=os.environ["DISCORD_TOKEN_0"]
 AUTHORIZED_USER_IDS=[1342173566828810271,1492932060782919760,1532899245005475860]
-def send(message):
-    requests.post(WEBHOOK,json={"content":message})
+async def send(message):
+    await asyncio.to_thread(requests.post,WEBHOOK,json={"content":message})
     print(message)
 @pyrenigma.event
 async def on_ready():
-    send("Pyrenigma is online.")
+    await send("Pyrenigma is online.")
 @pyrenigma.event
 async def on_message(message:discord.Message):
-    if not message.author.id in AUTHORIZED_USER_IDS:
+    if not(message.author.id in AUTHORIZED_USER_IDS and message.content.startswith("~") and message.channel.id==1532936635682000996):
         return
-    if not message.content.startswith("~"):
-        return
-    if not message.channel.id==1532936635682000996:
-        return
-    cmd=message.content[1:]
-    args=cmd.split(" ")[1:]
-    cmd=cmd.split(" ")[0]
+    content=message.content[1:].strip()
+    parts=content.split()
+    args=parts[1:]
+    cmd=parts[0]
     await run_cmd(cmd,args)
 async def run_cmd(cmd,args):
-    if cmd=="say":
+    if cmd=="help":
+        if not args:
+            await send("```markdown\n"
+            "≈Commands\n"
+            "~help <cmd>       Show this message\n"
+            "~say <message>    Speak a message\n"
+            "~reboot <flags>   Reboot the bot\n"
+            "~volume <level>   Set the volume of the bot\n"
+            "```")
+        elif args[0]=="say":
+            await send("```markdown\n"
+            "≈Say Command\n"
+            "~say <message>    Speak a message\n"
+            "```")
+        elif args[0]=="reboot":
+            await send("```markdown\n"
+            "≈Reboot Command\n"
+            "~reboot           Reboot the bot\n"
+            "-l, --lock        Lock the PC instead of rebooting\n"
+            "```")
+        elif args[0]=="volume":
+            await send("```markdown\n"
+            "≈Volume Command\n"
+            "~volume <level>   Set the volume of the bot\n"
+            "```")
+        else:
+            await send("Unknown command. Use `~help` to see the list of commands.")
+    elif cmd=="say":
+        await send("Speaking...")
         subprocess.Popen(["/home/firebot/git/random_bs/speak"," ".join(args)],start_new_session=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
     elif cmd=="reboot":
         if not args:
-            send("Rebooting...")
+            await send("Rebooting...")
             subprocess.Popen(["/home/firebot/git/Emberbot137/reboot.sh"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
         else:
             if args[0]=="-l" or args[0]=="--lock":
-                send("Locking PC...")
+                await send("Locking PC...")
                 subprocess.Popen(["loginctl","lock-session"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
-
+            else:
+                await send("Unknown flag. Use `~help reboot` to see the list of flags.")
+    elif cmd=="volume":
+        if not args:
+            await send("Please specify a volume level.")
+        else:
+            try:
+                level=int(args[0])
+                if level<0 or level>100:
+                    await send("Volume level must be between 0 and 100.")
+                    return
+                subprocess.Popen(["pactl","set-sink-volume","@DEFAULT_SINK@",f"{level}%"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+                await send(f"Volume set to {level}%.")
+            except ValueError:
+                await send("Volume level must be an integer.")
+    else:
+        await send("Unknown command. Use `~help` to see the list of commands.")
 pyrenigma.run(TOKEN)

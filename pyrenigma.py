@@ -90,7 +90,7 @@ async def run_cmd(cmd,args):
                 if level<0 or level>100:
                     await send("Volume level must be between 0 and 100.")
                     return
-                subprocess.Popen(["pactl","set-sink-volume","@DEFAULT_SINK@",f"{level}%"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+                subprocess.Popen(["amixer","set","Master",f"{level}%"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
                 await send(f"Volume set to {level}%.")
             except ValueError:
                 await send("Volume level must be an integer.")

@@ -4,7 +4,7 @@ from tapo import ApiClient
 intents=discord.Intents.default()
 intents.message_content=True
 pyrenigma=discord.Client(intents=intents)
-subprocess.Popen(["clang++","-O2","/home/firebot/git/random_bs/speak.cpp","-o","/home/firebot/git/random_bs/speak"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+subprocess.Popen(["clang++","-O2","/home/firebot/git/random_bs/speak.cpp","-o","/home/firebot/git/random_bs/speak"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=None)
 load_dotenv()
 WEBHOOK=os.environ["WEBHOOK"]
 TOKEN=os.environ["DISCORD_TOKEN_0"]
@@ -58,6 +58,7 @@ async def run_cmd(cmd,args):
             await send("```markdown\n"
             "≈Reboot Command\n"
             "~reboot               Reboot the bot\n"
+            "-s, --sync            Sync git\n"
             "-l, --lock            Lock the PC instead of rebooting\n"
             "```")
         elif args[0]=="volume":
@@ -82,15 +83,18 @@ async def run_cmd(cmd,args):
             await send("Unknown command. Use `~help` to see the list of commands.")
     elif cmd=="say":
         await send("Speaking...")
-        subprocess.Popen(["/home/firebot/git/random_bs/speak"," ".join(args)],start_new_session=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+        subprocess.Popen(["/home/firebot/git/random_bs/speak"," ".join(args)],start_new_session=True,stdout=subprocess.DEVNULL,stderr=None)
     elif cmd=="reboot":
         if not args:
             await send("Rebooting...")
-            subprocess.Popen(["/home/firebot/git/Emberbot137/reboot.sh"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+            subprocess.Popen(["/home/firebot/git/Emberbot137/reboot.sh"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=None)
         else:
             if args[0]=="-l" or args[0]=="--lock":
                 await send("Locking PC...")
-                subprocess.Popen(["loginctl","lock-session"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+                subprocess.Popen(["loginctl","lock-session"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=None)
+            elif args[0]=="-s" or args[0]=="--sync":
+                await send("Syncing git...")
+                subprocess.Popen(["git","sync"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=None)
             else:
                 await send("Unknown flag. Use `~help reboot` to see the list of flags.")
     elif cmd=="volume":
@@ -102,7 +106,7 @@ async def run_cmd(cmd,args):
                 if level<0 or level>100:
                     await send("Volume level must be between 0 and 100.")
                     return
-                subprocess.Popen(["amixer","set","Master",f"{level}%"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+                subprocess.Popen(["amixer","set","Master",f"{level}%"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=None)
                 await send(f"Volume set to {level}%.")
             except ValueError:
                 await send("Volume level must be an integer.")

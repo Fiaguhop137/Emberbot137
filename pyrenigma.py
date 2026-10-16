@@ -94,8 +94,8 @@ async def run_cmd(cmd,args):
                 subprocess.Popen(["loginctl","lock-session"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=None)
             elif args[0]=="-s" or args[0]=="--sync":
                 await send("Syncing git...")
-                subprocess.Popen(["git","sync"],stdout=subprocess.DEVNULL,stderr=None)
-                await send("Git synced.")
+                git_status=subprocess.run(["git","sync"],capture_output=True,text=True)
+                await send(f"Git synced.\n{git_status.stdout}")
             else:
                 await send("Unknown flag. Use `~help reboot` to see the list of flags.")
     elif cmd=="volume":

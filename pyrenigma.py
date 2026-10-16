@@ -9,6 +9,11 @@ load_dotenv()
 WEBHOOK=os.environ["WEBHOOK"]
 TOKEN=os.environ["DISCORD_TOKEN_0"]
 AUTHORIZED_USER_IDS=[1342173566828810271,1492932060782919760,1532899245005475860]
+programs={
+    "emberbot":"/home/firebot/git/Emberbot137/restart.sh",
+    "budgpt":"/home/firebot/git/random_bs/budgpt_backend.py",
+    "prism":"/home/firebot/git/Spectrum/restart_prism.sh",
+}
 async def init_tapo():
     global ember_keep_light_client,ember_keep_light_device
     ember_keep_light_client=ApiClient("yywm.zou@gmail.com",os.environ["TAPO_PASSWORD"])
@@ -68,10 +73,11 @@ async def run_cmd(cmd,args):
             "~light -t, --toggle   Toggle the light\n"
             "```")
         elif args[0]=="run":
-            await send("```markdown\n"
-            "≈Run Command\n"
-            "~run <program>        Run a program\n"
-            "```")
+            to_send="```markdown\n≈Run Command\n"
+            for program in programs.keys():
+                to_send+=f"~run {program}        Run {program}\n"
+            to_send+="```"
+            await send(to_send)
         else:
             await send("Unknown command. Use `~help` to see the list of commands.")
     elif cmd=="say":
@@ -133,11 +139,6 @@ async def run_cmd(cmd,args):
             await send("Please specify a program to run.")
         else:
             program=args[0]
-            programs={
-                "emberbot":"/home/firebot/git/Emberbot137/restart.sh",
-                "budgpt":"/home/firebot/git/random_bs/budgpt_backend.py",
-                "prism":"/home/firebot/git/Spectrum/restart_prism.sh",
-            }
             if program in programs:
                 subprocess.Popen([programs[program]],start_new_session=True,stdout=subprocess.DEVNULL,stderr=None)
                 await send(f"Running program: {program}")

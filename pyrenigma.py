@@ -42,6 +42,7 @@ async def run_cmd(cmd,args):
             "~reboot <flags>       Reboot the bot\n"
             "~volume <level>       Set the volume of the bot\n"
             "~light <flags>        Toggle the light\n"
+            "~run <program>        Run a program\n"
             "```")
         elif args[0]=="say":
             await send("```markdown\n"
@@ -65,6 +66,11 @@ async def run_cmd(cmd,args):
             "~light -n, --on       Turn on the light\n"
             "~light -f, --off      Turn off the light\n"
             "~light -t, --toggle   Toggle the light\n"
+            "```")
+        elif args[0]=="run":
+            await send("```markdown\n"
+            "≈Run Command\n"
+            "~run <program>        Run a program\n"
             "```")
         else:
             await send("Unknown command. Use `~help` to see the list of commands.")
@@ -122,6 +128,21 @@ async def run_cmd(cmd,args):
                     await send("Light turned on.")
             else:
                 await send("Unknown flag. Use `~help light` to see the list of flags.")
+    elif cmd=="run":
+        if not args:
+            await send("Please specify a program to run.")
+        else:
+            program=args[0]
+            programs={
+                "emberbot":"/home/firebot/git/Emberbot137/restart.sh",
+                "budgpt":"/home/firebot/git/random_bs/budgpt_backend.py",
+                "prism":"/home/firebot/git/Spectrum/restart_prism.sh",
+            }
+            if program in programs:
+                subprocess.Popen([programs[program]],start_new_session=True,stdout=subprocess.DEVNULL,stderr=None)
+                await send(f"Running program: {program}")
+            else:
+                await send("Unknown program.")
     else:
         await send("Unknown command. Use `~help` to see the list of commands.")
 pyrenigma.run(TOKEN)

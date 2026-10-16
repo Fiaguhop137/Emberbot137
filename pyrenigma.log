@@ -1,18 +1,2 @@
-[2026-10-16 18:14:03] [INFO    ] discord.client: logging in using static token
-[2026-10-16 18:14:04] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: a38a4b4ac3d4c4f23e46cb4226b13000).
-From github.com:Fiaguhop137/Confluxia
- * branch            main       -> FETCH_HEAD
-From github.com:Fiaguhop137/datapacks
- * branch            main       -> FETCH_HEAD
-From github.com:Fiaguhop137/Emberbot137
- * branch            main       -> FETCH_HEAD
-To github.com:Fiaguhop137/Emberbot137.git
-   a70f371..31187c6  main -> main
-From github.com:Fiaguhop137/Flags
- * branch            main       -> FETCH_HEAD
-From github.com:Fiaguhop137/fiaguhop137.github.io
- * branch            main       -> FETCH_HEAD
-From github.com:Fiaguhop137/resource-packs
- * branch            main       -> FETCH_HEAD
-From github.com:Fiaguhop137/Spectrum
- * branch            main       -> FETCH_HEAD
+[2026-10-16 18:20:21] [INFO    ] discord.client: logging in using static token
+[2026-10-16 18:20:22] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 6bb71edd4cf032446699bc5d2682f916).

@@ -11,7 +11,7 @@ TOKEN=os.environ["DISCORD_TOKEN_0"]
 AUTHORIZED_USER_IDS=[1342173566828810271,1492932060782919760,1532899245005475860]
 programs={
     "emberbot":"/home/firebot/git/Emberbot137/restart.sh",
-    "budgpt":"/home/firebot/git/random_bs/budgpt_backend.py",
+    "budgpt":"/home/firebot/git/random_bs/reboot_budgpt.sh",
     "prism":"/home/firebot/git/Spectrum/restart_prism.sh",
 }
 async def init_tapo():

@@ -1,19 +1,32 @@
 import os,requests,discord,subprocess,asyncio
+from discord import app_commands
+from discord.ext import commands
 from dotenv import load_dotenv
 from tapo import ApiClient
 intents=discord.Intents.default()
 intents.message_content=True
-pyrenigma=discord.Client(intents=intents)
+reader=discord.Client(intents=intents)
+pyrenigma=commands.Bot(command_prefix="~",intents=intents)
 subprocess.Popen(["clang++","-O2","/home/firebot/git/random_bs/speak.cpp","-o","/home/firebot/git/random_bs/speak"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=None)
 load_dotenv()
 WEBHOOK=os.environ["WEBHOOK"]
-TOKEN=os.environ["PYRENIGMA_TOKEN"]
+READER_TOKEN=os.environ["DISCORD_TOKEN_0"]
+TOKEN=os.environ.get("PYRENIGMA_TOKEN")
 AUTHORIZED_USER_IDS=[1342173566828810271,1492932060782919760,1532899245005475860]
 programs={
     "emberbot":"/home/firebot/git/Emberbot137/restart.sh",
     "budgpt":"/home/firebot/git/random_bs/reboot_budgpt.sh",
     "prism":"/home/firebot/git/Spectrum/restart_prism.sh",
 }
+@pyrenigma.event
+async def on_ready():
+    await pyrenigma.tree.sync()
+@pyrenigma.tree.command(name="badapple",description="Hit 'em with the Bad Apple!!")
+@app_commands.user_install()
+@app_commands.allowed_contexts(guilds=True,dms=True,private_channels=True)
+async def badapple(interaction: discord.Interaction):
+    await interaction.response.defer()
+    await interaction.followup.send(file=discord.File("/home/firebot/Downloads/bad_apple.avif"))
 async def init_tapo():
     global ember_keep_light_client,ember_keep_light_device
     ember_keep_light_client=ApiClient("yywm.zou@gmail.com",os.environ["TAPO_PASSWORD"])
@@ -22,10 +35,10 @@ asyncio.run(init_tapo())
 async def send(message):
     await asyncio.to_thread(requests.post,WEBHOOK,json={"content":message})
     print(message)
-@pyrenigma.event
+@reader.event
 async def on_ready():
-    await send("Pyrenigma is online.")
-@pyrenigma.event
+    await send("reader is online.")
+@reader.event
 async def on_message(message:discord.Message):
     if not(message.author.id in AUTHORIZED_USER_IDS and message.content.startswith("~") and message.channel.id==1532936635682000996):
         return
@@ -151,4 +164,5 @@ async def run_cmd(cmd,args):
                 await send("Unknown program.")
     else:
         await send("Unknown command. Use `~help` to see the list of commands.")
+reader.run(READER_TOKEN)
 pyrenigma.run(TOKEN)

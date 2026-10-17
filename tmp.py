@@ -6,15 +6,14 @@ import os
 dotenv.load_dotenv()
 TOKEN=os.environ.get("PYRENIGMA_TOKEN")
 intents=discord.Intents.default()
-class MyBot(commands.Bot):
-    def __init__(self):
-        super().__init__(command_prefix="!", intents=intents)
-    async def setup_hook(self):
-        await self.tree.sync()
-bot=MyBot()
-@bot.tree.command(name="badapple")
+pyrenigma=commands.Bot(command_prefix="~",intents=intents)
+@pyrenigma.event
+async def on_ready():
+    await pyrenigma.tree.sync()
+@pyrenigma.tree.command(name="badapple",description="Hit 'em with the Bad Apple!!")
 @app_commands.user_install()
 @app_commands.allowed_contexts(guilds=True,dms=True,private_channels=True)
-async def badapple(interaction:discord.Interaction):
-    await interaction.response.send_message("Pong! I can hear you anywhere.")
-bot.run(TOKEN)
+async def badapple(interaction: discord.Interaction):
+    await interaction.response.defer()
+    await interaction.followup.send(file=discord.File("/home/firebot/Downloads/bad_apple.avif"))
+pyrenigma.run(TOKEN)

@@ -24,7 +24,7 @@ async def on_ready():
 @pyrenigma.tree.command(name="badapple",description="Hit 'em with the Bad Apple!!")
 @app_commands.user_install()
 @app_commands.allowed_contexts(guilds=True,dms=True,private_channels=True)
-async def badapple(interaction: discord.Interaction):
+async def badapple(interaction:discord.Interaction):
     await interaction.response.defer()
     await interaction.followup.send(file=discord.File("/home/firebot/Downloads/bad_apple.avif"))
 async def init_tapo():
@@ -37,7 +37,7 @@ async def send(message):
     print(message)
 @reader.event
 async def on_ready():
-    await send("reader is online.")
+    await send("Pyrenigma is online.")
 @reader.event
 async def on_message(message:discord.Message):
     if not(message.author.id in AUTHORIZED_USER_IDS and message.content.startswith("~") and message.channel.id==1532936635682000996):
@@ -164,5 +164,7 @@ async def run_cmd(cmd,args):
                 await send("Unknown program.")
     else:
         await send("Unknown command. Use `~help` to see the list of commands.")
-reader.run(READER_TOKEN)
-pyrenigma.run(TOKEN)
+async def main():
+    async with reader,pyrenigma:
+        await asyncio.gather(reader.start(READER_TOKEN),pyrenigma.start(TOKEN))
+asyncio.run(main())

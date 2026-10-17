@@ -1,14 +1,20 @@
 *{
     font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
 }
+:root{
+    --light: #ffffff;
+    --dark: #000000;
+    --darker: #000000;
+    --black: #000000;
+}
 #chatbox{
     width:100%;
     height:calc(100vh - 66px);
-    border:3px solid#000000;
+    border:3px solid var(--dark);
     border-radius:9px;
-    background-color:#ffffff;
+    background-color:var(--light);
     padding:15px;
-    color:#000000;
+    color: var(--dark);
     box-sizing:border-box;
     overflow-y:auto;
     overflow-wrap:break-word;
@@ -16,58 +22,58 @@
 #input{
     width:calc(100vw - 396px);
     margin-top:10px;
-    border:3px solid#000000;
+    border:3px solid var(--dark);
     border-radius:9px;
-    background-color:#ffffff;
+    background-color:var(--light);
     padding:9px;
-    color:#000000;
+    color: var(--dark);
     box-sizing:border-box;
     overflow-y:auto;
 }
 #channel-id{
     width:180px;
     margin-top:10px;
-    border:3px solid#000000;
+    border:3px solid var(--dark);
     border-radius:9px;
-    background-color:#ffffff;
+    background-color:var(--light);
     padding:9px;
-    color:#000000;
+    color: var(--dark);
     box-sizing:border-box;
     overflow-y:auto;
 }
 #channel-select{
     width:180px;
     margin-top:10px;
-    border:3px solid#000000;
+    border:3px solid var(--dark);
     border-radius:9px;
-    background-color:#ffffff;
+    background-color:var(--light);
     padding:9px;
-    color:#000000;
+    color: var(--dark);
     box-sizing:border-box;
     overflow-y:auto;
 }
 @media(prefers-color-scheme:dark){
     body{
-        background-color:#000000;
+        background-color:var(--black);
     }
     #chatbox{
-        border:3px solid#000000;
-        background-color:#000000;
-        color:#ffffff;
+        border:3px solid var(--dark);
+        background-color:var(--darker);
+        color:var(--light);
     }
     #input{
-        border:3px solid#000000;
-        background-color:#000000;
-        color:#ffffff;
+        border:3px solid var(--dark);
+        background-color:var(--darker);
+        color:var(--light);
     }
     #channel-id{
-        border:3px solid#000000;
-        background-color:#000000;
-        color:#ffffff;
+        border:3px solid var(--dark);
+        background-color:var(--darker);
+        color:var(--light);
     }
     #channel-select{
-        border:3px solid#000000;
-        background-color:#000000;
-        color:#ffffff;
+        border:3px solid var(--dark);
+        background-color:var(--darker);
+        color:var(--light);
     }
 }

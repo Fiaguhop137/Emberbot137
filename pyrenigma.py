@@ -7,7 +7,7 @@ pyrenigma=discord.Client(intents=intents)
 subprocess.Popen(["clang++","-O2","/home/firebot/git/random_bs/speak.cpp","-o","/home/firebot/git/random_bs/speak"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=None)
 load_dotenv()
 WEBHOOK=os.environ["WEBHOOK"]
-TOKEN=os.environ["DISCORD_TOKEN_0"]
+TOKEN=os.environ["PYRENIGMA_TOKEN"]
 AUTHORIZED_USER_IDS=[1342173566828810271,1492932060782919760,1532899245005475860]
 programs={
     "emberbot":"/home/firebot/git/Emberbot137/restart.sh",

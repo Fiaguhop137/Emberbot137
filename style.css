@@ -1,12 +1,6 @@
 *{
     font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
 }
-:root{
-    --light: #ffffff;
-    --dark: #000000;
-    --darker: #000000;
-    --black: #000000;
-}
 #chatbox{
     width:100%;
     height:calc(100vh - 66px);

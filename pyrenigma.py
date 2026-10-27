@@ -17,6 +17,7 @@ programs={
     "emberbot":"/home/firebot/git/Emberbot137/restart.sh",
     "budgpt":"/home/firebot/git/random_bs/reboot_budgpt.sh",
     "prism":"/home/firebot/git/Spectrum/restart_prism.sh",
+    "firebase":"/home/firebot/git/Emberbot137/deploy_firebase.sh",
 }
 @pyrenigma.event
 async def on_ready():

@@ -90,7 +90,7 @@ async def run_cmd(cmd,args):
         elif args[0]=="run":
             to_send="```markdown\n≈Run Command\n"
             for program in programs.keys():
-                spaces=" "*(20-len(program))
+                spaces=" "*(16-len(program))
                 to_send+=f"~run {program} {spaces}Run {program}\n"
             to_send+="```"
             await send(to_send)

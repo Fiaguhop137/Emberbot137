@@ -44,13 +44,15 @@ async def on_message(message:discord.Message):
     if not(message.author.id in AUTHORIZED_USER_IDS and message.content.startswith("~") and message.channel.id==1532936635682000996):
         return
     content=message.content[1:].strip()
-    if content:
-        parts=content.split()
-    else:
-        return
-    args=parts[1:]
-    cmd=parts[0]
-    await run_cmd(cmd,args)
+    commands=content.split(";")
+    for command in commands:
+        if command.strip():
+            parts=command.strip().split()
+        else:
+            continue
+        args=parts[1:]
+        cmd=parts[0]
+        await run_cmd(cmd,args)
 async def run_cmd(cmd,args):
     if cmd=="help":
         if not args:

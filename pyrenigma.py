@@ -106,9 +106,19 @@ async def run_cmd(cmd,args):
             await send("Rebooting...")
             subprocess.Popen(["/home/firebot/git/Emberbot137/reboot.sh"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=None)
         else:
-            if args[0]=="-l" or args[0]=="--lock":
+            if args[0] in ("-l", "--lock"):
                 await send("Locking PC...")
-                subprocess.Popen(["loginctl","lock-session"],start_new_session=True,stdout=subprocess.DEVNULL,stderr=None)
+                result=subprocess.run(["/usr/bin/loginctl","lock-session"],text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,env={**os.environ,"PATH":"/usr/local/bin:/usr/bin:/bin"})
+                if result.returncode==0:
+                    await send("Lock command completed.")
+                else:
+                    for i in range(10):
+                        result=subprocess.run(["/usr/bin/loginctl","lock-session",str(i)],text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,env={**os.environ,"PATH":"/usr/local/bin:/usr/bin:/bin"})
+                        if result.returncode==0:
+                            await send(f"Lock command completed for session {i}.")
+                            break
+                    else:
+                        await send(f"Lock command failed for all sessions.\n```markdown\n{result.stdout}\n```")
             elif args[0]=="-s" or args[0]=="--sync":
                 await send("Syncing git...")
                 git_status=subprocess.run(["git","sync"],text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
